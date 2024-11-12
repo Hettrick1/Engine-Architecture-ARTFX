@@ -1,6 +1,6 @@
 #include "Game.h"
 
-Game::Game(std::string title) : mIsRunning(true)
+Game::Game(std::string title, std::vector<Scene*> scenes) : mIsRunning(true), mAllScenes(scenes)
 {
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
     {
@@ -10,6 +10,8 @@ Game::Game(std::string title) : mIsRunning(true)
     {
         std::cout << "SDL initialization succeeded!";
     }
+
+    mLoadedScene = 0;
 
     Initialize();
 
@@ -28,9 +30,13 @@ void Game::Initialize()
 
 void Game::Loop()
 {
+    if (mAllScenes.size() > 0) {
+        mAllScenes[mLoadedScene]->Start(mRenderer);
+    }
+
     while (mIsRunning) {
-        Update();
-        Render();
+        mAllScenes[mLoadedScene]->Update();
+        mAllScenes[mLoadedScene]->Render();
         Input();
     }
 
@@ -54,6 +60,7 @@ void Game::Input()
     if (mIsRunning) {
         SDL_Event event;
         while (SDL_PollEvent(&event)) {
+            mAllScenes[mLoadedScene]->OnInput(event);
             switch (event.type) {
             case SDL_QUIT:
                 mIsRunning = false;
