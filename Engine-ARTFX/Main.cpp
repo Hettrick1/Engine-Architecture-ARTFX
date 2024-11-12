@@ -1,6 +1,6 @@
 #include "SDL.h"
-#include "Game.h"
-#include "Pong.h"
+#include "Core/Engine/Editor/Game.h"
+#include "Core/Scenes/Childs/Pong.h"
 
 int main(int argc, char** argv) {
 	;

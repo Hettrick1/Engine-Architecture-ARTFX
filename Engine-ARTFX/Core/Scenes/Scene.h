@@ -1,5 +1,5 @@
 #pragma once
-#include "Renderer.h"
+#include "../Engine/Graphics/Renderer.h"
 
 class Scene
 {

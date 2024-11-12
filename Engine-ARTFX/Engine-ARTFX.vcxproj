@@ -133,24 +133,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="Log.cpp" />
+    <ClCompile Include="Core\Engine\Editor\Game.cpp" />
+    <ClCompile Include="Core\Engine\Debug Classes\Log.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Pong.cpp" />
-    <ClCompile Include="Renderer.cpp" />
-    <ClCompile Include="Scene.cpp" />
-    <ClCompile Include="Vector2D.cpp" />
-    <ClCompile Include="Window.cpp" />
+    <ClCompile Include="Core\Scenes\Childs\Pong.cpp" />
+    <ClCompile Include="Core\Engine\Graphics\Renderer.cpp" />
+    <ClCompile Include="Core\Scenes\Scene.cpp" />
+    <ClCompile Include="Core\Maths\Vector2D.cpp" />
+    <ClCompile Include="Core\Engine\Editor\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="Log.h" />
-    <ClInclude Include="Pong.h" />
-    <ClInclude Include="Rectangle.h" />
-    <ClInclude Include="Renderer.h" />
-    <ClInclude Include="Scene.h" />
-    <ClInclude Include="Vector2D.h" />
-    <ClInclude Include="Window.h" />
+    <ClInclude Include="Core\Engine\Editor\Game.h" />
+    <ClInclude Include="Core\Engine\Debug Classes\Log.h" />
+    <ClInclude Include="Core\Scenes\Childs\Pong.h" />
+    <ClInclude Include="Core\Maths\Rectangle.h" />
+    <ClInclude Include="Core\Engine\Graphics\Renderer.h" />
+    <ClInclude Include="Core\Scenes\Scene.h" />
+    <ClInclude Include="Core\Maths\Vector2D.h" />
+    <ClInclude Include="Core\Engine\Editor\Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

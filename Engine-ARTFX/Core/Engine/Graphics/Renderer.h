@@ -1,6 +1,6 @@
 #pragma once
-#include "Rectangle.h"
-#include "Window.h"
+#include "../../Maths/Rectangle.h"
+#include "../Editor/Window.h"
 
 class Renderer
 {

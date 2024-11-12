@@ -1,7 +1,7 @@
 #pragma once
 #include "Window.h"
-#include "Renderer.h"
-#include "Scene.h"
+#include "../Graphics/Renderer.h"
+#include "../../Scenes/Scene.h"
 #include <iostream>
 #include <vector>
 
