@@ -1,12 +1,13 @@
 #include "SDL.h"
-#include "Vector2D.h"
-#include "Log.h"
+#include "Game.h"
 
 int main(int argc, char** argv) {
 	Vector2D myVector = Vector2D::One;
 	myVector *= 2;
 
-	Log::Info("" + static_cast<std::string>(myVector.Lenght()));
+	Game* game = new Game("myGame");
+
+	Log::Info(std::to_string(myVector.Length()));
 
 	return 0;
 }

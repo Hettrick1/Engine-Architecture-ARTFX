@@ -1,5 +1,6 @@
 #pragma once
 #include <cmath>
+#include <string>
 
 struct Vector2D
 {
@@ -45,19 +46,22 @@ struct Vector2D
 		return { scalar / right.x, scalar / right.y };
 	}
 
-	inline float Lenght() const {
+	inline float Length() const {
 		float sum = x*x + y*y;
 		return sqrt(sum);
 	}
 	inline void Normalize() {
-		(*this) /= Lenght();
+		(*this) /= Length();
 	}
 	inline Vector2D Normalized() {
-		return (*this) / Lenght();
+		return (*this) / Length();
 	}
 	friend float Dot(Vector2D& left, Vector2D& right) {
 		return left.x * right.x + left.y * right.y;
 	}
 
+	inline std::string ToString() {
+		return "( " + std::to_string(x) + " , " + std::to_string(y) + " )";
+	}
 };
 
