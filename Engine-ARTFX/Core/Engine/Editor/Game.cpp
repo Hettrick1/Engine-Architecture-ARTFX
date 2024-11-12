@@ -33,10 +33,14 @@ void Game::Loop()
     if (mAllScenes.size() > 0) {
         mAllScenes[mLoadedScene]->Start(mRenderer);
     }
+    else {
+        Log::Error(LogType::Error, "No scene are available !");
+        return;
+    }
 
     while (mIsRunning) {
-        mAllScenes[mLoadedScene]->Update();
-        mAllScenes[mLoadedScene]->Render();
+        Render();
+        Update();
         Input();
     }
 
@@ -45,14 +49,12 @@ void Game::Loop()
 
 void Game::Update()
 {
+    mAllScenes[mLoadedScene]->Update();
 }
 
 void Game::Render()
 {
-    mRenderer->BeginDraw();
-    Rectangle rect = { {250, 300}, {300, 200} };
-    mRenderer->DrawRect(rect);
-    mRenderer->EndDraw();
+    mAllScenes[mLoadedScene]->Render();
 }
 
 void Game::Input()
@@ -65,6 +67,11 @@ void Game::Input()
             case SDL_QUIT:
                 mIsRunning = false;
                 break;
+            case SDL_KEYDOWN:
+                if (event.key.keysym.sym == SDLK_ESCAPE) {
+                    mIsRunning = false;
+                    break;
+                }
             }
         }
     }
