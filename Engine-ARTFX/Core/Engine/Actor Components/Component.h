@@ -1,5 +1,8 @@
 #pragma once
 #include "Actor.h"
+
+class Actor;
+
 class Component
 {
 public:
