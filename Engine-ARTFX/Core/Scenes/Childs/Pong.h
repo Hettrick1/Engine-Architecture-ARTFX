@@ -1,5 +1,7 @@
 #pragma once
 #include "../Scene.h"
+#include "../../../Game/Pong/Paddle.h"
+#include "../../../Game/Pong/Ball.h"
 class Pong : public Scene
 {
 public:
@@ -9,8 +11,13 @@ public:
 	void Render() override;
 	void OnInput(SDL_Event event) override;
 	void Close() override;
+
+public :
+	void ResetGame();
 private:
-	Vector2D mPlayerPos;
-	Rectangle mPlayer;
+	Paddle* mPaddleRight;
+	Paddle* mPaddleLeft;
+	Ball* mBall;
+	int mDirection; // -1 = down || 1 = up || 0 = stop
 };
 

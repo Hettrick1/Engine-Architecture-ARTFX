@@ -133,6 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Game\Pong\Ball.cpp" />
     <ClCompile Include="Core\Engine\Editor\Game.cpp" />
     <ClCompile Include="Core\Engine\Debug Classes\Log.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -141,8 +142,10 @@
     <ClCompile Include="Core\Scenes\Scene.cpp" />
     <ClCompile Include="Core\Maths\Vector2D.cpp" />
     <ClCompile Include="Core\Engine\Editor\Window.cpp" />
+    <ClCompile Include="Game\Pong\Paddle.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Game\Pong\Ball.h" />
     <ClInclude Include="Core\Engine\Editor\Game.h" />
     <ClInclude Include="Core\Engine\Debug Classes\Log.h" />
     <ClInclude Include="Core\Scenes\Childs\Pong.h" />
@@ -151,6 +154,7 @@
     <ClInclude Include="Core\Scenes\Scene.h" />
     <ClInclude Include="Core\Maths\Vector2D.h" />
     <ClInclude Include="Core\Engine\Editor\Window.h" />
+    <ClInclude Include="Game\Pong\Paddle.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

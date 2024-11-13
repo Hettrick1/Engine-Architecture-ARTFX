@@ -15,6 +15,7 @@ void Scene::Update()
 
 void Scene::Render()
 {
+
 }
 
 void Scene::OnInput(SDL_Event)

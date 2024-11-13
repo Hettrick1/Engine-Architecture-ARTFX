@@ -3,8 +3,10 @@
 
 Pong::Pong() : Scene()
 {
-    mPlayerPos = { 200, 200 };
-    mPlayer = { mPlayerPos, { 50, 50 } };
+    mDirection = 0;
+    mPaddleLeft = new Paddle({ 30, 400 });
+    mPaddleRight = new Paddle({ 730, 400 });
+    mBall = new Ball();
 }
 
 void Pong::Start(Renderer* renderer) 
@@ -14,36 +16,66 @@ void Pong::Start(Renderer* renderer)
 
 void Pong::Update()
 {
+    mBall->CheckCollision(800, 800, mPaddleLeft, mPaddleRight);
+    mBall->Move();
+    float speed = mBall->GetPosition().y - (mPaddleRight->GetPaddlePos().y + mPaddleRight->GetPaddleSize().y / 2 - mBall->GetSize() / 2);
+    mPaddleRight->MoveIA(speed);
+    mPaddleLeft->MovePlayer(mDirection);
+    if (mBall->GetIsDead()) {
+        ResetGame();
+    }
 }
 
 void Pong::Render()
 {
     mRenderer->BeginDraw();
-    mRenderer->DrawRect(mPlayer);
+    Rectangle rectToDraw = mBall->GetBallRect();
+    mRenderer->DrawRect(rectToDraw);
+    rectToDraw = mPaddleRight->GetPaddleRect();
+    mRenderer->DrawRect(rectToDraw);
+    rectToDraw = mPaddleLeft->GetPaddleRect();
+    mRenderer->DrawRect(rectToDraw);    
+    
     mRenderer->EndDraw();
 }
 
 void Pong::OnInput(SDL_Event event)
 {
-    switch (event.type) {
-    case SDL_KEYDOWN:
-        if (event.key.keysym.sym == SDLK_w) {
-            mPlayerPos.y -= 1;
+    if (event.type == SDL_KEYDOWN) {
+        switch (event.key.keysym.sym)
+        {
+        case SDLK_w:
+            mDirection = 1;
+            break;
+        case SDLK_s:
+            mDirection = -1;
+            break;
+        default:
+            mDirection = 0;
+            break;
+        } 
+    }
+    else if (event.type == SDL_KEYUP){
+        switch (event.key.keysym.sym)
+        {
+        case SDLK_w:
+            mDirection = 0;
+            break;
+        case SDLK_s:
+            mDirection = 0;
+            break;
         }
-        if (event.key.keysym.sym == SDLK_s) {
-            mPlayerPos.y += 1;
-        }
-        if (event.key.keysym.sym == SDLK_d) {
-            mPlayerPos.x += 1;
-        }
-        if (event.key.keysym.sym == SDLK_a) {
-            mPlayerPos.x -= 1;
-        }
-        mPlayer = { mPlayerPos, { 50, 50 } };
-        break;
     }
 }
 
 void Pong::Close()
 {
+}
+
+void Pong::ResetGame()
+{
+    mDirection = 0;
+    mPaddleLeft = new Paddle({ 30, 400 });
+    mPaddleRight = new Paddle({ 730, 400 });
+    mBall = new Ball();
 }

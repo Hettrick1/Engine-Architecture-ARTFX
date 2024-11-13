@@ -47,7 +47,7 @@ struct Vector2D
 	}
 
 	inline float Length() const {
-		float sum = x*x + y*y;
+		float sum = (x*x) + (y*y);
 		return sqrt(sum);
 	}
 	inline void Normalize() {
