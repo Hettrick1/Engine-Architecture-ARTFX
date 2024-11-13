@@ -31,3 +31,7 @@ void Actor::SetActive(bool active)
 void Actor::Update()
 {
 }
+
+void Actor::Destroy()
+{
+}

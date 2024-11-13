@@ -107,5 +107,8 @@
     <ClInclude Include="Core\Engine\Actor Components\Actor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Core\Engine\Actor Components\ActorState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

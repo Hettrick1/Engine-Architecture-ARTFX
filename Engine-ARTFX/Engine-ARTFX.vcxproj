@@ -151,6 +151,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Engine\Actor Components\Actor.h" />
+    <ClInclude Include="Core\Engine\Actor Components\ActorState.h" />
     <ClInclude Include="Core\Engine\Actor Components\Component.h" />
     <ClInclude Include="Core\Maths\Vector3D.h" />
     <ClInclude Include="Game\Pong\Ball.h" />
