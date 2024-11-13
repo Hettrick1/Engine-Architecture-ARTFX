@@ -2,6 +2,7 @@
 #include "Window.h"
 #include "../Graphics/Renderer.h"
 #include "../../Scenes/Scene.h"
+#include "../../Time.h"
 #include <iostream>
 #include <vector>
 

@@ -39,9 +39,11 @@ void Game::Loop()
     }
 
     while (mIsRunning) {
-        Render();
-        Update();
+        Time::ComputeDeltaTime();
         Input();
+        Update();
+        Render();
+        Time::DelayTime();
     }
 
     Close();
