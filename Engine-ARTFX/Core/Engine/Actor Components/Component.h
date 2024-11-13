@@ -7,7 +7,7 @@ class Component
 {
 public:
 	Component() = delete;
-	Component(Actor* mOwner, int updateOder);
+	Component(Actor* owner, int updateOder);
 	virtual ~Component() {}
 	virtual void OnStart();
 	virtual void Update();
