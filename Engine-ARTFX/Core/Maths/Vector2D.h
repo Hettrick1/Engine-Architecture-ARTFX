@@ -9,7 +9,7 @@ struct Vector2D
 	Vector2D() :x(0), y(0) {}
 	Vector2D(float pX, float pY): x(pX), y(pY){}
 
-	static const Vector2D Zero, One;
+	static const Vector2D Zero, One, UnitX, UnitY;
 
 	inline void operator += (Vector2D& right) {
 		x += right.x;
@@ -26,6 +26,10 @@ struct Vector2D
 	inline void operator /= (float scalar) {
 		x /= scalar;
 		y /= scalar;
+	}
+	inline void operator = (float scalar) {
+		x = scalar;
+		y = scalar;
 	}
 	friend Vector2D operator + (Vector2D& left, Vector2D& right) {
 		return { left.x + right.x, left.y + right.y };
@@ -45,6 +49,22 @@ struct Vector2D
 	friend Vector2D operator / (float scalar, Vector2D& right) {
 		return { scalar / right.x, scalar / right.y };
 	}
+	friend bool operator == (Vector2D& left, Vector2D& right) {
+		if (left.x == right.x && left.y == right.y) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	friend bool operator != (Vector2D& left, Vector2D& right) {
+		if (left.x == right.x && left.y == right.y) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
 
 	inline float Length() const {
 		float sum = (x*x) + (y*y);
@@ -53,8 +73,8 @@ struct Vector2D
 	inline void Normalize() {
 		(*this) /= Length();
 	}
-	inline Vector2D Normalized() {
-		return (*this) / Length();
+	inline Vector2D Normalize(Vector2D temp) {
+		return temp / temp.Length();
 	}
 	friend float Dot(Vector2D& left, Vector2D& right) {
 		return left.x * right.x + left.y * right.y;
@@ -66,9 +86,7 @@ struct Vector2D
 		if ((*this).y < min.y) (*this).y = min.y;
 		if ((*this).y > max.y) (*this).y = max.y;
 	}
-
-	inline Vector2D Clamped(Vector2D& min, Vector2D& max) {
-		Vector2D temp = (*this);
+	inline Vector2D Clamp(Vector2D temp, Vector2D& min, Vector2D& max) {
 		if (temp.x < min.x) temp.x = min.x;
 		if (temp.x > max.x) temp.x = max.x;
 
@@ -77,9 +95,13 @@ struct Vector2D
 
 		return temp;
 	}
-
 	inline float Distance(Vector2D& vec) {
 		return sqrt(((*this).x - vec.x) * ((*this).x - vec.x) + ((*this).y - vec.y) * ((*this).y - vec.y));
+	}
+
+	inline bool Equals(Vector2D& right, float acceptance) {
+		if (x < right.x - acceptance || x > right.y + acceptance || y < right.y - acceptance || y > right.y + acceptance) return true;
+		else return false;
 	}
 
 	inline std::string ToString() {
