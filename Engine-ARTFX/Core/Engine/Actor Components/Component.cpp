@@ -1,6 +1,6 @@
 #include "Component.h"
 
-Component::Component(Actor* mOwner, int updateOder)
+Component::Component(Actor* owner, int updateOder) : mIsActive(true), mOwner(owner), mUpdateOrder(updateOder)
 {
 }
 
