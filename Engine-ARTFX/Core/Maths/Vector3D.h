@@ -11,7 +11,7 @@ struct Vector3D
 	Vector3D(float pX, float pY, float pZ) : x(pX), y(pY), z(pZ) {}
 	Vector3D(float size) : x(size), y(size), z(size) {}
 
-	static const Vector2D Zero, One, UnitX, UnitY, UnitZ;
+	static const Vector3D Zero, One, Forward, Up, Right;
 
 	//--------------------Operators overload--------------------
 
@@ -36,6 +36,11 @@ struct Vector3D
 		y /= scalar;
 		z /= scalar;
 	}
+	inline void operator = (float scalar) {
+		x = scalar;
+		y = scalar;
+		z = scalar;
+	}
 
 	//operators +=, -= with vector 2
 	inline void operator += (Vector2D& right) {
@@ -54,18 +59,6 @@ struct Vector3D
 	friend Vector3D operator - (Vector3D& left, Vector3D& right) {
 		return { left.x - right.x, left.y - right.y, left.z - right.z };
 	}
-	friend Vector3D operator * (Vector3D& left, float scalar) {
-		return { left.x * scalar, left.y * scalar, left.z * scalar };
-	}
-	friend Vector3D operator * (float scalar, Vector3D& right) {
-		return { scalar * right.x, scalar * right.y, scalar * right.z };
-	}
-	friend Vector3D operator / (Vector3D& left, float scalar) {
-		return { left.x / scalar, left.y / scalar, left.z / scalar };
-	}
-	friend Vector3D operator / (float scalar, Vector3D& right) {
-		return { scalar / right.x, scalar / right.y , scalar / right.z};
-	}
 
 	//operators +, - with vector 2
 	friend Vector3D operator + (Vector2D& left, Vector3D& right) {
@@ -82,6 +75,37 @@ struct Vector3D
 		return { left.x - right.x, left.y - right.y, left.z};
 	}
 
+	//operators *, / with vector 3
+	friend Vector3D operator * (Vector3D& left, float scalar) {
+		return { left.x * scalar, left.y * scalar, left.z * scalar };
+	}
+	friend Vector3D operator * (float scalar, Vector3D& right) {
+		return { scalar * right.x, scalar * right.y, scalar * right.z };
+	}
+	friend Vector3D operator / (Vector3D& left, float scalar) {
+		return { left.x / scalar, left.y / scalar, left.z / scalar };
+	}
+	friend Vector3D operator / (float scalar, Vector3D& right) {
+		return { scalar / right.x, scalar / right.y , scalar / right.z };
+	}
+
+	friend bool operator == (Vector3D& left, Vector3D& right) {
+		if (left.x == right.x && left.y == right.y && left.z == right.z) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	friend bool operator != (Vector3D& left, Vector3D& right) {
+		if (left.x == right.x && left.y == right.y && left.z == right.z) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+
 	//--------------------Functions--------------------
 
 	inline float Length() const { 
@@ -91,14 +115,17 @@ struct Vector3D
 	inline void Normalize() { 
 		(*this) /= Length();
 	}
-	inline Vector3D Normalized() { 
-		return (*this) / Length();
+	friend Vector3D Normalize(Vector3D temp) {
+		return temp / temp.Length();
 	}
 	friend float Dot(Vector3D& left, Vector3D& right) {
 		return left.x * right.x + left.y * right.y + left.z * right.z;
 	}
 	friend Vector3D CrossProduct(Vector3D& left, Vector3D& right) {
 		return Vector3D(left.y * right.z - left.z * right.y, left.z * right.x - left.x * right.z, left.x * right.y - left.y * right.x);
+	}
+	inline Vector3D CrossProduct(Vector3D& right) {
+		return Vector3D(y * right.z - z * right.y, z * right.x - x * right.z, x * right.y - y * right.x);
 	}
 	
 	inline void Clamp(Vector3D& min, Vector3D& max) {
@@ -112,8 +139,7 @@ struct Vector3D
 		if ((*this).z > max.z) (*this).z = max.z;
 	}
 
-	inline Vector3D Clamped(Vector3D& min, Vector3D& max) {
-		Vector3D temp = (*this);
+	friend Vector3D Clamp(Vector3D temp, Vector3D& min, Vector3D& max) {
 		if (temp.x < min.x) temp.x = min.x;
 		if (temp.x > max.x) temp.x = max.x;
 
@@ -126,8 +152,13 @@ struct Vector3D
 		return temp;
 	}
 
-	inline float Distance(Vector3D& vec) {
+	inline float Distance(Vector3D& vec) const {
 		return sqrt(((*this).x - vec.x) * ((*this).x - vec.x) + ((*this).y - vec.y) * ((*this).y - vec.y) + ((*this).z - vec.z) * ((*this).z - vec.z));
+	}
+
+	inline bool Equals(Vector3D& right, float acceptance) {
+		if (x < right.x - acceptance || x > right.y + acceptance || y < right.y - acceptance || y > right.y + acceptance || z < right.z - acceptance || z > right.z + acceptance) return true;
+		else return false;
 	}
 
 	inline std::string ToString() {
