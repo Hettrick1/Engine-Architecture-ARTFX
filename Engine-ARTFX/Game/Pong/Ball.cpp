@@ -39,7 +39,7 @@ void Ball::CheckCollision(const int WIDTH, const int HEIGHT, Paddle* paddleL, Pa
 
 void Ball::BounceX()
 {
-    mBallSpeed.x *= -1;
+    mBallSpeed.x *= -1.05;
 }
 
 void Ball::BounceY()

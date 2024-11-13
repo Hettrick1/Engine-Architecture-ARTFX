@@ -22,12 +22,12 @@ void Paddle::MovePlayer(float direction)
 void Paddle::MoveIA(float speed)
 {
 	if (speed > 0) {
-		if (mPaddlePos.y > 0 && mPaddlePos.y < 800 - mPaddleSize.y) {
+		if (mPaddlePos.y > 0) {
 			mPaddlePos.y -= mPaddleSpeed.y;
 		}
 	}
 	else if (speed < 0){
-		if (mPaddlePos.y > 0 && mPaddlePos.y < 800 - mPaddleSize.y) {
+		if (mPaddlePos.y < 800 - mPaddleSize.y) {
 			mPaddlePos.y += mPaddleSpeed.y;
 		}
 	}

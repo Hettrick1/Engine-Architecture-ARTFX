@@ -18,7 +18,7 @@ void Pong::Update()
 {
     mBall->CheckCollision(800, 800, mPaddleLeft, mPaddleRight);
     mBall->Move();
-    float speed = mBall->GetPosition().y - (mPaddleRight->GetPaddlePos().y + mPaddleRight->GetPaddleSize().y / 2 - mBall->GetSize() / 2);
+    float speed = (mPaddleRight->GetPaddlePos().y + mPaddleRight->GetPaddleSize().y / 2 - mBall->GetSize() / 2)- mBall->GetPosition().y;
     mPaddleRight->MoveIA(speed);
     mPaddleLeft->MovePlayer(mDirection);
     if (mBall->GetIsDead()) {

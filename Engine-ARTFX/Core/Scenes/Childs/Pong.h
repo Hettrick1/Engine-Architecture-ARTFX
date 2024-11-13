@@ -2,6 +2,7 @@
 #include "../Scene.h"
 #include "../../../Game/Pong/Paddle.h"
 #include "../../../Game/Pong/Ball.h"
+
 class Pong : public Scene
 {
 public:
