@@ -8,6 +8,7 @@ struct Vector2D
 
 	Vector2D() :x(0), y(0) {}
 	Vector2D(float pX, float pY): x(pX), y(pY){}
+	Vector2D(float size): x(size), y(size){}
 
 	static const Vector2D Zero, One, UnitX, UnitY;
 
