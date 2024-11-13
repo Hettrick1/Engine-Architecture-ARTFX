@@ -133,6 +133,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Core\Engine\Actor Components\Actor.cpp" />
+    <ClCompile Include="Core\Engine\Actor Components\Component.cpp" />
     <ClCompile Include="Core\Maths\Vector3D.cpp" />
     <ClCompile Include="Game\Pong\Ball.cpp" />
     <ClCompile Include="Core\Engine\Editor\Game.cpp" />
@@ -145,8 +147,11 @@
     <ClCompile Include="Core\Engine\Editor\Window.cpp" />
     <ClCompile Include="Game\Pong\Paddle.cpp" />
     <ClCompile Include="Core\Time.cpp" />
+    <ClCompile Include="Core\Engine\Actor Components\Transform2D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Core\Engine\Actor Components\Actor.h" />
+    <ClInclude Include="Core\Engine\Actor Components\Component.h" />
     <ClInclude Include="Core\Maths\Vector3D.h" />
     <ClInclude Include="Game\Pong\Ball.h" />
     <ClInclude Include="Core\Engine\Editor\Game.h" />
@@ -159,6 +164,7 @@
     <ClInclude Include="Core\Engine\Editor\Window.h" />
     <ClInclude Include="Game\Pong\Paddle.h" />
     <ClInclude Include="Core\Time.h" />
+    <ClInclude Include="Core\Engine\Actor Components\Transform2D.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
