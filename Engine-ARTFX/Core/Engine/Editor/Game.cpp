@@ -14,7 +14,6 @@ Game::Game(std::string title, std::vector<Scene*> scenes) : mIsRunning(true), mA
     mLoadedScene = 0;
 
     Initialize();
-
 }
 
 Game::~Game()
