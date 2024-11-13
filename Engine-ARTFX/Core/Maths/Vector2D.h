@@ -59,6 +59,28 @@ struct Vector2D
 	friend float Dot(Vector2D& left, Vector2D& right) {
 		return left.x * right.x + left.y * right.y;
 	}
+	inline void Clamp(Vector2D& min, Vector2D& max) {
+		if ((*this).x < min.x) (*this).x = min.x;
+		if ((*this).x > max.x) (*this).x = max.x;
+
+		if ((*this).y < min.y) (*this).y = min.y;
+		if ((*this).y > max.y) (*this).y = max.y;
+	}
+
+	inline Vector2D Clamped(Vector2D& min, Vector2D& max) {
+		Vector2D temp = (*this);
+		if (temp.x < min.x) temp.x = min.x;
+		if (temp.x > max.x) temp.x = max.x;
+
+		if (temp.y < min.y) temp.y = min.y;
+		if (temp.y > max.y) temp.y = max.y;
+
+		return temp;
+	}
+
+	inline float Distance(Vector2D& vec) {
+		return sqrt(((*this).x - vec.x) * ((*this).x - vec.x) + ((*this).y - vec.y) * ((*this).y - vec.y));
+	}
 
 	inline std::string ToString() {
 		return "( " + std::to_string(x) + " , " + std::to_string(y) + " )";
