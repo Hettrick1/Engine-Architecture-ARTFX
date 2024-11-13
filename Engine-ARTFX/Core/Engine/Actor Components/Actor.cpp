@@ -28,6 +28,11 @@ void Actor::SetActive(bool active)
 {
 }
 
+std::vector<Component*> Actor::GetComponents() const
+{
+    return mComponents;
+}
+
 void Actor::Update()
 {
 }

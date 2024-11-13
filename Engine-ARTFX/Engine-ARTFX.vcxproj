@@ -136,6 +136,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Core\Engine\Actor Components\Colliders\BoxCollider2D.cpp" />
+    <ClCompile Include="Core\Engine\Actor Components\Colliders\Collider.cpp" />
     <ClCompile Include="Core\Engine\Actor Components\Actor.cpp" />
     <ClCompile Include="Core\Engine\Actor Components\Component.cpp" />
     <ClCompile Include="Core\Maths\Vector3D.cpp" />
@@ -153,6 +155,8 @@
     <ClCompile Include="Core\Engine\Actor Components\Transform2D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Core\Engine\Actor Components\Colliders\BoxCollider2D.h" />
+    <ClInclude Include="Core\Engine\Actor Components\Colliders\Collider.h" />
     <ClInclude Include="Core\Engine\Actor Components\Actor.h" />
     <ClInclude Include="Core\Engine\Actor Components\ActorState.h" />
     <ClInclude Include="Core\Engine\Actor Components\Component.h" />

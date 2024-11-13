@@ -20,10 +20,11 @@ public:
 	void AddComponent(Component* component);
 	void RemoveComponent(int index);
 	void SetActive(bool active);
+	std::vector<Component*> GetComponents() const;
 private:
 	Scene* mScene;
 	ActorState mState;
 	Transform2D mTransformComponent;
-	std::vector<Component*> mComponent;
+	std::vector<Component*> mComponents;
 };
 
