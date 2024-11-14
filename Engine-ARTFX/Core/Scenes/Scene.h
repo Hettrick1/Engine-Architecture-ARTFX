@@ -1,5 +1,6 @@
 #pragma once
 #include "../Engine/Graphics/Renderer.h"
+#include "../Engine/Actor Components/Actor.h"
 
 class Scene
 {
@@ -15,5 +16,6 @@ public:
 protected:
 	std::string mTitle;
 	Renderer* mRenderer;
+	std::vector<Actor*> mAllActors;
 };
 

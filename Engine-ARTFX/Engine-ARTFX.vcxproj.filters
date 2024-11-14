@@ -66,6 +66,9 @@
     <ClCompile Include="Core\Engine\Actor Components\Colliders\BoxCollider2D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Core\Scenes\Childs\ActorTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Engine\Debug Classes\Log.h">
@@ -120,6 +123,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Core\Engine\Actor Components\Colliders\BoxCollider2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Scenes\Childs\ActorTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
