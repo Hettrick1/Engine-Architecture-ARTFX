@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Component.h"
+#include "../Managers/CollisionManager.h"
 
 class Collider : public Component
 {
@@ -12,12 +13,13 @@ public:
 	virtual void Update();
 	virtual void OnEnd();
 public:
-	virtual void CheckCollisionWith(Collider* other);
+	virtual bool CheckCollisionWith(Collider* other);
 	virtual void OnCollision();
-	/*virtual void OnCollisionEnter(); //Need to be implemented
-	virtual void OnCollisionQuit();
+	/*
 	virtual void OnTriggerEnter();
 	virtual void OnTriggerStay();
 	virtual void OnTriggerQuit();*/
+protected :
+	bool mIsTriggerable;
 };
 

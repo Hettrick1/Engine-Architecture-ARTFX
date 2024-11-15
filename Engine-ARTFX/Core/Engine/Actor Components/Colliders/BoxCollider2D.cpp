@@ -21,13 +21,15 @@ void BoxCollider2D::OnEnd()
 {
 }
 
-void BoxCollider2D::CheckCollisionWith(Collider* other)
+bool BoxCollider2D::CheckCollisionWith(Collider* other)
 {
     if (BoxCollider2D* boxCollider = dynamic_cast<BoxCollider2D*>(other)) {
         if (CheckCollisionWithBox(boxCollider)) {
-            OnCollision();  
+            return true;
         }
+        return false;
     }
+    return false;
 }
 
 void BoxCollider2D::OnCollision()

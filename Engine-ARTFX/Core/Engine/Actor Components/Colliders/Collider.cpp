@@ -2,6 +2,7 @@
 
 Collider::Collider(Actor* owner, int updateOder) : Component(owner, updateOder)
 {
+	CollisionManager::GetInstance().RegisterCollider(this);
 }
 
 Collider::~Collider()
@@ -20,8 +21,9 @@ void Collider::OnEnd()
 {
 }
 
-void Collider::CheckCollisionWith(Collider* other)
+bool Collider::CheckCollisionWith(Collider* other)
 {
+	return true;
 }
 
 void Collider::OnCollision()

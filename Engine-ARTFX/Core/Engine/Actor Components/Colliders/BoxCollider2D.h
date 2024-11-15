@@ -14,7 +14,7 @@ public:
 	void OnEnd() override;
 
 public:
-	void CheckCollisionWith(Collider* other) override;
+	bool CheckCollisionWith(Collider* other) override;
 	void OnCollision() override;
 
 public:
