@@ -1,4 +1,5 @@
 #include "Scene.h"
+#include "../Engine/Actor Components/Actor.h"
 
 Scene::Scene(std::string title) : mTitle(title)
 {

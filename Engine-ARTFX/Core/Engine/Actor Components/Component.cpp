@@ -1,4 +1,5 @@
 #include "Component.h"
+#include "Actor.h"
 
 Component::Component(Actor* owner, int updateOder) : mIsActive(true), mOwner(owner), mUpdateOrder(updateOder)
 {

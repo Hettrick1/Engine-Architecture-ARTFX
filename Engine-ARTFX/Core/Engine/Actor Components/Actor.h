@@ -1,11 +1,8 @@
 #pragma once
-#include "../../Scenes/Scene.h"
 #include "ActorState.h"
 #include "Transform2D.h"
-#include "Component.h"
 #include <vector>
 
-class Transform;
 class Component;
 class Scene;
 

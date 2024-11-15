@@ -1,4 +1,6 @@
 #include "CollisionManager.h"
+#include "../Colliders/Collider.h"
+#include "../Actor.h"
 
 CollisionManager& CollisionManager::GetInstance()
 {

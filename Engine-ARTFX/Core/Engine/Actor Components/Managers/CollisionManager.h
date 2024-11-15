@@ -1,6 +1,5 @@
 #pragma once
 
-#include "../Colliders/Collider.h"
 #include <vector>
 
 class Collider;

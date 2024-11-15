@@ -1,6 +1,5 @@
 #pragma once
 #include "../Engine/Graphics/Renderer.h"
-#include "../Engine/Actor Components/Actor.h"
 #include <vector>
 
 class Actor;
