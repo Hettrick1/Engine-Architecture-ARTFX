@@ -15,3 +15,8 @@ void Component::Update()
 void Component::OnEnd()
 {
 }
+
+Actor* Component::GetOwner()
+{
+	return mOwner;
+}

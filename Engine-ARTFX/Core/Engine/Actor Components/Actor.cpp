@@ -33,6 +33,11 @@ std::vector<Component*> Actor::GetComponents() const
     return mComponents;
 }
 
+ActorState Actor::GetState()
+{
+    return mState;
+}
+
 void Actor::Update()
 {
 }

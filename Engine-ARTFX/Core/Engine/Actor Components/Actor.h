@@ -22,6 +22,7 @@ public:
 	void RemoveComponent(int index);
 	void SetActive(bool active);
 	std::vector<Component*> GetComponents() const;
+	ActorState GetState();
 private:
 	Scene* mScene;
 	ActorState mState;

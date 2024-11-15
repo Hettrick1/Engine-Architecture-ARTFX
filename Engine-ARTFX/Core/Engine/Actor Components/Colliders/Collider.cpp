@@ -29,3 +29,12 @@ bool Collider::CheckCollisionWith(Collider* other)
 void Collider::OnCollision()
 {
 }
+
+void Collider::OnTriggerEnter()
+{
+}
+
+bool Collider::GetIsTriggerable()
+{
+	return mIsTriggerable;
+}

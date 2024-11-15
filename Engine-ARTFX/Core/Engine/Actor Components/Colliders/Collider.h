@@ -12,13 +12,18 @@ public:
 	virtual void OnStart();
 	virtual void Update();
 	virtual void OnEnd();
+
 public:
 	virtual bool CheckCollisionWith(Collider* other);
 	virtual void OnCollision();
-	/*
 	virtual void OnTriggerEnter();
+	/*
 	virtual void OnTriggerStay();
 	virtual void OnTriggerQuit();*/
+
+public:
+	bool GetIsTriggerable();
+
 protected :
 	bool mIsTriggerable;
 };
