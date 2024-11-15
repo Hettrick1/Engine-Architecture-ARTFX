@@ -25,3 +25,11 @@ void Scene::OnInput(SDL_Event)
 void Scene::Close()
 {
 }
+
+void Scene::AddActor(Actor* actor)
+{
+}
+
+void Scene::RemoveActor()
+{
+}

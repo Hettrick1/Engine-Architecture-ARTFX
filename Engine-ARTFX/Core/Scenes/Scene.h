@@ -1,6 +1,9 @@
 #pragma once
 #include "../Engine/Graphics/Renderer.h"
+#include "../Engine/Actor Components/Actor.h"
+#include <vector>
 
+class Actor;
 
 class Scene
 {
@@ -12,9 +15,13 @@ public:
 	virtual void OnInput(SDL_Event);
 	virtual void Close();
 
+public:
+	virtual void AddActor(Actor* actor);
+	virtual void RemoveActor();
 
 protected:
 	std::string mTitle;
 	Renderer* mRenderer;
+	std::vector<Actor*> mAllActors;
 };
 

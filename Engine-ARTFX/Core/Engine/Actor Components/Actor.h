@@ -7,6 +7,7 @@
 
 class Transform;
 class Component;
+class Scene;
 
 class Actor
 {
