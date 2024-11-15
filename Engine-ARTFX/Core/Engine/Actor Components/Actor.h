@@ -12,7 +12,7 @@ class Scene;
 class Actor
 {
 public:
-	Actor();
+	Actor(Vector2D position = 0, Vector2D size = 1, float rotation = 0);
 	~Actor();
 	void Start();
 	void Update();

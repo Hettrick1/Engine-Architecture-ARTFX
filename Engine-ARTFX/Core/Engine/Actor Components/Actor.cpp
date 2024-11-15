@@ -1,7 +1,8 @@
 #include "Actor.h"
 
-Actor::Actor()
+Actor::Actor(Vector2D position, Vector2D size, float rotation) : mState(ActorState::Active), mTransformComponent({ position, size, rotation })
 {
+
 }
 
 Actor::~Actor()
