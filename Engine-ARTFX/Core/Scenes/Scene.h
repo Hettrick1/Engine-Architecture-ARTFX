@@ -7,6 +7,7 @@ class Actor;
 class Scene
 {
 public:
+	static Scene* ActiveScene;
 	Scene(std::string title = "Scene");
 	virtual void Start(Renderer* renderer);
 	virtual void Update();
@@ -16,11 +17,14 @@ public:
 
 public:
 	virtual void AddActor(Actor* actor);
-	virtual void RemoveActor();
+	virtual void UpdateAllActors();
+	virtual void RemoveActor(Actor* actor);
 
 protected:
 	std::string mTitle;
 	Renderer* mRenderer;
 	std::vector<Actor*> mAllActors;
+	std::vector<Actor*> mPendingActors;
+	bool mIsUpdatingActor;
 };
 

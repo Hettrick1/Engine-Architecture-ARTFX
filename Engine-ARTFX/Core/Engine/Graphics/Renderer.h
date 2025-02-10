@@ -1,6 +1,7 @@
 #pragma once
 #include "../../Maths/Rectangle.h"
 #include "../Editor/Window.h"
+#include "SDL_image.h"
 
 class Renderer
 {
@@ -15,7 +16,7 @@ public:
 	void Close();
 
 	void DrawRect(Rectangle& rRect);
-
+	SDL_Renderer* ToSdlRenderer();
 private:
 	SDL_Renderer* mSdlRenderer;
 };

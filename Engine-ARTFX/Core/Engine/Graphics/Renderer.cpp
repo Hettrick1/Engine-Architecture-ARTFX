@@ -12,6 +12,11 @@ bool Renderer::Initialize(Window& rWindow)
         Log::Error(LogType::Video, "Failed to create Renderer");
         return false;
     }
+    if (IMG_Init(IMG_INIT_PNG) == 0) 
+    {
+        Log::Error(LogType::Video, "Unable to initialize SDL_Image");
+        return false;
+    }
     return true;
 }
 
@@ -36,4 +41,9 @@ void Renderer::DrawRect(Rectangle& rRect)
     SDL_SetRenderDrawColor(mSdlRenderer, 255, 255, 255, 255);
     SDL_Rect sdlRect = rRect.ToSdlRect();
     SDL_RenderFillRect(mSdlRenderer, &sdlRect);
+}
+
+SDL_Renderer* Renderer::ToSdlRenderer()
+{
+    return mSdlRenderer;
 }

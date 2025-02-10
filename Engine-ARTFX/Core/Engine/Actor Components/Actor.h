@@ -14,14 +14,14 @@ public:
 	void Start();
 	void Update();
 	void Destroy();
-	void AttachScene(Scene* scene);
+	void AttachScene(Scene& scene);
 	void AddComponent(Component* component);
 	void RemoveComponent(int index);
 	void SetActive(bool active);
 	std::vector<Component*> GetComponents() const;
 	ActorState GetState();
 private:
-	Scene* mScene;
+	Scene& mScene;
 	ActorState mState;
 	Transform2D mTransformComponent;
 	std::vector<Component*> mComponents;
