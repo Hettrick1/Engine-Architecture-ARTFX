@@ -24,7 +24,10 @@ void Game::Initialize()
 {
     mGameWindow = new Window(800, 800);
     mRenderer = new Renderer();
-    if (mGameWindow->Open() && mRenderer->Initialize(*mGameWindow)) Loop();
+    if (mGameWindow->Open() && mRenderer->Initialize(*mGameWindow)) {
+        mAllScenes[mLoadedScene]->Load();
+        Loop();
+    }
 }
 
 void Game::Loop()
