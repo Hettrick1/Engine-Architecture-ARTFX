@@ -43,6 +43,16 @@ ActorState Actor::GetState()
     return mState;
 }
 
+Scene& Actor::GetScene()
+{
+    return mScene;
+}
+
+Transform2DComponent& Actor::GetTransformComponent()
+{
+    return mTransformComponent;
+}
+
 void Actor::Update()
 {
 }

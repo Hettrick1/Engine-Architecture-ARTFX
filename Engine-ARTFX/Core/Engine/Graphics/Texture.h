@@ -14,6 +14,7 @@ public:
 	void Unload();
 	void UpdateInfo(int& width, int& height);
 	Vector2D GetTextureSize();
+	SDL_Texture* GetSdlTexture() const { return mSdlTexture; }
 
 private:
 	std::string mFilePath;

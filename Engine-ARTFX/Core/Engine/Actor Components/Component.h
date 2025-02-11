@@ -6,14 +6,14 @@ class Component
 {
 public:
 	Component() = delete;
-	Component(Actor* owner, int updateOder);
+	Component(Actor* owner, int updateOder = 0);
 	virtual ~Component() {}
 	virtual void OnStart();
 	virtual void Update();
 	virtual void OnEnd();
 	virtual Actor* GetOwner();
 
-private:
+protected:
 	bool mIsActive;
 	Actor* mOwner;
 	int mUpdateOrder;

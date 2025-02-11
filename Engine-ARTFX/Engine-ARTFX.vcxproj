@@ -139,6 +139,7 @@
     <ClCompile Include="Core\Engine\Graphics\Assets.cpp" />
     <ClCompile Include="Core\Engine\Actor Components\Managers\CollisionManager.cpp" />
     <ClCompile Include="Core\Engine\Graphics\Texture.cpp" />
+    <ClCompile Include="Core\Maths\Rectangle.cpp" />
     <ClCompile Include="Core\Scenes\Childs\ActorTest.cpp" />
     <ClCompile Include="Core\Engine\Actor Components\Colliders\BoxCollider2DComponent.cpp" />
     <ClCompile Include="Core\Engine\Actor Components\Colliders\ColliderComponent.cpp" />
@@ -157,6 +158,7 @@
     <ClCompile Include="Game\Pong\Paddle.cpp" />
     <ClCompile Include="Core\Time.cpp" />
     <ClCompile Include="Core\Engine\Actor Components\Transform2DComponent.cpp" />
+    <ClCompile Include="Core\Engine\Actor Components\SpriteComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Engine\Graphics\Assets.h" />
@@ -182,6 +184,7 @@
     <ClInclude Include="Game\Pong\Paddle.h" />
     <ClInclude Include="Core\Time.h" />
     <ClInclude Include="Core\Engine\Actor Components\Transform2DComponent.h" />
+    <ClInclude Include="Core\Engine\Actor Components\SpriteComponent.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

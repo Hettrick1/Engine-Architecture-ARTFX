@@ -12,7 +12,7 @@ namespace Maths
     const float INFINITY_NEG = -INFINITY_POS;
 
     inline float ToRad(float degrees) {return degrees * PI / 180.0f;}
-    inline float ToDeg(float radians) {return degrees * 180.0f / PI;}
+    inline float ToDeg(float radians) {return radians * 180.0f / PI;}
 
     inline bool NearZero(float val, float epsilon = 0.001f){ return fabs(val)<=epsilon;}
 

@@ -20,6 +20,8 @@ public:
 	void SetActive(bool active);
 	std::vector<Component*> GetComponents() const;
 	ActorState GetState();
+	Scene& GetScene();
+	Transform2DComponent& GetTransformComponent();
 private:
 	Scene& mScene;
 	ActorState mState;

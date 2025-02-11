@@ -23,6 +23,9 @@ public:
 	virtual void UpdateAllActors();
 	virtual void RemoveActor(Actor* actor);
 
+public : 
+	Renderer* GetRenderer() const { return mRenderer; }
+
 protected:
 	std::string mTitle;
 	Renderer* mRenderer;
