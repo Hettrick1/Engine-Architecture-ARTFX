@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../../Maths/Rectangle.h"
 #include "../Editor/Window.h"
 #include "SDL_image.h"

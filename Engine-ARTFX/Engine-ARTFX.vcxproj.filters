@@ -54,16 +54,16 @@
     <ClCompile Include="Core\Engine\Actor Components\Component.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Engine\Actor Components\Transform2D.cpp">
+    <ClCompile Include="Core\Engine\Actor Components\Transform2DComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Core\Engine\Actor Components\Actor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Engine\Actor Components\Colliders\Collider.cpp">
+    <ClCompile Include="Core\Engine\Actor Components\Colliders\ColliderComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Engine\Actor Components\Colliders\BoxCollider2D.cpp">
+    <ClCompile Include="Core\Engine\Actor Components\Colliders\BoxCollider2DComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Core\Scenes\Childs\ActorTest.cpp">
@@ -72,7 +72,7 @@
     <ClCompile Include="Core\Engine\Actor Components\Managers\CollisionManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Engine\Actor Components\Asset.cpp">
+    <ClCompile Include="Core\Engine\Graphics\Assets.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Core\Engine\Graphics\Texture.cpp">
@@ -119,7 +119,7 @@
     <ClInclude Include="Core\Engine\Actor Components\Component.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Engine\Actor Components\Transform2D.h">
+    <ClInclude Include="Core\Engine\Actor Components\Transform2DComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Core\Engine\Actor Components\Actor.h">
@@ -128,10 +128,10 @@
     <ClInclude Include="Core\Engine\Actor Components\ActorState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Engine\Actor Components\Colliders\Collider.h">
+    <ClInclude Include="Core\Engine\Actor Components\Colliders\ColliderComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Engine\Actor Components\Colliders\BoxCollider2D.h">
+    <ClInclude Include="Core\Engine\Actor Components\Colliders\BoxCollider2DComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Core\Scenes\Childs\ActorTest.h">
@@ -140,10 +140,13 @@
     <ClInclude Include="Core\Engine\Actor Components\Managers\CollisionManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Engine\Actor Components\Asset.h">
-    <Filter>Header Files</Filter>
+    <ClInclude Include="Core\Engine\Graphics\Assets.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Core\Engine\Graphics\Texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Maths\Maths.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

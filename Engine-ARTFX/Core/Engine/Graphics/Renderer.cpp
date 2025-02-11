@@ -1,7 +1,9 @@
 #include "Renderer.h"
 
-Renderer::Renderer() :mSdlRenderer(nullptr)
+Renderer::Renderer() 
+    : mSdlRenderer(nullptr)
 {
+
 }
 
 bool Renderer::Initialize(Window& rWindow)

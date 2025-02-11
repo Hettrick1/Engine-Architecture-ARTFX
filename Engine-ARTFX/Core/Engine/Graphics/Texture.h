@@ -2,8 +2,8 @@
 
 #include <iostream>
 #include "SDL.h"
-#include "Renderer.h"
 #include "..\..\Maths\Vector2D.h"
+#include "Renderer.h"
 
 class Texture
 {

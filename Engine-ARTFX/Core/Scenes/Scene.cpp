@@ -14,6 +14,10 @@ void Scene::Start(Renderer* renderer)
 	mRenderer = renderer;
 }
 
+void Scene::Load()
+{
+}
+
 void Scene::Update()
 {
 }
@@ -25,6 +29,14 @@ void Scene::Render()
 
 void Scene::OnInput(SDL_Event)
 {
+}
+
+void Scene::Unload()
+{
+	while (!mAllActors.empty()) {
+		delete mAllActors.back();
+	}
+	Assets::Clear();
 }
 
 void Scene::Close()

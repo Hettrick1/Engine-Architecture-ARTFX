@@ -3,18 +3,18 @@
 #include "../Component.h"
 #include "../Managers/CollisionManager.h"
 
-class Collider : public Component
+class ColliderComponent : public Component
 {
 public:
-	Collider() = delete;
-	Collider(Actor* owner, int updateOder);
-	~Collider();
+	ColliderComponent() = delete;
+	ColliderComponent(Actor* owner, int updateOder);
+	~ColliderComponent();
 	virtual void OnStart();
 	virtual void Update();
 	virtual void OnEnd();
 
 public:
-	virtual bool CheckCollisionWith(Collider* other);
+	virtual bool CheckCollisionWith(ColliderComponent* other);
 	virtual void OnCollision();
 	virtual void OnTriggerEnter();
 	/*

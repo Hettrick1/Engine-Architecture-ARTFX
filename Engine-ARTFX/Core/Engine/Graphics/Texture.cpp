@@ -43,5 +43,5 @@ void Texture::UpdateInfo(int& width, int& height)
 
 Vector2D Texture::GetTextureSize()
 {
-	return {mWidth, mHeight};
+	return {static_cast<float>(mWidth), static_cast<float>(mHeight)};
 }

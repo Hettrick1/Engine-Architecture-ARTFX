@@ -2,19 +2,19 @@
 
 #include <vector>
 
-class Collider;
+class ColliderComponent;
 
 class CollisionManager
 {
 public:
     static CollisionManager& GetInstance();
 
-    void RegisterCollider(Collider* collider);
+    void RegisterCollider(ColliderComponent* collider);
 
     void CheckCollisions();
 
 private:
     CollisionManager() = default;
-    std::vector<Collider*> colliders;
+    std::vector<ColliderComponent*> colliders;
 };
 

@@ -1,24 +1,24 @@
 #pragma once
 
-#include "Collider.h"
+#include "ColliderComponent.h"
 #include "../../../Maths/Vector2D.h"
 
-class BoxCollider2D : public Collider
+class BoxCollider2DComponent : public ColliderComponent
 {
 public:
-	BoxCollider2D() = delete;
-	BoxCollider2D(Actor* owner, int updateOder, Vector2D position, Vector2D size);
-	~BoxCollider2D();
+	BoxCollider2DComponent() = delete;
+	BoxCollider2DComponent(Actor* owner, int updateOder, Vector2D position, Vector2D size);
+	~BoxCollider2DComponent();
 	void OnStart() override;
 	void Update() override;
 	void OnEnd() override;
 
 public:
-	bool CheckCollisionWith(Collider* other) override;
+	bool CheckCollisionWith(ColliderComponent* other) override;
 	void OnCollision() override;
 
 public:
-	bool CheckCollisionWithBox(BoxCollider2D* other);
+	bool CheckCollisionWithBox(BoxCollider2DComponent* other);
 
 	/*void OnCollisionEnter(); //Need to be implemented
 	void OnCollisionQuit();

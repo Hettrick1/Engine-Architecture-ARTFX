@@ -1,5 +1,5 @@
 #include "CollisionManager.h"
-#include "../Colliders/Collider.h"
+#include "../Colliders/ColliderComponent.h"
 #include "../Actor.h"
 
 CollisionManager& CollisionManager::GetInstance()
@@ -8,7 +8,7 @@ CollisionManager& CollisionManager::GetInstance()
     return instance;
 }
 
-void CollisionManager::RegisterCollider(Collider* collider)
+void CollisionManager::RegisterCollider(ColliderComponent* collider)
 {
     colliders.push_back(collider);
 }

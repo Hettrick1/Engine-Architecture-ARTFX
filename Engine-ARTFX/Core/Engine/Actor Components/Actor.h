@@ -1,6 +1,6 @@
 #pragma once
 #include "ActorState.h"
-#include "Transform2D.h"
+#include "Transform2DComponent.h"
 #include <vector>
 
 class Component;
@@ -23,7 +23,7 @@ public:
 private:
 	Scene& mScene;
 	ActorState mState;
-	Transform2D mTransformComponent;
+	Transform2DComponent mTransformComponent;
 	std::vector<Component*> mComponents;
 };
 

@@ -1,6 +1,7 @@
 #pragma once
 #include "../Engine/Graphics/Renderer.h"
 #include <vector>
+#include "../Engine/Graphics/Assets.h"
 
 class Actor;
 
@@ -10,9 +11,11 @@ public:
 	static Scene* ActiveScene;
 	Scene(std::string title = "Scene");
 	virtual void Start(Renderer* renderer);
+	virtual void Load();
 	virtual void Update();
 	virtual void Render();
 	virtual void OnInput(SDL_Event);
+	virtual void Unload();
 	virtual void Close();
 
 public:
