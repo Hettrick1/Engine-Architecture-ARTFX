@@ -22,7 +22,7 @@ Game::~Game()
 
 void Game::Initialize()
 {
-    mGameWindow = new Window(800, 800);
+    mGameWindow = new Window(1920, 1080);
     mRenderer = new Renderer();
     if (mGameWindow->Open() && mRenderer->Initialize(*mGameWindow)) {
         mAllScenes[mLoadedScene]->Load();
@@ -41,11 +41,11 @@ void Game::Loop()
     }
 
     while (mIsRunning) {
-        Time::ComputeDeltaTime();
+        Timer::ComputeDeltaTime();
         Input();
-        Update();
+        Update(); 
         Render();
-        Time::DelayTime();
+        Timer::DelayTime();
     }
 
     Close();
@@ -64,15 +64,14 @@ void Game::Render()
 void Game::Input()
 {
     if (mIsRunning) {
-        SDL_Event event;
-        while (SDL_PollEvent(&event)) {
-            mAllScenes[mLoadedScene]->OnInput(event);
-            switch (event.type) {
+        while (SDL_PollEvent(&mSdlEvent)) {
+            mAllScenes[mLoadedScene]->OnInput(mSdlEvent);
+            switch (mSdlEvent.type) {
             case SDL_QUIT:
                 mIsRunning = false;
                 break;
             case SDL_KEYDOWN:
-                if (event.key.keysym.sym == SDLK_ESCAPE) {
+                if (mSdlEvent.key.keysym.sym == SDLK_ESCAPE) {
                     mIsRunning = false;
                     break;
                 }

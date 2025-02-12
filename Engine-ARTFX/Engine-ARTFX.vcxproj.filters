@@ -45,7 +45,7 @@
     <ClCompile Include="Game\Pong\Paddle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Time.cpp">
+    <ClCompile Include="Core\Maths\Timer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Core\Maths\Vector3D.cpp">
@@ -54,7 +54,7 @@
     <ClCompile Include="Core\Engine\Actor Components\Component.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Engine\Actor Components\Transform2DComponent.cpp">
+    <ClCompile Include="Core\Engine\Actor Components\Transform2D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Core\Engine\Actor Components\Actor.cpp">
@@ -64,9 +64,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Core\Engine\Actor Components\Colliders\BoxCollider2DComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\Scenes\Childs\ActorTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Core\Engine\Actor Components\Managers\CollisionManager.cpp">
@@ -82,6 +79,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Core\Maths\Rectangle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Scenes\Childs\SpaceInvader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\SpaceInvader\SpaceInvaderPlayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -116,7 +119,7 @@
     <ClInclude Include="Game\Pong\Paddle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Time.h">
+    <ClInclude Include="Core\Maths\Timer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Core\Maths\Vector3D.h">
@@ -125,7 +128,7 @@
     <ClInclude Include="Core\Engine\Actor Components\Component.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Engine\Actor Components\Transform2DComponent.h">
+    <ClInclude Include="Core\Engine\Actor Components\Transform2D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Core\Engine\Actor Components\Actor.h">
@@ -138,9 +141,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Core\Engine\Actor Components\Colliders\BoxCollider2DComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\Scenes\Childs\ActorTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Core\Engine\Actor Components\Managers\CollisionManager.h">
@@ -156,6 +156,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Core\Engine\Actor Components\SpriteComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Scenes\Childs\SpaceInvader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\SpaceInvader\SpaceInvaderPlayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -22,6 +22,7 @@ void SpriteComponent::SetTexture(const Texture& pTexture)
 
 void SpriteComponent::Draw(Renderer& pRenderer)
 {
-	Vector2D origin{ mTexWidth / 2.0f, mTexHeight / 2.0f };
+	Vector2D origin{((mTexWidth * mOwner->GetTransformComponent().GetSize().x) / 2.0f), 
+		((mTexHeight * mOwner->GetTransformComponent().GetSize().y) / 2.0f) };
 	pRenderer.DrawSprite(*mOwner, mTexture, Rectangle(), origin, Renderer::Flip::None);
 }

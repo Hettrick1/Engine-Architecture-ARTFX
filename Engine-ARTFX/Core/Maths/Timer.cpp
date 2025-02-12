@@ -1,11 +1,11 @@
-#include "Time.h"
+#include "Timer.h"
 
-unsigned int Time::mFrameStart = 0;
-unsigned int Time::mFrameTime = 0;
-unsigned int Time::mLastFrame = 0;
-float Time::deltaTime = 0;
+unsigned int Timer::mFrameStart = 0;
+unsigned int Timer::mFrameTime = 0;
+unsigned int Timer::mLastFrame = 0;
+float Timer::deltaTime = 0;
 
-unsigned int Time::ComputeDeltaTime()
+unsigned int Timer::ComputeDeltaTime()
 {
     mFrameStart = SDL_GetTicks();
     unsigned int dt = mFrameStart - mLastFrame;
@@ -15,7 +15,7 @@ unsigned int Time::ComputeDeltaTime()
     return dt;
 }
 
-void Time::DelayTime()
+void Timer::DelayTime()
 {
     mFrameTime = SDL_GetTicks() - mFrameStart;
     if (mFrameTime < FRAME_DELAY)

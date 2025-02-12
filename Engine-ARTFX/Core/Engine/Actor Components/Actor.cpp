@@ -1,12 +1,14 @@
 #include "Actor.h"
 #include "Component.h"
-#include "../../Scenes/Scene.h"
+#include "Scene.h"
 #include <algorithm>
 
 Actor::Actor(Vector2D position, Vector2D size, float rotation) : 
-    mState(ActorState::Active), mTransformComponent({ position, size, rotation }), mScene(*Scene::ActiveScene)
+    mState(ActorState::Active), mScene(*Scene::ActiveScene)
 {
-
+    mTransformComponent.SetPosition(position);
+    mTransformComponent.SetSize(size);
+    mTransformComponent.SetRotation(rotation);
 }
 
 Actor::~Actor()
@@ -72,6 +74,12 @@ void Actor::Update()
 
 void Actor::Destroy()
 {
+    while (!mComponents.empty()) {
+        delete mComponents.back();
+    }
+    while (!mPendingComponents.empty()) {
+        delete mPendingComponents.back();
+    }
 }
 
 std::vector<Component*> Actor::GetComponents() const
@@ -89,7 +97,7 @@ Scene& Actor::GetScene()
     return mScene;
 }
 
-Transform2DComponent& Actor::GetTransformComponent()
+Transform2D& Actor::GetTransformComponent()
 {
     return mTransformComponent;
 }

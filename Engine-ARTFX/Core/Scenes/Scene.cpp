@@ -1,12 +1,13 @@
 #include "Scene.h"
 
-#include "../Engine/Actor Components/Actor.h"
+#include "Actor.h"
 #include <algorithm>
 
 Scene* Scene::ActiveScene = nullptr;
 
 Scene::Scene(std::string title) : mTitle(title)
 {
+	ActiveScene = this;
 }
 
 void Scene::Start(Renderer* renderer)
@@ -34,7 +35,12 @@ void Scene::OnInput(SDL_Event)
 void Scene::Unload()
 {
 	while (!mAllActors.empty()) {
+		mAllActors.back()->Destroy();
 		delete mAllActors.back();
+	}
+	while (!mPendingActors.empty()) {
+		mPendingActors.back()->Destroy();
+		delete mPendingActors.back();
 	}
 	Assets::Clear();
 }

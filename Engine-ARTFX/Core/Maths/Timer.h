@@ -3,12 +3,12 @@
 #include <algorithm>
 #include <SDL_timer.h>
 
-class Time
+class Timer
 {
 public:
-	Time() = default;
-	Time(const Time&) = delete;
-	Time& operator=(const Time&) = delete;
+	Timer() = default;
+	Timer(const Timer&) = delete;
+	Timer& operator=(const Timer&) = delete;
 
 	static unsigned int ComputeDeltaTime();
 	static void DelayTime();

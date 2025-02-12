@@ -1,6 +1,6 @@
 #include "Assets.h"
 #include <sstream>
-#include "../Debug Classes/Log.h"
+#include "Log.h"
 
 std::map<std::string, Texture> Assets::mTextures = {};
 
@@ -31,5 +31,7 @@ void Assets::Clear()
 
 Texture Assets::LoadTextureFromFile(Renderer& pRenderer, const std::string& pFilePath)
 {
-	return Texture();
+	Texture texture;
+	texture.Load(pRenderer, pFilePath);
+	return texture;
 }

@@ -1,10 +1,10 @@
 #pragma once
 #include "../../Maths/Vector2D.h"
-class Transform2DComponent
+class Transform2D
 {
 public:
-	Transform2DComponent(Vector2D position, Vector2D size, float rotation);
-	Transform2DComponent() = delete;
+	Transform2D(Vector2D position, Vector2D size, float rotation);
+	Transform2D();
 
 	Vector2D GetPosition();
 	Vector2D GetSize();
@@ -15,8 +15,8 @@ public:
 	void SetRotation(float newRotation);
 
 private:
-	Vector2D mPosition = {0.0, 0.0};
-	Vector2D mSize = {1.0, 1.0};
-	float mRotation = 0.0f;
+	Vector2D mPosition;
+	Vector2D mSize;
+	float mRotation;
 };
 

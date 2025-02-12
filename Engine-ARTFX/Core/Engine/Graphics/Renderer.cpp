@@ -1,6 +1,6 @@
 #include "Renderer.h"
 #include "../Actor Components/SpriteComponent.h"
-#include "../Actor Components/Transform2DComponent.h"
+#include "../Actor Components/Transform2D.h"
 #include "../../Maths/Maths.h"
 #include "../Actor Components/Actor.h"
 #include "../Graphics/Texture.h"
@@ -78,7 +78,7 @@ void Renderer::DrawRect(Rectangle& rRect)
 void Renderer::DrawSprite(Actor& pActor, Texture& pTexture, Rectangle pRect, Vector2D pOrigin, Flip pFlipMethod)
 {
     SDL_Rect destinationRect; 
-    Transform2DComponent transform = pActor.GetTransformComponent();
+    Transform2D& transform = pActor.GetTransformComponent();
     destinationRect.w = static_cast<int>(pTexture.GetTextureSize().x * transform.GetSize().x);
     destinationRect.h = static_cast<int>(pTexture.GetTextureSize().y * transform.GetSize().y);
     destinationRect.x = static_cast<int>(transform.GetPosition().x - pOrigin.x); 

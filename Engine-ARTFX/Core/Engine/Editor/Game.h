@@ -1,8 +1,8 @@
 #pragma once
 #include "Window.h"
-#include "../Graphics/Renderer.h"
-#include "../../Scenes/Scene.h"
-#include "../../Time.h"
+#include "Renderer.h"
+#include "Scene.h"
+#include "Timer.h"
 #include <iostream>
 #include <vector>
 
@@ -19,6 +19,7 @@ public:
 	void Close();
 
 private:
+	SDL_Event mSdlEvent;
 	std::string mTitle;
 	Window* mGameWindow;
 	Renderer* mRenderer;
