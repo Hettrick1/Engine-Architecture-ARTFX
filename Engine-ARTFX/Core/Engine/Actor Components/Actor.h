@@ -16,8 +16,8 @@ public:
 	void Destroy();
 	void AttachScene(Scene& scene);
 	void AddComponent(Component* component);
-	void RemoveComponent(int index);
-	void SetActive(bool active);
+	void RemoveComponent(Component* component);
+	void SetActive(ActorState state);
 	std::vector<Component*> GetComponents() const;
 	ActorState GetState();
 	Scene& GetScene();
@@ -26,6 +26,8 @@ private:
 	Scene& mScene;
 	ActorState mState;
 	Transform2DComponent mTransformComponent;
+	bool mIsUpdatingComponents;
 	std::vector<Component*> mComponents;
+	std::vector<Component*> mPendingComponents;
 };
 

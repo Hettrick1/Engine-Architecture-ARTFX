@@ -26,6 +26,7 @@ public:
 
 	bool Initialize(Window& rWindow);
 	void BeginDraw();
+	void Draw();
 	void EndDraw();
 	void Close();
 

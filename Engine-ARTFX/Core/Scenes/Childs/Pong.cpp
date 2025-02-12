@@ -35,7 +35,7 @@ void Pong::Render()
     mRenderer->DrawRect(rectToDraw);
     rectToDraw = mPaddleLeft->GetPaddleRect();
     mRenderer->DrawRect(rectToDraw);    
-    
+    mRenderer->Draw();
     mRenderer->EndDraw();
 }
 

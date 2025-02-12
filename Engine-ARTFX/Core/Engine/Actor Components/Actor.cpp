@@ -1,6 +1,7 @@
 #include "Actor.h"
 #include "Component.h"
 #include "../../Scenes/Scene.h"
+#include <algorithm>
 
 Actor::Actor(Vector2D position, Vector2D size, float rotation) : 
     mState(ActorState::Active), mTransformComponent({ position, size, rotation }), mScene(*Scene::ActiveScene)
@@ -23,13 +24,53 @@ void Actor::AttachScene(Scene& scene)
 
 void Actor::AddComponent(Component* component)
 {
+    if (mIsUpdatingComponents) 
+    {
+        mPendingComponents.emplace_back(component);
+    }
+    else 
+    {
+        mComponents.emplace_back(component);
+    }
 }
 
-void Actor::RemoveComponent(int index)
+void Actor::RemoveComponent(Component* component)
 {
+    std::vector<Component*>::iterator it = find(mPendingComponents.begin(), mPendingComponents.end(), component);
+    if (it != mPendingComponents.end())
+    {
+        iter_swap(it, mPendingComponents.end() - 1);
+        mPendingComponents.pop_back();
+    }
+    it = find(mComponents.begin(), mComponents.end(), component);
+    if (it != mComponents.end())
+    {
+        iter_swap(it, mComponents.end() - 1);
+        mComponents.pop_back();
+    }
 }
 
-void Actor::SetActive(bool active)
+void Actor::SetActive(ActorState state)
+{
+    mState = state;
+}
+
+void Actor::Update()
+{
+    mIsUpdatingComponents = true;
+    for (Component* component : mComponents)
+    {
+        component->Update();
+    }
+    mIsUpdatingComponents = false;
+    for (Component* component : mPendingComponents)
+    {
+        mComponents.emplace_back(component);
+    }
+    mPendingComponents.clear();
+}
+
+void Actor::Destroy()
 {
 }
 
@@ -51,12 +92,4 @@ Scene& Actor::GetScene()
 Transform2DComponent& Actor::GetTransformComponent()
 {
     return mTransformComponent;
-}
-
-void Actor::Update()
-{
-}
-
-void Actor::Destroy()
-{
 }

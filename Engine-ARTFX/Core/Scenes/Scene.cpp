@@ -46,23 +46,33 @@ void Scene::Close()
 void Scene::AddActor(Actor* actor)
 {
 	actor->AttachScene(*this);
-	if (mIsUpdatingActor) { mPendingActors.emplace_back(actor); }
-	else mAllActors.emplace_back(actor);
+	if (mIsUpdatingActor) 
+	{ 
+		mPendingActors.emplace_back(actor); 
+	}
+	else
+	{
+		mAllActors.emplace_back(actor);
+	}
 }
 
 void Scene::UpdateAllActors()
 {
 	mIsUpdatingActor = true;
-	for (Actor* actor : mAllActors) {
+	for (Actor* actor : mAllActors) 
+	{
 		actor->Update();
 	}
 	mIsUpdatingActor = false;
-	for (Actor* actor : mPendingActors) {
+	for (Actor* actor : mPendingActors) 
+	{
 		mAllActors.emplace_back(actor);
 	}
 	mPendingActors.clear();
-	for (Actor* actor : mAllActors) {
-		if (actor->GetState() == ActorState::Dead) {
+	for (Actor* actor : mAllActors) 
+	{
+		if (actor->GetState() == ActorState::Dead)
+		{
 			delete actor;
 		}
 	}

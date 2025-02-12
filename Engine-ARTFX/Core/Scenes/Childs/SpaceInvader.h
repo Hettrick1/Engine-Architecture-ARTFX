@@ -1,10 +1,10 @@
 #pragma once
 #include "../Scene.h"
 
-class ActorTest : public Scene
+class SpaceInvader : public Scene
 {
 public:
-	ActorTest();
+	SpaceInvader();
 	void Start(Renderer* renderer) override;
 	void Update() override;
 	void Render() override;

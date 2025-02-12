@@ -33,6 +33,13 @@ void Renderer::BeginDraw()
     SDL_RenderClear(mSdlRenderer);
 }
 
+void Renderer::Draw()
+{
+    for (SpriteComponent* sprite : mSprites) {
+        sprite->Draw(*this);
+    }
+}
+
 void Renderer::EndDraw()
 {
     SDL_RenderPresent(mSdlRenderer);
