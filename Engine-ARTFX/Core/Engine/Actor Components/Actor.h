@@ -11,9 +11,9 @@ class Actor
 public:
 	Actor(Vector2D position = 0, Vector2D size = 1, float rotation = 0);
 	~Actor();
-	virtual void Start();
-	virtual void Update();
-	virtual void Destroy();
+	virtual void Start() = 0;
+	virtual void Update() = 0;
+	virtual void Destroy() = 0;
 	void AttachScene(Scene& scene);
 	void AddComponent(Component* component);
 	void RemoveComponent(Component* component);

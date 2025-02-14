@@ -76,7 +76,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Dependencies\glew-2.2.0-win32\glew-2.2.0\include\GL;$(SolutionDir)\Dependencies\GL\SDL\include;$(SolutionDir)\Dependencies\SDL2_image-2.8.2\include;Core;Core\Engine;Core\Maths;Core\Scenes;Core\Engine\Actor Components;Core\Engine\Debug Classes;Core\Engine\Editor;Core\Engine\Graphics;Core\Engine\Actor Components\Colliders;Core\Engine\Actor Components\Managers;Core\Scenes\Childs;Game</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Dependencies\glew-2.2.0-win32\glew-2.2.0\include\GL;$(SolutionDir)\Dependencies\GL\SDL\include;$(SolutionDir)\Dependencies\SDL2_image-2.8.2\include;Core;Core\Engine;Core\Maths;Core\Scenes;Core\Engine\Actor Components;Core\Engine\Debug Classes;Core\Engine\Editor;Core\Engine\Graphics;Core\Engine\Actor Components\Colliders;Core\Engine\Actor Components\Managers;Core\Scenes\Childs;Game;Core\Engine\Inputs</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp14</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -94,6 +95,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)\Dependencies\glew-2.2.0-win32\glew-2.2.0\include\GL;$(SolutionDir)\Dependencies\GL\SDL\include;$(SolutionDir)\Dependencies\SDL2_image-2.8.2\include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp14</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -136,9 +138,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Core\Engine\Inputs\BooleanActions.cpp" />
     <ClCompile Include="Core\Engine\Graphics\Assets.cpp" />
     <ClCompile Include="Core\Engine\Actor Components\Managers\CollisionManager.cpp" />
     <ClCompile Include="Core\Engine\Graphics\Texture.cpp" />
+    <ClCompile Include="Core\Engine\Inputs\InputActions.cpp" />
     <ClCompile Include="Core\Maths\Rectangle.cpp" />
     <ClCompile Include="Core\Engine\Actor Components\Colliders\BoxCollider2DComponent.cpp" />
     <ClCompile Include="Core\Engine\Actor Components\Colliders\ColliderComponent.cpp" />
@@ -149,6 +153,8 @@
     <ClCompile Include="Game\Pong\Ball.cpp" />
     <ClCompile Include="Core\Engine\Editor\Game.cpp" />
     <ClCompile Include="Core\Engine\Debug Classes\Log.cpp" />
+    <ClCompile Include="Core\Engine\Inputs\InputAxis2D.cpp" />
+    <ClCompile Include="Core\Engine\Inputs\InputManager.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Core\Scenes\Childs\Pong.cpp" />
     <ClCompile Include="Core\Engine\Graphics\Renderer.cpp" />
@@ -162,9 +168,13 @@
     <ClCompile Include="Game\SpaceInvader\SpaceInvaderPlayer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Core\Engine\Inputs\IActionListener.h" />
+    <ClInclude Include="Core\Engine\Inputs\BooleanActions.h" />
+    <ClInclude Include="Core\Engine\Editor\Defs.h" />
     <ClInclude Include="Core\Engine\Graphics\Assets.h" />
     <ClInclude Include="Core\Engine\Actor Components\Managers\CollisionManager.h" />
     <ClInclude Include="Core\Engine\Graphics\Texture.h" />
+    <ClInclude Include="Core\Engine\Inputs\ActionType.h" />
     <ClInclude Include="Core\Maths\Maths.h" />
     <ClInclude Include="Core\Engine\Actor Components\Colliders\BoxCollider2DComponent.h" />
     <ClInclude Include="Core\Engine\Actor Components\Colliders\ColliderComponent.h" />
@@ -187,6 +197,9 @@
     <ClInclude Include="Core\Engine\Actor Components\Transform2D.h" />
     <ClInclude Include="Core\Engine\Actor Components\SpriteComponent.h" />
     <ClInclude Include="Game\SpaceInvader\SpaceInvaderPlayer.h" />
+    <ClInclude Include="Core\Engine\Inputs\InputActions.h" />
+    <ClInclude Include="Core\Engine\Inputs\InputAxis2D.h" />
+    <ClInclude Include="Core\Engine\Inputs\InputManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

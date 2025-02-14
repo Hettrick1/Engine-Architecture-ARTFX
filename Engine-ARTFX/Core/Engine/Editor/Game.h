@@ -3,6 +3,7 @@
 #include "Renderer.h"
 #include "Scene.h"
 #include "Timer.h"
+#include "InputManager.h"
 #include <iostream>
 #include <vector>
 
@@ -23,6 +24,7 @@ private:
 	std::string mTitle;
 	Window* mGameWindow;
 	Renderer* mRenderer;
+	InputManager& mInputManager;
 	bool mIsRunning;
 	std::vector<Scene*> mAllScenes;
 	int mLoadedScene;

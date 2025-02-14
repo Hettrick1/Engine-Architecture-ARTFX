@@ -1,8 +1,8 @@
 #pragma once
-
 #include "Actor.h"
+#include "IActionListener.h"
 
-class SpaceInvaderPlayer : public Actor
+class SpaceInvaderPlayer : public Actor, IActionListener
 {
 public:
 	SpaceInvaderPlayer();
@@ -10,6 +10,8 @@ public:
 	void Start() override;
 	void Update() override;
 	void Destroy() override;
+
+	void OnActionTriggered(InputActions* action) override;
 private:
 
 };

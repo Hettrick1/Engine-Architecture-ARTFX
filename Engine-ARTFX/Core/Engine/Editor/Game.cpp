@@ -1,6 +1,8 @@
 #include "Game.h"
+#include "Defs.h"
 
-Game::Game(std::string title, std::vector<Scene*> scenes) : mIsRunning(true), mAllScenes(scenes)
+Game::Game(std::string title, std::vector<Scene*> scenes) 
+    : mIsRunning(true), mAllScenes(scenes), mInputManager(InputManager::Instance())
 {
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
     {
@@ -18,11 +20,13 @@ Game::Game(std::string title, std::vector<Scene*> scenes) : mIsRunning(true), mA
 
 Game::~Game()
 {
+    delete mRenderer;
+    delete mGameWindow;
 }
 
 void Game::Initialize()
 {
-    mGameWindow = new Window(1920, 1080);
+    mGameWindow = new Window(WINDOW_WIDTH, WINDOW_HEIGHT);
     mRenderer = new Renderer();
     if (mGameWindow->Open() && mRenderer->Initialize(*mGameWindow)) {
         mAllScenes[mLoadedScene]->Load();
@@ -63,7 +67,9 @@ void Game::Render()
 
 void Game::Input()
 {
-    if (mIsRunning) {
+
+    if (mIsRunning) {    
+        mInputManager.Update();
         while (SDL_PollEvent(&mSdlEvent)) {
             mAllScenes[mLoadedScene]->OnInput(mSdlEvent);
             switch (mSdlEvent.type) {
@@ -77,6 +83,7 @@ void Game::Input()
                 }
             }
         }
+        
     }
 }
 
