@@ -1,4 +1,5 @@
 #include "BooleanActions.h"
+#include <iostream>
 
 BooleanActions::BooleanActions(SDL_Keycode key)
 	:mKey(key), mState(false)
