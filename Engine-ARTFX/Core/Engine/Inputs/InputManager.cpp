@@ -18,6 +18,7 @@ InputManager::~InputManager()
             actions.pop_back();
         }
     }
+    mActionBindings.clear();
 }
 
 void InputManager::CreateNewBooleanBinding(SDL_Keycode key, IActionListener* listener, std::string name)

@@ -1,6 +1,7 @@
 #pragma once
 #include "Actor.h"
 #include "IActionListener.h"
+#include "FlipbookComponent.h"
 
 class SpaceInvaderPlayer : public Actor, IActionListener
 {
@@ -15,6 +16,6 @@ public:
 	void OnActionTriggered(InputActions* action) override;
 	void OnActionEnded(InputActions* action) override;
 private:
-
+	FlipbookComponent* mWalkAnim;
 };
 

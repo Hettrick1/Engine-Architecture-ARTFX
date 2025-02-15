@@ -1,25 +1,32 @@
 #include "SpaceInvaderPlayer.h"
-#include "SpriteComponent.h"
 #include "Scene.h"
 #include "BooleanActions.h"
 #include "InputManager.h"
 
 
-SpaceInvaderPlayer::SpaceInvaderPlayer() : 
-	Actor({500, 500}, 0.5, 0)
+SpaceInvaderPlayer::SpaceInvaderPlayer() :
+	Actor({ 500, 500 }, 1.0, 0), mWalkAnim(nullptr)
 {
 }
 
 SpaceInvaderPlayer::~SpaceInvaderPlayer()
 {
+	delete mWalkAnim;
 }
 
 void SpaceInvaderPlayer::Start()
 {
 	Actor::Start();
-	Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/pokeball.png", "ball");
+	std::vector<Texture*> walkAnimTextures = {
+		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/WalkAnim/Walk1.png", "walk1"),
+		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/WalkAnim/Walk2.png", "walk2"),
+		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/WalkAnim/Walk3.png", "walk3"),
+		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/WalkAnim/Walk4.png", "walk4"),
+		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/WalkAnim/Walk5.png", "walk5")
+	};
 
-	SpriteComponent* sprite = new SpriteComponent(this, Assets::GetTexture("ball"), 500000);
+	mWalkAnim = new FlipbookComponent(this, walkAnimTextures, 500000);
+	mWalkAnim->SetAnimationFps(5);
 
 	InputManager& inputManager = InputManager::Instance();
 	inputManager.CreateNewBooleanBinding(SDLK_SPACE, this, "jump");
@@ -29,6 +36,7 @@ void SpaceInvaderPlayer::Start()
 void SpaceInvaderPlayer::Update()
 {
 	Actor::Update();
+	mWalkAnim->Update(); 
 }
 
 void SpaceInvaderPlayer::Destroy()

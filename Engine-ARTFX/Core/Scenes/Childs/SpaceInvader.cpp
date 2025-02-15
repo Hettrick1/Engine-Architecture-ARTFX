@@ -2,18 +2,25 @@
 #include "SpaceInvader/SpaceInvaderPlayer.h"
 
 SpaceInvader::SpaceInvader()
+	: mPlayer(nullptr)
 {
+}
+
+SpaceInvader::~SpaceInvader()
+{
+	delete mPlayer;
 }
 
 void SpaceInvader::Start(Renderer* renderer)
 {
 	Scene::Start(renderer);
-	SpaceInvaderPlayer player = SpaceInvaderPlayer();
-	player.Start();
+	mPlayer = new SpaceInvaderPlayer();
+	mPlayer->Start();
 }
 
 void SpaceInvader::Update()
 {
+	mPlayer->Update();
 }
 
 void SpaceInvader::Render()
