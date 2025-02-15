@@ -5,7 +5,7 @@ class BooleanActions :
     public InputActions
 {
 public :
-    BooleanActions(SDL_Keycode key);
+    BooleanActions(SDL_Keycode key, std::string name);
     ActionType GetType() const override;
 
     void Update() override;

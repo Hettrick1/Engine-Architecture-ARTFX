@@ -20,7 +20,7 @@ InputManager::~InputManager()
     }
 }
 
-void InputManager::CreateNewBooleanBinding(SDL_Keycode key, IActionListener* listener)
+void InputManager::CreateNewBooleanBinding(SDL_Keycode key, IActionListener* listener, std::string name)
 {
     if (mActionBindings.find(key) != mActionBindings.end()) {
         std::vector<InputActions*> actionsToBind = mActionBindings[key];
@@ -29,13 +29,13 @@ void InputManager::CreateNewBooleanBinding(SDL_Keycode key, IActionListener* lis
         }
     }
     else {
-        BooleanActions* newAction = new BooleanActions(key);
+        BooleanActions* newAction = new BooleanActions(key, name);
         newAction->AddListener(listener);
         BindActionToKeys(newAction, { key });
     }
 }
 
-void InputManager::CreateNewAxis2DBinding(SDL_Keycode positiveX, SDL_Keycode negativeX, SDL_Keycode positiveY, SDL_Keycode negativeY, IActionListener& listener)
+void InputManager::CreateNewAxis2DBinding(SDL_Keycode positiveX, SDL_Keycode negativeX, SDL_Keycode positiveY, SDL_Keycode negativeY, IActionListener& listener, std::string name)
 {
 
 }

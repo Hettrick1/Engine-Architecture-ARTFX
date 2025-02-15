@@ -11,7 +11,9 @@ public:
 	void Update() override;
 	void Destroy() override;
 
+	void OnActionStarted(InputActions* action) override;
 	void OnActionTriggered(InputActions* action) override;
+	void OnActionEnded(InputActions* action) override;
 private:
 
 };

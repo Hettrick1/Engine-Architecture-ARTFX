@@ -1,8 +1,8 @@
 #include "InputAxis2D.h"
 
-InputAxis2D::InputAxis2D(SDL_Keycode positiveX, SDL_Keycode negativeX, SDL_Keycode positiveY, SDL_Keycode negativeY)
+InputAxis2D::InputAxis2D(SDL_Keycode positiveX, SDL_Keycode negativeX, SDL_Keycode positiveY, SDL_Keycode negativeY, std::string name)
     : mPositiveX(positiveX), mNegativeX(negativeX), mPositiveY(positiveY), mNegativeY(negativeY),
-    x(0), y(0)
+      x(0), y(0), InputActions(name)
 {
 }
 
@@ -13,12 +13,12 @@ ActionType InputAxis2D::GetType() const
 
 void InputAxis2D::Update()
 {
-    float newX = (IsKeyPressed(mPositiveX) ? 1 : 0) - (IsKeyPressed(mNegativeX) ? 1 : 0);
-    float newY = (IsKeyPressed(mPositiveY) ? 1 : 0) - (IsKeyPressed(mNegativeY) ? 1 : 0);
+    float newX = static_cast<float>((IsKeyPressed(mPositiveX) ? 1 : 0) - (IsKeyPressed(mNegativeX) ? 1 : 0));
+    float newY = static_cast<float>((IsKeyPressed(mPositiveY) ? 1 : 0) - (IsKeyPressed(mNegativeY) ? 1 : 0));
     if (newX != x || newY != y) {
         x = newX;
         y = newY;
-        NotifyListeners();
+        NotifyListenersTriggered();
     }
 }
 

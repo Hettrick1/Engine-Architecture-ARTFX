@@ -1,8 +1,8 @@
 #include "BooleanActions.h"
 #include <iostream>
 
-BooleanActions::BooleanActions(SDL_Keycode key)
-	:mKey(key), mState(false)
+BooleanActions::BooleanActions(SDL_Keycode key, std::string name)
+	: mKey(key), mState(false), InputActions(name)
 {
 }
 
@@ -14,9 +14,17 @@ ActionType BooleanActions::GetType() const
 void BooleanActions::Update()
 {
 	bool newState = IsKeyPressed(mKey);
+	if (newState == true) {
+		NotifyListenersTriggered();
+	}
 	if (newState != mState) {
+		if (newState == true) {
+			NotifyListenersStarted();
+		}
+		else {
+			NotifyListenersEnded();
+		}
 		mState = newState;
-		NotifyListeners();
 	}
 }
 

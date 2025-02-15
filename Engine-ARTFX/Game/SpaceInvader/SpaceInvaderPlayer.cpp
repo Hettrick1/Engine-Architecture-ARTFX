@@ -22,7 +22,8 @@ void SpaceInvaderPlayer::Start()
 	SpriteComponent* sprite = new SpriteComponent(this, Assets::GetTexture("ball"), 500000);
 
 	InputManager& inputManager = InputManager::Instance();
-	inputManager.CreateNewBooleanBinding(SDLK_SPACE, this);
+	inputManager.CreateNewBooleanBinding(SDLK_SPACE, this, "jump");
+	inputManager.CreateNewBooleanBinding(SDLK_c, this, "shoot");
 }
 
 void SpaceInvaderPlayer::Update()
@@ -35,12 +36,32 @@ void SpaceInvaderPlayer::Destroy()
 	Actor::Destroy();
 }
 
+void SpaceInvaderPlayer::OnActionStarted(InputActions* action)
+{
+	if (action->GetType() == ActionType::Boolean) { 
+		auto* jumpAction = dynamic_cast<BooleanActions*>(action); 
+		if (jumpAction && jumpAction->GetName() == "jump") {
+			std::cout << "Started!\n"; 
+		}
+	}
+}
+
 void SpaceInvaderPlayer::OnActionTriggered(InputActions* action)
 {
 	if (action->GetType() == ActionType::Boolean) {
 		auto* jumpAction = dynamic_cast<BooleanActions*>(action);
-		if (jumpAction && jumpAction->GetState()) {
-			std::cout << "Player is jumping!\n";
+		if (jumpAction && jumpAction->GetName() == "shoot") {
+			std::cout << "Triggered!\n";
+		}
+	}
+}
+
+void SpaceInvaderPlayer::OnActionEnded(InputActions* action)
+{
+	if (action->GetType() == ActionType::Boolean) {
+		auto* jumpAction = dynamic_cast<BooleanActions*>(action);
+		if (jumpAction) {
+			std::cout << "Ended!\n";
 		}
 	}
 }
