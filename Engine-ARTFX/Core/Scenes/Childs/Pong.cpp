@@ -39,34 +39,34 @@ void Pong::Render()
     mRenderer->EndDraw();
 }
 
-void Pong::OnInput(SDL_Event event)
-{
-    if (event.type == SDL_KEYDOWN) {
-        switch (event.key.keysym.sym)
-        {
-        case SDLK_w:
-            mDirection = 1;
-            break;
-        case SDLK_s:
-            mDirection = -1;
-            break;
-        default:
-            mDirection = 0;
-            break;
-        } 
-    }
-    else if (event.type == SDL_KEYUP){
-        switch (event.key.keysym.sym)
-        {
-        case SDLK_w:
-            mDirection = 0;
-            break;
-        case SDLK_s:
-            mDirection = 0;
-            break;
-        }
-    }
-}
+//void Pong::OnInput(SDL_Event event)
+//{
+//    if (event.type == SDL_KEYDOWN) {
+//        switch (event.key.keysym.sym)
+//        {
+//        case SDLK_w:
+//            mDirection = 1;
+//            break;
+//        case SDLK_s:
+//            mDirection = -1;
+//            break;
+//        default:
+//            mDirection = 0;
+//            break;
+//        } 
+//    }
+//    else if (event.type == SDL_KEYUP){
+//        switch (event.key.keysym.sym)
+//        {
+//        case SDLK_w:
+//            mDirection = 0;
+//            break;
+//        case SDLK_s:
+//            mDirection = 0;
+//            break;
+//        }
+//    }
+//}
 
 void Pong::Close()
 {

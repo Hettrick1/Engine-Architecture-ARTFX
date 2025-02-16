@@ -71,7 +71,6 @@ void Game::Input()
     if (mIsRunning) {    
         mInputManager.Update();
         while (SDL_PollEvent(&mSdlEvent)) {
-            mAllScenes[mLoadedScene]->OnInput(mSdlEvent);
             switch (mSdlEvent.type) {
             case SDL_QUIT:
                 mIsRunning = false;

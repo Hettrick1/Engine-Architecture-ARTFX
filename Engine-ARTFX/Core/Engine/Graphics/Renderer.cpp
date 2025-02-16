@@ -93,8 +93,23 @@ void Renderer::DrawSprite(Actor& pActor, Texture& pTexture, Rectangle pRect, Vec
             Maths::Round(pRect.dimensions.x),
             Maths::Round(pRect.dimensions.y) };
     }
-
-    SDL_RenderCopyEx(mSdlRenderer, pTexture.GetSdlTexture(), sourceSDL, &destinationRect, -Maths::ToDeg(transform.GetRotation()), nullptr, SDL_FLIP_NONE); 
+    SDL_RendererFlip flip;
+    switch (pFlipMethod)
+    {
+    case Renderer::Flip::None:
+        flip = SDL_FLIP_NONE;
+        break;
+    case Renderer::Flip::Horizontal:
+        flip = SDL_FLIP_HORIZONTAL;
+        break;
+    case Renderer::Flip::Vertical:
+        flip = SDL_FLIP_VERTICAL;
+        break;
+    default:
+        flip = SDL_FLIP_NONE;
+        break;
+    }
+    SDL_RenderCopyEx(mSdlRenderer, pTexture.GetSdlTexture(), sourceSDL, &destinationRect, -Maths::ToDeg(transform.GetRotation()), nullptr, flip); 
 
     delete sourceSDL;
 

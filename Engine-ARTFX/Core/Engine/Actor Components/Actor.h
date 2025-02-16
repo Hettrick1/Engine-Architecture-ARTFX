@@ -18,10 +18,24 @@ public:
 	void AddComponent(Component* component);
 	void RemoveComponent(Component* component);
 	void SetActive(ActorState state);
+	void SetPosition(Vector2D pPosition);
 	std::vector<Component*> GetComponents() const;
 	ActorState GetState();
 	Scene& GetScene();
 	Transform2D& GetTransformComponent();
+
+	template<typename  C>
+	C* GetComponentOfType() const
+	{
+		C* result = nullptr;
+		for (Component* component : mComponents)
+		{
+			result = dynamic_cast<C*>(component);
+			if (result != nullptr) return result;
+		}
+		return nullptr;
+	}
+
 private:
 	Scene& mScene;
 	ActorState mState;

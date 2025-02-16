@@ -57,6 +57,11 @@ void Actor::SetActive(ActorState state)
     mState = state;
 }
 
+void Actor::SetPosition(Vector2D pPosition)
+{
+    mTransformComponent.SetPosition(pPosition);
+}
+
 void Actor::Update()
 {
     mIsUpdatingComponents = true;

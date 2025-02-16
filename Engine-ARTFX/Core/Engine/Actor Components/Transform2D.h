@@ -1,5 +1,8 @@
 #pragma once
-#include "../../Maths/Vector2D.h"
+
+#include "Vector2D.h"
+#include "Maths.h"
+
 class Transform2D
 {
 public:
@@ -13,6 +16,8 @@ public:
 	void SetPosition(Vector2D newPosition);
 	void SetSize(Vector2D newSize);
 	void SetRotation(float newRotation);
+	Vector2D Right() const { return Vector2D(Maths::Cos(mRotation), -Maths::Sin(mRotation)); }
+	Vector2D Up() const { return Vector2D(Maths::Sin(mRotation), -Maths::Cos(mRotation)); }
 
 private:
 	Vector2D mPosition;

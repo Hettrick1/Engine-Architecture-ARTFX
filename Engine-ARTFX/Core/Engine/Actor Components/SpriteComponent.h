@@ -12,6 +12,7 @@ public:
 	SpriteComponent& operator= (const SpriteComponent&) = delete;
 
 	virtual void SetTexture(const Texture& pTexture);
+	void SetFlipMethode(Renderer::Flip pFlipMethode);
 	virtual void Draw(Renderer& pRenderer);
 
 	int GetDrawOrder() const { return mDrawOrder; }
@@ -22,6 +23,7 @@ protected:
 	int mDrawOrder;
 	int mTexWidth;
 	int mTexHeight;
+	Renderer::Flip mFlipMethode;
 private:
 
 };

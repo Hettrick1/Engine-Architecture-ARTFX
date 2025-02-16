@@ -14,7 +14,6 @@ public:
 	virtual void Load();
 	virtual void Update();
 	virtual void Render();
-	virtual void OnInput(SDL_Event);
 	virtual void Unload();
 	virtual void Close();
 

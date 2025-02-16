@@ -2,16 +2,16 @@
 #include "Scene.h"
 #include "BooleanActions.h"
 #include "InputManager.h"
+#include "PlayerController.h"
 
 
 SpaceInvaderPlayer::SpaceInvaderPlayer() :
-	Actor({ 500, 500 }, 1.0, 0), mWalkAnim(nullptr)
+	Actor({ 500, 500 }, 1.0, 0)
 {
 }
 
 SpaceInvaderPlayer::~SpaceInvaderPlayer()
 {
-	delete mWalkAnim;
 }
 
 void SpaceInvaderPlayer::Start()
@@ -25,18 +25,17 @@ void SpaceInvaderPlayer::Start()
 		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/WalkAnim/Walk5.png", "walk5")
 	};
 
-	mWalkAnim = new FlipbookComponent(this, walkAnimTextures, 500000);
-	mWalkAnim->SetAnimationFps(5);
+	FlipbookComponent* walkAnim = new FlipbookComponent(this, walkAnimTextures, 500000);
+	walkAnim->SetAnimationFps(5);
+	AddComponent(walkAnim);
 
-	InputManager& inputManager = InputManager::Instance();
-	inputManager.CreateNewBooleanBinding(SDLK_SPACE, this, "jump");
-	inputManager.CreateNewBooleanBinding(SDLK_c, this, "shoot");
+	PlayerController* pc = new PlayerController(this, 100); 
+	AddComponent(pc);
 }
 
 void SpaceInvaderPlayer::Update()
 {
 	Actor::Update();
-	mWalkAnim->Update(); 
 }
 
 void SpaceInvaderPlayer::Destroy()
@@ -44,32 +43,4 @@ void SpaceInvaderPlayer::Destroy()
 	Actor::Destroy();
 }
 
-void SpaceInvaderPlayer::OnActionStarted(InputActions* action)
-{
-	if (action->GetType() == ActionType::Boolean) { 
-		auto* jumpAction = dynamic_cast<BooleanActions*>(action); 
-		if (jumpAction && jumpAction->GetName() == "jump") {
-			std::cout << "Started!\n"; 
-		}
-	}
-}
 
-void SpaceInvaderPlayer::OnActionTriggered(InputActions* action)
-{
-	if (action->GetType() == ActionType::Boolean) {
-		auto* jumpAction = dynamic_cast<BooleanActions*>(action);
-		if (jumpAction && jumpAction->GetName() == "shoot") {
-			std::cout << "Triggered!\n";
-		}
-	}
-}
-
-void SpaceInvaderPlayer::OnActionEnded(InputActions* action)
-{
-	if (action->GetType() == ActionType::Boolean) {
-		auto* jumpAction = dynamic_cast<BooleanActions*>(action);
-		if (jumpAction) {
-			std::cout << "Ended!\n";
-		}
-	}
-}

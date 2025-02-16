@@ -30,10 +30,6 @@ void SpaceInvader::Render()
 	mRenderer->EndDraw();
 }
 
-void SpaceInvader::OnInput(SDL_Event event)
-{
-}
-
 void SpaceInvader::Close()
 {
 }

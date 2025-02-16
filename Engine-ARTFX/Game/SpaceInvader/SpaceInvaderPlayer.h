@@ -3,7 +3,7 @@
 #include "IActionListener.h"
 #include "FlipbookComponent.h"
 
-class SpaceInvaderPlayer : public Actor, IActionListener
+class SpaceInvaderPlayer : public Actor
 {
 public:
 	SpaceInvaderPlayer();
@@ -11,11 +11,6 @@ public:
 	void Start() override;
 	void Update() override;
 	void Destroy() override;
-
-	void OnActionStarted(InputActions* action) override;
-	void OnActionTriggered(InputActions* action) override;
-	void OnActionEnded(InputActions* action) override;
 private:
-	FlipbookComponent* mWalkAnim;
 };
 

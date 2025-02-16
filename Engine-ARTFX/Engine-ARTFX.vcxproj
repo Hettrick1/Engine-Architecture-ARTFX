@@ -138,6 +138,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Core\Engine\Actor Components\ActorMovementComponent.cpp" />
     <ClCompile Include="Core\Engine\Inputs\BooleanActions.cpp" />
     <ClCompile Include="Core\Engine\Graphics\Assets.cpp" />
     <ClCompile Include="Core\Engine\Actor Components\Managers\CollisionManager.cpp" />
@@ -167,8 +168,11 @@
     <ClCompile Include="Core\Engine\Actor Components\Transform2D.cpp" />
     <ClCompile Include="Core\Engine\Actor Components\SpriteComponent.cpp" />
     <ClCompile Include="Game\SpaceInvader\SpaceInvaderPlayer.cpp" />
+    <ClCompile Include="Core\Engine\Actor Components\RigidbodyComponent.cpp" />
+    <ClCompile Include="Core\Engine\Actor Components\PlayerController.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Core\Engine\Actor Components\ActorMovementComponent.h" />
     <ClInclude Include="Core\Engine\Inputs\IActionListener.h" />
     <ClInclude Include="Core\Engine\Inputs\BooleanActions.h" />
     <ClInclude Include="Core\Engine\Editor\Defs.h" />
@@ -202,6 +206,8 @@
     <ClInclude Include="Core\Engine\Inputs\InputActions.h" />
     <ClInclude Include="Core\Engine\Inputs\InputAxis2D.h" />
     <ClInclude Include="Core\Engine\Inputs\InputManager.h" />
+    <ClInclude Include="Core\Engine\Actor Components\RigidbodyComponent.h" />
+    <ClInclude Include="Core\Engine\Actor Components\PlayerController.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

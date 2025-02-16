@@ -10,7 +10,6 @@ public:
 	void Start(Renderer* renderer) override;
 	void Update() override;
 	void Render() override;
-	void OnInput(SDL_Event event) override;
 	void Close() override;
 
 public :

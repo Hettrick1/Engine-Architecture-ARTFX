@@ -28,10 +28,6 @@ void Scene::Render()
 
 }
 
-void Scene::OnInput(SDL_Event)
-{
-}
-
 void Scene::Unload()
 {
 	while (!mAllActors.empty()) {
