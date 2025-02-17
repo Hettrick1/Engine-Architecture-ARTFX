@@ -230,5 +230,8 @@
     <ClInclude Include="Game\SpaceInvader\GroundActor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Core\Engine\Actor Components\Managers\HitResult.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

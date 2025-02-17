@@ -31,6 +31,8 @@ void CollisionManager::CheckCollisions()
             if (colliders[i]->GetOwner()->GetState() == ActorState::Active && colliders[j]->GetOwner()->GetState() == ActorState::Active) {
                 if (colliders[i]->CheckCollisionWith(colliders[j])) {
                     if (colliders[i]->GetIsTriggerable()) {
+                        colliders[i]->SetHitResult(true, colliders[j]->GetOwner());
+                        colliders[j]->SetHitResult(true, colliders[i]->GetOwner());
                         colliders[i]->NotifyListenersStarted();
                         colliders[j]->NotifyListenersStarted();
                     }
@@ -43,6 +45,10 @@ void CollisionManager::CheckCollisions()
                     else {
 
                     }
+                }
+                else {
+                    colliders[i]->SetHitResult(false, nullptr);
+                    colliders[j]->SetHitResult(false, nullptr);
                 }
             }
         }

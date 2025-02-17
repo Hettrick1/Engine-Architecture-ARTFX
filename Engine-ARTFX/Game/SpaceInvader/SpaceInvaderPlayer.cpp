@@ -48,10 +48,16 @@ void SpaceInvaderPlayer::Destroy()
 
 void SpaceInvaderPlayer::OnTriggerEnter(ColliderComponent* collider)
 {
-	std::cout << "OUI\n";
 	PlayerController* pc = GetComponentOfType<PlayerController>();
-	pc->SetSpeedX(0);
-	pc->SetSpeedY(0);
+	Actor* otherActor = collider->GetHitResult().hitActor;
+	if(otherActor->GetTransformComponent().GetPosition().x < GetTransformComponent().GetPosition().x)
+	{
+		pc->SetSpeedY(0);
+	}
+	else if (otherActor->GetTransformComponent().GetPosition().y < GetTransformComponent().GetPosition().y)
+	{
+		pc->SetSpeedX(0);
+	}
 }
 
 void SpaceInvaderPlayer::OnCollision(ColliderComponent* collider)

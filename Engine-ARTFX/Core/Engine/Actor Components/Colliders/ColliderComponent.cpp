@@ -56,3 +56,17 @@ void ColliderComponent::NotifyListenersEnded()
 	}
 }
 
+void ColliderComponent::SetHitResult(bool pHit, Actor* pHitActor)
+{
+	mHitResult.bHit = pHit;
+	mHitResult.hitActor = pHitActor;
+	if (pHitActor != nullptr) {
+		mHitResult.hitLocation = pHitActor->GetTransformComponent().GetPosition();
+	}
+}
+
+HitResult& ColliderComponent::GetHitResult()
+{
+	return mHitResult;
+}
+

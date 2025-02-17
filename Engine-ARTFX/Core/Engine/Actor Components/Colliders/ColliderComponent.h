@@ -1,7 +1,8 @@
 #pragma once
 
-#include "../Component.h"
-#include "../Managers/CollisionManager.h"
+#include "Component.h"
+#include "CollisionManager.h"
+#include "HitResult.h"
 
 class ICollisionListener;
 
@@ -26,9 +27,12 @@ public:
 	void NotifyListenersStarted();
 	void NotifyListenersStay();
 	void NotifyListenersEnded();
+	void SetHitResult(bool pHit, Actor* pHitActor);
+	HitResult& GetHitResult();
 
 protected :
 	bool mIsTriggerable;
 	std::vector<ICollisionListener*> mListeners;
+	HitResult mHitResult;
 };
 
