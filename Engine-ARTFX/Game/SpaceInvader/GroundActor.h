@@ -1,22 +1,21 @@
 #pragma once
 #include "Actor.h"
 #include "IActionListener.h"
-#include "FlipbookComponent.h"
+#include "SpriteComponent.h"
 #include "ICollisionListener.h"
 
-class SpaceInvaderPlayer : public Actor, public ICollisionListener
+class GroundActor : public Actor, public ICollisionListener
 {
 public:
-	SpaceInvaderPlayer();
-	~SpaceInvaderPlayer();
+	GroundActor(Vector2D pPos = 0, Vector2D pSize = 1, float pRotation = 0);
+	~GroundActor();
 	void Start() override;
 	void Update() override;
 	void Destroy() override;
-public :
+public:
 	void OnTriggerEnter(ColliderComponent* collider) override;
 	void OnCollision(ColliderComponent* collider) override;
 	void OnTriggerStay(ColliderComponent* collider) override;
 	void OnTriggerExit(ColliderComponent* collider) override;
-private:
 };
 

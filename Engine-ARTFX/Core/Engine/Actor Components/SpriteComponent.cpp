@@ -29,7 +29,7 @@ void SpriteComponent::SetFlipMethode(Renderer::Flip pFlipMethode)
 
 void SpriteComponent::Draw(Renderer& pRenderer)
 {
-	Vector2D origin{((mTexWidth * mOwner->GetTransformComponent().GetSize().x) / 2.0f), 
+	Vector2D origin = { ((mTexWidth * mOwner->GetTransformComponent().GetSize().x) / 2.0f),
 		((mTexHeight * mOwner->GetTransformComponent().GetSize().y) / 2.0f) };
 	pRenderer.DrawSprite(*mOwner, mTexture, Rectangle(), origin, mFlipMethode);
 }

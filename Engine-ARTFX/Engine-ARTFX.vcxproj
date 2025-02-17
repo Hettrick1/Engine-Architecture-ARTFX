@@ -157,6 +157,7 @@
     <ClCompile Include="Core\Engine\Debug Classes\Log.cpp" />
     <ClCompile Include="Core\Engine\Inputs\InputAxis2D.cpp" />
     <ClCompile Include="Core\Engine\Inputs\InputManager.cpp" />
+    <ClCompile Include="Game\SpaceInvader\GroundActor.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Core\Scenes\Childs\Pong.cpp" />
     <ClCompile Include="Core\Engine\Graphics\Renderer.cpp" />
@@ -209,6 +210,7 @@
     <ClInclude Include="Core\Engine\Inputs\InputManager.h" />
     <ClInclude Include="Core\Engine\Actor Components\RigidbodyComponent.h" />
     <ClInclude Include="Core\Engine\Actor Components\PlayerController.h" />
+    <ClInclude Include="Game\SpaceInvader\GroundActor.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

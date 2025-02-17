@@ -26,8 +26,7 @@ void SpaceInvaderPlayer::Start()
 		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/WalkAnim/Walk4.png", "walk4"),
 		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/WalkAnim/Walk5.png", "walk5")
 	};
-
-	CollisionManager::Instance().CreateCollider<BoxCollider2DComponent>(this, this, 10, GetTransformComponent().GetPosition(), GetTransformComponent().GetSize());
+	CollisionManager::Instance().CreateCollider<BoxCollider2DComponent>(this, 10, GetTransformComponent().GetSize() * walkAnimTextures[0]->GetTextureSize());
 
 	FlipbookComponent* walkAnim = new FlipbookComponent(this, walkAnimTextures, 500000);
 	walkAnim->SetAnimationFps(5);
@@ -49,7 +48,10 @@ void SpaceInvaderPlayer::Destroy()
 
 void SpaceInvaderPlayer::OnTriggerEnter(ColliderComponent* collider)
 {
-	std::cout << "OUI TA MERE \n";
+	std::cout << "OUI\n";
+	PlayerController* pc = GetComponentOfType<PlayerController>();
+	pc->SetSpeedX(0);
+	pc->SetSpeedY(0);
 }
 
 void SpaceInvaderPlayer::OnCollision(ColliderComponent* collider)

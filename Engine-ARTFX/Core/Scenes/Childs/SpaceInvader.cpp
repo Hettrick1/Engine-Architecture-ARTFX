@@ -1,15 +1,16 @@
 #include "SpaceInvader.h"
 #include "SpaceInvader/SpaceInvaderPlayer.h"
+#include "SpaceInvader/GroundActor.h"
 
 SpaceInvader::SpaceInvader()
-	: mPlayer(nullptr), mPlayer2(nullptr)
+	: mPlayer(nullptr)
 {
 }
 
 SpaceInvader::~SpaceInvader()
 {
 	delete mPlayer;
-	delete mPlayer2;
+
 }
 
 void SpaceInvader::Start(Renderer* renderer)
@@ -17,15 +18,16 @@ void SpaceInvader::Start(Renderer* renderer)
 	Scene::Start(renderer);
 	mPlayer = new SpaceInvaderPlayer();
 	mPlayer->Start();
-	mPlayer2 = new SpaceInvaderPlayer();
-	mPlayer2->Start();
-	mPlayer2->SetPosition(Vector2D(490, 500));
+	AddActor(mPlayer);
+	GroundActor* ground = new GroundActor({ 0, 100 }, { 100, 1 }, 0);
+	ground->Start();
+	AddActor(ground);
+;
 }
 
 void SpaceInvader::Update()
 {
-	mPlayer->Update();
-	mPlayer2->Update();
+	Scene::Update();
 }
 
 void SpaceInvader::Render()

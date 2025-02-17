@@ -24,7 +24,5 @@ protected:
 	int mTexWidth;
 	int mTexHeight;
 	Renderer::Flip mFlipMethode;
-private:
-
 };
 

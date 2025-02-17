@@ -1,5 +1,6 @@
 #pragma once
-
+#include "Log.h"
+#include "Actor.h"
 #include <vector>
 
 class ColliderComponent;
@@ -28,8 +29,14 @@ inline void CollisionManager::CreateCollider(ICollisionListener* pListener, Args
 {
     static_assert(std::is_base_of<ColliderComponent, ColliderType>::value,
         "ColliderType must be derived from ColliderComponent!");
+    Actor* owner = dynamic_cast<Actor*>(pListener);
+    if (owner == nullptr) {
+        Log::Error(LogType::Application, "owner does not derive from actor!");
+        return;
+    }
 
-    ColliderType* newCollider = new ColliderType(std::forward<Args>(args)...);
+    ColliderType* newCollider = new ColliderType(owner, std::forward<Args>(args)...);
+    owner->AddComponent(newCollider);
 
     newCollider->AddListener(pListener);
 

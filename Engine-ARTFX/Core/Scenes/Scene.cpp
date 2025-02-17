@@ -21,6 +21,7 @@ void Scene::Load()
 
 void Scene::Update()
 {
+	UpdateAllActors();
 }
 
 void Scene::Render()

@@ -32,6 +32,7 @@ void CollisionManager::CheckCollisions()
                 if (colliders[i]->CheckCollisionWith(colliders[j])) {
                     if (colliders[i]->GetIsTriggerable()) {
                         colliders[i]->NotifyListenersStarted();
+                        colliders[j]->NotifyListenersStarted();
                     }
                     else {
 
