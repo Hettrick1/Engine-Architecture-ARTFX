@@ -15,16 +15,10 @@ public:
 
 public:
 	bool CheckCollisionWith(ColliderComponent* other) override;
-	void OnCollision() override;
 
 public:
 	bool CheckCollisionWithBox(BoxCollider2DComponent* other);
 
-	/*void OnCollisionEnter(); //Need to be implemented
-	void OnCollisionQuit();
-	void OnTriggerEnter();
-	void OnTriggerStay();
-	void OnTriggerQuit();*/
 public:
 
 private:

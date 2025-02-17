@@ -1,11 +1,22 @@
 #include "CollisionManager.h"
-#include "../Colliders/ColliderComponent.h"
-#include "../Actor.h"
+#include "Actor.h"
+#include "ICollisionListener.h"
+#include "ColliderComponent.h"
 
-CollisionManager& CollisionManager::GetInstance()
+CollisionManager& CollisionManager::Instance()
 {
     static CollisionManager instance;
     return instance;
+}
+
+CollisionManager::~CollisionManager()
+{
+
+    while (colliders.size() > 0) {
+        delete colliders.back();
+        colliders.pop_back();
+    }
+    colliders.clear();
 }
 
 void CollisionManager::RegisterCollider(ColliderComponent* collider)
@@ -19,17 +30,17 @@ void CollisionManager::CheckCollisions()
         for (size_t j = i + 1; j < colliders.size(); ++j) {
             if (colliders[i]->GetOwner()->GetState() == ActorState::Active && colliders[j]->GetOwner()->GetState() == ActorState::Active) {
                 if (colliders[i]->CheckCollisionWith(colliders[j])) {
-                    if (!colliders[i]->GetIsTriggerable()) {
-                        colliders[i]->OnCollision();
+                    if (colliders[i]->GetIsTriggerable()) {
+                        colliders[i]->NotifyListenersStarted();
                     }
                     else {
-                        colliders[i]->OnTriggerEnter();
+
                     }
                     if (!colliders[j]->GetIsTriggerable()) {
-                        colliders[j]->OnCollision();
+
                     }
                     else {
-                        colliders[j]->OnTriggerEnter();
+
                     }
                 }
             }

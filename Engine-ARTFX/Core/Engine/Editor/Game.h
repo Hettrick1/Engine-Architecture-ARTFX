@@ -4,6 +4,7 @@
 #include "Scene.h"
 #include "Timer.h"
 #include "InputManager.h"
+#include "CollisionManager.h"
 #include <iostream>
 #include <vector>
 
@@ -25,6 +26,7 @@ private:
 	Window* mGameWindow;
 	Renderer* mRenderer;
 	InputManager& mInputManager;
+	CollisionManager& mCollisionManager;
 	bool mIsRunning;
 	std::vector<Scene*> mAllScenes;
 	int mLoadedScene;

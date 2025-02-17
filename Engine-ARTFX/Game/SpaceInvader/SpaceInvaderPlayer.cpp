@@ -3,6 +3,8 @@
 #include "BooleanActions.h"
 #include "InputManager.h"
 #include "PlayerController.h"
+#include "CollisionManager.h"
+#include "BoxCollider2DComponent.h"
 
 
 SpaceInvaderPlayer::SpaceInvaderPlayer() :
@@ -25,6 +27,8 @@ void SpaceInvaderPlayer::Start()
 		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/WalkAnim/Walk5.png", "walk5")
 	};
 
+	CollisionManager::Instance().CreateCollider<BoxCollider2DComponent>(this, this, 10, GetTransformComponent().GetPosition(), GetTransformComponent().GetSize());
+
 	FlipbookComponent* walkAnim = new FlipbookComponent(this, walkAnimTextures, 500000);
 	walkAnim->SetAnimationFps(5);
 	AddComponent(walkAnim);
@@ -41,6 +45,23 @@ void SpaceInvaderPlayer::Update()
 void SpaceInvaderPlayer::Destroy()
 {
 	Actor::Destroy();
+}
+
+void SpaceInvaderPlayer::OnTriggerEnter(ColliderComponent* collider)
+{
+	std::cout << "OUI TA MERE \n";
+}
+
+void SpaceInvaderPlayer::OnCollision(ColliderComponent* collider)
+{
+}
+
+void SpaceInvaderPlayer::OnTriggerStay(ColliderComponent* collider)
+{
+}
+
+void SpaceInvaderPlayer::OnTriggerExit(ColliderComponent* collider)
+{
 }
 
 

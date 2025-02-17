@@ -1,6 +1,7 @@
 #include "BoxCollider2DComponent.h"
 
-BoxCollider2DComponent::BoxCollider2DComponent(Actor* owner, int updateOder, Vector2D position, Vector2D size) : ColliderComponent(owner, updateOder), mPosition(position), mSize(size)
+BoxCollider2DComponent::BoxCollider2DComponent(Actor* owner, int updateOder, Vector2D position, Vector2D size) 
+    : ColliderComponent(owner, updateOder), mPosition(position), mSize(size)
 {
 }
 
@@ -30,11 +31,6 @@ bool BoxCollider2DComponent::CheckCollisionWith(ColliderComponent* other)
         return false;
     }
     return false;
-}
-
-void BoxCollider2DComponent::OnCollision()
-{
-
 }
 
 bool BoxCollider2DComponent::CheckCollisionWithBox(BoxCollider2DComponent* other)

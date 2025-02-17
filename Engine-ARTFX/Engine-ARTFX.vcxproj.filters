@@ -221,5 +221,8 @@
     <ClInclude Include="Core\Engine\Actor Components\PlayerController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Core\Engine\Actor Components\Managers\ICollisionListener.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

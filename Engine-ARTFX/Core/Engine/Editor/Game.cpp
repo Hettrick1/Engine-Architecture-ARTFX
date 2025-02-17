@@ -2,7 +2,7 @@
 #include "Defs.h"
 
 Game::Game(std::string title, std::vector<Scene*> scenes) 
-    : mIsRunning(true), mAllScenes(scenes), mInputManager(InputManager::Instance())
+    : mIsRunning(true), mAllScenes(scenes), mInputManager(InputManager::Instance()), mCollisionManager(CollisionManager::Instance())
 {
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
     {
@@ -57,6 +57,7 @@ void Game::Loop()
 
 void Game::Update()
 {
+    mCollisionManager.CheckCollisions();
     mAllScenes[mLoadedScene]->Update();
 }
 
@@ -67,8 +68,7 @@ void Game::Render()
 
 void Game::Input()
 {
-
-    if (mIsRunning) {    
+    if (mIsRunning) { 
         mInputManager.Update();
         while (SDL_PollEvent(&mSdlEvent)) {
             switch (mSdlEvent.type) {
@@ -82,7 +82,6 @@ void Game::Input()
                 }
             }
         }
-        
     }
 }
 

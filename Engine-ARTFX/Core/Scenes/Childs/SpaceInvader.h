@@ -14,5 +14,6 @@ public:
 	void Close() override;
 private:
 	SpaceInvaderPlayer* mPlayer;
+	SpaceInvaderPlayer* mPlayer2;
 };
 
