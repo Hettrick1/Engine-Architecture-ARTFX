@@ -26,7 +26,11 @@ void SpaceInvaderPlayer::Start()
 		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/WalkAnim/Walk4.png", "walk4"),
 		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/WalkAnim/Walk5.png", "walk5")
 	};
-	CollisionManager::Instance().CreateCollider<BoxCollider2DComponent>(this, 10, GetTransformComponent().GetSize() * walkAnimTextures[0]->GetTextureSize());
+	CollisionManager::Instance().CreateCollider<BoxCollider2DComponent>(this, 10, GetTransformComponent().GetSize() * 64);
+
+	Texture* tex = Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/collider64x64.png", "ground");
+	SpriteComponent* newSprite = new SpriteComponent(this, *tex, 4000);
+	AddComponent(newSprite);
 
 	FlipbookComponent* walkAnim = new FlipbookComponent(this, walkAnimTextures, 500000);
 	walkAnim->SetAnimationFps(5);
@@ -48,14 +52,21 @@ void SpaceInvaderPlayer::Destroy()
 
 void SpaceInvaderPlayer::OnTriggerEnter(ColliderComponent* collider)
 {
-	PlayerController* pc = GetComponentOfType<PlayerController>();
-	Actor* otherActor = collider->GetHitResult().hitActor;
-	if(otherActor->GetTransformComponent().GetPosition().x < GetTransformComponent().GetPosition().x)
-	{
+    PlayerController* pc = GetComponentOfType<PlayerController>();
+    Actor* otherActor = collider->GetHitResult().hitActor;
+
+    float playerX = GetTransformComponent().GetPosition().x;
+    float playerY = GetTransformComponent().GetPosition().y;
+    float otherX = otherActor->GetTransformComponent().GetPosition().x;
+    float otherY = otherActor->GetTransformComponent().GetPosition().y;
+
+	float distX = Maths::Abs(playerX - otherX);
+	float distY = Maths::Abs(playerY - otherY);
+
+	if (distX > distY) {
 		pc->SetSpeedY(0);
 	}
-	else if (otherActor->GetTransformComponent().GetPosition().y < GetTransformComponent().GetPosition().y)
-	{
+	else {
 		pc->SetSpeedX(0);
 	}
 }

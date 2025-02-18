@@ -26,7 +26,7 @@ void CollisionManager::RegisterCollider(ColliderComponent* collider)
 
 void CollisionManager::CheckCollisions()
 {
-    for (size_t i = 0; i < colliders.size(); ++i) {
+    /*for (size_t i = 0; i < colliders.size()-1; ++i) {
         for (size_t j = i + 1; j < colliders.size(); ++j) {
             if (colliders[i]->GetOwner()->GetState() == ActorState::Active && colliders[j]->GetOwner()->GetState() == ActorState::Active) {
                 if (colliders[i]->CheckCollisionWith(colliders[j])) {
@@ -50,6 +50,34 @@ void CollisionManager::CheckCollisions()
                     colliders[i]->SetHitResult(false, nullptr);
                     colliders[j]->SetHitResult(false, nullptr);
                 }
+            }
+        }
+    }*/
+    std::vector<ColliderComponent*> activeColliders;
+    for (auto& collider : colliders) {
+        if (collider->GetOwner()->GetState() == ActorState::Active) {
+            activeColliders.push_back(collider);
+        }
+    }
+
+    for (size_t i = 0; i < activeColliders.size() - 1; ++i) {
+        for (size_t j = i + 1; j < activeColliders.size(); ++j) {
+            auto* collider1 = activeColliders[i];
+            auto* collider2 = activeColliders[j];
+
+            if (collider1->CheckCollisionWith(collider2)) {
+                if (collider1->GetIsTriggerable()) {
+                    collider1->SetHitResult(true, collider2->GetOwner());
+                    collider1->NotifyListenersStarted();
+                }
+                if (collider2->GetIsTriggerable()) {
+                    collider2->SetHitResult(true, collider1->GetOwner());
+                    collider2->NotifyListenersStarted();
+                }
+            }
+            else {
+                collider1->SetHitResult(false, nullptr);
+                collider2->SetHitResult(false, nullptr);
             }
         }
     }

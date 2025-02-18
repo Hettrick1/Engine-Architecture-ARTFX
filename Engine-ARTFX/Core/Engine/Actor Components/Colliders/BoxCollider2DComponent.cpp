@@ -7,11 +7,11 @@ BoxCollider2DComponent::BoxCollider2DComponent(Actor* pOwner, int pUpdateOder, V
     : ColliderComponent(pOwner, pUpdateOder), mSize(pSize), mShowInGame(true)
 {
     mPosition = pOwner->GetTransformComponent().GetPosition();
-    if (mShowInGame) {
+    /*if (mShowInGame) {
         Texture* tex = Assets::LoadTexture(*mOwner->GetScene().GetRenderer(), "Imports/Sprites/collider.png", "ground");
         SpriteComponent* newSprite = new SpriteComponent(mOwner, *tex, 4000);
         mOwner->AddComponent(newSprite);
-    }
+    }*/
 }
 
 BoxCollider2DComponent::~BoxCollider2DComponent()
@@ -44,8 +44,19 @@ bool BoxCollider2DComponent::CheckCollisionWith(ColliderComponent* other)
 
 bool BoxCollider2DComponent::CheckCollisionWithBox(BoxCollider2DComponent* other)
 {
-    bool xOverlap = (mPosition.x < other->mPosition.x + other->mSize.x) && (mPosition.x + mSize.x > other->mPosition.x);
-    bool yOverlap = (mPosition.y < other->mPosition.y + other->mSize.y) && (mPosition.y + mSize.y > other->mPosition.y);
+    float left1 = mPosition.x - mSize.x / 2;
+    float right1 = mPosition.x + mSize.x / 2;
+    float top1 = mPosition.y - mSize.y / 2;
+    float bottom1 = mPosition.y + mSize.y / 2;
+
+    float left2 = other->mPosition.x - other->mSize.x / 2;
+    float right2 = other->mPosition.x + other->mSize.x / 2;
+    float top2 = other->mPosition.y - other->mSize.y / 2;
+    float bottom2 = other->mPosition.y + other->mSize.y / 2;
+
+    bool xOverlap = (left1 < right2) && (right1 > left2);
+    bool yOverlap = (top1 < bottom2) && (bottom1 > top2);
+
 
     return xOverlap && yOverlap;
 }
