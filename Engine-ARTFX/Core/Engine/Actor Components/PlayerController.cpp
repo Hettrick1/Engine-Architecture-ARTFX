@@ -6,7 +6,7 @@
 #include <iostream>
 
 PlayerController::PlayerController(Actor* pOwner, int pUpdateOrder)
-	: ActorMovementComponent(pOwner, pUpdateOrder)
+	: ActorMovementComponent(pOwner, pUpdateOrder), mCanGoRight(true), mCanGoLeft(true), mCanGoUp(true), mCanGoDown(true)
 {
 	InputManager& inputManager = InputManager::Instance();
 	inputManager.CreateNewBooleanBinding(SDLK_SPACE, this, "jump");
@@ -33,19 +33,43 @@ void PlayerController::OnActionTriggered(InputActions* action)
 		auto* Triggeredaction = dynamic_cast<BooleanActions*>(action);
 		if (Triggeredaction && Triggeredaction->GetName() == "up") 
 		{
-			SetSpeedY(50);
+			if (mCanGoUp)
+			{
+				SetSpeedY(50);
+			}
+			else {
+				SetSpeedY(0);
+			}
 		}
 		else if (Triggeredaction && Triggeredaction->GetName() == "left") 
 		{
-			SetSpeedX(-50);
+			if (mCanGoLeft)
+			{
+				SetSpeedX(-50);
+			}
+			else {
+				SetSpeedX(0);
+			}
 		}
 		else if (Triggeredaction && Triggeredaction->GetName() == "down") 
 		{
-			SetSpeedY(-50);
+			if (mCanGoDown)
+			{
+				SetSpeedY(-50);
+			}
+			else {
+				SetSpeedY(0);
+			}
 		}
 		else if (Triggeredaction && Triggeredaction->GetName() == "right") 
 		{
-			SetSpeedX(50);
+			if (mCanGoRight)
+			{
+				SetSpeedX(50);
+			}
+			else {
+				SetSpeedX(0);
+			}
 		}
 	}
 }
@@ -91,5 +115,45 @@ void PlayerController::Update()
 		else {
 			flipbook->SetAnimationFps(5);
 		}
+	}
+}
+
+void PlayerController::EnableDirection(Vector2D pDirection)
+{
+	if (pDirection.x < 0)
+	{
+		mCanGoLeft = true;
+	}
+	if (pDirection.x > 0)
+	{
+		mCanGoRight = true;
+	}
+	if (pDirection.y < 0)
+	{
+		mCanGoDown = true;
+	}
+	if (pDirection.y > 0)
+	{
+		mCanGoUp = true;
+	}
+}
+
+void PlayerController::DisableDirection(Vector2D pDirection)
+{
+	if (pDirection.x < 0)
+	{
+		mCanGoLeft = false;
+	}
+	if (pDirection.x > 0)
+	{
+		mCanGoRight = false;
+	}
+	if (pDirection.y < 0)
+	{
+		mCanGoDown = false;
+	}
+	if (pDirection.y > 0)
+	{
+		mCanGoUp = false;
 	}
 }

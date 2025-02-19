@@ -13,6 +13,7 @@ public:
 	bool Load(Renderer& renderer, const std::string& filename);
 	void Unload();
 	void UpdateInfo(int& width, int& height);
+	void OverrideTextureSize(int width, int height);
 	Vector2D GetTextureSize();
 	SDL_Texture* GetSdlTexture() const { return mSdlTexture; }
 

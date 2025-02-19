@@ -16,6 +16,10 @@ public:
 	void OnActionEnded(InputActions* action) override;
 public:
 	void Update() override;
+public:
+	void EnableDirection(Vector2D pDirection);
+	void DisableDirection(Vector2D pDirection);
 private:
+	bool mCanGoRight, mCanGoLeft, mCanGoUp, mCanGoDown;
 };
 

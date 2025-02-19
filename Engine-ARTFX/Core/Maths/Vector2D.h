@@ -47,10 +47,10 @@ struct Vector2D
 	friend Vector2D operator * (const Vector2D& left, const Vector2D& right) {
 		return { left.x * right.x, left.y * right.y };
 	}
-	friend Vector2D operator / (Vector2D& left, float scalar) {
+	friend Vector2D operator / (const Vector2D& left, float scalar) {
 		return { left.x / scalar, left.y / scalar };
 	}
-	friend Vector2D operator / (float scalar, Vector2D& right) {
+	friend Vector2D operator / (float scalar, const Vector2D& right) {
 		return { scalar / right.x, scalar / right.y };
 	}
 	friend bool operator == (Vector2D& left, Vector2D& right) {

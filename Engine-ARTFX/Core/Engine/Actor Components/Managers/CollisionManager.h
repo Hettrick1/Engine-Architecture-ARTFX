@@ -2,6 +2,10 @@
 #include "Log.h"
 #include "Actor.h"
 #include <vector>
+#include <unordered_map>
+#include <unordered_set>
+
+// Collision Manager Class to handle all the collision check and to send all the event related to collisons
 
 class ColliderComponent;
 class ICollisionListener;
@@ -12,7 +16,7 @@ public:
     static CollisionManager& Instance();
     ~CollisionManager();
 
-    void RegisterCollider(ColliderComponent* collider);
+    void RegisterCollider(ColliderComponent* pCollider);
 
     void CheckCollisions();
 
@@ -21,8 +25,11 @@ public:
 
 private:
     CollisionManager() = default;
-    std::vector<ColliderComponent*> colliders;
+    std::vector<ColliderComponent*> mAllColliders;
+    std::unordered_map<ColliderComponent*, std::unordered_set<ColliderComponent*>> mCurrentCollisions;
 };
+
+// template to create the collider of the type needed 
 
 template<typename ColliderType, typename ...Args>
 inline void CollisionManager::CreateCollider(ICollisionListener* pListener, Args && ...args)
@@ -43,3 +50,10 @@ inline void CollisionManager::CreateCollider(ICollisionListener* pListener, Args
     RegisterCollider(newCollider);
 }
 
+struct CollisionPairHash { // hash to handle collision pair, to send only one OnTriggerEnd event
+    std::size_t operator()(const std::pair<ColliderComponent*, ColliderComponent*>& pair) const {
+        auto h1 = std::hash<ColliderComponent*>{}(pair.first);
+        auto h2 = std::hash<ColliderComponent*>{}(pair.second);
+        return h1 ^ (h2 << 1); // XOR to minimize hash collisions
+    }
+};

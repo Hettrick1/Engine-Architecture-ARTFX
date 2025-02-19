@@ -26,11 +26,7 @@ void SpaceInvaderPlayer::Start()
 		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/WalkAnim/Walk4.png", "walk4"),
 		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/WalkAnim/Walk5.png", "walk5")
 	};
-	CollisionManager::Instance().CreateCollider<BoxCollider2DComponent>(this, 10, GetTransformComponent().GetSize() * 64);
-
-	Texture* tex = Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/collider64x64.png", "ground");
-	SpriteComponent* newSprite = new SpriteComponent(this, *tex, 4000);
-	AddComponent(newSprite);
+	CollisionManager::Instance().CreateCollider<BoxCollider2DComponent>(this, 10, (GetTransformComponent().GetSize() * 64) / 2);
 
 	FlipbookComponent* walkAnim = new FlipbookComponent(this, walkAnimTextures, 500000);
 	walkAnim->SetAnimationFps(5);
@@ -60,14 +56,34 @@ void SpaceInvaderPlayer::OnTriggerEnter(ColliderComponent* collider)
     float otherX = otherActor->GetTransformComponent().GetPosition().x;
     float otherY = otherActor->GetTransformComponent().GetPosition().y;
 
-	float distX = Maths::Abs(playerX - otherX);
-	float distY = Maths::Abs(playerY - otherY);
+	// calculate if the collider is on the left/right/up/down
+	float rightLeft = playerX - otherX;
+	float upDown = playerY - otherY;
+	float distX = Maths::Abs(rightLeft);
+	float distY = Maths::Abs(upDown);
 
-	if (distX > distY) {
-		pc->SetSpeedY(0);
+	// disable the input depending on where the collision
+	if (distX > distY) 
+	{ // collision up or down
+		if (upDown < 0) // down
+		{
+			pc->DisableDirection({ 0, -1 });
+		}
+		else if (upDown > 0) // up
+		{
+			pc->DisableDirection({ 0, 1 });
+		}
 	}
-	else {
-		pc->SetSpeedX(0);
+	else if (distX < distY) 
+	{ // collision right or left
+		if (rightLeft < 0) // left
+		{
+			pc->DisableDirection({ 1, 0 });
+		}
+		else if (rightLeft > 0) // right
+		{
+			pc->DisableDirection({ -1, 0 });
+		}
 	}
 }
 
@@ -81,6 +97,48 @@ void SpaceInvaderPlayer::OnTriggerStay(ColliderComponent* collider)
 
 void SpaceInvaderPlayer::OnTriggerExit(ColliderComponent* collider)
 {
+	Log::Info("RAUS");
+	PlayerController* pc = GetComponentOfType<PlayerController>(); 
+	Actor* otherActor = collider->GetHitResult().hitActor; 
+	if (!otherActor) {
+		Log::Error(LogType::Error, "The other actor was nullptr");
+		return; 
+	}
+
+	float playerX = GetTransformComponent().GetPosition().x; 
+	float playerY = GetTransformComponent().GetPosition().y; 
+	float otherX = otherActor->GetTransformComponent().GetPosition().x; 
+	float otherY = otherActor->GetTransformComponent().GetPosition().y; 
+
+	// calculate if the collider is on the left/right/up/down
+	float rightLeft = playerX - otherX; 
+	float upDown = playerY - otherY; 
+	float distX = Maths::Abs(rightLeft); 
+	float distY = Maths::Abs(upDown); 
+
+	// enable the collision depending where de collision was
+	if (distX > distY)
+	{ // collision up or down
+		if (upDown < 0)
+		{
+			pc->EnableDirection({ 0, -1 });
+		}
+		else if (upDown > 0)
+		{
+			pc->EnableDirection({ 0, 1 });
+		}
+	}
+	if (distX < distY)
+	{ // collision right or left
+		if (rightLeft < 0)
+		{
+			pc->EnableDirection({ 1, 0 });
+		}
+		else if (rightLeft > 0)
+		{
+			pc->EnableDirection({ -1, 0 });
+		}
+	}
 }
 
 

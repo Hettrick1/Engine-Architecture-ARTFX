@@ -7,11 +7,11 @@ BoxCollider2DComponent::BoxCollider2DComponent(Actor* pOwner, int pUpdateOder, V
     : ColliderComponent(pOwner, pUpdateOder), mSize(pSize), mShowInGame(true)
 {
     mPosition = pOwner->GetTransformComponent().GetPosition();
-    /*if (mShowInGame) {
+    if (mShowInGame) {
         Texture* tex = Assets::LoadTexture(*mOwner->GetScene().GetRenderer(), "Imports/Sprites/collider.png", "ground");
-        SpriteComponent* newSprite = new SpriteComponent(mOwner, *tex, 4000);
+        SpriteComponent* newSprite = new SpriteComponent(mOwner, *tex, 4000, pSize);
         mOwner->AddComponent(newSprite);
-    }*/
+    }
 }
 
 BoxCollider2DComponent::~BoxCollider2DComponent()

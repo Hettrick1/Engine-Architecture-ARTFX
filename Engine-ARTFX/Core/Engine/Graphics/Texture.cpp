@@ -43,6 +43,12 @@ void Texture::UpdateInfo(int& width, int& height)
 	height = mHeight;
 }
 
+void Texture::OverrideTextureSize(int width, int height)
+{
+	mWidth = width;
+	mHeight = height;
+}
+
 Vector2D Texture::GetTextureSize()
 {
 	return {static_cast<float>(mWidth), static_cast<float>(mHeight)};
