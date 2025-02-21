@@ -132,7 +132,13 @@
     <ClCompile Include="Core\Engine\Graphics\OpenGl\RendererOpenGl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Engine\Graphics\OpenGl\Shader.cpp">
+    <ClCompile Include="Core\Engine\Graphics\OpenGl\Shaders\Shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Engine\Graphics\OpenGl\Shaders\ShaderProgram.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Scenes\Childs\GlTestScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -275,12 +281,18 @@
     <ClInclude Include="Core\Engine\Graphics\OpenGl\RendererOpenGl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Engine\Graphics\OpenGl\Shader.h">
+    <ClInclude Include="Core\Engine\Graphics\OpenGl\Shaders\Shader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Engine\Graphics\OpenGl\Shaders\ShaderProgram.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Scenes\Childs\GlTestScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Core\Engine\Graphics\OpenGl\Shaders\Simple.vert" />
-    <None Include="Core\Engine\Graphics\OpenGl\Shaders\Simple.frag" />
+    <None Include="Imports\Shaders\Simple.vert" />
+    <None Include="Imports\Shaders\Simple.frag" />
   </ItemGroup>
 </Project>

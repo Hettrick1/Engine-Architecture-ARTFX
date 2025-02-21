@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "Defs.h"
 #include "RendererSdl.h"
+#include "RendererOpenGl.h"
 
 Game::Game(std::string title, std::vector<Scene*> scenes) 
     : mIsRunning(true), mAllScenes(scenes), mInputManager(InputManager::Instance()), mCollisionManager(CollisionManager::Instance())
@@ -28,7 +29,7 @@ Game::~Game()
 void Game::Initialize()
 {
     mGameWindow = new Window(WINDOW_WIDTH, WINDOW_HEIGHT);
-    mRenderer = new RendererSdl();
+    mRenderer = new RendererOpenGl();
     if (mGameWindow->Open() && mRenderer->Initialize(*mGameWindow)) {
         mAllScenes[mLoadedScene]->Load();
         Loop();

@@ -41,9 +41,7 @@ void SpaceInvader::Update()
 
 void SpaceInvader::Render()
 {
-	mRenderer->BeginDraw();
-	mRenderer->Draw();
-	mRenderer->EndDraw();
+	Scene::Render();
 }
 
 void SpaceInvader::Close()

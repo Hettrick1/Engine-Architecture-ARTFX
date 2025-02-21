@@ -2,6 +2,7 @@
 
 #include "IRenderer.h"
 #include "VertexArray.h"
+#include "Shaders/ShaderProgram.h"
 #include "IRenderer.h"
 #include <vector>
 #include <vector>
@@ -28,10 +29,13 @@ public:
 
 	void DrawSprite(Actor& pActor, Texture& pTexture, Rectangle pRect, Vector2D pOrigin, IRenderer::Flip pFlipMethod) const override;
 
+	void SetCurrentShaderProgram(ShaderProgram& shaderProgram) override;
+
 	RendererType GetType() override { return IRenderer::RendererType::OPENGL; }
 private:
 	Window* mWindow;
 	VertexArray* mVAO;
 	SDL_GLContext mContext;
 	std::vector<SpriteComponent*> mSprites;
+	ShaderProgram* mCurrentShaderProgram;
 };

@@ -33,6 +33,8 @@ public:
 	virtual void AddSprite(SpriteComponent* pSprite) = 0;
 	virtual void RemoveSprite(SpriteComponent* pSprite) = 0;
 
+	virtual void SetCurrentShaderProgram(class ShaderProgram& shaderProgram) {};
+
 	virtual RendererType GetType() = 0;
 	virtual void DrawSprite(Actor& pActor, Texture& pTex, Rectangle pSourceRect, Vector2D pOrigin, Flip pFlip = Flip::None) const = 0;
 	virtual SDL_Renderer* ToSdlRenderer() { return nullptr; }

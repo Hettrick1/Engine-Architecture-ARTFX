@@ -27,7 +27,9 @@ void Scene::Update()
 
 void Scene::Render()
 {
-
+	mRenderer->BeginDraw();
+	mRenderer->Draw();
+	mRenderer->EndDraw();
 }
 
 void Scene::Unload()

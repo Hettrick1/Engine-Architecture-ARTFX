@@ -7,7 +7,7 @@
 #include "glew.h"
 
 RendererOpenGl::RendererOpenGl()
-	: mVAO(nullptr), mWindow(nullptr)
+	: mVAO(nullptr), mWindow(nullptr), mCurrentShaderProgram(nullptr)
 {
 }
 
@@ -59,6 +59,11 @@ void RendererOpenGl::BeginDraw()
 	glClear(GL_COLOR_BUFFER_BIT);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	if (mCurrentShaderProgram != nullptr)
+	{
+		mCurrentShaderProgram->Use();
+	}
+	mVAO->SetActive();
 }
 
 void RendererOpenGl::Draw()
@@ -99,4 +104,10 @@ void RendererOpenGl::RemoveSprite(SpriteComponent* pSprite)
 
 void RendererOpenGl::DrawSprite(Actor& pActor, Texture& pTexture, Rectangle pRect, Vector2D pOrigin, IRenderer::Flip pFlipMethod) const
 {
+}
+
+void RendererOpenGl::SetCurrentShaderProgram(ShaderProgram& shaderProgram)
+{
+	mCurrentShaderProgram = &shaderProgram;
+	mCurrentShaderProgram->Use();
 }
