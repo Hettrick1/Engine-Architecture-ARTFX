@@ -7,127 +7,125 @@ struct Vector3D
 {
 	float x, y, z;
 
-	Vector3D() :x(0), y(0), z(0){}
+	Vector3D() :x(0.0), y(0.0), z(0.0){}
 	Vector3D(float pX, float pY, float pZ) : x(pX), y(pY), z(pZ) {}
 	Vector3D(float size) : x(size), y(size), z(size) {}
 
-	static const Vector3D Zero, One, Forward, Up, Right;
+	void Set(float xP, float yP, float zP);
+	float LengthSq() const;
+	float Length() const;
+	void Normalize();
 
-	//--------------------Operators overload--------------------
+	const float* GetAsFloatPtr() const
+	{
+		return reinterpret_cast<const float*>(&x);
+	}
 
-	//operators +=, -=, *=, /= with vector 3
-	inline void operator += (Vector3D& right) {
-		x += right.x;
-		y += right.y;
-		z += right.z;
+	// Vector addition (a + b)
+	friend Vector3D operator+(const Vector3D& a, const Vector3D& b)
+	{
+		return Vector3D(a.x + b.x, a.y + b.y, a.z + b.z);
 	}
-	inline void operator -= (Vector3D& right) {
-		x -= right.x;
-		y -= right.y;
-		z -= right.z;
+
+	// Vector subtraction (a - b)
+	friend Vector3D operator-(const Vector3D& a, const Vector3D& b)
+	{
+		return Vector3D(a.x - b.x, a.y - b.y, a.z - b.z);
 	}
-	inline void operator *= (float scalar) {
-		x *= scalar;
-		y *= scalar;
-		z *= scalar;
+
+	// Component-wise multiplication
+	friend Vector3D operator*(const Vector3D& left, const Vector3D& right)
+	{
+		return Vector3D(left.x * right.x, left.y * right.y, left.z * right.z);
 	}
-	inline void operator /= (float scalar) {
+
+	// Scalar multiplication
+	friend Vector3D operator*(const Vector3D& vec, float scalar)
+	{
+		return Vector3D(vec.x * scalar, vec.y * scalar, vec.z * scalar);
+	}
+
+	// Scalar multiplication
+	friend Vector3D operator*(float scalar, const Vector3D& vec)
+	{
+		return Vector3D(vec.x * scalar, vec.y * scalar, vec.z * scalar);
+	}
+
+	friend Vector3D operator/(const Vector3D& left, const Vector3D& right)
+	{
+		return Vector3D(left.x / right.x, left.y / right.y, left.z / right.z);
+	}
+
+	// Scalar division
+	friend Vector3D operator/(const Vector3D& vec, float scalar)
+	{
+		return Vector3D(vec.x / scalar, vec.y / scalar, vec.z / scalar);
+	}
+
+	// Scalar /=
+	Vector3D& operator/=(float scalar)
+	{
 		x /= scalar;
 		y /= scalar;
 		z /= scalar;
-	}
-	inline void operator = (float scalar) {
-		x = scalar;
-		y = scalar;
-		z = scalar;
+		return *this;
 	}
 
-	//operators +=, -= with vector 2
-	inline void operator += (Vector2D& right) {
+	// Scalar *=
+	Vector3D& operator*=(float scalar)
+	{
+		x *= scalar;
+		y *= scalar;
+		z *= scalar;
+		return *this;
+	}
+
+	// Vector +=
+	Vector3D& operator+=(const Vector3D& right)
+	{
 		x += right.x;
 		y += right.y;
+		z += right.z;
+		return *this;
 	}
-	inline void operator -= (Vector2D& right) {
+
+	// Vector -=
+	Vector3D& operator-=(const Vector3D& right)
+	{
 		x -= right.x;
 		y -= right.y;
+		z -= right.z;
+		return *this;
 	}
 
-	//operators +, - with vector 3
-	friend Vector3D operator + (Vector3D& left, Vector3D& right) {
-		return { left.x + right.x, left.y + right.y, left.z + right.z };
-	}
-	friend Vector3D operator - (Vector3D& left, Vector3D& right) {
-		return { left.x - right.x, left.y - right.y, left.z - right.z };
-	}
-
-	//operators +, - with vector 2
-	friend Vector3D operator + (Vector2D& left, Vector3D& right) {
-		return { left.x + right.x, left.y + right.y, right.z };
-	}
-	friend Vector3D operator + (Vector3D& left, Vector2D& right) {
-		return { left.x + right.x, left.y + right.y, left.z};
+	// Normalize the provided vector
+	static Vector3D Normalize(const Vector3D& vec)
+	{
+		Vector3D temp = vec;
+		temp.Normalize();
+		return temp;
 	}
 
-	friend Vector3D operator - (Vector2D& left, Vector3D& right) {
-		return { left.x - right.x, left.y - right.y, right.z };
-	}
-	friend Vector3D operator - (Vector3D& left, Vector2D& right) {
-		return { left.x - right.x, left.y - right.y, left.z};
-	}
-
-	//operators *, / with vector 3
-	friend Vector3D operator * (Vector3D& left, float scalar) {
-		return { left.x * scalar, left.y * scalar, left.z * scalar };
-	}
-	friend Vector3D operator * (float scalar, Vector3D& right) {
-		return { scalar * right.x, scalar * right.y, scalar * right.z };
-	}
-	friend Vector3D operator / (Vector3D& left, float scalar) {
-		return { left.x / scalar, left.y / scalar, left.z / scalar };
-	}
-	friend Vector3D operator / (float scalar, Vector3D& right) {
-		return { scalar / right.x, scalar / right.y , scalar / right.z };
+	// Dot product between two vectors (a dot b)
+	static float Dot(const Vector3D& a, const Vector3D& b)
+	{
+		return (a.x * b.x + a.y * b.y + a.z * b.z);
 	}
 
-	friend bool operator == (Vector3D& left, Vector3D& right) {
-		if (left.x == right.x && left.y == right.y && left.z == right.z) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-	friend bool operator != (Vector3D& left, Vector3D& right) {
-		if (left.x == right.x && left.y == right.y && left.z == right.z) {
-			return false;
-		}
-		else {
-			return true;
-		}
+	// Cross product between two vectors (a cross b)
+	static Vector3D Cross(const Vector3D& a, const Vector3D& b)
+	{
+		Vector3D temp;
+		temp.x = a.y * b.z - a.z * b.y;
+		temp.y = a.z * b.x - a.x * b.z;
+		temp.z = a.x * b.y - a.y * b.x;
+		return temp;
 	}
 
-	//--------------------Functions--------------------
+	friend Vector3D Normalize(Vector3D temp) { 
+		return temp / temp.Length(); 
+	}
 
-	inline float Length() const { 
-		float sum = (x * x) + (y * y) + (z * z);
-		return sqrt(sum);
-	}
-	inline void Normalize() { 
-		(*this) /= Length();
-	}
-	friend Vector3D Normalize(Vector3D temp) {
-		return temp / temp.Length();
-	}
-	friend float Dot(Vector3D& left, Vector3D& right) {
-		return left.x * right.x + left.y * right.y + left.z * right.z;
-	}
-	friend Vector3D CrossProduct(Vector3D& left, Vector3D& right) {
-		return Vector3D(left.y * right.z - left.z * right.y, left.z * right.x - left.x * right.z, left.x * right.y - left.y * right.x);
-	}
-	inline Vector3D CrossProduct(Vector3D& right) {
-		return Vector3D(y * right.z - z * right.y, z * right.x - x * right.z, x * right.y - y * right.x);
-	}
-	
 	inline void Clamp(Vector3D& min, Vector3D& max) {
 		if ((*this).x < min.x) (*this).x = min.x;
 		if ((*this).x > max.x) (*this).x = max.x;
@@ -164,4 +162,34 @@ struct Vector3D
 	inline std::string ToString() {
 		return "( " + std::to_string(x) + " , " + std::to_string(y) + " , " + std::to_string(z) + " )";
 	}
+
+	// Lerp from A to B by f
+	static Vector3D Lerp(const Vector3D& a, const Vector3D& b, float f)
+	{
+		return Vector3D(a + f * (b - a));
+	}
+
+	// Reflect V about (normalized) N
+	static Vector3D Reflect(const Vector3D& v, const Vector3D& n)
+	{
+		return v - 2.0f * Vector3D::Dot(v, n) * n;
+	}
+
+	static Vector3D Transform(Vector3D& vec, class Matrix4D& mat, float w = 1.0f);
+
+	// This will transform the vector and renormalize the w component
+	static Vector3D TransformWithPerspDiv(Vector3D& vec, class Matrix4D& mat, float w = 1.0f);
+
+	// Transform a Vector3 by a quaternion
+	static Vector3D Transform(const Vector3D& v, const class Quaternion& q);
+
+	static const Vector3D zero;
+	static const Vector3D unitX;
+	static const Vector3D unitY;
+	static const Vector3D unitZ;
+	static const Vector3D negUnitX;
+	static const Vector3D negUnitY;
+	static const Vector3D negUnitZ;
+	static const Vector3D infinity;
+	static const Vector3D negInfinity;
 };

@@ -76,7 +76,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Dependencies\glew-2.2.0-win32\glew-2.2.0\include\GL;$(SolutionDir)\Dependencies\GL\SDL\include;$(SolutionDir)\Dependencies\SDL2_image-2.8.2\include;Core;Core\Engine;Core\Maths;Core\Scenes;Core\Engine\Actor Components;Core\Engine\Debug Classes;Core\Engine\Editor;Core\Engine\Graphics;Core\Engine\Actor Components\Colliders;Core\Engine\Actor Components\Managers;Core\Scenes\Childs;Game;Core\Engine\Inputs</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Dependencies\glew-2.2.0-win32\glew-2.2.0\include\GL;$(SolutionDir)\Dependencies\GL\SDL\include;$(SolutionDir)\Dependencies\SDL2_image-2.8.2\include;Core;Core\Engine;Core\Maths;Core\Scenes;Core\Engine\Actor Components;Core\Engine\Debug Classes;Core\Engine\Editor;Core\Engine\Graphics;Core\Engine\Actor Components\Colliders;Core\Engine\Actor Components\Managers;Core\Scenes\Childs;Game;Core\Engine\Inputs;Core\Engine\Graphics\OpenGl</AdditionalIncludeDirectories>
       <LanguageStandard>Default</LanguageStandard>
     </ClCompile>
     <Link>
@@ -94,7 +94,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Dependencies\glew-2.2.0-win32\glew-2.2.0\include\GL;$(SolutionDir)\Dependencies\GL\SDL\include;$(SolutionDir)\Dependencies\SDL2_image-2.8.2\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Dependencies\glew-2.2.0-win32\glew-2.2.0\include\GL;$(SolutionDir)\Dependencies\GL\SDL\include;$(SolutionDir)\Dependencies\SDL2_image-2.8.2\include;Core;Core\Engine;Core\Maths;Core\Scenes;Core\Engine\Actor Components;Core\Engine\Debug Classes;Core\Engine\Editor;Core\Engine\Graphics;Core\Engine\Actor Components\Colliders;Core\Engine\Actor Components\Managers;Core\Scenes\Childs;Game;Core\Engine\Inputs;Core\Engine\Graphics\OpenGl</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp14</LanguageStandard>
     </ClCompile>
     <Link>
@@ -144,12 +144,16 @@
     <ClCompile Include="Core\Engine\Actor Components\Managers\CollisionManager.cpp" />
     <ClCompile Include="Core\Engine\Graphics\Texture.cpp" />
     <ClCompile Include="Core\Engine\Inputs\InputActions.cpp" />
+    <ClCompile Include="Core\Maths\Matrix4D.cpp" />
+    <ClCompile Include="Core\Maths\Matrix4DRow.cpp" />
+    <ClCompile Include="Core\Maths\Quaternion.cpp" />
     <ClCompile Include="Core\Maths\Rectangle.cpp" />
     <ClCompile Include="Core\Engine\Actor Components\Colliders\BoxCollider2DComponent.cpp" />
     <ClCompile Include="Core\Engine\Actor Components\Colliders\ColliderComponent.cpp" />
     <ClCompile Include="Core\Engine\Actor Components\Actor.cpp" />
     <ClCompile Include="Core\Engine\Actor Components\Component.cpp" />
     <ClCompile Include="Core\Maths\Vector3D.cpp" />
+    <ClCompile Include="Core\Maths\Vector4D.cpp" />
     <ClCompile Include="Core\Scenes\Childs\SpaceInvader.cpp" />
     <ClCompile Include="Core\Engine\Actor Components\FlipbookComponent.cpp" />
     <ClCompile Include="Game\Pong\Ball.cpp" />
@@ -190,7 +194,11 @@
     <ClInclude Include="Core\Engine\Actor Components\Actor.h" />
     <ClInclude Include="Core\Engine\Actor Components\ActorState.h" />
     <ClInclude Include="Core\Engine\Actor Components\Component.h" />
+    <ClInclude Include="Core\Maths\Matrix4D.h" />
+    <ClInclude Include="Core\Maths\Matrix4DRow.h" />
+    <ClInclude Include="Core\Maths\Quaternion.h" />
     <ClInclude Include="Core\Maths\Vector3D.h" />
+    <ClInclude Include="Core\Maths\Vector4D.h" />
     <ClInclude Include="Core\Scenes\Childs\SpaceInvader.h" />
     <ClInclude Include="Core\Engine\Actor Components\FlipbookComponent.h" />
     <ClInclude Include="Game\Pong\Ball.h" />
