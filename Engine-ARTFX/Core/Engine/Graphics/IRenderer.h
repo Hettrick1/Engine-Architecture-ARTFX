@@ -3,6 +3,7 @@
 #include "Actor.h"
 #include "Rectangle.h"
 #include "Window.h"
+#include "SDL_image.h"
 
 class Texture;
 class SpriteComponent;

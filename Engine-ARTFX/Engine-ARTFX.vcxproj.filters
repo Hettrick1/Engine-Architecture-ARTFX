@@ -30,7 +30,7 @@
     <ClCompile Include="Core\Engine\Editor\Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Engine\Graphics\RendererSdl.cpp">
+    <ClCompile Include="Core\Engine\Graphics\SDL\RendererSdl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Core\Scenes\Scene.cpp">
@@ -126,6 +126,15 @@
     <ClCompile Include="Core\Maths\Vector4D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Core\Engine\Graphics\OpenGl\VertexArray.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Engine\Graphics\OpenGl\RendererOpenGl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Engine\Graphics\OpenGl\Shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Engine\Debug Classes\Log.h">
@@ -143,7 +152,7 @@
     <ClInclude Include="Core\Maths\Rectangle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Engine\Graphics\RendererSdl.h">
+    <ClInclude Include="Core\Engine\Graphics\SDL\RendererSdl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Core\Scenes\Scene.h">
@@ -260,5 +269,18 @@
     <ClInclude Include="Core\Maths\Vector4D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Core\Engine\Graphics\OpenGl\VertexArray.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Engine\Graphics\OpenGl\RendererOpenGl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Engine\Graphics\OpenGl\Shader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Core\Engine\Graphics\OpenGl\Shaders\Simple.vert" />
+    <None Include="Core\Engine\Graphics\OpenGl\Shaders\Simple.frag" />
   </ItemGroup>
 </Project>

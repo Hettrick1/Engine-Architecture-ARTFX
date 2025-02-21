@@ -70,37 +70,35 @@ struct Vector2D
 		}
 	}
 
-	inline float Length() const {
+	float Length() const {
 		float sum = (x*x) + (y*y);
 		return sqrt(sum);
 	}
 	inline void Normalize() {
 		(*this) /= Length();
 	}
-	inline Vector2D Normalize(Vector2D temp) {
+	friend Vector2D Normalize(Vector2D temp) {
 		return temp / temp.Length();
 	}
 	friend float Dot(Vector2D& left, Vector2D& right) {
 		return left.x * right.x + left.y * right.y;
 	}
 	inline void Clamp(Vector2D& min, Vector2D& max) {
-		if ((*this).x < min.x) (*this).x = min.x;
-		if ((*this).x > max.x) (*this).x = max.x;
+		if (x < min.x) x = min.x;
+		if (x > max.x) x = max.x;
 
-		if ((*this).y < min.y) (*this).y = min.y;
-		if ((*this).y > max.y) (*this).y = max.y;
+		if (y < min.y) y = min.y;
+		if (y > max.y) y = max.y;
 	}
-	inline Vector2D Clamp(Vector2D temp, Vector2D& min, Vector2D& max) {
+	inline void Clamp(Vector2D& temp, Vector2D& min, Vector2D& max) {
 		if (temp.x < min.x) temp.x = min.x;
 		if (temp.x > max.x) temp.x = max.x;
 
 		if (temp.y < min.y) temp.y = min.y;
 		if (temp.y > max.y) temp.y = max.y;
-
-		return temp;
 	}
 	inline float Distance(Vector2D& vec) {
-		return sqrt(((*this).x - vec.x) * ((*this).x - vec.x) + ((*this).y - vec.y) * ((*this).y - vec.y));
+		return sqrt((x - vec.x) * (x - vec.x) + (y - vec.y) * (y - vec.y));
 	}
 
 	inline bool Equals(Vector2D& right, float acceptance) {

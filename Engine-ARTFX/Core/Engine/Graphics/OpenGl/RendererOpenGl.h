@@ -1,20 +1,23 @@
 #pragma once
 
 #include "IRenderer.h"
-#include "SDL_image.h"
+#include "VertexArray.h"
+#include "IRenderer.h"
+#include <vector>
 #include <vector>
 
 class Actor;
 class Texture;
 
-class RendererSdl : public IRenderer
+class RendererOpenGl : public IRenderer
 {
 public:
-	RendererSdl();
-	RendererSdl(const RendererSdl&) = delete;
-	RendererSdl& operator = (const RendererSdl&) = delete;
+	RendererOpenGl();
+	virtual ~RendererOpenGl();
+	RendererOpenGl(const RendererOpenGl&) = delete;
+	RendererOpenGl& operator=(const RendererOpenGl&) = delete;
 
-	bool Initialize(Window& rWindow);
+	bool Initialize(Window& pWindow) override;
 	void BeginDraw() override;
 	void Draw() override;
 	void EndDraw() override;
@@ -23,13 +26,12 @@ public:
 	void AddSprite(SpriteComponent* pSprite) override;
 	void RemoveSprite(SpriteComponent* pSprite) override;
 
-	RendererType GetType() override { return IRenderer::RendererType::SDL; }
-
-	void DrawRect(Rectangle& rRect);
 	void DrawSprite(Actor& pActor, Texture& pTexture, Rectangle pRect, Vector2D pOrigin, IRenderer::Flip pFlipMethod) const override;
-	SDL_Renderer* ToSdlRenderer() override;
+
+	RendererType GetType() override { return IRenderer::RendererType::OPENGL; }
 private:
-	SDL_Renderer* mSdlRenderer;
+	Window* mWindow;
+	VertexArray* mVAO;
+	SDL_GLContext mContext;
 	std::vector<SpriteComponent*> mSprites;
 };
-

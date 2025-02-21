@@ -1,9 +1,9 @@
 #include "RendererSdl.h"
-#include "../Actor Components/SpriteComponent.h"
-#include "../Actor Components/Transform2D.h"
-#include "../../Maths/Maths.h"
-#include "../Actor Components/Actor.h"
-#include "../Graphics/Texture.h"
+#include "SpriteComponent.h"
+#include "Transform2D.h"
+#include "Maths.h"
+#include "Actor.h"
+#include "Texture.h"
 
 RendererSdl::RendererSdl() 
     : mSdlRenderer(nullptr)
