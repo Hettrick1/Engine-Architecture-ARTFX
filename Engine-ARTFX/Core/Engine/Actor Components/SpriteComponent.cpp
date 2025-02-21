@@ -4,11 +4,11 @@
 #include "../../Scenes/Scene.h"
 
 SpriteComponent::SpriteComponent(Actor* pOwner, Texture& pTexture, int pDrawOrder, Vector2D pSizeOverride)
-	: Component(pOwner), mTexture(pTexture), mDrawOrder(pDrawOrder), mFlipMethode(Renderer::Flip::None)
+	: Component(pOwner), mTexture(pTexture), mDrawOrder(pDrawOrder), mFlipMethode(IRenderer::Flip::None)
 {
 	if (pSizeOverride.x == 0 || pSizeOverride.y == 0) {
-		mTexWidth = pTexture.GetTextureSize().x;
-		mTexHeight = pTexture.GetTextureSize().y;
+		mTexWidth = static_cast<int>(pTexture.GetTextureSize().x);
+		mTexHeight = static_cast<int>(pTexture.GetTextureSize().y);
 	}
 	else {
 		mTexWidthOverride = static_cast<int>(pSizeOverride.x);
@@ -40,12 +40,12 @@ void SpriteComponent::SetTexture(const Texture& pTexture)
 	}
 }
 
-void SpriteComponent::SetFlipMethode(Renderer::Flip pFlipMethode)
+void SpriteComponent::SetFlipMethode(IRenderer::Flip pFlipMethode)
 {
 	mFlipMethode = pFlipMethode;
 }
 
-void SpriteComponent::Draw(Renderer& pRenderer)
+void SpriteComponent::Draw(IRenderer& pRenderer)
 {
 	if (mTexHeightOverride != 0 && mTexWidthOverride != 0)
 	{

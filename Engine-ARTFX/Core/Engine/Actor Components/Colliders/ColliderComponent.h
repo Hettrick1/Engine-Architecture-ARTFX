@@ -13,13 +13,11 @@ public:
 	ColliderComponent(Actor* owner, int updateOder);
 	~ColliderComponent();
 
+	bool GetIsTriggerable();
 	virtual void Update();
-
-public:
 	virtual bool CheckCollisionWith(ColliderComponent* other);
 
 public:
-	bool GetIsTriggerable();
 	void AddListener(ICollisionListener* listener);
 	void RemoveListener(ICollisionListener* listener);
 

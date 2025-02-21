@@ -104,10 +104,10 @@ void PlayerController::Update()
 	if (flipbook)
 	{
 		if (mSpeed.x < 0) {
-			flipbook->SetFlipMethode(Renderer::Flip::Horizontal);
+			flipbook->SetFlipMethode(IRenderer::Flip::Horizontal);
 		}
 		else if (mSpeed.x > 0) {
-			flipbook->SetFlipMethode(Renderer::Flip::None);
+			flipbook->SetFlipMethode(IRenderer::Flip::None);
 		}
 		if (Maths::NearZero(mSpeed.Length())) {
 			flipbook->SetAnimationFps(0);

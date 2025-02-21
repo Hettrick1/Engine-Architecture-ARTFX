@@ -1,7 +1,7 @@
 #pragma once
-#include "../Engine/Graphics/Renderer.h"
+#include "IRenderer.h"
 #include <vector>
-#include "../Engine/Graphics/Assets.h"
+#include "Assets.h"
 
 class Actor;
 
@@ -10,7 +10,7 @@ class Scene
 public:
 	static Scene* ActiveScene;
 	Scene(std::string title = "Scene");
-	virtual void Start(Renderer* renderer);
+	virtual void Start(IRenderer* renderer);
 	virtual void Load();
 	virtual void Update();
 	virtual void Render();
@@ -23,11 +23,11 @@ public:
 	virtual void RemoveActor(Actor* actor);
 
 public : 
-	Renderer* GetRenderer() const { return mRenderer; }
+	IRenderer* GetRenderer() const { return mRenderer; }
 
 protected:
 	std::string mTitle;
-	Renderer* mRenderer;
+	IRenderer* mRenderer;
 	std::vector<Actor*> mAllActors;
 	std::vector<Actor*> mPendingActors;
 	bool mIsUpdatingActor;

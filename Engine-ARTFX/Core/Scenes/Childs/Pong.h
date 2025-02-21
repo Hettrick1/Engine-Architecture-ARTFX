@@ -1,13 +1,13 @@
 #pragma once
-#include "../Scene.h"
-#include "../../../Game/Pong/Paddle.h"
+#include "Scene.h"
+#include "../../Game/Pong/Paddle.h"
 #include "../../../Game/Pong/Ball.h"
 
 class Pong : public Scene
 {
 public:
 	Pong();
-	void Start(Renderer* renderer) override;
+	void Start(IRenderer* renderer) override;
 	void Update() override;
 	void Render() override;
 	void Close() override;

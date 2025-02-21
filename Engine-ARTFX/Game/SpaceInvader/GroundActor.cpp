@@ -34,7 +34,6 @@ void GroundActor::Destroy()
 
 void GroundActor::OnTriggerEnter(ColliderComponent* collider)
 {
-	std::cout << "NON\n";
 }
 
 void GroundActor::OnCollision(ColliderComponent* collider)

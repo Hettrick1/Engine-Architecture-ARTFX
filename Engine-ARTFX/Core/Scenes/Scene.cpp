@@ -5,12 +5,13 @@
 
 Scene* Scene::ActiveScene = nullptr;
 
-Scene::Scene(std::string title) : mTitle(title)
+Scene::Scene(std::string title) 
+	: mTitle(title), mIsUpdatingActor(false), mRenderer(nullptr)
 {
 	ActiveScene = this;
 }
 
-void Scene::Start(Renderer* renderer)
+void Scene::Start(IRenderer* renderer)
 {
 	mRenderer = renderer;
 }

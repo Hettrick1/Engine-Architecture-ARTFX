@@ -12,8 +12,8 @@ public:
 	SpriteComponent& operator= (const SpriteComponent&) = delete;
 
 	virtual void SetTexture(const Texture& pTexture);
-	void SetFlipMethode(Renderer::Flip pFlipMethode);
-	virtual void Draw(Renderer& pRenderer);
+	void SetFlipMethode(IRenderer::Flip pFlipMethode);
+	virtual void Draw(IRenderer& pRenderer);
 
 	int GetDrawOrder() const { return mDrawOrder; }
 	int GetTexWidth() const { return mTexWidth; }
@@ -25,6 +25,6 @@ protected:
 	int mTexHeight;
 	int mTexWidthOverride;
 	int mTexHeightOverride;
-	Renderer::Flip mFlipMethode;
+	IRenderer::Flip mFlipMethode;
 };
 

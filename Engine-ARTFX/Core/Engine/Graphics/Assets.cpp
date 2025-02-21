@@ -4,7 +4,7 @@
 
 std::map<std::string, Texture> Assets::mTextures = {};
 
-Texture* Assets::LoadTexture(Renderer& pRenderer, const std::string& pFilePath, const std::string& pName)
+Texture* Assets::LoadTexture(IRenderer& pRenderer, const std::string& pFilePath, const std::string& pName)
 {
 	mTextures[pName] = LoadTextureFromFile(pRenderer, pFilePath);
 	return &mTextures[pName];
@@ -29,7 +29,7 @@ void Assets::Clear()
 	mTextures.clear();
 }
 
-Texture Assets::LoadTextureFromFile(Renderer& pRenderer, const std::string& pFilePath)
+Texture Assets::LoadTextureFromFile(IRenderer& pRenderer, const std::string& pFilePath)
 {
 	Texture texture;
 	texture.Load(pRenderer, pFilePath);

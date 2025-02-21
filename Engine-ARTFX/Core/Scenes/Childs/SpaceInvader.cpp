@@ -13,7 +13,7 @@ SpaceInvader::~SpaceInvader()
 
 }
 
-void SpaceInvader::Start(Renderer* renderer)
+void SpaceInvader::Start(IRenderer* renderer)
 {
 	Scene::Start(renderer);
 	mPlayer = new SpaceInvaderPlayer();

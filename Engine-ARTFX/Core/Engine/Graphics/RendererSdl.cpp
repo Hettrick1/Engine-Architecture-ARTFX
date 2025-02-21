@@ -1,17 +1,17 @@
-#include "Renderer.h"
+#include "RendererSdl.h"
 #include "../Actor Components/SpriteComponent.h"
 #include "../Actor Components/Transform2D.h"
 #include "../../Maths/Maths.h"
 #include "../Actor Components/Actor.h"
 #include "../Graphics/Texture.h"
 
-Renderer::Renderer() 
+RendererSdl::RendererSdl() 
     : mSdlRenderer(nullptr)
 {
 
 }
 
-bool Renderer::Initialize(Window& rWindow)
+bool RendererSdl::Initialize(Window& rWindow)
 {
     mSdlRenderer = SDL_CreateRenderer(rWindow.GetSdlWindow(), -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     if (!mSdlRenderer)
@@ -27,30 +27,30 @@ bool Renderer::Initialize(Window& rWindow)
     return true;
 }
 
-void Renderer::BeginDraw()
+void RendererSdl::BeginDraw()
 {
     SDL_SetRenderDrawColor(mSdlRenderer, 120, 120, 255, 255);
     SDL_RenderClear(mSdlRenderer);
 }
 
-void Renderer::Draw()
+void RendererSdl::Draw()
 {
     for (SpriteComponent* sprite : mSprites) {
         sprite->Draw(*this);
     }
 }
 
-void Renderer::EndDraw()
+void RendererSdl::EndDraw()
 {
     SDL_RenderPresent(mSdlRenderer);
 }
 
-void Renderer::Close()
+void RendererSdl::Close()
 {
     SDL_DestroyRenderer(mSdlRenderer);
 }
 
-void Renderer::AddSprite(SpriteComponent* pSprite)
+void RendererSdl::AddSprite(SpriteComponent* pSprite)
 {
     int spriteDrawOrder = pSprite->GetDrawOrder();
     std::vector<SpriteComponent*>::iterator sc;
@@ -61,21 +61,21 @@ void Renderer::AddSprite(SpriteComponent* pSprite)
     mSprites.insert(sc, pSprite);
 }
 
-void Renderer::RemoveSprite(SpriteComponent* pSprite)
+void RendererSdl::RemoveSprite(SpriteComponent* pSprite)
 {
     std::vector<SpriteComponent*>::iterator sc;
     sc = std::find(mSprites.begin(), mSprites.end(), pSprite);
     mSprites.erase(sc);
 }
 
-void Renderer::DrawRect(Rectangle& rRect)
+void RendererSdl::DrawRect(Rectangle& rRect)
 {
     SDL_SetRenderDrawColor(mSdlRenderer, 255, 255, 255, 255);
     SDL_Rect sdlRect = rRect.ToSdlRect();
     SDL_RenderFillRect(mSdlRenderer, &sdlRect);
 }
 
-void Renderer::DrawSprite(Actor& pActor, Texture& pTexture, Rectangle pRect, Vector2D pOrigin, Flip pFlipMethod)
+void RendererSdl::DrawSprite(Actor& pActor, Texture& pTexture, Rectangle pRect, Vector2D pOrigin, IRenderer::Flip pFlipMethod) const
 {
     SDL_Rect destinationRect; 
     Transform2D& transform = pActor.GetTransformComponent();
@@ -96,13 +96,13 @@ void Renderer::DrawSprite(Actor& pActor, Texture& pTexture, Rectangle pRect, Vec
     SDL_RendererFlip flip;
     switch (pFlipMethod)
     {
-    case Renderer::Flip::None:
+    case RendererSdl::Flip::None:
         flip = SDL_FLIP_NONE;
         break;
-    case Renderer::Flip::Horizontal:
+    case RendererSdl::Flip::Horizontal:
         flip = SDL_FLIP_HORIZONTAL;
         break;
-    case Renderer::Flip::Vertical:
+    case RendererSdl::Flip::Vertical:
         flip = SDL_FLIP_VERTICAL;
         break;
     default:
@@ -115,7 +115,7 @@ void Renderer::DrawSprite(Actor& pActor, Texture& pTexture, Rectangle pRect, Vec
 
 }
 
-SDL_Renderer* Renderer::ToSdlRenderer()
+SDL_Renderer* RendererSdl::ToSdlRenderer()
 {
     return mSdlRenderer;
 }

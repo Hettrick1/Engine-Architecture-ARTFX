@@ -1,5 +1,5 @@
 #pragma once
-#include "../Scene.h"
+#include "Scene.h"
 
 class SpaceInvaderPlayer;
 
@@ -8,7 +8,7 @@ class SpaceInvader : public Scene
 public:
 	SpaceInvader();
 	~SpaceInvader();
-	void Start(Renderer* renderer) override;
+	void Start(IRenderer* renderer) override;
 	void Update() override;
 	void Render() override;
 	void Close() override;

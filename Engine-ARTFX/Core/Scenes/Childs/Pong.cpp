@@ -9,7 +9,7 @@ Pong::Pong() : Scene()
     mBall = new Ball();
 }
 
-void Pong::Start(Renderer* renderer) 
+void Pong::Start(IRenderer* renderer)
 {
 	Scene::Start(renderer);
 }
@@ -30,11 +30,11 @@ void Pong::Render()
 {
     mRenderer->BeginDraw();
     Rectangle rectToDraw = mBall->GetBallRect();
-    mRenderer->DrawRect(rectToDraw);
+    //mRenderer->DrawRect(rectToDraw);
     rectToDraw = mPaddleRight->GetPaddleRect();
-    mRenderer->DrawRect(rectToDraw);
+    //mRenderer->DrawRect(rectToDraw);
     rectToDraw = mPaddleLeft->GetPaddleRect();
-    mRenderer->DrawRect(rectToDraw);    
+    //mRenderer->DrawRect(rectToDraw);    
     mRenderer->Draw();
     mRenderer->EndDraw();
 }

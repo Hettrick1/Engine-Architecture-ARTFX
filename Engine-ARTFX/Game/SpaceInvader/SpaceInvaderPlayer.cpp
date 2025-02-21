@@ -26,7 +26,7 @@ void SpaceInvaderPlayer::Start()
 		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/WalkAnim/Walk4.png", "walk4"),
 		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/WalkAnim/Walk5.png", "walk5")
 	};
-	CollisionManager::Instance().CreateCollider<BoxCollider2DComponent>(this, 10, (GetTransformComponent().GetSize() * 64) / 2);
+	CollisionManager::Instance().CreateCollider<BoxCollider2DComponent>(this, 10, (GetTransformComponent().GetSize() * 64) / 1.5);
 
 	FlipbookComponent* walkAnim = new FlipbookComponent(this, walkAnimTextures, 500000);
 	walkAnim->SetAnimationFps(5);
@@ -97,7 +97,6 @@ void SpaceInvaderPlayer::OnTriggerStay(ColliderComponent* collider)
 
 void SpaceInvaderPlayer::OnTriggerExit(ColliderComponent* collider)
 {
-	Log::Info("RAUS");
 	PlayerController* pc = GetComponentOfType<PlayerController>(); 
 	Actor* otherActor = collider->GetHitResult().hitActor; 
 	if (!otherActor) {
@@ -116,7 +115,7 @@ void SpaceInvaderPlayer::OnTriggerExit(ColliderComponent* collider)
 	float distX = Maths::Abs(rightLeft); 
 	float distY = Maths::Abs(upDown); 
 
-	// enable the collision depending where de collision was
+	// enable the inputs depending where de collision was
 	if (distX > distY)
 	{ // collision up or down
 		if (upDown < 0)

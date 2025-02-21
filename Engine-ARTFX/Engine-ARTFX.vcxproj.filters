@@ -30,7 +30,7 @@
     <ClCompile Include="Core\Engine\Editor\Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Engine\Graphics\Renderer.cpp">
+    <ClCompile Include="Core\Engine\Graphics\RendererSdl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Core\Scenes\Scene.cpp">
@@ -131,7 +131,7 @@
     <ClInclude Include="Core\Maths\Rectangle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Engine\Graphics\Renderer.h">
+    <ClInclude Include="Core\Engine\Graphics\RendererSdl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Core\Scenes\Scene.h">
@@ -231,6 +231,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Core\Engine\Actor Components\Managers\HitResult.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Engine\Graphics\IRenderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

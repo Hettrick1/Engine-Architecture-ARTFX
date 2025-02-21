@@ -1,6 +1,6 @@
 #pragma once
 #include "Window.h"
-#include "Renderer.h"
+#include "IRenderer.h"
 #include "Scene.h"
 #include "Timer.h"
 #include "InputManager.h"
@@ -24,7 +24,7 @@ private:
 	SDL_Event mSdlEvent;
 	std::string mTitle;
 	Window* mGameWindow;
-	Renderer* mRenderer;
+	IRenderer* mRenderer;
 	InputManager& mInputManager;
 	CollisionManager& mCollisionManager;
 	bool mIsRunning;

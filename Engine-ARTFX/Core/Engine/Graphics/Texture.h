@@ -2,15 +2,16 @@
 
 #include <iostream>
 #include "SDL.h"
-#include "..\..\Maths\Vector2D.h"
-#include "Renderer.h"
+#include "SDL_image.h"
+#include "Vector2D.h"
+#include "IRenderer.h"
 
 class Texture
 {
 public:
 	Texture();
 	~Texture();
-	bool Load(Renderer& renderer, const std::string& filename);
+	bool Load(IRenderer& renderer, const std::string& filename);
 	void Unload();
 	void UpdateInfo(int& width, int& height);
 	void OverrideTextureSize(int width, int height);

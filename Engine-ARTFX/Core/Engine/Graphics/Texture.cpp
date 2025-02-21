@@ -10,7 +10,7 @@ Texture::~Texture()
 {
 }
 
-bool Texture::Load(Renderer& renderer, const std::string& filename)
+bool Texture::Load(IRenderer& renderer, const std::string& filename)
 {
 	mFilePath = filename;
 	SDL_Surface* surface = IMG_Load(mFilePath.c_str());
