@@ -28,6 +28,10 @@ void CollisionManager::RegisterCollider(ColliderComponent* pCollider)
 
 void CollisionManager::CheckCollisions()
 {
+    if (mAllColliders.size() <= 0)
+    {
+        return;
+    }
     // check only if the actor is active
     std::vector<ColliderComponent*> activeColliders;
     for (auto& collider : mAllColliders) {

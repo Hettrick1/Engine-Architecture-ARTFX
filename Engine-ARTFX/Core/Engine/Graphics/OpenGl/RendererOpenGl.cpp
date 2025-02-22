@@ -55,19 +55,21 @@ bool RendererOpenGl::Initialize(Window& pWindow)
 
 void RendererOpenGl::BeginDraw()
 {
-	glClearColor(0.45f, 0.45f, 1.0f, 1.0f);
+	glClearColor(0.1f, 0.45f, 1.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	if (mCurrentShaderProgram != nullptr)
 	{
 		mCurrentShaderProgram->Use();
+		mCurrentShaderProgram->setVector3f("pos", { 10, 0, 0 }); 
 	}
 	mVAO->SetActive();
 }
 
 void RendererOpenGl::Draw()
 {
+	glDrawElements(GL_TRIANGLES, 4, GL_FLOAT, indices);
 }
 
 void RendererOpenGl::EndDraw()
