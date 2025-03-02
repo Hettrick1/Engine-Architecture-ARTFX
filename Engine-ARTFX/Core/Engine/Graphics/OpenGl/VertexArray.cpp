@@ -13,7 +13,7 @@ VertexArray::VertexArray(const float* pVertices, unsigned int pVerticeCount, con
 	glBindBuffer(GL_ARRAY_BUFFER, mVertexBufferId);
 	glBufferData(GL_ARRAY_BUFFER, mVerticeCount * 3 * sizeof(float), pVertices, GL_STATIC_DRAW);
 
-
+	// EBO
 	glGenBuffers(1, &mIndexBufferId);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mIndexBufferId);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, mIndexCount * sizeof(float), pIndices, GL_STATIC_DRAW);
@@ -32,4 +32,5 @@ VertexArray::~VertexArray()
 void VertexArray::SetActive()
 {
 	glBindVertexArray(mVertexArrayId);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mIndexBufferId);
 }

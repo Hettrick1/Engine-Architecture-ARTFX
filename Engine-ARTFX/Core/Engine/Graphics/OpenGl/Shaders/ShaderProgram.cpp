@@ -67,10 +67,10 @@ void ShaderProgram::setVector4f(const GLchar* name, const Vector4D& value)
 }
 void ShaderProgram::setMatrix4(const GLchar* name, const Matrix4D& matrix)
 {
-	glUniformMatrix4fv(glGetUniformLocation(mId, name), 1, GL_FALSE, matrix.GetAsFloatPtr());
+	glUniformMatrix4fv(glGetUniformLocation(mId, name), 1, GL_TRUE, matrix.GetAsFloatPtr());
 }
 void ShaderProgram::setMatrix4Row(const GLchar* name, const Matrix4DRow& matrix)
 {
-	glUniformMatrix4fv(glGetUniformLocation(mId, name), 1, GL_FALSE, matrix.GetAsFloatPtr());
+	glUniformMatrix4fv(glGetUniformLocation(mId, name), 1, GL_TRUE, matrix.GetAsFloatPtr());
 }
 

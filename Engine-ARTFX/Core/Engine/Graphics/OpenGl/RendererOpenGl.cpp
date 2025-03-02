@@ -62,14 +62,14 @@ void RendererOpenGl::BeginDraw()
 	if (mCurrentShaderProgram != nullptr)
 	{
 		mCurrentShaderProgram->Use();
-		mCurrentShaderProgram->setVector3f("pos", { 10, 0, 0 }); 
+		mCurrentShaderProgram->setVector3f("pos", { 0, 0, 0 }); 
 	}
 	mVAO->SetActive();
 }
 
 void RendererOpenGl::Draw()
 {
-	glDrawElements(GL_TRIANGLES, 4, GL_FLOAT, indices);
+	glDrawElements(GL_TRIANGLES, 6, GL_INT, indices);
 }
 
 void RendererOpenGl::EndDraw()
