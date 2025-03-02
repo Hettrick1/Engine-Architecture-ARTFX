@@ -69,7 +69,7 @@ void RendererOpenGl::BeginDraw()
 
 void RendererOpenGl::Draw()
 {
-	glDrawElements(GL_TRIANGLES, 6, GL_INT, indices);
+	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0); 
 }
 
 void RendererOpenGl::EndDraw()
