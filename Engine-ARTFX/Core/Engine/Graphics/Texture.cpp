@@ -61,9 +61,9 @@ void Texture::OverrideTextureSize(int width, int height)
 	mHeight = height;
 }
 
-Vector2D Texture::GetTextureSize()
+Vector3D Texture::GetTextureSize()
 {
-	return {static_cast<float>(mWidth), static_cast<float>(mHeight)};
+	return {static_cast<float>(mWidth), static_cast<float>(mHeight), 0};
 }
 
 bool Texture::LoadSdl(RendererSdl* pRenderer, const std::string& pFilePath, SDL_Surface* pSurface)

@@ -8,7 +8,7 @@
 
 
 testGlPlayer::testGlPlayer() :
-	Actor({ 0, 0 }, 1.0, 0)
+	Actor()
 {
 }
 
@@ -23,6 +23,8 @@ void testGlPlayer::Start()
 		
 	SpriteComponent* walkAnim = new SpriteComponent(this, *walkAnimTextures, 500000);
 	AddComponent(walkAnim);
+
+	mTransformComponent.RotateZ(90);
 }
 
 void testGlPlayer::Update()

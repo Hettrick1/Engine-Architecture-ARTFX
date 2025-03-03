@@ -1,11 +1,11 @@
 #pragma once
 
-#include "Vector2D.h"
+#include "Vector3D.h"
 
 class Actor;
 
 struct HitResult {
     bool bHit = false;        
     Actor* hitActor = nullptr; 
-    Vector2D hitLocation;
+    Vector3D hitLocation;
 };

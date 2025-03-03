@@ -1,13 +1,13 @@
 #pragma once
 
 #include "ColliderComponent.h"
-#include "Vector2D.h"
+#include "Vector3D.h"
 
 class BoxCollider2DComponent : public ColliderComponent
 {
 public:
 	BoxCollider2DComponent() = delete;
-	BoxCollider2DComponent(Actor* pOwner, int pUpdateOder, Vector2D pSize = 1);
+	BoxCollider2DComponent(Actor* pOwner, int pUpdateOder, Vector3D pSize = 1);
 	~BoxCollider2DComponent();
 	void OnStart() override;
 	void Update() override;
@@ -21,10 +21,10 @@ public:
 
 public:
 	void SetShowInGame(bool pShowInGame);
-	void SetSize(Vector2D pSize);
+	void SetSize(Vector3D pSize);
 private:
-	Vector2D mPosition;
-	Vector2D mSize;
+	Vector3D mPosition;
+	Vector3D mSize;
 	bool mShowInGame;
 };
 

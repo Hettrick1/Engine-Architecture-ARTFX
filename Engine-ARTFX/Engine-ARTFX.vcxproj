@@ -176,7 +176,7 @@
     <ClCompile Include="Core\Engine\Editor\Window.cpp" />
     <ClCompile Include="Game\Pong\Paddle.cpp" />
     <ClCompile Include="Core\Maths\Timer.cpp" />
-    <ClCompile Include="Core\Engine\Actor Components\Transform2D.cpp" />
+    <ClCompile Include="Core\Engine\Actor Components\TransformComponent.cpp" />
     <ClCompile Include="Core\Engine\Actor Components\SpriteComponent.cpp" />
     <ClCompile Include="Game\SpaceInvader\SpaceInvaderPlayer.cpp" />
     <ClCompile Include="Core\Engine\Actor Components\RigidbodyComponent.cpp" />
@@ -222,7 +222,7 @@
     <ClInclude Include="Core\Engine\Editor\Window.h" />
     <ClInclude Include="Game\Pong\Paddle.h" />
     <ClInclude Include="Core\Maths\Timer.h" />
-    <ClInclude Include="Core\Engine\Actor Components\Transform2D.h" />
+    <ClInclude Include="Core\Engine\Actor Components\TransformComponent.h" />
     <ClInclude Include="Core\Engine\Actor Components\SpriteComponent.h" />
     <ClInclude Include="Game\SpaceInvader\SpaceInvaderPlayer.h" />
     <ClInclude Include="Core\Engine\Inputs\InputActions.h" />

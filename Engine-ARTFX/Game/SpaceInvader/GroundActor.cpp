@@ -3,7 +3,7 @@
 #include "CollisionManager.h"
 #include "BoxCollider2DComponent.h"
 
-GroundActor::GroundActor(Vector2D pPos, Vector2D pSize, float pRotation)
+GroundActor::GroundActor(Vector3D pPos, Vector3D pSize, Quaternion pRotation)
 	: Actor(pPos, pSize, pRotation)
 {
 }

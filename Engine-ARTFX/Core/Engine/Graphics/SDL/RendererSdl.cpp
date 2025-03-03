@@ -1,6 +1,6 @@
 #include "RendererSdl.h"
 #include "SpriteComponent.h"
-#include "Transform2D.h"
+#include "TransformComponent.h"
 #include "Maths.h"
 #include "Actor.h"
 #include "Texture.h"
@@ -78,7 +78,7 @@ void RendererSdl::DrawRect(Rectangle& rRect)
 void RendererSdl::DrawSprite(Actor& pActor, Texture& pTexture, Rectangle pRect, Vector2D pOrigin, IRenderer::Flip pFlipMethod) const
 {
     SDL_Rect destinationRect; 
-    Transform2D& transform = pActor.GetTransformComponent();
+    TransformComponent& transform = pActor.GetTransformComponent();
     destinationRect.w = static_cast<int>(pTexture.GetTextureSize().x * transform.GetSize().x);
     destinationRect.h = static_cast<int>(pTexture.GetTextureSize().y * transform.GetSize().y);
     destinationRect.x = static_cast<int>(transform.GetPosition().x - pOrigin.x); 
@@ -109,7 +109,7 @@ void RendererSdl::DrawSprite(Actor& pActor, Texture& pTexture, Rectangle pRect, 
         flip = SDL_FLIP_NONE;
         break;
     }
-    SDL_RenderCopyEx(mSdlRenderer, pTexture.GetSdlTexture(), sourceSDL, &destinationRect, -Maths::ToDeg(transform.GetRotation()), nullptr, flip); 
+    SDL_RenderCopyEx(mSdlRenderer, pTexture.GetSdlTexture(), sourceSDL, &destinationRect, -Maths::ToDeg(transform.GetRotation().z), nullptr, flip); 
 
     delete sourceSDL;
 

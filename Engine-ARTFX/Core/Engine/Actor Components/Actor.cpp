@@ -3,12 +3,13 @@
 #include "Scene.h"
 #include <algorithm>
 
-Actor::Actor(Vector2D position, Vector2D size, float rotation) : 
+Actor::Actor(Vector3D position, Vector3D size, Quaternion rotation) : 
     mState(ActorState::Active), mScene(*Scene::ActiveScene)
 {
     mTransformComponent.SetPosition(position);
     mTransformComponent.SetSize(size);
     mTransformComponent.SetRotation(rotation);
+    mTransformComponent.SetOwner(this);
 }
 
 Actor::~Actor()
@@ -57,7 +58,7 @@ void Actor::SetActive(ActorState state)
     mState = state;
 }
 
-void Actor::SetPosition(Vector2D pPosition)
+void Actor::SetPosition(Vector3D pPosition)
 {
     mTransformComponent.SetPosition(pPosition);
 }
@@ -102,7 +103,12 @@ Scene& Actor::GetScene()
     return mScene;
 }
 
-Transform2D& Actor::GetTransformComponent()
+TransformComponent& Actor::GetTransformComponent()
 {
     return mTransformComponent;
+}
+
+void Actor::UpdateComponentsTransform()
+{
+
 }

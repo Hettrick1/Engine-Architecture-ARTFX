@@ -8,7 +8,7 @@
 
 
 SpaceInvaderPlayer::SpaceInvaderPlayer() :
-	Actor({ 500, 500 }, 1.0, 0)
+	Actor()
 {
 }
 

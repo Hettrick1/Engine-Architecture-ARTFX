@@ -3,7 +3,7 @@
 #include "Actor.h"
 #include "../../Scenes/Scene.h"
 
-SpriteComponent::SpriteComponent(Actor* pOwner, Texture& pTexture, int pDrawOrder, Vector2D pSizeOverride)
+SpriteComponent::SpriteComponent(Actor* pOwner, Texture& pTexture, int pDrawOrder, Vector3D pSizeOverride)
 	: Component(pOwner), mTexture(pTexture), mDrawOrder(pDrawOrder), mFlipMethode(IRenderer::Flip::None)
 {
 	if (pSizeOverride.x == 0 || pSizeOverride.y == 0) {

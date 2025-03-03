@@ -1,6 +1,6 @@
 #include "RendererOpenGl.h"
 #include "SpriteComponent.h"
-#include "Transform2D.h"
+#include "TransformComponent.h"
 #include "Maths.h"
 #include "Actor.h"
 #include "Texture.h"
@@ -50,6 +50,7 @@ bool RendererOpenGl::Initialize(Window& pWindow)
 		Log::Error(LogType::Video, "Failed to initialize SDL_Image");
 	}
 	mVAO = new VertexArray(vertices, 4, indices, 6);
+	mViewProj = Matrix4DRow::CreateSimpleViewProj(mWindow->GetDimensions().x, mWindow->GetDimensions().y);
 	return true;
 }
 
@@ -59,18 +60,20 @@ void RendererOpenGl::BeginDraw()
 	glClear(GL_COLOR_BUFFER_BIT);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	if (mCurrentShaderProgram != nullptr)
+	glDepthFunc(GL_LESS);
+	if (mCurrentShaderProgram == nullptr)
 	{
-		mCurrentShaderProgram->Use();
+		return;
 	}
+	mCurrentShaderProgram->Use();
+	mCurrentShaderProgram->setMatrix4Row("uViewProj", mViewProj);
 	mVAO->SetActive();
 }
 
 void RendererOpenGl::Draw()
 {
 	for (SpriteComponent* sprite : mSprites) {
-		sprite->GetTexture().SetActive();
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		sprite->Draw(*this);
 	}
 }
 
@@ -108,6 +111,16 @@ void RendererOpenGl::RemoveSprite(SpriteComponent* pSprite)
 
 void RendererOpenGl::DrawSprite(Actor& pActor, Texture& pTexture, Rectangle pRect, Vector2D pOrigin, IRenderer::Flip pFlipMethod) const
 {
+	if (mCurrentShaderProgram == nullptr)
+	{
+		return;
+	}
+	mCurrentShaderProgram->Use();
+	Matrix4DRow scaleMat = Matrix4DRow::CreateScale(pTexture.GetTextureSize());
+	Matrix4DRow world = scaleMat * pActor.GetTransformComponent().GetWorldTransform();
+	mCurrentShaderProgram->setMatrix4Row("uWorldTransform", world);
+	pTexture.SetActive();
+	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 }
 
 void RendererOpenGl::SetCurrentShaderProgram(ShaderProgram& shaderProgram)

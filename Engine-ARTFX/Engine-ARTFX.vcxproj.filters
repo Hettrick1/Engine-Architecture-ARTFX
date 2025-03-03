@@ -54,7 +54,7 @@
     <ClCompile Include="Core\Engine\Actor Components\Component.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Engine\Actor Components\Transform2D.cpp">
+    <ClCompile Include="Core\Engine\Actor Components\TransformComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Core\Engine\Actor Components\Actor.cpp">
@@ -185,7 +185,7 @@
     <ClInclude Include="Core\Engine\Actor Components\Component.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Engine\Actor Components\Transform2D.h">
+    <ClInclude Include="Core\Engine\Actor Components\TransformComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Core\Engine\Actor Components\Actor.h">

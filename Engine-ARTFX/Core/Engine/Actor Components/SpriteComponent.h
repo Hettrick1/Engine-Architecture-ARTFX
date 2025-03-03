@@ -5,7 +5,7 @@
 class SpriteComponent : public Component
 {
 public:
-	SpriteComponent(Actor* pOwner, Texture& pTexture, int pDrawOrder = 100, Vector2D pSizeOverride = 0);
+	SpriteComponent(Actor* pOwner, Texture& pTexture, int pDrawOrder = 100, Vector3D pSizeOverride = 0);
 	virtual ~SpriteComponent();
 	SpriteComponent() = delete;
 	SpriteComponent(const SpriteComponent&) = delete;

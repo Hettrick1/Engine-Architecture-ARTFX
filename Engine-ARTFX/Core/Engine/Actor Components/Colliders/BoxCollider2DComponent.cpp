@@ -3,7 +3,7 @@
 #include "Scene.h"
 #include "Actor.h"
 
-BoxCollider2DComponent::BoxCollider2DComponent(Actor* pOwner, int pUpdateOder, Vector2D pSize) 
+BoxCollider2DComponent::BoxCollider2DComponent(Actor* pOwner, int pUpdateOder, Vector3D pSize) 
     : ColliderComponent(pOwner, pUpdateOder), mSize(pSize), mShowInGame(true)
 {
     mPosition = pOwner->GetTransformComponent().GetPosition();
@@ -66,7 +66,7 @@ void BoxCollider2DComponent::SetShowInGame(bool showInGame)
     mShowInGame = showInGame;
 }
 
-void BoxCollider2DComponent::SetSize(Vector2D pSize)
+void BoxCollider2DComponent::SetSize(Vector3D pSize)
 {
     mSize = pSize;
 }

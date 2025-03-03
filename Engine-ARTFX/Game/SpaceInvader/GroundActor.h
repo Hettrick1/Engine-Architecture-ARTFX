@@ -7,7 +7,7 @@
 class GroundActor : public Actor, public ICollisionListener
 {
 public:
-	GroundActor(Vector2D pPos = 0, Vector2D pSize = 1, float pRotation = 0);
+	GroundActor(Vector3D pPos = 0, Vector3D pSize = 1, Quaternion pRotation = Quaternion(0,0));
 	~GroundActor();
 	void Start() override;
 	void Update() override;

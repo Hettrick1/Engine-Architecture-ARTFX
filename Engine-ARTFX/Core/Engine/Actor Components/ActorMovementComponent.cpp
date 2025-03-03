@@ -26,7 +26,7 @@ void ActorMovementComponent::Update()
 {
 	if(!Maths::NearZero(mSpeed.Length()))
 	{
-		Vector2D newPosition = mOwner->GetTransformComponent().GetPosition()
+		Vector3D newPosition = mOwner->GetTransformComponent().GetPosition()
 			+ (mOwner->GetTransformComponent().Right() * mSpeed.x
 			+ mOwner->GetTransformComponent().Up() * mSpeed.y ) * Timer::deltaTime;
 		mOwner->SetPosition(newPosition);

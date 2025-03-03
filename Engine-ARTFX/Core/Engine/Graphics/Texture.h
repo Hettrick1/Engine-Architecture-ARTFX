@@ -20,7 +20,7 @@ public:
 	void SetActive() const;
 	void UpdateInfo(int& pWidth, int& pHeight);
 	void OverrideTextureSize(int pWidth, int pHeight);
-	Vector2D GetTextureSize();
+	Vector3D GetTextureSize();
 	SDL_Texture* GetSdlTexture() const { return mSdlTexture; }
 
 private:

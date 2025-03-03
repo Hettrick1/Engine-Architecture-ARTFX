@@ -38,4 +38,5 @@ private:
 	SDL_GLContext mContext;
 	std::vector<SpriteComponent*> mSprites;
 	ShaderProgram* mCurrentShaderProgram;
+	Matrix4DRow mViewProj;
 };

@@ -1,6 +1,6 @@
 #pragma once
 #include "ActorState.h"
-#include "Transform2D.h"
+#include "TransformComponent.h"
 #include <vector>
 
 class Component;
@@ -9,7 +9,7 @@ class Scene;
 class Actor
 {
 public:
-	Actor(Vector2D position = 0, Vector2D size = 1, float rotation = 0);
+	Actor(Vector3D position = 0, Vector3D size = 1, Quaternion rotation = Quaternion(0, 0));
 	~Actor();
 	virtual void Start() = 0;
 	virtual void Update() = 0;
@@ -18,11 +18,11 @@ public:
 	void AddComponent(Component* component);
 	void RemoveComponent(Component* component);
 	void SetActive(ActorState state);
-	void SetPosition(Vector2D pPosition);
+	void SetPosition(Vector3D pPosition);
 	std::vector<Component*> GetComponents() const;
 	ActorState GetState();
 	Scene& GetScene();
-	Transform2D& GetTransformComponent();
+	TransformComponent& GetTransformComponent();
 
 	template<typename  C>
 	C* GetComponentOfType() const
@@ -35,11 +35,12 @@ public:
 		}
 		return nullptr;
 	}
+	void UpdateComponentsTransform();
 
-private:
+protected:
 	Scene& mScene;
 	ActorState mState;
-	Transform2D mTransformComponent;
+	TransformComponent mTransformComponent;
 	bool mIsUpdatingComponents;
 	std::vector<Component*> mComponents;
 	std::vector<Component*> mPendingComponents;
