@@ -1,5 +1,6 @@
 #include "RendererOpenGl.h"
 #include "SpriteComponent.h"
+#include "MeshComponent.h"
 #include "TransformComponent.h"
 #include "Maths.h"
 #include "Actor.h"
@@ -7,7 +8,7 @@
 #include "glew.h"
 
 RendererOpenGl::RendererOpenGl()
-	: mVAO(nullptr), mWindow(nullptr), mCurrentShaderProgram(nullptr)
+	: mVAO(nullptr), mWindow(nullptr), mSpriteShaderProgram(nullptr)
 {
 }
 
@@ -50,31 +51,22 @@ bool RendererOpenGl::Initialize(Window& pWindow)
 		Log::Error(LogType::Video, "Failed to initialize SDL_Image");
 	}
 	mVAO = new VertexArray(vertices, 4, indices, 6);
-	mViewProj = Matrix4DRow::CreateSimpleViewProj(mWindow->GetDimensions().x, mWindow->GetDimensions().y);
+	mSpriteViewProj = Matrix4DRow::CreateSimpleViewProj(mWindow->GetDimensions().x, mWindow->GetDimensions().y);
+	mView = Matrix4DRow::CreateLookAt(Vector3D(0, 0, 5), Vector3D::unitX, Vector3D::unitZ);
+	mProj = Matrix4DRow::CreatePerspectiveFOV(70.0f, mWindow->GetDimensions().x, mWindow->GetDimensions().y, 0.01f, 10000.0f);
 	return true;
 }
 
 void RendererOpenGl::BeginDraw()
 {
 	glClearColor(0.1f, 0.45f, 1.0f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glDepthFunc(GL_LESS);
-	if (mCurrentShaderProgram == nullptr)
-	{
-		return;
-	}
-	mCurrentShaderProgram->Use();
-	mCurrentShaderProgram->setMatrix4Row("uViewProj", mViewProj);
-	mVAO->SetActive();
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 void RendererOpenGl::Draw()
 {
-	for (SpriteComponent* sprite : mSprites) {
-		sprite->Draw(*this);
-	}
+	DrawMeshes();
+	DrawSprites();
 }
 
 void RendererOpenGl::EndDraw()
@@ -123,20 +115,48 @@ void RendererOpenGl::RemoveMesh(MeshComponent* pMesh)
 
 void RendererOpenGl::DrawSprite(Actor& pActor, Texture& pTexture, Rectangle pRect, Vector2D pOrigin, IRenderer::Flip pFlipMethod) const
 {
-	if (mCurrentShaderProgram == nullptr)
+	if (mSpriteShaderProgram == nullptr)
 	{
 		return;
 	}
-	mCurrentShaderProgram->Use();
+	mSpriteShaderProgram->Use();
 	Matrix4DRow scaleMat = Matrix4DRow::CreateScale(pTexture.GetTextureSize());
 	Matrix4DRow world = scaleMat * pActor.GetTransformComponent().GetWorldTransform();
-	mCurrentShaderProgram->setMatrix4Row("uWorldTransform", world);
+	mSpriteShaderProgram->setMatrix4Row("uWorldTransform", world);
 	pTexture.SetActive();
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 }
 
-void RendererOpenGl::SetCurrentShaderProgram(ShaderProgram& shaderProgram)
+void RendererOpenGl::DrawMeshes()
 {
-	mCurrentShaderProgram = &shaderProgram;
-	mCurrentShaderProgram->Use();
+	glEnable(GL_DEPTH_TEST);
+	glDisable(GL_BLEND);
+	for (MeshComponent* m : mMeshes) 
+	{
+		m->Draw(mView * mProj);
+	}
+}
+
+void RendererOpenGl::DrawSprites()
+{
+	glDisable(GL_DEPTH_TEST); 
+	glEnable(GL_BLEND); 
+	glBlendEquationSeparate(GL_FUNC_ADD, GL_FUNC_ADD);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); 
+	if (mSpriteShaderProgram == nullptr)
+	{
+		return;
+	}
+	mSpriteShaderProgram->Use(); 
+	mSpriteShaderProgram->setMatrix4Row("uViewProj", mSpriteViewProj); 
+	mVAO->SetActive(); 
+	for (SpriteComponent* sprite : mSprites) {
+		sprite->Draw(*this);
+	}
+}
+
+void RendererOpenGl::SetSpriteShaderProgram(ShaderProgram& shaderProgram)
+{
+	mSpriteShaderProgram = &shaderProgram;
+	mSpriteShaderProgram->Use();
 }

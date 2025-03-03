@@ -10,7 +10,7 @@ Mesh::Mesh()
 	mVertexShader.Load("Simple.vert", ShaderType::VERTEX);
 	mFragmentShader.Load("Simple.frag", ShaderType::FRAGMENT);
 	mShaderProgram.Compose({ &mVertexShader, &mFragmentShader });
-	mTextures.emplace_back(&Assets::GetTexture("wall"));
+	mTextures.emplace_back(&Assets::GetTexture("cube"));
 }
 
 Mesh::~Mesh()

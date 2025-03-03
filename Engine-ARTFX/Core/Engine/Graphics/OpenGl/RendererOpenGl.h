@@ -32,7 +32,10 @@ public:
 
 	void DrawSprite(Actor& pActor, Texture& pTexture, Rectangle pRect, Vector2D pOrigin, IRenderer::Flip pFlipMethod) const override;
 
-	void SetCurrentShaderProgram(ShaderProgram& shaderProgram) override;
+	void DrawMeshes();
+	void DrawSprites();
+
+	void SetSpriteShaderProgram(ShaderProgram& shaderProgram) override;
 
 	RendererType GetType() override { return IRenderer::RendererType::OPENGL; }
 private:
@@ -41,6 +44,7 @@ private:
 	SDL_GLContext mContext;
 	std::vector<SpriteComponent*> mSprites;
 	std::vector<MeshComponent*> mMeshes;
-	ShaderProgram* mCurrentShaderProgram;
-	Matrix4DRow mViewProj;
+	ShaderProgram* mSpriteShaderProgram;
+	Matrix4DRow mSpriteViewProj;
+	Matrix4DRow mView, mProj;
 };

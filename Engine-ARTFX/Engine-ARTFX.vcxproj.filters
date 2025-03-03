@@ -150,6 +150,9 @@
     <ClCompile Include="Core\Engine\Actor Components\MeshComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Game\TestOpenGl\Cube.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Engine\Debug Classes\Log.h">
@@ -308,9 +311,14 @@
     <ClInclude Include="Core\Engine\Actor Components\MeshComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Game\TestOpenGl\Cube.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Imports\Shaders\Simple.vert" />
     <None Include="Imports\Shaders\Simple.frag" />
+    <None Include="Imports\Shaders\BasicMesh.vert" />
+    <None Include="Imports\Shaders\BasicMesh.frag" />
   </ItemGroup>
 </Project>

@@ -37,7 +37,7 @@ public:
 	virtual void AddMesh(MeshComponent* pMesh) = 0;
 	virtual void RemoveMesh(MeshComponent* pMesh) = 0;
 
-	virtual void SetCurrentShaderProgram(class ShaderProgram& shaderProgram) {};
+	virtual void SetSpriteShaderProgram(class ShaderProgram& shaderProgram) {};
 
 	virtual RendererType GetType() = 0;
 	virtual void DrawSprite(Actor& pActor, Texture& pTex, Rectangle pSourceRect, Vector2D pOrigin, Flip pFlip = Flip::None) const = 0;

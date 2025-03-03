@@ -28,9 +28,9 @@ void MeshComponent::Draw(Matrix4DRow viewProj)
 		if (tex)
 		{
 			tex->SetActive();
-			mMesh->GetVao()->SetActive();
-			glDrawElements(GL_TRIANGLES, mMesh->GetVao()->GetIndicesCount(), GL_UNSIGNED_BYTE, 0);
 		}
+		mMesh->GetVao()->SetActive();
+		glDrawElements(GL_TRIANGLES, mMesh->GetVao()->GetIndicesCount(), GL_UNSIGNED_INT, 0);
 	}
 }
 
