@@ -30,6 +30,8 @@ public:
 	void AddMesh(MeshComponent* pMesh) override;
 	void RemoveMesh(MeshComponent* pMesh) override;
 
+	void SetViewMatrix(Matrix4DRow pViewMatrix) override;
+
 	void DrawSprite(Actor& pActor, Texture& pTexture, Rectangle pRect, Vector2D pOrigin, IRenderer::Flip pFlipMethod) const override;
 
 	void DrawMeshes();

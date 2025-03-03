@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../../Core/Maths/Vector2D.h"
-#include "../../Core/Maths/Rectangle.h"
-#include "../../Core/Engine/Debug Classes/Log.h"
+#include "Vector2D.h"
+#include "Rectangle.h"
+#include "Log.h"
 #include <string>
 
 class Paddle

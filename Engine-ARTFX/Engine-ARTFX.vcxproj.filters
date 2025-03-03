@@ -18,7 +18,7 @@
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Engine\Debug Classes\Log.cpp">
+    <ClCompile Include="Core\Engine\DebugClasses\Log.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Core\Maths\Vector2D.cpp">
@@ -51,22 +51,22 @@
     <ClCompile Include="Core\Maths\Vector3D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Engine\Actor Components\Component.cpp">
+    <ClCompile Include="Core\Engine\ActorComponents\Actor\Component.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Engine\Actor Components\TransformComponent.cpp">
+    <ClCompile Include="Core\Engine\ActorComponents\Actor\TransformComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Engine\Actor Components\Actor.cpp">
+    <ClCompile Include="Core\Engine\ActorComponents\Actor\Actor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Engine\Actor Components\Colliders\ColliderComponent.cpp">
+    <ClCompile Include="Core\Engine\ActorComponents\Colliders\ColliderComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Engine\Actor Components\Colliders\BoxCollider2DComponent.cpp">
+    <ClCompile Include="Core\Engine\ActorComponents\Colliders\BoxCollider2DComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Engine\Actor Components\Managers\CollisionManager.cpp">
+    <ClCompile Include="Core\Engine\ActorComponents\Managers\CollisionManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Core\Engine\Graphics\Assets.cpp">
@@ -75,7 +75,7 @@
     <ClCompile Include="Core\Engine\Graphics\Texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Engine\Actor Components\SpriteComponent.cpp">
+    <ClCompile Include="Core\Engine\ActorComponents\GraphicComponent\SpriteComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Core\Maths\Rectangle.cpp">
@@ -99,16 +99,16 @@
     <ClCompile Include="Core\Engine\Inputs\InputActions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Engine\Actor Components\FlipbookComponent.cpp">
+    <ClCompile Include="Core\Engine\ActorComponents\GraphicComponent\FlipbookComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Engine\Actor Components\RigidbodyComponent.cpp">
+    <ClCompile Include="Core\Engine\ActorComponents\PhysicComponent\RigidbodyComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Engine\Actor Components\ActorMovementComponent.cpp">
+    <ClCompile Include="Core\Engine\ActorComponents\PhysicComponent\ActorMovementComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Engine\Actor Components\PlayerController.cpp">
+    <ClCompile Include="Core\Engine\CoreComponents\PlayerController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Game\SpaceInvader\GroundActor.cpp">
@@ -147,15 +147,18 @@
     <ClCompile Include="Core\Engine\Graphics\Mesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Engine\Actor Components\MeshComponent.cpp">
+    <ClCompile Include="Core\Engine\ActorComponents\GraphicComponent\MeshComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Game\TestOpenGl\Cube.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Core\Engine\ActorComponents\Actor\CameraComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Core\Engine\Debug Classes\Log.h">
+    <ClInclude Include="Core\Engine\DebugClasses\Log.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Core\Maths\Vector2D.h">
@@ -191,25 +194,25 @@
     <ClInclude Include="Core\Maths\Vector3D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Engine\Actor Components\Component.h">
+    <ClInclude Include="Core\Engine\ActorComponents\Actor\Component.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Engine\Actor Components\TransformComponent.h">
+    <ClInclude Include="Core\Engine\ActorComponents\Actor\TransformComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Engine\Actor Components\Actor.h">
+    <ClInclude Include="Core\Engine\ActorComponents\Actor\Actor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Engine\Actor Components\ActorState.h">
+    <ClInclude Include="Core\Engine\ActorComponents\Actor\ActorState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Engine\Actor Components\Colliders\ColliderComponent.h">
+    <ClInclude Include="Core\Engine\ActorComponents\Colliders\ColliderComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Engine\Actor Components\Colliders\BoxCollider2DComponent.h">
+    <ClInclude Include="Core\Engine\ActorComponents\Colliders\BoxCollider2DComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Engine\Actor Components\Managers\CollisionManager.h">
+    <ClInclude Include="Core\Engine\ActorComponents\Managers\CollisionManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Core\Engine\Graphics\Assets.h">
@@ -221,7 +224,7 @@
     <ClInclude Include="Core\Maths\Maths.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Engine\Actor Components\SpriteComponent.h">
+    <ClInclude Include="Core\Engine\ActorComponents\GraphicComponent\SpriteComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Core\Scenes\Childs\SpaceInvader.h">
@@ -251,25 +254,25 @@
     <ClInclude Include="Core\Engine\Inputs\InputManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Engine\Actor Components\FlipbookComponent.h">
+    <ClInclude Include="Core\Engine\ActorComponents\GraphicComponent\FlipbookComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Engine\Actor Components\RigidbodyComponent.h">
+    <ClInclude Include="Core\Engine\ActorComponents\PhysicComponent\RigidbodyComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Engine\Actor Components\ActorMovementComponent.h">
+    <ClInclude Include="Core\Engine\ActorComponents\PhysicComponent\ActorMovementComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Engine\Actor Components\PlayerController.h">
+    <ClInclude Include="Core\Engine\CoreComponents\PlayerController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Engine\Actor Components\Managers\ICollisionListener.h">
+    <ClInclude Include="Core\Engine\ActorComponents\Managers\ICollisionListener.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Game\SpaceInvader\GroundActor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Engine\Actor Components\Managers\HitResult.h">
+    <ClInclude Include="Core\Engine\ActorComponents\Managers\HitResult.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Core\Engine\Graphics\IRenderer.h">
@@ -308,10 +311,13 @@
     <ClInclude Include="Core\Engine\Graphics\Mesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Engine\Actor Components\MeshComponent.h">
+    <ClInclude Include="Core\Engine\ActorComponents\GraphicComponent\MeshComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Game\TestOpenGl\Cube.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Engine\ActorComponents\Actor\CameraComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

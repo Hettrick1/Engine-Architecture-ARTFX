@@ -113,6 +113,11 @@ void RendererOpenGl::RemoveMesh(MeshComponent* pMesh)
 	mMeshes.erase(sc); 
 }
 
+void RendererOpenGl::SetViewMatrix(Matrix4DRow pViewMatrix)
+{
+	mView = pViewMatrix;
+}
+
 void RendererOpenGl::DrawSprite(Actor& pActor, Texture& pTexture, Rectangle pRect, Vector2D pOrigin, IRenderer::Flip pFlipMethod) const
 {
 	if (mSpriteShaderProgram == nullptr)

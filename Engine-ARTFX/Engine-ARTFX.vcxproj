@@ -76,7 +76,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Dependencies\glew-2.2.0-win32\glew-2.2.0\include\GL;$(SolutionDir)\Dependencies\GL\SDL\include;$(SolutionDir)\Dependencies\SDL2_image-2.8.2\include;Core;Core\Engine;Core\Maths;Core\Scenes;Core\Engine\Actor Components;Core\Engine\Debug Classes;Core\Engine\Editor;Core\Engine\Graphics;Core\Engine\Actor Components\Colliders;Core\Engine\Actor Components\Managers;Core\Scenes\Childs;Game;Core\Engine\Inputs;Core\Engine\Graphics\OpenGl;Core\Engine\Graphics\SDL</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Dependencies\glew-2.2.0-win32\glew-2.2.0\include\GL;$(SolutionDir)\Dependencies\GL\SDL\include;$(SolutionDir)\Dependencies\SDL2_image-2.8.2\include;Core;Core\Engine;Core\Maths;Core\Scenes;Core\Engine\ActorComponents;Core\Engine\DebugClasses;Core\Engine\Editor;Core\Engine\Graphics;Core\Engine\ActorComponents\Colliders;Core\Engine\ActorComponents\Managers;Core\Scenes\Childs;Game;Core\Engine\Inputs;Core\Engine\Graphics\OpenGl;Core\Engine\Graphics\SDL;Core\Engine\ActorComponents\GraphicComponent;Core\Engine\ActorComponents\PhysicComponent;Core\Engine\ActorComponents\Actor;Core\Engine\CoreComponents</AdditionalIncludeDirectories>
       <LanguageStandard>Default</LanguageStandard>
     </ClCompile>
     <Link>
@@ -94,7 +94,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Dependencies\glew-2.2.0-win32\glew-2.2.0\include\GL;$(SolutionDir)\Dependencies\GL\SDL\include;$(SolutionDir)\Dependencies\SDL2_image-2.8.2\include;Core;Core\Engine;Core\Maths;Core\Scenes;Core\Engine\Actor Components;Core\Engine\Debug Classes;Core\Engine\Editor;Core\Engine\Graphics;Core\Engine\Actor Components\Colliders;Core\Engine\Actor Components\Managers;Core\Scenes\Childs;Game;Core\Engine\Inputs;Core\Engine\Graphics\OpenGl;Core\Engine\Graphics\SDL</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Dependencies\glew-2.2.0-win32\glew-2.2.0\include\GL;$(SolutionDir)\Dependencies\GL\SDL\include;$(SolutionDir)\Dependencies\SDL2_image-2.8.2\include;Core;Core\Engine;Core\Maths;Core\Scenes;Core\Engine\ActorComponents;Core\Engine\DebugClasses;Core\Engine\Editor;Core\Engine\Graphics;Core\Engine\ActorComponents\Colliders;Core\Engine\ActorComponents\Managers;Core\Scenes\Childs;Game;Core\Engine\Inputs;Core\Engine\Graphics\OpenGl;Core\Engine\Graphics\SDL;Core\Engine\ActorComponents\GraphicComponent;Core\Engine\ActorComponents\PhysicComponent;Core\Engine\ActorComponents\Actor;Core\Engine\CoreComponents</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp14</LanguageStandard>
     </ClCompile>
     <Link>
@@ -138,31 +138,32 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Core\Engine\Actor Components\ActorMovementComponent.cpp" />
+    <ClCompile Include="Core\Engine\ActorComponents\Actor\CameraComponent.cpp" />
+    <ClCompile Include="Core\Engine\ActorComponents\PhysicComponent\ActorMovementComponent.cpp" />
     <ClCompile Include="Core\Engine\Graphics\OpenGl\RendererOpenGl.cpp" />
     <ClCompile Include="Core\Engine\Graphics\OpenGl\Shaders\Shader.cpp" />
     <ClCompile Include="Core\Engine\Graphics\OpenGl\Shaders\ShaderProgram.cpp" />
     <ClCompile Include="Core\Engine\Graphics\OpenGl\VertexArray.cpp" />
     <ClCompile Include="Core\Engine\Inputs\BooleanActions.cpp" />
     <ClCompile Include="Core\Engine\Graphics\Assets.cpp" />
-    <ClCompile Include="Core\Engine\Actor Components\Managers\CollisionManager.cpp" />
+    <ClCompile Include="Core\Engine\ActorComponents\Managers\CollisionManager.cpp" />
     <ClCompile Include="Core\Engine\Graphics\Texture.cpp" />
     <ClCompile Include="Core\Engine\Inputs\InputActions.cpp" />
     <ClCompile Include="Core\Maths\Matrix4D.cpp" />
     <ClCompile Include="Core\Maths\Matrix4DRow.cpp" />
     <ClCompile Include="Core\Maths\Quaternion.cpp" />
     <ClCompile Include="Core\Maths\Rectangle.cpp" />
-    <ClCompile Include="Core\Engine\Actor Components\Colliders\BoxCollider2DComponent.cpp" />
-    <ClCompile Include="Core\Engine\Actor Components\Colliders\ColliderComponent.cpp" />
-    <ClCompile Include="Core\Engine\Actor Components\Actor.cpp" />
-    <ClCompile Include="Core\Engine\Actor Components\Component.cpp" />
+    <ClCompile Include="Core\Engine\ActorComponents\Colliders\BoxCollider2DComponent.cpp" />
+    <ClCompile Include="Core\Engine\ActorComponents\Colliders\ColliderComponent.cpp" />
+    <ClCompile Include="Core\Engine\ActorComponents\Actor\Actor.cpp" />
+    <ClCompile Include="Core\Engine\ActorComponents\Actor\Component.cpp" />
     <ClCompile Include="Core\Maths\Vector3D.cpp" />
     <ClCompile Include="Core\Maths\Vector4D.cpp" />
     <ClCompile Include="Core\Scenes\Childs\SpaceInvader.cpp" />
-    <ClCompile Include="Core\Engine\Actor Components\FlipbookComponent.cpp" />
+    <ClCompile Include="Core\Engine\ActorComponents\GraphicComponent\FlipbookComponent.cpp" />
     <ClCompile Include="Game\Pong\Ball.cpp" />
     <ClCompile Include="Core\Engine\Editor\Game.cpp" />
-    <ClCompile Include="Core\Engine\Debug Classes\Log.cpp" />
+    <ClCompile Include="Core\Engine\DebugClasses\Log.cpp" />
     <ClCompile Include="Core\Engine\Inputs\InputAxis2D.cpp" />
     <ClCompile Include="Core\Engine\Inputs\InputManager.cpp" />
     <ClCompile Include="Game\SpaceInvader\GroundActor.cpp" />
@@ -177,18 +178,19 @@
     <ClCompile Include="Core\Engine\Editor\Window.cpp" />
     <ClCompile Include="Game\Pong\Paddle.cpp" />
     <ClCompile Include="Core\Maths\Timer.cpp" />
-    <ClCompile Include="Core\Engine\Actor Components\TransformComponent.cpp" />
-    <ClCompile Include="Core\Engine\Actor Components\SpriteComponent.cpp" />
+    <ClCompile Include="Core\Engine\ActorComponents\Actor\TransformComponent.cpp" />
+    <ClCompile Include="Core\Engine\ActorComponents\GraphicComponent\SpriteComponent.cpp" />
     <ClCompile Include="Game\SpaceInvader\SpaceInvaderPlayer.cpp" />
-    <ClCompile Include="Core\Engine\Actor Components\RigidbodyComponent.cpp" />
-    <ClCompile Include="Core\Engine\Actor Components\PlayerController.cpp" />
+    <ClCompile Include="Core\Engine\ActorComponents\PhysicComponent\RigidbodyComponent.cpp" />
+    <ClCompile Include="Core\Engine\CoreComponents\PlayerController.cpp" />
     <ClCompile Include="Core\Engine\Graphics\Mesh.cpp" />
-    <ClCompile Include="Core\Engine\Actor Components\MeshComponent.cpp" />
+    <ClCompile Include="Core\Engine\ActorComponents\GraphicComponent\MeshComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Core\Engine\Actor Components\ActorMovementComponent.h" />
-    <ClInclude Include="Core\Engine\Actor Components\Managers\HitResult.h" />
-    <ClInclude Include="Core\Engine\Actor Components\Managers\ICollisionListener.h" />
+    <ClInclude Include="Core\Engine\ActorComponents\Actor\CameraComponent.h" />
+    <ClInclude Include="Core\Engine\ActorComponents\PhysicComponent\ActorMovementComponent.h" />
+    <ClInclude Include="Core\Engine\ActorComponents\Managers\HitResult.h" />
+    <ClInclude Include="Core\Engine\ActorComponents\Managers\ICollisionListener.h" />
     <ClInclude Include="Core\Engine\Graphics\IRenderer.h" />
     <ClInclude Include="Core\Engine\Graphics\OpenGl\RendererOpenGl.h" />
     <ClInclude Include="Core\Engine\Graphics\OpenGl\Shaders\Shader.h" />
@@ -198,25 +200,25 @@
     <ClInclude Include="Core\Engine\Inputs\BooleanActions.h" />
     <ClInclude Include="Core\Engine\Editor\Defs.h" />
     <ClInclude Include="Core\Engine\Graphics\Assets.h" />
-    <ClInclude Include="Core\Engine\Actor Components\Managers\CollisionManager.h" />
+    <ClInclude Include="Core\Engine\ActorComponents\Managers\CollisionManager.h" />
     <ClInclude Include="Core\Engine\Graphics\Texture.h" />
     <ClInclude Include="Core\Engine\Inputs\ActionType.h" />
     <ClInclude Include="Core\Maths\Maths.h" />
-    <ClInclude Include="Core\Engine\Actor Components\Colliders\BoxCollider2DComponent.h" />
-    <ClInclude Include="Core\Engine\Actor Components\Colliders\ColliderComponent.h" />
-    <ClInclude Include="Core\Engine\Actor Components\Actor.h" />
-    <ClInclude Include="Core\Engine\Actor Components\ActorState.h" />
-    <ClInclude Include="Core\Engine\Actor Components\Component.h" />
+    <ClInclude Include="Core\Engine\ActorComponents\Colliders\BoxCollider2DComponent.h" />
+    <ClInclude Include="Core\Engine\ActorComponents\Colliders\ColliderComponent.h" />
+    <ClInclude Include="Core\Engine\ActorComponents\Actor\Actor.h" />
+    <ClInclude Include="Core\Engine\ActorComponents\Actor\ActorState.h" />
+    <ClInclude Include="Core\Engine\ActorComponents\Actor\Component.h" />
     <ClInclude Include="Core\Maths\Matrix4D.h" />
     <ClInclude Include="Core\Maths\Matrix4DRow.h" />
     <ClInclude Include="Core\Maths\Quaternion.h" />
     <ClInclude Include="Core\Maths\Vector3D.h" />
     <ClInclude Include="Core\Maths\Vector4D.h" />
     <ClInclude Include="Core\Scenes\Childs\SpaceInvader.h" />
-    <ClInclude Include="Core\Engine\Actor Components\FlipbookComponent.h" />
+    <ClInclude Include="Core\Engine\ActorComponents\GraphicComponent\FlipbookComponent.h" />
     <ClInclude Include="Game\Pong\Ball.h" />
     <ClInclude Include="Core\Engine\Editor\Game.h" />
-    <ClInclude Include="Core\Engine\Debug Classes\Log.h" />
+    <ClInclude Include="Core\Engine\DebugClasses\Log.h" />
     <ClInclude Include="Core\Scenes\Childs\Pong.h" />
     <ClInclude Include="Core\Maths\Rectangle.h" />
     <ClInclude Include="Core\Engine\Graphics\SDL\RendererSdl.h" />
@@ -225,20 +227,20 @@
     <ClInclude Include="Core\Engine\Editor\Window.h" />
     <ClInclude Include="Game\Pong\Paddle.h" />
     <ClInclude Include="Core\Maths\Timer.h" />
-    <ClInclude Include="Core\Engine\Actor Components\TransformComponent.h" />
-    <ClInclude Include="Core\Engine\Actor Components\SpriteComponent.h" />
+    <ClInclude Include="Core\Engine\ActorComponents\Actor\TransformComponent.h" />
+    <ClInclude Include="Core\Engine\ActorComponents\GraphicComponent\SpriteComponent.h" />
     <ClInclude Include="Game\SpaceInvader\SpaceInvaderPlayer.h" />
     <ClInclude Include="Core\Engine\Inputs\InputActions.h" />
     <ClInclude Include="Core\Engine\Inputs\InputAxis2D.h" />
     <ClInclude Include="Core\Engine\Inputs\InputManager.h" />
-    <ClInclude Include="Core\Engine\Actor Components\RigidbodyComponent.h" />
-    <ClInclude Include="Core\Engine\Actor Components\PlayerController.h" />
+    <ClInclude Include="Core\Engine\ActorComponents\PhysicComponent\RigidbodyComponent.h" />
+    <ClInclude Include="Core\Engine\CoreComponents\PlayerController.h" />
     <ClInclude Include="Game\SpaceInvader\GroundActor.h" />
     <ClInclude Include="Core\Scenes\Childs\GlTestScene.h" />
     <ClInclude Include="Game\TestOpenGl\Cube.h" />
     <ClInclude Include="Game\TestOpenGl\testGlPlayer.h" />
     <ClInclude Include="Core\Engine\Graphics\Mesh.h" />
-    <ClInclude Include="Core\Engine\Actor Components\MeshComponent.h" />
+    <ClInclude Include="Core\Engine\ActorComponents\GraphicComponent\MeshComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Imports\Shaders\BasicMesh.frag" />

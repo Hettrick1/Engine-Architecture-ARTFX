@@ -3,6 +3,7 @@
 #include "Actor.h"
 #include "Rectangle.h"
 #include "Window.h"
+#include "Matrix4DRow.h"
 #include "SDL_image.h"
 
 class Texture;
@@ -38,6 +39,7 @@ public:
 	virtual void RemoveMesh(MeshComponent* pMesh) = 0;
 
 	virtual void SetSpriteShaderProgram(class ShaderProgram& shaderProgram) {};
+	virtual void SetViewMatrix(Matrix4DRow pViewMatrix) {};
 
 	virtual RendererType GetType() = 0;
 	virtual void DrawSprite(Actor& pActor, Texture& pTex, Rectangle pSourceRect, Vector2D pOrigin, Flip pFlip = Flip::None) const = 0;

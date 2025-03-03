@@ -28,8 +28,9 @@ public:
 	void RotateY(float pAngle);
 	void RotateZ(float pAngle);
 
-	Vector3D Right() const { return Vector3D(Maths::Cos(mRotation.z), -Maths::Sin(mRotation.z), 0); }
-	Vector3D Up() const { return Vector3D(Maths::Sin(mRotation.z), -Maths::Cos(mRotation.z), 0); }
+	Vector3D Right() const { return Vector3D::Transform(Vector3D::unitY, mRotation); } // pas sur que ce soit Y donc inverser avec le z si ca fait de la merde
+	Vector3D Up() const { return Vector3D::Transform(Vector3D::unitZ, mRotation); }
+	Vector3D Forward() const { return Vector3D::Transform(Vector3D::unitX, mRotation); }
 
 	void ComputeWorldTransform();
 

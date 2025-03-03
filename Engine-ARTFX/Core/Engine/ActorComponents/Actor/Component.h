@@ -11,7 +11,7 @@ public:
 	virtual void OnStart();
 	virtual void Update();
 	virtual void OnEnd();
-	virtual Actor* GetOwner();
+	Actor* GetOwner();
 
 protected:
 	bool mIsActive;

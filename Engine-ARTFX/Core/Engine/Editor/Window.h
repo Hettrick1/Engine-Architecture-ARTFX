@@ -1,7 +1,7 @@
 #pragma once
 #include <SDL.h>
-#include "../../Maths/Vector2D.h"
-#include "../Debug Classes/Log.h"
+#include "Vector2D.h"
+#include "Log.h"
 
 class Window
 {
