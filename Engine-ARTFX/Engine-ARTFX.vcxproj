@@ -181,6 +181,8 @@
     <ClCompile Include="Game\SpaceInvader\SpaceInvaderPlayer.cpp" />
     <ClCompile Include="Core\Engine\Actor Components\RigidbodyComponent.cpp" />
     <ClCompile Include="Core\Engine\Actor Components\PlayerController.cpp" />
+    <ClCompile Include="Core\Engine\Graphics\Mesh.cpp" />
+    <ClCompile Include="Core\Engine\Actor Components\MeshComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Engine\Actor Components\ActorMovementComponent.h" />
@@ -233,6 +235,8 @@
     <ClInclude Include="Game\SpaceInvader\GroundActor.h" />
     <ClInclude Include="Core\Scenes\Childs\GlTestScene.h" />
     <ClInclude Include="Game\TestOpenGl\testGlPlayer.h" />
+    <ClInclude Include="Core\Engine\Graphics\Mesh.h" />
+    <ClInclude Include="Core\Engine\Actor Components\MeshComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Imports\Shaders\Simple.frag" />

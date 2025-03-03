@@ -109,6 +109,18 @@ void RendererOpenGl::RemoveSprite(SpriteComponent* pSprite)
 	mSprites.erase(sc); 
 }
 
+void RendererOpenGl::AddMesh(MeshComponent* pMesh)
+{
+	mMeshes.push_back(pMesh);
+}
+
+void RendererOpenGl::RemoveMesh(MeshComponent* pMesh)
+{
+	std::vector<MeshComponent*>::iterator sc; 
+	sc = std::find(mMeshes.begin(), mMeshes.end(), pMesh);
+	mMeshes.erase(sc); 
+}
+
 void RendererOpenGl::DrawSprite(Actor& pActor, Texture& pTexture, Rectangle pRect, Vector2D pOrigin, IRenderer::Flip pFlipMethod) const
 {
 	if (mCurrentShaderProgram == nullptr)

@@ -27,6 +27,9 @@ public:
 	void AddSprite(SpriteComponent* pSprite) override;
 	void RemoveSprite(SpriteComponent* pSprite) override;
 
+	void AddMesh(MeshComponent* pMesh) override;
+	void RemoveMesh(MeshComponent* pMesh) override;
+
 	void DrawSprite(Actor& pActor, Texture& pTexture, Rectangle pRect, Vector2D pOrigin, IRenderer::Flip pFlipMethod) const override;
 
 	void SetCurrentShaderProgram(ShaderProgram& shaderProgram) override;
@@ -37,6 +40,7 @@ private:
 	VertexArray* mVAO;
 	SDL_GLContext mContext;
 	std::vector<SpriteComponent*> mSprites;
+	std::vector<MeshComponent*> mMeshes;
 	ShaderProgram* mCurrentShaderProgram;
 	Matrix4DRow mViewProj;
 };
