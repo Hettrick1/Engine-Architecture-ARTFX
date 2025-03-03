@@ -18,6 +18,7 @@ public:
 	int GetDrawOrder() const { return mDrawOrder; }
 	int GetTexWidth() const { return mTexWidth; }
 	int GetTexHeight() const { return mTexHeight; }
+	Texture& GetTexture();
 protected:
 	Texture mTexture;
 	int mDrawOrder;

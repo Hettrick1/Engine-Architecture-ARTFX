@@ -62,14 +62,16 @@ void RendererOpenGl::BeginDraw()
 	if (mCurrentShaderProgram != nullptr)
 	{
 		mCurrentShaderProgram->Use();
-		mCurrentShaderProgram->setVector3f("pos", { 0, 0, 0 }); 
 	}
 	mVAO->SetActive();
 }
 
 void RendererOpenGl::Draw()
 {
-	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0); 
+	for (SpriteComponent* sprite : mSprites) {
+		sprite->GetTexture().SetActive();
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+	}
 }
 
 void RendererOpenGl::EndDraw()

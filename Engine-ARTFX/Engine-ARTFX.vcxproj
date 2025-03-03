@@ -167,6 +167,7 @@
     <ClCompile Include="Core\Engine\Inputs\InputManager.cpp" />
     <ClCompile Include="Game\SpaceInvader\GroundActor.cpp" />
     <ClCompile Include="Core\Scenes\Childs\GlTestScene.cpp" />
+    <ClCompile Include="Game\TestOpenGl\testGlPlayer.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Core\Scenes\Childs\Pong.cpp" />
     <ClCompile Include="Core\Engine\Graphics\SDL\RendererSdl.cpp" />
@@ -231,6 +232,7 @@
     <ClInclude Include="Core\Engine\Actor Components\PlayerController.h" />
     <ClInclude Include="Game\SpaceInvader\GroundActor.h" />
     <ClInclude Include="Core\Scenes\Childs\GlTestScene.h" />
+    <ClInclude Include="Game\TestOpenGl\testGlPlayer.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Imports\Shaders\Simple.frag" />

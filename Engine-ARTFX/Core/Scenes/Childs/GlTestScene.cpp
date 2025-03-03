@@ -1,4 +1,5 @@
 #include "GlTestScene.h"
+#include "TestOpenGl/testGlPlayer.h"
 
 GlTestScene::GlTestScene()
 {
@@ -12,9 +13,13 @@ void GlTestScene::Start(IRenderer* renderer)
 {
 	Scene::Start(renderer);
 	mVertexShader.Load("Simple.vert", ShaderType::VERTEX);
-	mVertexShader.Load("Simple.frag", ShaderType::FRAGMENT);
+	mFragmentShader.Load("Simple.frag", ShaderType::FRAGMENT);
 	mShaderProgram.Compose({ &mVertexShader, &mFragmentShader });
 	mRenderer->SetCurrentShaderProgram(mShaderProgram);
+
+	testGlPlayer* player = new testGlPlayer();
+	AddActor(player);
+	player->Start();
 }
 
 void GlTestScene::Update()

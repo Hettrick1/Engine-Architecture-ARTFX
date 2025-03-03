@@ -55,3 +55,8 @@ void SpriteComponent::Draw(IRenderer& pRenderer)
 		((mTexHeight * mOwner->GetTransformComponent().GetSize().y) / 2.0f) };
 	pRenderer.DrawSprite(*mOwner, mTexture, Rectangle(), origin, mFlipMethode);
 }
+
+Texture& SpriteComponent::GetTexture()
+{
+	return mTexture;
+}

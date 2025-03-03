@@ -141,6 +141,9 @@
     <ClCompile Include="Core\Scenes\Childs\GlTestScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Game\TestOpenGl\testGlPlayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Engine\Debug Classes\Log.h">
@@ -288,6 +291,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Core\Scenes\Childs\GlTestScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\TestOpenGl\testGlPlayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
