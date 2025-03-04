@@ -9,7 +9,7 @@
 PlayerController3D::PlayerController3D(Actor* pOwner, int pUpdateOrder)
 	: ActorMovementComponent(pOwner, pUpdateOrder),
 	mCanGoRight(true), mCanGoLeft(true), mCanGoUp(true), mCanGoDown(true), mCanGoBackward(true), mCanGoForward(true),
-	mSpeed(10)
+	mSpeed(10), mYaw(0), mPitch(0)
 {
 	InputManager& inputManager = InputManager::Instance();
 	inputManager.CreateNewBooleanBinding(this, "up", SDLK_SPACE);
@@ -99,11 +99,23 @@ void PlayerController3D::OnActionTriggered(InputActions* action)
 		SDL_SetRelativeMouseMode(SDL_TRUE);
 		InputAxis2D* axisAction = static_cast<InputAxis2D*>(action);
 		Vector2D axis = axisAction->GetAxis();
-		Log::Info(std::to_string(axis.y));
-		mPitch += axis.y * 100 * Timer::deltaTime;
-		mYaw += axis.x * 100 * Timer::deltaTime;
-		mOwner->GetTransformComponent().RotateX(mYaw);
-		mOwner->GetTransformComponent().RotateZ(mPitch);
+
+		float sensitivity = 0.1f;
+		float deltaTime = Timer::deltaTime;
+
+		axis.x *= sensitivity * deltaTime;
+		axis.y *= sensitivity * deltaTime;
+
+		mYaw += axis.x;
+		mPitch += axis.y;
+
+		if (mPitch > 90.0f) mPitch = 90.0f;
+		else if (mPitch < -90.0f) mPitch = -90.0f;
+
+		mOwner->GetTransformComponent().RotateY(mYaw);
+		mOwner->GetTransformComponent().RotateZ(mPitch); 
+		 
+		Log::Info(std::to_string(mYaw));
 	}
 }
 

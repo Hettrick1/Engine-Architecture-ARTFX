@@ -22,24 +22,12 @@ void InputAxis2D::Update()
     float newX, newY;
 
     if (mUseMouse) { // mouse mode
-        int mouseX, mouseY;
-        SDL_GetMouseState(&mouseX, &mouseY);
-        
-        int screenWidth, screenHeight; 
-        SDL_GetWindowSize(SDL_GL_GetCurrentWindow(), &screenWidth, &screenHeight);
 
-        static int lastX = 0, lastY = 0;
-        int deltaX = mouseX - lastX;
-        int deltaY = mouseY - lastY;
+        int deltaX, deltaY; 
+        SDL_GetRelativeMouseState(&deltaX, &deltaY); 
+        newX = deltaX; 
+        newY = deltaY; 
 
-        float normX = deltaX / (float)screenWidth;
-        float normY = deltaY / (float)screenHeight;
-
-        lastX = mouseX;
-        lastY = mouseY;
-
-        newX = static_cast<float>(normX);
-        newY = static_cast<float>(normY);
     }
     else { // keyboard mode
         newX = static_cast<float>((IsKeyPressed(mPositiveX) ? 1 : 0) - (IsKeyPressed(mNegativeX) ? 1 : 0));
