@@ -4,6 +4,7 @@
 
 class CameraComponent : public Component
 {
+public:
 	CameraComponent(Actor* pOwner);
 	~CameraComponent();
 

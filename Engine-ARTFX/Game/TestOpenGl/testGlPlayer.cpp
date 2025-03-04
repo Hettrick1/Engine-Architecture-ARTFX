@@ -2,7 +2,7 @@
 #include "Scene.h"
 #include "BooleanActions.h"
 #include "InputManager.h"
-#include "PlayerController.h"
+#include "PlayerController2D.h"
 #include "CollisionManager.h"
 #include "BoxCollider2DComponent.h"
 
@@ -24,7 +24,7 @@ void testGlPlayer::Start()
 	SpriteComponent* walkAnim = new SpriteComponent(this, *walkAnimTextures, 500000);
 	AddComponent(walkAnim);
 
-	mTransformComponent.RotateZ(90);
+	mTransformComponent.RotateZ(45);
 }
 
 void testGlPlayer::Update()

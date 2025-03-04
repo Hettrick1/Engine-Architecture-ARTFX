@@ -7,7 +7,7 @@ ActorMovementComponent::ActorMovementComponent(Actor* pOwner, int pUpdateOrder)
 {
 }
 
-void ActorMovementComponent::SetSpeed(Vector2D pSpeed)
+void ActorMovementComponent::SetSpeed(Vector3D pSpeed)
 {
 	mSpeed = pSpeed;
 }
@@ -22,13 +22,19 @@ void ActorMovementComponent::SetSpeedY(float pSpeedY)
 	mSpeed.y = pSpeedY;
 }
 
+void ActorMovementComponent::SetSpeedZ(float pSpeedZ)
+{
+	mSpeed.z = pSpeedZ;
+}
+
 void ActorMovementComponent::Update()
 {
 	if(!Maths::NearZero(mSpeed.Length()))
 	{
 		Vector3D newPosition = mOwner->GetTransformComponent().GetPosition()
 			+ (mOwner->GetTransformComponent().Right() * mSpeed.x
-			+ mOwner->GetTransformComponent().Up() * mSpeed.y ) * Timer::deltaTime;
+			+ mOwner->GetTransformComponent().Up() * mSpeed.y 
+			+ mOwner->GetTransformComponent().Forward() * mSpeed.z ) * Timer::deltaTime;
 		mOwner->SetPosition(newPosition);
 	}
 }

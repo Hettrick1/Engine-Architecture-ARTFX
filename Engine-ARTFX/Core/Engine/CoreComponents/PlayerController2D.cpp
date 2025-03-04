@@ -1,22 +1,22 @@
-#include "PlayerController.h"
+#include "PlayerController2D.h"
 #include "BooleanActions.h"
 #include "FlipbookComponent.h"
 #include "InputManager.h"
 #include "Actor.h"
 #include <iostream>
 
-PlayerController::PlayerController(Actor* pOwner, int pUpdateOrder)
+PlayerController2D::PlayerController2D(Actor* pOwner, int pUpdateOrder)
 	: ActorMovementComponent(pOwner, pUpdateOrder), mCanGoRight(true), mCanGoLeft(true), mCanGoUp(true), mCanGoDown(true)
 {
 	InputManager& inputManager = InputManager::Instance();
-	inputManager.CreateNewBooleanBinding(SDLK_SPACE, this, "jump");
-	inputManager.CreateNewBooleanBinding(SDLK_w, this, "up");
-	inputManager.CreateNewBooleanBinding(SDLK_a, this, "left");
-	inputManager.CreateNewBooleanBinding(SDLK_s, this, "down");
-	inputManager.CreateNewBooleanBinding(SDLK_d, this, "right");
+	inputManager.CreateNewBooleanBinding(this, "jump", SDLK_SPACE);
+	inputManager.CreateNewBooleanBinding(this, "up", SDLK_w);
+	inputManager.CreateNewBooleanBinding(this, "left", SDLK_a);
+	inputManager.CreateNewBooleanBinding(this, "down", SDLK_s);
+	inputManager.CreateNewBooleanBinding(this, "right", SDLK_d);
 }
 
-void PlayerController::OnActionStarted(InputActions* action)
+void PlayerController2D::OnActionStarted(InputActions* action)
 {
 	if (action->GetType() == ActionType::Boolean) {
 		auto* Triggeredaction = dynamic_cast<BooleanActions*>(action);
@@ -26,7 +26,7 @@ void PlayerController::OnActionStarted(InputActions* action)
 	}
 }
 
-void PlayerController::OnActionTriggered(InputActions* action)
+void PlayerController2D::OnActionTriggered(InputActions* action)
 {
 	if (action->GetType() == ActionType::Boolean) 
 	{
@@ -74,7 +74,7 @@ void PlayerController::OnActionTriggered(InputActions* action)
 	}
 }
 
-void PlayerController::OnActionEnded(InputActions* action)
+void PlayerController2D::OnActionEnded(InputActions* action)
 {
 	if (action->GetType() == ActionType::Boolean) {
 		auto* Triggeredaction = dynamic_cast<BooleanActions*>(action);
@@ -97,7 +97,7 @@ void PlayerController::OnActionEnded(InputActions* action)
 	}
 }
 
-void PlayerController::Update()
+void PlayerController2D::Update()
 {
 	ActorMovementComponent::Update();
 	FlipbookComponent* flipbook = mOwner->GetComponentOfType<FlipbookComponent>();
@@ -118,7 +118,7 @@ void PlayerController::Update()
 	}
 }
 
-void PlayerController::EnableDirection(Vector2D pDirection)
+void PlayerController2D::EnableDirection(Vector2D pDirection)
 {
 	if (pDirection.x < 0)
 	{
@@ -138,7 +138,7 @@ void PlayerController::EnableDirection(Vector2D pDirection)
 	}
 }
 
-void PlayerController::DisableDirection(Vector2D pDirection)
+void PlayerController2D::DisableDirection(Vector2D pDirection)
 {
 	if (pDirection.x < 0)
 	{

@@ -27,10 +27,10 @@ void Cube::Start()
 void Cube::Update()
 {
 	Actor::Update();
-	rotX = 50 * Timer::deltaTime;
+	/*rotX = 50 * Timer::deltaTime;
 	rotY = 50 * Timer::deltaTime;
 	GetTransformComponent().RotateX(rotX);
-	GetTransformComponent().RotateY(rotY);
+	GetTransformComponent().RotateY(rotY);*/
 }
 
 void Cube::Destroy()

@@ -3,13 +3,13 @@
 #include "ActorMovementComponent.h"
 #include "IActionListener.h"
 
-class PlayerController : public ActorMovementComponent, IActionListener
+class PlayerController2D : public ActorMovementComponent, IActionListener
 {
 public:
-	PlayerController(Actor* pOwner, int pUpdateOrder = 100);
-	PlayerController() = delete;
-	PlayerController(const PlayerController&) = delete;
-	PlayerController& operator=(const PlayerController&) = delete;
+	PlayerController2D(Actor* pOwner, int pUpdateOrder = 100);
+	PlayerController2D() = delete;
+	PlayerController2D(const PlayerController2D&) = delete;
+	PlayerController2D& operator=(const PlayerController2D&) = delete;
 public:
 	void OnActionStarted(InputActions* action) override;
 	void OnActionTriggered(InputActions* action) override;

@@ -2,7 +2,7 @@
 #include "Scene.h"
 #include "BooleanActions.h"
 #include "InputManager.h"
-#include "PlayerController.h"
+#include "PlayerController2D.h"
 #include "CollisionManager.h"
 #include "BoxCollider2DComponent.h"
 
@@ -32,7 +32,7 @@ void SpaceInvaderPlayer::Start()
 	walkAnim->SetAnimationFps(5);
 	AddComponent(walkAnim);
 
-	PlayerController* pc = new PlayerController(this, 100); 
+	PlayerController2D* pc = new PlayerController2D(this, 100); 
 	AddComponent(pc);
 }
 
@@ -48,7 +48,7 @@ void SpaceInvaderPlayer::Destroy()
 
 void SpaceInvaderPlayer::OnTriggerEnter(ColliderComponent* collider)
 {
-    PlayerController* pc = GetComponentOfType<PlayerController>();
+    PlayerController2D* pc = GetComponentOfType<PlayerController2D>();
     Actor* otherActor = collider->GetHitResult().hitActor;
 
     float playerX = GetTransformComponent().GetPosition().x;
@@ -97,7 +97,7 @@ void SpaceInvaderPlayer::OnTriggerStay(ColliderComponent* collider)
 
 void SpaceInvaderPlayer::OnTriggerExit(ColliderComponent* collider)
 {
-	PlayerController* pc = GetComponentOfType<PlayerController>(); 
+	PlayerController2D* pc = GetComponentOfType<PlayerController2D>(); 
 	Actor* otherActor = collider->GetHitResult().hitActor; 
 	if (!otherActor) {
 		Log::Error(LogType::Error, "The other actor was nullptr");

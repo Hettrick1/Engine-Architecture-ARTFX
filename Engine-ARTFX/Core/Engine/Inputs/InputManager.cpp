@@ -10,7 +10,7 @@ InputManager& InputManager::Instance()
 
 InputManager::~InputManager()
 {
-    for (auto it = mActionBindings.begin(); it != mActionBindings.end(); ++it) {
+    for (auto it = mActionKeyBindings.begin(); it != mActionKeyBindings.end(); ++it) {
         auto& key = it->first;
         auto& actions = it->second;
         while (actions.size() > 0) {
@@ -18,13 +18,13 @@ InputManager::~InputManager()
             actions.pop_back();
         }
     }
-    mActionBindings.clear();
+    mActionKeyBindings.clear();
 }
 
-void InputManager::CreateNewBooleanBinding(SDL_Keycode key, IActionListener* listener, std::string name)
+void InputManager::CreateNewBooleanBinding(IActionListener* listener, std::string name, SDL_Keycode key)
 {
-    if (mActionBindings.find(key) != mActionBindings.end()) {
-        std::vector<InputActions*> actionsToBind = mActionBindings[key];
+    if (mActionKeyBindings.find(key) != mActionKeyBindings.end()) {
+        std::vector<InputActions*> actionsToBind = mActionKeyBindings[key];
         for (InputActions* action : actionsToBind) {
             action->AddListener(listener);
         }
@@ -36,25 +36,47 @@ void InputManager::CreateNewBooleanBinding(SDL_Keycode key, IActionListener* lis
     }
 }
 
-void InputManager::CreateNewAxis2DBinding(SDL_Keycode positiveX, SDL_Keycode negativeX, SDL_Keycode positiveY, SDL_Keycode negativeY, IActionListener& listener, std::string name)
+void InputManager::CreateNewAxis2DBinding(IActionListener* listener, std::string name, SDL_Keycode positiveX, SDL_Keycode negativeX, SDL_Keycode positiveY, SDL_Keycode negativeY)
 {
+    bool hasKeyboardBinding = (positiveX != SDLK_UNKNOWN && negativeX != SDLK_UNKNOWN && positiveY != SDLK_UNKNOWN && negativeY != SDLK_UNKNOWN);
 
+    if (hasKeyboardBinding) {
+        InputAxis2D* newAction = new InputAxis2D(positiveX, negativeX, positiveY, negativeY, name);
+        newAction->AddListener(listener);
+        BindActionToKeys(newAction, { positiveX, negativeX, positiveY, negativeY });
+    }
+    else {
+        InputAxis2D* newAction = new InputAxis2D(name);
+        newAction->AddListener(listener);
+        BindActionToMouse(newAction);
+    }
 }
 
 void InputManager::BindActionToKeys(InputActions* action, const std::vector<SDL_Keycode>& keys)
 {
     for (auto& key : keys) {
-        mActionBindings[key].push_back(action);
+        mActionKeyBindings[key].push_back(action);
     }
+}
+
+void InputManager::BindActionToMouse(InputActions* action)
+{
+    mActionMouseBindings.push_back(action);
 }
 
 void InputManager::Update()
 {
-    for (auto it = mActionBindings.begin(); it != mActionBindings.end(); ++it) {
+    for (auto it = mActionKeyBindings.begin(); it != mActionKeyBindings.end(); ++it) 
+    {
         auto& key = it->first;        
         auto& actions = it->second;
-        for (auto* action : actions) {
+        for (auto* action : actions) 
+        {
             action->Update();
         }
+    }
+    for (InputActions* action : mActionMouseBindings)
+    {
+        action->Update();
     }
 }

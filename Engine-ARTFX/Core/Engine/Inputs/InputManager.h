@@ -8,11 +8,13 @@ class InputManager
 public:
     static InputManager& Instance();
     ~InputManager();
-    void CreateNewBooleanBinding(SDL_Keycode key, IActionListener* listener, std::string name);
-    void CreateNewAxis2DBinding(SDL_Keycode positiveX, SDL_Keycode negativeX, SDL_Keycode positiveY, SDL_Keycode negativeY, IActionListener& listener, std::string name);
+    void CreateNewBooleanBinding(IActionListener* listener, std::string name, SDL_Keycode key);
+    void CreateNewAxis2DBinding(IActionListener* listener, std::string name, SDL_Keycode positiveX = SDLK_UNKNOWN, SDL_Keycode negativeX = SDLK_UNKNOWN, SDL_Keycode positiveY = SDLK_UNKNOWN, SDL_Keycode negativeY = SDLK_UNKNOWN);
     void Update();
 private:
     void BindActionToKeys(InputActions* action, const std::vector<SDL_Keycode>& keys);
-    std::unordered_map<SDL_Keycode, std::vector<InputActions*>> mActionBindings;
+    void BindActionToMouse(InputActions* action);
+    std::unordered_map<SDL_Keycode, std::vector<InputActions*>> mActionKeyBindings;
+    std::vector<InputActions*> mActionMouseBindings;
 };
 

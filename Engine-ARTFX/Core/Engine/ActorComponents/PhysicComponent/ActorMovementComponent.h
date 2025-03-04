@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Component.h"
-#include "Vector2D.h"
+#include "Vector3D.h"
 #include "Maths.h"
 
 class Actor;
@@ -14,14 +14,15 @@ public:
 	ActorMovementComponent(const ActorMovementComponent&) = delete;
 	ActorMovementComponent& operator=(const ActorMovementComponent&) = delete;
 
-	Vector2D GetSpeed() const { return mSpeed; }
+	Vector3D GetSpeed() const { return mSpeed; }
 
-	void SetSpeed(Vector2D pSpeed);
+	void SetSpeed(Vector3D pSpeed);
 	void SetSpeedX(float pSpeedX);
 	void SetSpeedY(float pSpeedY);
+	void SetSpeedZ(float pSpeedZ);
 
 	void Update() override;
 protected:
-	Vector2D mSpeed;
+	Vector3D mSpeed;
 };
 

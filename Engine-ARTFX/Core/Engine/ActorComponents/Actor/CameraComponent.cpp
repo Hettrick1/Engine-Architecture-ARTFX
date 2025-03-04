@@ -21,7 +21,7 @@ void CameraComponent::Update()
 	Vector3D camPosition = mOwner->GetTransformComponent().GetPosition();
 	Vector3D target = mOwner->GetTransformComponent().GetPosition() + mOwner->GetTransformComponent().Forward() * 100.0f;
 	Vector3D up = mOwner->GetTransformComponent().Up();
-	Log::Info("" + std::to_string(camPosition.x) + ", " + std::to_string(camPosition.y) + ", " + std::to_string(camPosition.z)); 
+	//Log::Info("" + std::to_string(camPosition.x) + ", " + std::to_string(camPosition.y) + ", " + std::to_string(camPosition.z)); 
 	Matrix4DRow view = Matrix4DRow::CreateLookAt(camPosition, target, up); 
 	
 	mOwner->GetScene().GetRenderer()->SetViewMatrix(view);
