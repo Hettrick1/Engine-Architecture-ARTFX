@@ -1,5 +1,6 @@
 #include "TransformComponent.h"
 #include "Actor.h"
+#include "Log.h"
 
 TransformComponent::TransformComponent(Actor* pOwner, Vector3D position, Vector3D size, Quaternion rotation)
     : mOwner(pOwner), mPosition(position), mSize(size), mRotation(rotation)
@@ -57,25 +58,34 @@ void TransformComponent::SetOwner(Actor* pOwner)
 
 void TransformComponent::RotateX(float pAngle)
 {
-    float piAngle = pAngle * (Maths::PI / 180);
-    Quaternion newX({ 1, 0, 0 }, piAngle);
-    mRotation = Quaternion::Concatenate(mRotation, newX); 
+    float piAngle = Maths::ToRad(pAngle);
+    Quaternion newX(Vector3D::unitX, piAngle);
+    mRotation = Quaternion::Concatenate(newX, mRotation);
+    Log::Info("x : " + std::to_string(Maths::ToDeg(mRotation.x)));
+    Log::Info("y : " + std::to_string(Maths::ToDeg(mRotation.y)));
+    Log::Info("z : " + std::to_string(Maths::ToDeg(mRotation.z)));
     ComputeWorldTransform();
 }
 
 void TransformComponent::RotateY(float pAngle)
 {
-    float piAngle = pAngle * (Maths::PI / 180);
-    Quaternion newY({ 0, 1, 0 }, piAngle); 
-    mRotation = Quaternion::Concatenate(mRotation, newY);
-    ComputeWorldTransform(); 
+    float piAngle = Maths::ToRad(pAngle);
+    Quaternion newY(Vector3D::unitY, piAngle);
+    mRotation = Quaternion::Concatenate(newY, mRotation);
+    Log::Info("x : " + std::to_string(Maths::ToDeg(mRotation.x)));
+    Log::Info("y : " + std::to_string(Maths::ToDeg(mRotation.y)));
+    Log::Info("z : " + std::to_string(Maths::ToDeg(mRotation.z)));
+    ComputeWorldTransform();
 } 
 
 void TransformComponent::RotateZ(float pAngle)
 {
-    float piAngle = pAngle * (Maths::PI / 180);
-    Quaternion newZ({ 0, 0, 1 }, piAngle); 
-    mRotation = Quaternion::Concatenate(mRotation, newZ);
+    float piAngle = Maths::ToRad(pAngle);
+    Quaternion newZ(Vector3D::unitZ, piAngle);
+    mRotation = Quaternion::Concatenate(newZ, mRotation);
+    Log::Info("x : " + std::to_string(Maths::ToDeg(mRotation.x)));
+    Log::Info("y : " + std::to_string(Maths::ToDeg(mRotation.y)));
+    Log::Info("z : " + std::to_string(Maths::ToDeg(mRotation.z)));
     ComputeWorldTransform(); 
 }
 

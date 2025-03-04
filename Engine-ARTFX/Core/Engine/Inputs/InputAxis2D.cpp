@@ -23,7 +23,7 @@ void InputAxis2D::Update()
 
     if (mUseMouse) { // mouse mode
 
-        int deltaX, deltaY; 
+        int deltaX = 0, deltaY = 0; 
         SDL_GetRelativeMouseState(&deltaX, &deltaY); 
         newX = deltaX; 
         newY = deltaY; 

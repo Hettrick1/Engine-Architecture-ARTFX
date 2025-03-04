@@ -97,25 +97,19 @@ void PlayerController3D::OnActionTriggered(InputActions* action)
 	else if (action->GetType() == ActionType::Axis2D)
 	{
 		SDL_SetRelativeMouseMode(SDL_TRUE);
+		SDL_SetHintWithPriority(SDL_HINT_MOUSE_RELATIVE_MODE_WARP, "1", SDL_HINT_OVERRIDE); 
 		InputAxis2D* axisAction = static_cast<InputAxis2D*>(action);
 		Vector2D axis = axisAction->GetAxis();
 
 		float sensitivity = 0.1f;
-		float deltaTime = Timer::deltaTime;
 
-		axis.x *= sensitivity * deltaTime;
-		axis.y *= sensitivity * deltaTime;
+		axis.x *= sensitivity;
+		axis.y *= sensitivity;
 
-		mYaw += axis.x;
-		mPitch += axis.y;
-
-		if (mPitch > 90.0f) mPitch = 90.0f;
-		else if (mPitch < -90.0f) mPitch = -90.0f;
-
-		mOwner->GetTransformComponent().RotateY(mYaw);
-		mOwner->GetTransformComponent().RotateZ(mPitch); 
-		 
-		Log::Info(std::to_string(mYaw));
+		mOwner->GetTransformComponent().RotateY(axis.x);
+		mOwner->GetTransformComponent().RotateX(axis.y);
+		//mOwner->GetTransformComponent().GetRotation().Normalize(); 
+		//Log::Info(std::to_string(axis.x));
 	}
 }
 

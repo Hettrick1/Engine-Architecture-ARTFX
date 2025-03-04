@@ -70,9 +70,8 @@ void Game::Render()
 
 void Game::Input()
 {
-    if (mIsRunning) { 
-        mInputManager.Update();
-        while (SDL_PollEvent(&mSdlEvent)) {
+    if (mIsRunning) {  
+        while (SDL_PollEvent(&mSdlEvent)) { 
             switch (mSdlEvent.type) {
             case SDL_QUIT:
                 mIsRunning = false;
@@ -83,6 +82,8 @@ void Game::Input()
                     break;
                 }
             }
+            mInputManager.Update();
+
         }
     }
 }
