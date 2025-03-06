@@ -15,16 +15,21 @@ public:
 	RigidbodyComponent(const RigidbodyComponent&) = delete;
 	RigidbodyComponent& operator=(const RigidbodyComponent&) = delete;
 public :
-	void Update() override;
+	void Update();
 	void ApplyForce(Vector3D pForce);
+	void AddImpulse(Vector3D pImpulse);
 	void OnCollisionEnter(ColliderComponent* otherCollider);
+	void OnCollisionStay(ColliderComponent* otherCollider);
 	void OnCollisionExit(ColliderComponent* otherCollider);
 public:
 	void SetVelocity(Vector3D pVelocity);
 	void SetMass(float pMass);
 	void SetUseGravity(bool pUseGravity);
-	Vector3D Getvelocity() const { return mVelocity; }
+	void SetIsGrounded(bool pIsGrounded);
+	void SetGravity(float pGravity);
+	Vector3D GetVelocity() const { return mVelocity; }
 	float GetMass() const { return mMass; }
+	bool GetIsGrounded() const { return mIsGrounded; }
 
 private:
 	Vector3D mVelocity;
@@ -34,5 +39,6 @@ private:
 	bool mUseGravity;
 	float mGravity;
 	float mBounciness;
+	bool mIsGrounded;
 };
 

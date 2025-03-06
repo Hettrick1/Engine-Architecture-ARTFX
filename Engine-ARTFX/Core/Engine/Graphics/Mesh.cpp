@@ -11,7 +11,7 @@ Mesh::Mesh()
 	mFragmentShader.Load("BasicMesh.frag", ShaderType::FRAGMENT);
 	mShaderProgram.Compose({ &mVertexShader, &mFragmentShader });
 	mTextures.emplace_back(&Assets::GetTexture("cube"));
-	mTextures.emplace_back(&Assets::GetTexture("player"));
+	mTextures.emplace_back(&Assets::GetTexture("walk1"));
 }
 
 Mesh::~Mesh()

@@ -25,8 +25,10 @@ public:
 	void NotifyListenersStarted();
 	void NotifyListenersStay();
 	void NotifyListenersEnded();
-	void SetHitResult(bool pHit, Actor* pHitActor, ColliderComponent* collision);
+	void SetHitResult(bool pHit, Actor* pHitActor, ColliderComponent* collision, Vector3D pNormal = 0, float pOverlap = 0);
 	HitResult& GetHitResult();
+
+	Vector3D GetSize() const { return mSize; }
 
 protected :
 	bool mIsTriggerable;

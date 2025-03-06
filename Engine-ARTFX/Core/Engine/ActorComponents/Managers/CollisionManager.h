@@ -20,6 +20,10 @@ public:
     void RegisterCollider(Actor* pOwner, ColliderComponent* pCollider);
     void RegisterRigidbody(Actor* pOwner, RigidbodyComponent* pRigidbody);
     void CheckCollisions();
+    void CheckRigidBody();
+    void CalculateNormal(ColliderComponent* collider1, ColliderComponent* collider2);
+
+    RigidbodyComponent* GetRigidbody(Actor* pRbOwner);
 
     template <typename ColliderType, typename... Args>
     void CreateCollider(ICollisionListener* pListener, Args&&... args);

@@ -8,23 +8,23 @@
 RigidbodyComponent::RigidbodyComponent(Actor* pOwner, int pUpdateOrder)
 	: Component(pOwner, pUpdateOrder), 
 	mVelocity(0.0), mAcceleration(0.0), mMass(1.0), mFriction(0.1f), mUseGravity(true), mGravity(-9.81), 
-	mBounciness(0.2)
+	mBounciness(0.1), mIsGrounded(false)
 {
 	CollisionManager::Instance().RegisterRigidbody(pOwner, this); 
 }
 
 void RigidbodyComponent::Update()
 {
-	if (mUseGravity && mGravity < 0)
+	if (mUseGravity && mGravity != 0 && !mIsGrounded)
 	{
-		mAcceleration.z += mGravity;
+		mAcceleration.z += mMass * mGravity;
 	}
 
 	mVelocity += mAcceleration * Timer::deltaTime;
 
 	mVelocity *= (1.0f - mFriction * Timer::deltaTime);
 
-	mOwner->GetTransformComponent().Translate(mVelocity * Timer::deltaTime);
+	mOwner->GetTransformComponent().Translate(mVelocity * 0.5 * Timer::deltaTime);
 
 	//Log::Info(std::to_string(mOwner->GetTransformComponent().GetPosition().z));
 
@@ -39,22 +39,89 @@ void RigidbodyComponent::ApplyForce(Vector3D pForce)
 	}
 }
 
+void RigidbodyComponent::AddImpulse(Vector3D pImpulse)
+{
+    if (mMass > 0.0f)
+    {
+        mVelocity += pImpulse / mMass;
+    }
+}
+
 void RigidbodyComponent::OnCollisionEnter(ColliderComponent* otherCollider)
 {
 	if (!mUseGravity)
 	{
 		return;
 	}
-	if (mVelocity.Length() != 0)
-	{
-		mOwner->SetPosition(otherCollider->GetHitResult().hitLocation);
-	}
-	mVelocity = 0;
-	mGravity = 0;
+
+    HitResult hit = otherCollider->GetHitResult();
+    Vector3D n = hit.Normal;
+
+    mOwner->SetPosition(mOwner->GetTransformComponent().GetPosition() + n * hit.Depth);
+
+    // Get if existing the other rigidbody
+    RigidbodyComponent* otherRb = CollisionManager::Instance().GetRigidbody(otherCollider->GetOwner());
+
+    bool otherIsStatic = (otherRb == nullptr) || (otherRb->GetMass() > 100000.0f) || otherRb->GetIsGrounded();
+
+    if (otherIsStatic)
+    {
+        mIsGrounded = true;
+    }
+
+    Vector3D otherVelocity = (otherRb && !otherIsStatic) ? otherRb->GetVelocity() : Vector3D(0); 
+
+    // Calculate Velocity relative to the normal
+    Vector3D relativeVelocity = mVelocity - otherVelocity;
+    float vRel = Vector3D::Dot(relativeVelocity, n);
+
+    if (vRel >= 0)
+        return;
+
+    // bounciness
+    float e = mBounciness;
+
+    // calculate invert mass
+    float invMass1 = (mMass > 0.0f) ? 1.0f / mMass : 0.0f;
+    float invMass2 = (otherRb && otherRb->GetMass() > 0.0f) ? 1.0f / otherRb->GetMass() : 0.0f;
+
+    // calculate impulse
+    float j = -(1 + e) * vRel / (invMass1 + invMass2);
+
+    const float impulseThreshold = 0.8f;
+    if (fabs(j) < impulseThreshold * mMass)
+    {
+        mOwner->SetPosition(mOwner->GetTransformComponent().GetPosition() + n * hit.Depth);
+        SetVelocity(0);
+        return;
+    }
+
+    Vector3D impulse = j * n;
+
+    // apply impulse
+    mVelocity += impulse * invMass1;
+
+    if (otherRb)
+    {
+        otherRb->SetVelocity(otherRb->GetVelocity() - impulse * invMass2);
+    }
+}
+
+void RigidbodyComponent::OnCollisionStay(ColliderComponent* otherCollider)
+{
+
 }
 
 void RigidbodyComponent::OnCollisionExit(ColliderComponent* otherCollider)
 {
+    RigidbodyComponent* otherRb = CollisionManager::Instance().GetRigidbody(otherCollider->GetOwner()); 
+
+    bool otherIsStatic = (otherRb == nullptr) || (otherRb->GetMass() > 100000.0f) || otherRb->GetIsGrounded(); 
+    if (otherIsStatic)
+    {
+        mIsGrounded = false;
+        otherRb->SetIsGrounded(false);
+    }
 	mGravity = -9.81;
 }
 
@@ -71,4 +138,14 @@ void RigidbodyComponent::SetMass(float pMass)
 void RigidbodyComponent::SetUseGravity(bool pUseGravity)
 {
 	mUseGravity = pUseGravity;
+}
+
+void RigidbodyComponent::SetIsGrounded(bool pIsGrounded)
+{
+    mIsGrounded = pIsGrounded;
+}
+
+void RigidbodyComponent::SetGravity(float pGravity)
+{
+    mGravity = pGravity;
 }

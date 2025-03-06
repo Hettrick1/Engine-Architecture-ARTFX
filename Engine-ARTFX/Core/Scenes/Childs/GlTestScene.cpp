@@ -25,21 +25,27 @@ void GlTestScene::Start(IRenderer* renderer)
 
 	Cube* cube = new Cube();
 	AddActor(cube);
-	cube->SetPosition(Vector3D(0.0f, 10.0f, 0.0f));
+	cube->SetPosition(Vector3D(-3.0f, 10.0f, 3.0f));
 	cube->Start();
+	cube->GetComponentOfType<RigidbodyComponent>()->AddImpulse(Vector3D(5, 0, 0));
 
 	Cube* cube3 = new Cube();
 	AddActor(cube3);
-	cube3->SetPosition(Vector3D(0.0f, 10.0f, 2.0f));
 	cube3->Start();
-	cube->GetComponentOfType<MeshComponent>()->SetTextureIndex(1);
+	cube3->SetPosition(Vector3D(3.0f, 10.0f, 3.0f));
+	cube3->GetComponentOfType<MeshComponent>()->SetTextureIndex(1);
+	cube3->GetComponentOfType<RigidbodyComponent>()->SetMass(1);
+	cube3->GetComponentOfType<RigidbodyComponent>()->SetMass(1.5);
+	cube3->GetComponentOfType<RigidbodyComponent>()->AddImpulse(Vector3D(-13, 0, 0));
+
 
 	Cube* cube2 = new Cube();
 	AddActor(cube2);
-	cube2->SetPosition(Vector3D(0.0f, 5.0f, -3.0f));
+	cube2->SetPosition(Vector3D(0.0f, 5.0f, -4.0f));
 	cube2->GetTransformComponent().SetSize({ 20, 20, 1 });
 	cube2->Start();
 	cube2->GetComponentOfType<RigidbodyComponent>()->SetUseGravity(false);
+	cube2->GetComponentOfType<RigidbodyComponent>()->SetMass(10000000);
 
 	CameraActor* camera = new CameraActor();
 	camera->Start();

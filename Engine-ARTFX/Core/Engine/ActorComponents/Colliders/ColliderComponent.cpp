@@ -56,7 +56,7 @@ void ColliderComponent::NotifyListenersEnded()
 	}
 }
 
-void ColliderComponent::SetHitResult(bool pHit, Actor* pHitActor, ColliderComponent* collision)
+void ColliderComponent::SetHitResult(bool pHit, Actor* pHitActor, ColliderComponent* collision, Vector3D pNormal, float pOverlap)
 {
 	mHitResult.bHit = pHit;
 	mHitResult.hitActor = pHitActor;
@@ -69,6 +69,8 @@ void ColliderComponent::SetHitResult(bool pHit, Actor* pHitActor, ColliderCompon
 		);
 		mHitResult.hitLocation = loc;
 	}
+	mHitResult.Depth = pOverlap;
+	mHitResult.Normal = pNormal;
 }
 
 HitResult& ColliderComponent::GetHitResult()

@@ -60,6 +60,7 @@ void Game::Loop()
 void Game::Update()
 {
     mCollisionManager.CheckCollisions();
+    mCollisionManager.CheckRigidBody();
     mAllScenes[mLoadedScene]->Update();
 }
 
