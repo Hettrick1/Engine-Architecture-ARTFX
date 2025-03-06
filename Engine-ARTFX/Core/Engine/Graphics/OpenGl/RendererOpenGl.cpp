@@ -50,6 +50,12 @@ bool RendererOpenGl::Initialize(Window& pWindow)
 	{
 		Log::Error(LogType::Video, "Failed to initialize SDL_Image");
 	}
+
+	mSpriteVertexShader.Load("Simple.vert", ShaderType::VERTEX); 
+	mSpriteFragmentShader.Load("Simple.frag", ShaderType::FRAGMENT);  
+	mSpriteShaderProgramTemp.Compose({ &mSpriteVertexShader, &mSpriteFragmentShader });
+	SetSpriteShaderProgram(mSpriteShaderProgramTemp);
+
 	mVAO = new VertexArray(vertices, 4, indices, 6);
 	mSpriteViewProj = Matrix4DRow::CreateSimpleViewProj(mWindow->GetDimensions().x, mWindow->GetDimensions().y);
 	mView = Matrix4DRow::CreateLookAt(Vector3D(0, 0, 5), Vector3D::unitX, Vector3D::unitZ);

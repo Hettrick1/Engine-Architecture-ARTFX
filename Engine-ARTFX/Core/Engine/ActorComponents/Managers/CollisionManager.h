@@ -16,7 +16,7 @@ public:
     static CollisionManager& Instance();
     ~CollisionManager();
 
-    void RegisterCollider(ColliderComponent* pCollider);
+    void RegisterCollider(Actor* pOwner, ColliderComponent* pCollider);
 
     void CheckCollisions();
 
@@ -30,7 +30,6 @@ private:
 };
 
 // template to create the collider of the type needed 
-
 template<typename ColliderType, typename ...Args>
 inline void CollisionManager::CreateCollider(ICollisionListener* pListener, Args && ...args)
 {
@@ -47,7 +46,7 @@ inline void CollisionManager::CreateCollider(ICollisionListener* pListener, Args
 
     newCollider->AddListener(pListener);
 
-    RegisterCollider(newCollider);
+    RegisterCollider(owner, newCollider);
 }
 
 struct CollisionPairHash { // hash to handle collision pair, to send only one OnTriggerEnd event

@@ -13,8 +13,5 @@ public:
 	void Render() override;
 	void Close() override;
 private:
-	Shader mVertexShader;
-	Shader mFragmentShader;
-	ShaderProgram mShaderProgram;
 };
 

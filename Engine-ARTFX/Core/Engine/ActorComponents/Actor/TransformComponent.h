@@ -20,6 +20,7 @@ public:
 	Matrix4DRow GetWorldTransform();
 
 	void SetPosition(Vector3D newPosition);
+	void Translate(Vector3D pTranslation);
 	void SetSize(Vector3D newSize);
 	void SetRotation(Quaternion newRotation);
 	void SetOwner(Actor* pOwner);
@@ -28,10 +29,13 @@ public:
 	void RotateY(float pAngle);
 	void RotateZ(float pAngle);
 
-	Vector3D Right() const { return Vector3D::Transform(Vector3D::unitX, mRotation); } // pas sur que ce soit Y donc inverser avec le z si ca fait de la merde
-	Vector3D Up() const { return Vector3D::Transform(Vector3D::unitY, mRotation); }
-	Vector3D Forward() const { return Vector3D::Transform(Vector3D::unitZ, mRotation); }
+	Vector3D Right() const { return Vector3D(-mRotation.AsMatrixRow().mat[0][0], -mRotation.AsMatrixRow().mat[1][0], -mRotation.AsMatrixRow().mat[2][0]); }
+	Vector3D Forward() const { return Vector3D(mRotation.AsMatrixRow().mat[0][1], mRotation.AsMatrixRow().mat[1][1], mRotation.AsMatrixRow().mat[2][1]); }
+	Vector3D Up() const { return Vector3D(mRotation.AsMatrixRow().mat[0][2], mRotation.AsMatrixRow().mat[1][2], mRotation.AsMatrixRow().mat[2][2]); }
 
+	float Pitch() const { return mPitch; }
+	float Roll() const { return mRoll; }
+	float Yaw() const { return mYaw; }
 	void ComputeWorldTransform();
 
 private:
@@ -41,5 +45,6 @@ private:
 	Matrix4DRow mWorldTransform;
 	Actor* mOwner;
 	bool mNeedsToUpdate;
+	float mRoll, mPitch, mYaw;
 };
 

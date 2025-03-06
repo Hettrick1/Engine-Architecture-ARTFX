@@ -7,8 +7,8 @@ Mesh::Mesh()
 	: mVao(nullptr)
 {
 	mVao = new VertexArray(cubeVertices, 28, cubeIndices, 36);
-	mVertexShader.Load("Simple.vert", ShaderType::VERTEX);
-	mFragmentShader.Load("Simple.frag", ShaderType::FRAGMENT);
+	mVertexShader.Load("BasicMesh.vert", ShaderType::VERTEX);
+	mFragmentShader.Load("BasicMesh.frag", ShaderType::FRAGMENT);
 	mShaderProgram.Compose({ &mVertexShader, &mFragmentShader });
 	mTextures.emplace_back(&Assets::GetTexture("cube"));
 }

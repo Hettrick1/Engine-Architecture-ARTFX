@@ -21,7 +21,7 @@ CollisionManager::~CollisionManager()
     mAllColliders.clear();
 }
 
-void CollisionManager::RegisterCollider(ColliderComponent* pCollider)
+void CollisionManager::RegisterCollider(Actor* pOwner, ColliderComponent* pCollider)
 {
     mAllColliders.push_back(pCollider);
 }
@@ -39,9 +39,7 @@ void CollisionManager::CheckCollisions()
             activeColliders.push_back(collider);
         }
     }
-
     std::unordered_map<ColliderComponent*, std::unordered_set<ColliderComponent*>> newCollisions;
-
     // for each collisions check their state
     for (size_t i = 0; i < activeColliders.size() - 1; ++i) {
         for (size_t j = i + 1; j < activeColliders.size(); ++j) {

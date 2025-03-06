@@ -138,6 +138,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Core\Engine\ActorComponents\Colliders\BoxCollider3DComponent.cpp" />
     <ClCompile Include="Core\Engine\CoreComponents\CameraActor.cpp" />
     <ClCompile Include="Core\Engine\ActorComponents\Actor\CameraComponent.cpp" />
     <ClCompile Include="Core\Engine\ActorComponents\PhysicComponent\ActorMovementComponent.cpp" />
@@ -189,6 +190,7 @@
     <ClCompile Include="Core\Engine\CoreComponents\PlayerController3D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Core\Engine\ActorComponents\Colliders\BoxCollider3DComponent.h" />
     <ClInclude Include="Core\Engine\CoreComponents\CameraActor.h" />
     <ClInclude Include="Core\Engine\ActorComponents\Actor\CameraComponent.h" />
     <ClInclude Include="Core\Engine\ActorComponents\PhysicComponent\ActorMovementComponent.h" />

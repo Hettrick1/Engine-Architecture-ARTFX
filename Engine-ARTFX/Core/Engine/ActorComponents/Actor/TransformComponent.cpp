@@ -39,6 +39,12 @@ void TransformComponent::SetPosition(Vector3D newPosition)
     ComputeWorldTransform();
 }
 
+void TransformComponent::Translate(Vector3D pTranslation)
+{
+    mPosition += pTranslation;
+    ComputeWorldTransform();
+}
+
 void TransformComponent::SetSize(Vector3D newSize)
 {
     mSize = newSize;
@@ -59,6 +65,7 @@ void TransformComponent::SetOwner(Actor* pOwner)
 void TransformComponent::RotateX(float pAngle)
 {
     float piAngle = Maths::ToRad(pAngle);
+    mPitch += pAngle;
     Quaternion newX(Vector3D::unitX, piAngle);
     mRotation = Quaternion::Concatenate(newX, mRotation);
     Log::Info("x : " + std::to_string(Maths::ToDeg(mRotation.x)));
@@ -70,6 +77,7 @@ void TransformComponent::RotateX(float pAngle)
 void TransformComponent::RotateY(float pAngle)
 {
     float piAngle = Maths::ToRad(pAngle);
+    mRoll += pAngle;
     Quaternion newY(Vector3D::unitY, piAngle);
     mRotation = Quaternion::Concatenate(newY, mRotation);
     Log::Info("x : " + std::to_string(Maths::ToDeg(mRotation.x)));
@@ -81,6 +89,7 @@ void TransformComponent::RotateY(float pAngle)
 void TransformComponent::RotateZ(float pAngle)
 {
     float piAngle = Maths::ToRad(pAngle);
+    mYaw += pAngle;
     Quaternion newZ(Vector3D::unitZ, piAngle);
     mRotation = Quaternion::Concatenate(newZ, mRotation);
     Log::Info("x : " + std::to_string(Maths::ToDeg(mRotation.x)));

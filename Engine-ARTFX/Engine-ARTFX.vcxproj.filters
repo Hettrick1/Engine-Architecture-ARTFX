@@ -162,6 +162,9 @@
     <ClCompile Include="Core\Engine\CoreComponents\PlayerController3D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Core\Engine\ActorComponents\Colliders\BoxCollider3DComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Engine\DebugClasses\Log.h">
@@ -330,6 +333,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Core\Engine\CoreComponents\PlayerController3D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Engine\ActorComponents\Colliders\BoxCollider3DComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -19,6 +19,7 @@ void CameraActor::Start()
 	PlayerController3D* pc = new PlayerController3D(this, 100);
 	pc->SetMovementSpeed(5);
 	AddComponent(pc); 
+	//GetTransformComponent().RotateX(90);
 }
 
 void CameraActor::Update()

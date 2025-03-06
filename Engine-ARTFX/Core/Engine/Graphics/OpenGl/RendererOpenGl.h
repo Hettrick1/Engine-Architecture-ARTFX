@@ -49,4 +49,7 @@ private:
 	ShaderProgram* mSpriteShaderProgram;
 	Matrix4DRow mSpriteViewProj;
 	Matrix4DRow mView, mProj;
+	Shader mSpriteVertexShader;
+	Shader mSpriteFragmentShader;
+	ShaderProgram mSpriteShaderProgramTemp;
 };

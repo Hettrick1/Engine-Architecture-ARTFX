@@ -1,6 +1,7 @@
 #include "Cube.h"
 #include "Scene.h"
 #include "MeshComponent.h"
+#include "RigidbodyComponent.h"
 #include "Timer.h"
 
 float rotX = 0;
@@ -22,6 +23,8 @@ void Cube::Start()
 	MeshComponent* mesh = new MeshComponent(this);
 	mesh->SetTextureIndex(0);
 	AddComponent(mesh);
+	RigidbodyComponent* rb = new RigidbodyComponent(this);
+	AddComponent(rb);
 }
 
 void Cube::Update()

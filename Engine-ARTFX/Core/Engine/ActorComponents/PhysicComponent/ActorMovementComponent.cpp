@@ -33,7 +33,7 @@ void ActorMovementComponent::Update()
 	{
 		Vector3D newPosition = mOwner->GetTransformComponent().GetPosition()
 			+ (mOwner->GetTransformComponent().Right() * mSpeed.x
-			+ mOwner->GetTransformComponent().Up() * mSpeed.y 
+			+ Vector3D::unitZ * mSpeed.y 
 			+ mOwner->GetTransformComponent().Forward() * mSpeed.z ) * Timer::deltaTime;
 		mOwner->SetPosition(newPosition);
 	}

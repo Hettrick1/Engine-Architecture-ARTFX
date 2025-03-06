@@ -11,6 +11,6 @@ out vec2 fragTexCoord;
 void main()
 {
    gl_Position = vec4(pos, 1.0)* uWorldTransform * uViewProj;
-   ourColor = vec4(pos, 1.0);
+   //ourColor = vec4(pos, 1.0);
    fragTexCoord = texCoord;
 }
