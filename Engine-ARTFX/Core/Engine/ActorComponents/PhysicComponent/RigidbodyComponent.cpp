@@ -1,21 +1,23 @@
 #include "RigidbodyComponent.h"
+#include "CollisionManager.h"
+#include "ColliderComponent.h"
 #include "Actor.h"
 #include "Timer.h"
 #include "Log.h"
 
-float RigidbodyComponent::GRAVITY = -9.81;
-
 RigidbodyComponent::RigidbodyComponent(Actor* pOwner, int pUpdateOrder)
 	: Component(pOwner, pUpdateOrder), 
-	mVelocity(0.0), mAcceleration(0.0), mMass(1.0), mFriction(0.1f), mUseGravity(true)
+	mVelocity(0.0), mAcceleration(0.0), mMass(1.0), mFriction(0.1f), mUseGravity(true), mGravity(-9.81), 
+	mBounciness(0.2)
 {
+	CollisionManager::Instance().RegisterRigidbody(pOwner, this); 
 }
 
 void RigidbodyComponent::Update()
 {
-	if (mUseGravity)
+	if (mUseGravity && mGravity < 0)
 	{
-		mAcceleration.z += GRAVITY;
+		mAcceleration.z += mGravity;
 	}
 
 	mVelocity += mAcceleration * Timer::deltaTime;
@@ -24,14 +26,36 @@ void RigidbodyComponent::Update()
 
 	mOwner->GetTransformComponent().Translate(mVelocity * Timer::deltaTime);
 
-	Log::Info(std::to_string(mOwner->GetTransformComponent().GetPosition().z));
+	//Log::Info(std::to_string(mOwner->GetTransformComponent().GetPosition().z));
 
 	mAcceleration = 0;
 }
 
 void RigidbodyComponent::ApplyForce(Vector3D pForce)
 {
-	mAcceleration += pForce / mMass;
+	if (mUseGravity)
+	{
+		mAcceleration += pForce / mMass;
+	}
+}
+
+void RigidbodyComponent::OnCollisionEnter(ColliderComponent* otherCollider)
+{
+	if (!mUseGravity)
+	{
+		return;
+	}
+	if (mVelocity.Length() != 0)
+	{
+		mOwner->SetPosition(otherCollider->GetHitResult().hitLocation);
+	}
+	mVelocity = 0;
+	mGravity = 0;
+}
+
+void RigidbodyComponent::OnCollisionExit(ColliderComponent* otherCollider)
+{
+	mGravity = -9.81;
 }
 
 void RigidbodyComponent::SetVelocity(Vector3D pVelocity)

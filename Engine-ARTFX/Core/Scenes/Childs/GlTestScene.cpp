@@ -3,6 +3,7 @@
 #include "TestOpenGl/Cube.h"
 #include "CameraActor.h"
 #include "RigidbodyComponent.h"
+#include "MeshComponent.h"
 
 GlTestScene::GlTestScene()
 {
@@ -26,6 +27,12 @@ void GlTestScene::Start(IRenderer* renderer)
 	AddActor(cube);
 	cube->SetPosition(Vector3D(0.0f, 10.0f, 0.0f));
 	cube->Start();
+
+	Cube* cube3 = new Cube();
+	AddActor(cube3);
+	cube3->SetPosition(Vector3D(0.0f, 10.0f, 2.0f));
+	cube3->Start();
+	cube->GetComponentOfType<MeshComponent>()->SetTextureIndex(1);
 
 	Cube* cube2 = new Cube();
 	AddActor(cube2);

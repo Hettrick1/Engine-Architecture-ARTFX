@@ -3,9 +3,8 @@
 #include "MeshComponent.h"
 #include "RigidbodyComponent.h"
 #include "Timer.h"
-
-float rotX = 0;
-float rotY = 0;
+#include "CollisionManager.h"
+#include "BoxCollider3DComponent.h"
 
 Cube::Cube(Vector3D pPos, Vector3D pSize, Quaternion pRotation)
 	: Actor(pPos, pSize, pRotation)
@@ -25,18 +24,33 @@ void Cube::Start()
 	AddComponent(mesh);
 	RigidbodyComponent* rb = new RigidbodyComponent(this);
 	AddComponent(rb);
+	CollisionManager::Instance().CreateCollider<BoxCollider3DComponent>(this, 10, GetTransformComponent().GetSize());
 }
 
 void Cube::Update()
 {
 	Actor::Update();
-	/*rotX = 50 * Timer::deltaTime;
-	rotY = 50 * Timer::deltaTime;
-	GetTransformComponent().RotateX(rotX);
-	GetTransformComponent().RotateY(rotY);*/
 }
 
 void Cube::Destroy()
 {
 	Actor::Destroy();
+}
+
+void Cube::OnTriggerEnter(ColliderComponent* collider)
+{
+	Log::Info("AAAAAAAAAAAAAAA");
+	GetComponentOfType<RigidbodyComponent>()->ApplyForce(Vector3D(0, 0, 0));
+}
+
+void Cube::OnCollision(ColliderComponent* collider)
+{
+}
+
+void Cube::OnTriggerStay(ColliderComponent* collider)
+{
+}
+
+void Cube::OnTriggerExit(ColliderComponent* collider)
+{
 }

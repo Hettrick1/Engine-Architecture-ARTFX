@@ -9,6 +9,7 @@
 
 class ColliderComponent;
 class ICollisionListener;
+class RigidbodyComponent;
 
 class CollisionManager
 {
@@ -17,7 +18,7 @@ public:
     ~CollisionManager();
 
     void RegisterCollider(Actor* pOwner, ColliderComponent* pCollider);
-
+    void RegisterRigidbody(Actor* pOwner, RigidbodyComponent* pRigidbody);
     void CheckCollisions();
 
     template <typename ColliderType, typename... Args>
@@ -25,8 +26,9 @@ public:
 
 private:
     CollisionManager() = default;
-    std::vector<ColliderComponent*> mAllColliders;
+    std::unordered_map<Actor*, std::vector<ColliderComponent*>> mColliders;
     std::unordered_map<ColliderComponent*, std::unordered_set<ColliderComponent*>> mCurrentCollisions;
+    std::unordered_map<Actor*, RigidbodyComponent*> mRigidbodies;
 };
 
 // template to create the collider of the type needed 

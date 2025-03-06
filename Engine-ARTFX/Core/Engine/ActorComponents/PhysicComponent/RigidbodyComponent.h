@@ -5,6 +5,7 @@
 #include "Maths.h"
 
 class Actor;
+class ColliderComponent;
 
 class RigidbodyComponent : public Component
 {
@@ -16,6 +17,8 @@ public:
 public :
 	void Update() override;
 	void ApplyForce(Vector3D pForce);
+	void OnCollisionEnter(ColliderComponent* otherCollider);
+	void OnCollisionExit(ColliderComponent* otherCollider);
 public:
 	void SetVelocity(Vector3D pVelocity);
 	void SetMass(float pMass);
@@ -23,13 +26,13 @@ public:
 	Vector3D Getvelocity() const { return mVelocity; }
 	float GetMass() const { return mMass; }
 
-	static float GRAVITY;
-
 private:
 	Vector3D mVelocity;
 	Vector3D mAcceleration;
 	float mMass;
 	float mFriction;
 	bool mUseGravity;
+	float mGravity;
+	float mBounciness;
 };
 

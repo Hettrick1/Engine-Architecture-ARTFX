@@ -21,7 +21,6 @@ public:
 	void SetSize(Vector3D pSize);
 private:
 	Vector3D mPosition;
-	Vector3D mSize;
 	bool mShowInGame;
 };
 

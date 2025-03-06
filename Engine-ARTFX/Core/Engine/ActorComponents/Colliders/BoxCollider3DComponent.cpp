@@ -1,9 +1,10 @@
 #include "BoxCollider3DComponent.h"
 
 BoxCollider3DComponent::BoxCollider3DComponent(Actor* pOwner, int pUpdateOder, Vector3D pSize)
-    : ColliderComponent(pOwner, pUpdateOder), mSize(pSize), mShowInGame(true)
+    : ColliderComponent(pOwner, pUpdateOder), mShowInGame(true)
 {
     mPosition = pOwner->GetTransformComponent().GetPosition();
+    mSize = pSize;
 }
 
 BoxCollider3DComponent::~BoxCollider3DComponent()

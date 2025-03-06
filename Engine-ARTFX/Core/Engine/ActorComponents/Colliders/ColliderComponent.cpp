@@ -56,12 +56,18 @@ void ColliderComponent::NotifyListenersEnded()
 	}
 }
 
-void ColliderComponent::SetHitResult(bool pHit, Actor* pHitActor)
+void ColliderComponent::SetHitResult(bool pHit, Actor* pHitActor, ColliderComponent* collision)
 {
 	mHitResult.bHit = pHit;
 	mHitResult.hitActor = pHitActor;
 	if (pHitActor != nullptr) {
-		mHitResult.hitLocation = pHitActor->GetTransformComponent().GetPosition();
+		Vector3D loc = Vector3D
+		(
+			pHitActor->GetTransformComponent().GetPosition().x, 
+			pHitActor->GetTransformComponent().GetPosition().y, 
+			mOwner->GetTransformComponent().GetPosition().z + collision->mSize.z
+		);
+		mHitResult.hitLocation = loc;
 	}
 }
 

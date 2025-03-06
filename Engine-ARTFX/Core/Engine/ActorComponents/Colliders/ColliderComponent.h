@@ -25,12 +25,13 @@ public:
 	void NotifyListenersStarted();
 	void NotifyListenersStay();
 	void NotifyListenersEnded();
-	void SetHitResult(bool pHit, Actor* pHitActor);
+	void SetHitResult(bool pHit, Actor* pHitActor, ColliderComponent* collision);
 	HitResult& GetHitResult();
 
 protected :
 	bool mIsTriggerable;
 	std::vector<ICollisionListener*> mListeners;
 	HitResult mHitResult;
+	Vector3D mSize;
 };
 
