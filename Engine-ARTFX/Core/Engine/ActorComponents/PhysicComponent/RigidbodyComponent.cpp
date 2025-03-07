@@ -50,13 +50,17 @@ void RigidbodyComponent::AddImpulse(Vector3D pImpulse)
 void RigidbodyComponent::OnCollisionEnter(ColliderComponent* otherCollider)
 {
     Log::Info("aaaaaaaaaaa");
-	if (!mUseGravity)
-	{
-		return;
-	}
+    if (mIsStatic || !mUseGravity || mMass > 1000000)
+    {
+        return;
+    }
     HitResult hit = otherCollider->GetHitResult();
     Vector3D n = hit.Normal;
 
+    if (mIsGrounded && hit.Normal.z > 0.01f)
+    {
+        return;
+    }
     mOwner->GetTransformComponent().Translate(n * (hit.Depth + 0.001f));
 
     // Get if existing the other rigidbody
@@ -65,13 +69,13 @@ void RigidbodyComponent::OnCollisionEnter(ColliderComponent* otherCollider)
     bool isGround = false;
 
     if (otherRb) {
-        isGround = otherRb->IsStatic() || (otherRb->GetMass() > mMass * 10.0f);
+        isGround = otherRb->IsStatic() || (otherRb->GetMass() > mMass * 10.0f) || otherRb->GetIsGrounded();
     }
     else {
         isGround = true;
     }
 
-    if (isGround && hit.Normal.z > 0.7f) {
+    if (isGround && hit.Normal.z > 0.01f) {
         mIsGrounded = true;
         mVelocity.z = 0.0f; 
     }

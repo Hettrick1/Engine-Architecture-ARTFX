@@ -74,11 +74,11 @@ void GlTestScene::Start(IRenderer* renderer)
 	Cube* ball = new Cube();
 	AddActor(ball);
 	ball->Start();
-	ball->SetPosition(Vector3D(0.0f, 10.0f, 2.0f));
+	ball->SetPosition(Vector3D(-0.6f, 30.0f, 2.5f));
 	ball->GetComponentOfType<MeshComponent>()->SetTextureIndex(1);
 	ball->GetComponentOfType<RigidbodyComponent>()->SetMass(1);
 	ball->GetComponentOfType<RigidbodyComponent>()->SetMass(1.5);
-	ball->GetComponentOfType<RigidbodyComponent>()->AddImpulse(Vector3D(0, 25, 0));
+	ball->GetComponentOfType<RigidbodyComponent>()->AddImpulse(Vector3D(0, 0, 0));
 
 	CameraActor* camera = new CameraActor();
 	camera->Start();
