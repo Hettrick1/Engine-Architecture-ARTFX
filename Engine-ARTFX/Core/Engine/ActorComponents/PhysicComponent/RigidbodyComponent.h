@@ -31,6 +31,9 @@ public:
 	float GetMass() const { return mMass; }
 	bool GetIsGrounded() const { return mIsGrounded; }
 
+	void SetIsStatic(bool isStatic);
+	bool IsStatic() const { return mIsStatic; }
+
 private:
 	Vector3D mVelocity;
 	Vector3D mAcceleration;
@@ -39,6 +42,6 @@ private:
 	bool mUseGravity;
 	float mGravity;
 	float mBounciness;
-	bool mIsGrounded;
+	bool mIsGrounded, mIsStatic;
 };
 

@@ -39,8 +39,6 @@ void Cube::Destroy()
 
 void Cube::OnTriggerEnter(ColliderComponent* collider)
 {
-	Log::Info("AAAAAAAAAAAAAAA");
-	GetComponentOfType<RigidbodyComponent>()->ApplyForce(Vector3D(0, 0, 0));
 }
 
 void Cube::OnCollision(ColliderComponent* collider)

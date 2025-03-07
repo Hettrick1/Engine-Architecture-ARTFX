@@ -19,8 +19,20 @@ CollisionManager::~CollisionManager()
     {
         for (auto* collider : pair.second) 
         {
-            delete collider;
+            if (collider != nullptr)
+            {
+                delete collider;
+            }
+            collider = nullptr;
         }
+    }
+    for (auto it = mRigidbodies.begin(); it != mRigidbodies.end(); ++it)
+    {
+        if (it->second != nullptr)
+        {
+            delete it->second;
+        }
+        it->second = nullptr;
     }
     mColliders.clear();
     mCurrentCollisions.clear();
@@ -71,7 +83,9 @@ void CollisionManager::CheckCollisions()
                         bool isNewCollision1 = mCurrentCollisions[collider1].find(collider2) == mCurrentCollisions[collider1].end();
                         bool isNewCollision2 = mCurrentCollisions[collider2].find(collider1) == mCurrentCollisions[collider2].end();
 
-                        CalculateNormal(collider1, collider2);
+                        if (isNewCollision1 && isNewCollision2) {
+                            CalculateNormal(collider1, collider2);
+                        }
 
                         if (isNewCollision1 && collider1->GetIsTriggerable()) {
                             collider1->NotifyListenersStarted();
@@ -150,7 +164,7 @@ void CollisionManager::CheckRigidBody()
         for (auto it = mRigidbodies.begin(); it != mRigidbodies.end(); ++it)
         {
             RigidbodyComponent* rigidbody = it->second;
-            if (rigidbody)
+            if (rigidbody != nullptr)
             {
                 rigidbody->Update();
             }
@@ -174,43 +188,63 @@ void CollisionManager::CalculateNormal(ColliderComponent* collider1, ColliderCom
     Vector3D min2 = pos2 - halfSize2;
     Vector3D max2 = pos2 + halfSize2;
 
-    // Calculer l'overlap sur chaque axe
+    // Calculer les recouvrements (overlap) sur chaque axe
     float overlapX = std::min(max1.x, max2.x) - std::max(min1.x, min2.x);
     float overlapY = std::min(max1.y, max2.y) - std::max(min1.y, min2.y);
     float overlapZ = std::min(max1.z, max2.z) - std::max(min1.z, min2.z);
 
-    Vector3D normal;  // Normal de collision
+    // Vérifier si une collision s'est produite
+    if (overlapX <= 0 || overlapY <= 0 || overlapZ <= 0)
+    {
+        // Pas de collision, retourner
+        return;
+    }
 
-    // Déterminer l'axe de collision (celui avec le plus petit overlap)
-    if (overlapX < overlapY && overlapX < overlapZ) {
-        // Collision résolue sur l'axe X
-        if (pos1.x < pos2.x) {        
-            normal = Vector3D(-1, 0, 0);
-        }
-        else {          
+    // Déterminer l'axe avec le plus petit recouvrement
+    Vector3D normal;
+
+    float minOverlap = std::min({ overlapX, overlapY, overlapZ });
+    float depth = minOverlap;
+    // Déterminer la direction avec une tolérance pour les égalités
+    if (minOverlap == overlapX) {
+        const float epsilon = 0.001f;
+        if (pos1.x < pos2.x - epsilon) {
             normal = Vector3D(1, 0, 0);
         }
+        else if (pos1.x > pos2.x + epsilon) {
+            normal = Vector3D(-1, 0, 0);
+        }
+        else {
+            normal = (pos1.x < pos2.x) ? Vector3D(-1, 0, 0) : Vector3D(1, 0, 0);
+        }
     }
-    else if (overlapY < overlapX && overlapY < overlapZ) {
-        // Collision résolue sur l'axe Y
-        if (pos1.y < pos2.y) {
+    if (minOverlap == overlapY) {
+        const float epsilon = 0.001f;
+        if (pos1.y < pos2.y - epsilon) {
+            normal = Vector3D(0, 1, 0);
+        }
+        else if (pos1.x > pos2.x + epsilon) {
             normal = Vector3D(0, -1, 0);
         }
         else {
-            normal = Vector3D(0, 1, 0);
+            normal = (pos1.x < pos2.x) ? Vector3D(0, -1, 0) : Vector3D(0, 1, 0);
         }
     }
-    else {
-        // Collision résolue sur l'axe Z
-        if (pos1.z < pos2.z) {
+    if (minOverlap == overlapZ) {
+        const float epsilon = 0.001f;
+        if (pos1.z < pos2.z - epsilon) {
+            normal = Vector3D(0, 0, 1);
+        }
+        else if (pos1.z > pos2.z + epsilon) {
             normal = Vector3D(0, 0, -1);
         }
         else {
-            normal = Vector3D(0, 0, 1);
+            normal = (pos1.x < pos2.x) ? Vector3D(0, 0, -1) : Vector3D(0, 0, 1);
         }
     }
-    collider1->SetHitResult(true, collider2->GetOwner(), collider2, normal);
-    collider2->SetHitResult(true, collider1->GetOwner(), collider2, normal);
+     
+    collider1->SetHitResult(true, collider2->GetOwner(), collider2, normal, depth);
+    collider2->SetHitResult(true, collider1->GetOwner(), collider1, normal, depth);
 }
 
 RigidbodyComponent* CollisionManager::GetRigidbody(Actor* pRbOwner)

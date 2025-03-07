@@ -23,29 +23,62 @@ void GlTestScene::Start(IRenderer* renderer)
 	player->SetPosition(Vector3D(300, 0, 0));
 	player->GetTransformComponent().SetSize({ 1, 1, 0 });
 
-	Cube* cube = new Cube();
-	AddActor(cube);
-	cube->SetPosition(Vector3D(-3.0f, 10.0f, 3.0f));
-	cube->Start();
-	cube->GetComponentOfType<RigidbodyComponent>()->AddImpulse(Vector3D(5, 0, 0));
+	Cube* ground = new Cube(); 
+	AddActor(ground); 
+	ground->SetPosition(Vector3D(0.0f, 35.0f, -4.0f)); 
+	ground->GetTransformComponent().SetSize({ 20, 60, 1 }); 
+	ground->Start(); 
+	ground->GetComponentOfType<RigidbodyComponent>()->SetUseGravity(false); 
+	ground->GetComponentOfType<RigidbodyComponent>()->SetMass(10000000); 
 
-	Cube* cube3 = new Cube();
-	AddActor(cube3);
-	cube3->Start();
-	cube3->SetPosition(Vector3D(3.0f, 10.0f, 3.0f));
-	cube3->GetComponentOfType<MeshComponent>()->SetTextureIndex(1);
-	cube3->GetComponentOfType<RigidbodyComponent>()->SetMass(1);
-	cube3->GetComponentOfType<RigidbodyComponent>()->SetMass(1.5);
-	cube3->GetComponentOfType<RigidbodyComponent>()->AddImpulse(Vector3D(-13, 0, 0));
+	Cube* quille = new Cube();
+	AddActor(quille);
+	quille->GetTransformComponent().SetSize(Vector3D(1, 1, 2));
+	quille->SetPosition(Vector3D(0.6f, 30.0f, -2.5f));
+	quille->Start();
+	quille->GetComponentOfType<RigidbodyComponent>()->SetMass(0.5);
+	quille->GetComponentOfType<RigidbodyComponent>()->SetIsGrounded(true);
 
+	Cube* quille1 = new Cube();
+	AddActor(quille1);
+	quille1->GetTransformComponent().SetSize(Vector3D(1, 1, 2));
+	quille1->SetPosition(Vector3D(-0.6f, 30.0f, -2.5f));
+	quille1->Start();
+	quille1->GetComponentOfType<RigidbodyComponent>()->SetMass(0.5);
+	quille1->GetComponentOfType<RigidbodyComponent>()->SetIsGrounded(true);
 
-	Cube* cube2 = new Cube();
-	AddActor(cube2);
-	cube2->SetPosition(Vector3D(0.0f, 5.0f, -4.0f));
-	cube2->GetTransformComponent().SetSize({ 20, 20, 1 });
-	cube2->Start();
-	cube2->GetComponentOfType<RigidbodyComponent>()->SetUseGravity(false);
-	cube2->GetComponentOfType<RigidbodyComponent>()->SetMass(10000000);
+	/*Cube* quille2 = new Cube();
+	AddActor(quille2);
+	quille2->GetTransformComponent().SetSize(Vector3D(0.5, 0.5, 2));
+	quille2->SetPosition(Vector3D(1.0f, 30.0f, -3.0f));
+	quille2->Start();
+	quille2->GetComponentOfType<RigidbodyComponent>()->SetMass(0.5);
+	quille2->GetComponentOfType<RigidbodyComponent>()->SetIsGrounded(true);
+
+	Cube* quille3 = new Cube();
+	quille3->GetTransformComponent().SetSize(Vector3D(0.5, 0.5, 2));
+	AddActor(quille3);
+	quille3->SetPosition(Vector3D(-0.5f, 28.0f, -3.0f));
+	quille3->Start();
+	quille3->GetComponentOfType<RigidbodyComponent>()->SetMass(0.5);
+	quille3->GetComponentOfType<RigidbodyComponent>()->SetIsGrounded(true);
+
+	Cube* quille4 = new Cube();
+	AddActor(quille4);
+	quille4->GetTransformComponent().SetSize(Vector3D(0.5, 0.5, 2));
+	quille4->SetPosition(Vector3D(0.5f, 28.0f, -3.0f));
+	quille4->Start();
+	quille4->GetComponentOfType<RigidbodyComponent>()->SetMass(0.5);
+	quille4->GetComponentOfType<RigidbodyComponent>()->SetIsGrounded(true);*/
+
+	Cube* ball = new Cube();
+	AddActor(ball);
+	ball->Start();
+	ball->SetPosition(Vector3D(0.0f, 10.0f, 2.0f));
+	ball->GetComponentOfType<MeshComponent>()->SetTextureIndex(1);
+	ball->GetComponentOfType<RigidbodyComponent>()->SetMass(1);
+	ball->GetComponentOfType<RigidbodyComponent>()->SetMass(1.5);
+	ball->GetComponentOfType<RigidbodyComponent>()->AddImpulse(Vector3D(0, 25, 0));
 
 	CameraActor* camera = new CameraActor();
 	camera->Start();

@@ -19,8 +19,11 @@ public:
 public:
 	void SetShowInGame(bool pShowInGame);
 	void SetSize(Vector3D pSize);
+
+	Vector3D GetLastPosition();
 private:
 	Vector3D mPosition;
+	Vector3D mLastPosition;
 	bool mShowInGame;
 };
 
