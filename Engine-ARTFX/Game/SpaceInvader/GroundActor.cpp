@@ -19,7 +19,7 @@ void GroundActor::Start()
 	SpriteComponent* newSprite = new SpriteComponent(this, *tex, 4000);
 	AddComponent(newSprite);
 
-	CollisionManager::Instance().CreateCollider<BoxCollider2DComponent>(this, 10, GetTransformComponent().GetSize() * tex->GetTextureSize());
+	//CollisionManager::Instance().CreateCollider<BoxCollider2DComponent>(this, 10, GetTransformComponent().GetSize() * tex->GetTextureSize());
 }
 
 void GroundActor::Update()

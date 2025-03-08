@@ -1,6 +1,7 @@
 #pragma once
 #include "ActorState.h"
 #include "TransformComponent.h"
+#include "RigidbodyComponent.h"
 #include <vector>
 
 class Component;
@@ -23,6 +24,8 @@ public:
 	ActorState GetState();
 	Scene& GetScene();
 	TransformComponent& GetTransformComponent();
+	RigidbodyComponent* GetRigidBody() const { return mRigidbody; }
+	void SetRigidBody(RigidbodyComponent* pRigidbody);
 
 	template<typename  C>
 	C* GetComponentOfType() const
@@ -41,6 +44,7 @@ protected:
 	Scene& mScene;
 	ActorState mState;
 	TransformComponent mTransformComponent;
+	RigidbodyComponent* mRigidbody;
 	bool mIsUpdatingComponents;
 	std::vector<Component*> mComponents;
 	std::vector<Component*> mPendingComponents;

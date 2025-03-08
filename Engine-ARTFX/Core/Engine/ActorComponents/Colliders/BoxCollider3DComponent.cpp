@@ -3,6 +3,7 @@
 BoxCollider3DComponent::BoxCollider3DComponent(Actor* pOwner, int pUpdateOder, Vector3D pSize)
     : ColliderComponent(pOwner, pUpdateOder), mShowInGame(true)
 {
+    pOwner->AddComponent(this);
     mPosition = pOwner->GetTransformComponent().GetPosition();
     mLastPosition = mPosition;
     mSize = pSize;

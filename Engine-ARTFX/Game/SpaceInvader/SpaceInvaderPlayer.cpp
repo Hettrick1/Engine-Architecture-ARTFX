@@ -26,7 +26,7 @@ void SpaceInvaderPlayer::Start()
 		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/WalkAnim/Walk4.png", "walk4"),
 		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/WalkAnim/Walk5.png", "walk5")
 	};
-	CollisionManager::Instance().CreateCollider<BoxCollider2DComponent>(this, 10, (GetTransformComponent().GetSize() * 64) / 1);
+	//CollisionManager::Instance().CreateCollider<BoxCollider2DComponent>(this, 10, (GetTransformComponent().GetSize() * 64) / 1);
 
 	FlipbookComponent* walkAnim = new FlipbookComponent(this, walkAnimTextures, 500000);
 	walkAnim->SetAnimationFps(5);

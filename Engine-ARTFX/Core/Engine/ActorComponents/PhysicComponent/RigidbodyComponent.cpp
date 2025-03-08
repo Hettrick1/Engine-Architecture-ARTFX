@@ -1,5 +1,5 @@
 #include "RigidbodyComponent.h"
-#include "Physics/CollisionManager.h"
+#include "Physics/PhysicManager.h"
 #include "ColliderComponent.h"
 #include "Actor.h"
 #include "Timer.h"
@@ -10,7 +10,8 @@ RigidbodyComponent::RigidbodyComponent(Actor* pOwner, int pUpdateOrder)
 	mVelocity(0.0), mAcceleration(0.0), mMass(1.0), mFriction(0.1f), mUseGravity(true), mGravity(-9.81), 
 	mBounciness(0.5), mIsGrounded(false), mIsStatic(false)
 {
-	CollisionManager::Instance().RegisterRigidbody(pOwner, this); 
+    PhysicManager::Instance().RegisterRigidBody(pOwner, this);
+    pOwner->SetRigidBody(this);
 }
 
 void RigidbodyComponent::Update()
@@ -64,7 +65,7 @@ void RigidbodyComponent::OnCollisionEnter(ColliderComponent* otherCollider)
     mOwner->GetTransformComponent().Translate(n * (hit.Depth + 0.001f));
 
     // Get if existing the other rigidbody
-    RigidbodyComponent* otherRb = CollisionManager::Instance().GetRigidbody(otherCollider->GetOwner());
+    RigidbodyComponent* otherRb = otherCollider->GetOwner()->GetRigidBody();
 
     bool isGround = false;
 
@@ -129,7 +130,7 @@ void RigidbodyComponent::OnCollisionStay(ColliderComponent* otherCollider)
 
 void RigidbodyComponent::OnCollisionExit(ColliderComponent* otherCollider)
 {
-    RigidbodyComponent* otherRb = CollisionManager::Instance().GetRigidbody(otherCollider->GetOwner()); 
+    RigidbodyComponent* otherRb = otherCollider->GetOwner()->GetRigidBody();
 
     bool isGround = false;
 

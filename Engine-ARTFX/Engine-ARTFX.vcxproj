@@ -192,6 +192,7 @@
     <ClCompile Include="Core\Engine\Physics\PhysicManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Core\Engine\Physics\CollisionInfos.h" />
     <ClInclude Include="Core\Engine\Physics\CollisionResolver.h" />
     <ClInclude Include="Core\Engine\ActorComponents\Colliders\BoxCollider3DComponent.h" />
     <ClInclude Include="Core\Engine\CoreComponents\CameraActor.h" />

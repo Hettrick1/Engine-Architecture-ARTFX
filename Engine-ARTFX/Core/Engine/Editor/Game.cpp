@@ -4,7 +4,7 @@
 #include "RendererOpenGl.h"
 
 Game::Game(std::string title, std::vector<Scene*> scenes) 
-    : mIsRunning(true), mAllScenes(scenes), mInputManager(InputManager::Instance()), mCollisionManager(CollisionManager::Instance())
+    : mIsRunning(true), mAllScenes(scenes), mInputManager(InputManager::Instance()), mPhysicManager(PhysicManager::Instance())
 {
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
     {
@@ -59,8 +59,7 @@ void Game::Loop()
 
 void Game::Update()
 {
-    mCollisionManager.CheckRigidBody();
-    mCollisionManager.CheckCollisions();
+    //mCollisionManager.Update();
     mAllScenes[mLoadedScene]->Update();
 }
 

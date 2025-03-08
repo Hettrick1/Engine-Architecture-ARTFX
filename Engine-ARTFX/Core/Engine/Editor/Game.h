@@ -4,7 +4,7 @@
 #include "Scene.h"
 #include "Timer.h"
 #include "InputManager.h"
-#include "Physics/CollisionManager.h"
+#include "Physics/PhysicManager.h"
 #include <iostream>
 #include <vector>
 
@@ -26,7 +26,7 @@ private:
 	Window* mGameWindow;
 	IRenderer* mRenderer;
 	InputManager& mInputManager;
-	CollisionManager& mCollisionManager;
+	PhysicManager& mPhysicManager;
 	bool mIsRunning;
 	std::vector<Scene*> mAllScenes;
 	int mLoadedScene;

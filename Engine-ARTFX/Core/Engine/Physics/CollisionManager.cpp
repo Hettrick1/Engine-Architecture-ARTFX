@@ -6,10 +6,8 @@
 #include <utility>
 #include <algorithm>
 
-CollisionManager& CollisionManager::Instance()
+CollisionManager::CollisionManager()
 {
-    static CollisionManager instance;
-    return instance;
 }
 
 CollisionManager::~CollisionManager()
@@ -26,14 +24,6 @@ CollisionManager::~CollisionManager()
             collider = nullptr;
         }
     }
-    for (auto it = mRigidbodies.begin(); it != mRigidbodies.end(); ++it)
-    {
-        if (it->second != nullptr)
-        {
-            delete it->second;
-        }
-        it->second = nullptr;
-    }
     mColliders.clear();
     mCurrentCollisions.clear();
 }
@@ -45,11 +35,8 @@ void CollisionManager::RegisterCollider(Actor* pOwner, ColliderComponent* pColli
     }
 }
 
-void CollisionManager::RegisterRigidbody(Actor* pOwner, RigidbodyComponent* pRigidbody)
+void CollisionManager::RemoveCollider(Actor* pOwner, ColliderComponent* pCollider)
 {
-    if (mRigidbodies.find(pOwner) == mRigidbodies.end()) {
-        mRigidbodies[pOwner] = pRigidbody;
-    }
 }
 
 void CollisionManager::CheckCollisions()
@@ -89,11 +76,6 @@ void CollisionManager::CheckCollisions()
 
                         if (isNewCollision1 && collider1->GetIsTriggerable()) {
                             collider1->NotifyListenersStarted();
-                            // Call Rigidbody event if it exists
-                            Actor* actor1 = collider1->GetOwner(); 
-                            if (auto* rb1 = mRigidbodies[actor1]) { 
-                                rb1->OnCollisionEnter(collider2); 
-                            }
                         }
                         else if (collider1->GetIsTriggerable()) {
                             collider1->NotifyListenersStay();
@@ -101,12 +83,6 @@ void CollisionManager::CheckCollisions()
 
                         if (isNewCollision2 && collider2->GetIsTriggerable()) {
                             collider2->NotifyListenersStarted();
-
-                            // Call Rigidbody event if it exists
-                            Actor* actor2 = collider2->GetOwner();
-                            if (auto* rb2 = mRigidbodies[actor2]) {
-                                rb2->OnCollisionEnter(collider1);
-                            }
                         }
                         else if (collider2->GetIsTriggerable()) {
                             collider2->NotifyListenersStay();
@@ -132,44 +108,16 @@ void CollisionManager::CheckCollisions()
                     if (collider->GetIsTriggerable()) {
                         collider->SetHitResult(false, nullptr, nullptr);
                         collider->NotifyListenersEnded();
-
-                        Actor* actor1 = collider->GetOwner(); 
-                        if (auto* rb1 = mRigidbodies[actor1]) { 
-                            rb1->OnCollisionExit(otherCollider); 
-                        }
                     }
                     if (otherCollider->GetIsTriggerable()) {
                         otherCollider->SetHitResult(false, nullptr, nullptr);
                         otherCollider->NotifyListenersEnded();
-
-                        Actor* actor2 = otherCollider->GetOwner();
-                        if (auto* rb2 = mRigidbodies[actor2]) {
-                            rb2->OnCollisionExit(collider);
-                        } 
                     }
                 }
             }
         }
     }
-
     mCurrentCollisions = newCollisions;
-}
-
-void CollisionManager::CheckRigidBody()
-{
-    if (mRigidbodies.empty()) {
-        return;
-    }
-    else {
-        for (auto it = mRigidbodies.begin(); it != mRigidbodies.end(); ++it)
-        {
-            RigidbodyComponent* rigidbody = it->second;
-            if (rigidbody != nullptr)
-            {
-                rigidbody->Update();
-            }
-        }
-    }
 }
 
 void CollisionManager::CalculateNormal(ColliderComponent* collider1, ColliderComponent* collider2)
@@ -245,11 +193,4 @@ void CollisionManager::CalculateNormal(ColliderComponent* collider1, ColliderCom
      
     collider1->SetHitResult(true, collider2->GetOwner(), collider2, normal, depth);
     collider2->SetHitResult(true, collider1->GetOwner(), collider1, normal, depth);
-}
-
-RigidbodyComponent* CollisionManager::GetRigidbody(Actor* pRbOwner)
-{
-    if (mRigidbodies.find(pRbOwner) != mRigidbodies.end()) {
-        return mRigidbodies[pRbOwner];
-    }
 }

@@ -350,6 +350,9 @@
     <ClInclude Include="Core\Engine\Physics\CollisionResolver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Core\Engine\Physics\CollisionInfos.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Imports\Shaders\Simple.vert" />

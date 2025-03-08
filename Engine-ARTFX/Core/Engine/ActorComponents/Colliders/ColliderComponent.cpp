@@ -1,10 +1,11 @@
 #include "ColliderComponent.h"
 #include "Physics/ICollisionListener.h"
+#include "Physics/PhysicManager.h"
 
-ColliderComponent::ColliderComponent(Actor* owner, int updateOder)
-	: Component(owner, updateOder), mIsTriggerable(true)
+ColliderComponent::ColliderComponent(Actor* pOwner, int pUpdateOder)
+	: Component(pOwner, pUpdateOder), mIsTriggerable(true)
 {
-
+	PhysicManager::Instance().RegisterCollider(pOwner, this);
 }
 
 ColliderComponent::~ColliderComponent()

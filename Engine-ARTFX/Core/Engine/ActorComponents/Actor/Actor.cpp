@@ -108,6 +108,11 @@ TransformComponent& Actor::GetTransformComponent()
     return mTransformComponent;
 }
 
+void Actor::SetRigidBody(RigidbodyComponent* pRigidbody)
+{
+    mRigidbody = pRigidbody;
+}
+
 void Actor::UpdateComponentsTransform()
 {
 

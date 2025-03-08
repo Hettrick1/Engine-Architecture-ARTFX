@@ -24,7 +24,7 @@ void Cube::Start()
 	AddComponent(mesh);
 	RigidbodyComponent* rb = new RigidbodyComponent(this);
 	AddComponent(rb);
-	CollisionManager::Instance().CreateCollider<BoxCollider3DComponent>(this, 10, GetTransformComponent().GetSize());
+	BoxCollider3DComponent* bc = new BoxCollider3DComponent(this, 10, GetTransformComponent().GetSize());
 }
 
 void Cube::Update()
