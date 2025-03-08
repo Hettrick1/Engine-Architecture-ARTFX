@@ -1,5 +1,5 @@
 #include "ColliderComponent.h"
-#include "ICollisionListener.h"
+#include "Physics/ICollisionListener.h"
 
 ColliderComponent::ColliderComponent(Actor* owner, int updateOder)
 	: Component(owner, updateOder), mIsTriggerable(true)

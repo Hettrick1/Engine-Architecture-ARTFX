@@ -3,7 +3,7 @@
 #include "MeshComponent.h"
 #include "RigidbodyComponent.h"
 #include "Timer.h"
-#include "CollisionManager.h"
+#include "Physics/CollisionManager.h"
 #include "BoxCollider3DComponent.h"
 
 Cube::Cube(Vector3D pPos, Vector3D pSize, Quaternion pRotation)

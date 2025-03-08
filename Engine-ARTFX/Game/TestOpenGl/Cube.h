@@ -1,7 +1,7 @@
 #pragma once
 #include "Actor.h"
 #include "SpriteComponent.h"
-#include "ICollisionListener.h"
+#include "Physics/ICollisionListener.h"
 
 class Cube : public Actor, public ICollisionListener
 {

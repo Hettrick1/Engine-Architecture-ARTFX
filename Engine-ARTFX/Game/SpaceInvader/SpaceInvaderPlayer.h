@@ -2,7 +2,7 @@
 #include "Actor.h"
 #include "IActionListener.h"
 #include "FlipbookComponent.h"
-#include "ICollisionListener.h"
+#include "Physics/ICollisionListener.h"
 
 class SpaceInvaderPlayer : public Actor, public ICollisionListener
 {

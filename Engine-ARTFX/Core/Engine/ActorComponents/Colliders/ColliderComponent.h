@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Component.h"
-#include "CollisionManager.h"
-#include "HitResult.h"
+#include "Physics/CollisionManager.h"
+#include "Physics/HitResult.h"
 
 class ICollisionListener;
 

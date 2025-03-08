@@ -2,7 +2,7 @@
 #include "Actor.h"
 #include "IActionListener.h"
 #include "SpriteComponent.h"
-#include "ICollisionListener.h"
+#include "Physics/ICollisionListener.h"
 
 class GroundActor : public Actor, public ICollisionListener
 {

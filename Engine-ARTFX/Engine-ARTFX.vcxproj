@@ -138,6 +138,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Core\Engine\Physics\CollisionResolver.cpp" />
     <ClCompile Include="Core\Engine\ActorComponents\Colliders\BoxCollider3DComponent.cpp" />
     <ClCompile Include="Core\Engine\CoreComponents\CameraActor.cpp" />
     <ClCompile Include="Core\Engine\ActorComponents\Actor\CameraComponent.cpp" />
@@ -148,7 +149,7 @@
     <ClCompile Include="Core\Engine\Graphics\OpenGl\VertexArray.cpp" />
     <ClCompile Include="Core\Engine\Inputs\BooleanActions.cpp" />
     <ClCompile Include="Core\Engine\Graphics\Assets.cpp" />
-    <ClCompile Include="Core\Engine\ActorComponents\Managers\CollisionManager.cpp" />
+    <ClCompile Include="Core\Engine\Physics\CollisionManager.cpp" />
     <ClCompile Include="Core\Engine\Graphics\Texture.cpp" />
     <ClCompile Include="Core\Engine\Inputs\InputActions.cpp" />
     <ClCompile Include="Core\Maths\Matrix4D.cpp" />
@@ -188,14 +189,16 @@
     <ClCompile Include="Core\Engine\Graphics\Mesh.cpp" />
     <ClCompile Include="Core\Engine\ActorComponents\GraphicComponent\MeshComponent.cpp" />
     <ClCompile Include="Core\Engine\CoreComponents\PlayerController3D.cpp" />
+    <ClCompile Include="Core\Engine\Physics\PhysicManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Core\Engine\Physics\CollisionResolver.h" />
     <ClInclude Include="Core\Engine\ActorComponents\Colliders\BoxCollider3DComponent.h" />
     <ClInclude Include="Core\Engine\CoreComponents\CameraActor.h" />
     <ClInclude Include="Core\Engine\ActorComponents\Actor\CameraComponent.h" />
     <ClInclude Include="Core\Engine\ActorComponents\PhysicComponent\ActorMovementComponent.h" />
-    <ClInclude Include="Core\Engine\ActorComponents\Managers\HitResult.h" />
-    <ClInclude Include="Core\Engine\ActorComponents\Managers\ICollisionListener.h" />
+    <ClInclude Include="Core\Engine\Physics\HitResult.h" />
+    <ClInclude Include="Core\Engine\Physics\ICollisionListener.h" />
     <ClInclude Include="Core\Engine\Graphics\IRenderer.h" />
     <ClInclude Include="Core\Engine\Graphics\OpenGl\RendererOpenGl.h" />
     <ClInclude Include="Core\Engine\Graphics\OpenGl\Shaders\Shader.h" />
@@ -205,7 +208,7 @@
     <ClInclude Include="Core\Engine\Inputs\BooleanActions.h" />
     <ClInclude Include="Core\Engine\Editor\Defs.h" />
     <ClInclude Include="Core\Engine\Graphics\Assets.h" />
-    <ClInclude Include="Core\Engine\ActorComponents\Managers\CollisionManager.h" />
+    <ClInclude Include="Core\Engine\Physics\CollisionManager.h" />
     <ClInclude Include="Core\Engine\Graphics\Texture.h" />
     <ClInclude Include="Core\Engine\Inputs\ActionType.h" />
     <ClInclude Include="Core\Maths\Maths.h" />
@@ -247,6 +250,7 @@
     <ClInclude Include="Core\Engine\Graphics\Mesh.h" />
     <ClInclude Include="Core\Engine\ActorComponents\GraphicComponent\MeshComponent.h" />
     <ClInclude Include="Core\Engine\CoreComponents\PlayerController3D.h" />
+    <ClInclude Include="Core\Engine\Physics\PhysicManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Imports\Shaders\BasicMesh.frag" />

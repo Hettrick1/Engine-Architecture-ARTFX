@@ -1,6 +1,6 @@
 #include "GroundActor.h"
 #include "Scene.h"
-#include "CollisionManager.h"
+#include "Physics/CollisionManager.h"
 #include "BoxCollider2DComponent.h"
 
 GroundActor::GroundActor(Vector3D pPos, Vector3D pSize, Quaternion pRotation)
