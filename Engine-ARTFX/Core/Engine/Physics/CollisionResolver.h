@@ -8,8 +8,6 @@
 #include <utility>
 #include <algorithm>
 
-class CollisionManager;
-class CollisionResolver;
 class RigidbodyComponent;
 
 namespace CollisionUtils {
@@ -52,19 +50,24 @@ class CollisionResolver
 {
 public:
 	CollisionResolver() = default;
+	~CollisionResolver();
 	CollisionResolver(const CollisionResolver&) = delete;
 	CollisionResolver& operator=(const CollisionResolver&) = delete;
 
 	void UpdateRigidbodies();
 	void ResolveCollisions();
+	void CalculateQuerryCollisions();
+	void CalculatePhysicCollisions();
+
+	void CalculateReactionForce();
 
 	void RegisterRigidBody(Actor* pOwner, RigidbodyComponent* pRigidbody);
 	void RemoveRigidBody(Actor* pOwner, RigidbodyComponent* pRigidbody);
-	void AddCollisionToQueue(CollisionInfos pCollisionInfo);
+	void AddCollisionToQueue(CollisionInfos* pCollisionInfo);
 private:
-	std::unordered_map<std::pair<Actor*, Actor*>, CollisionInfos,
+	std::unordered_map<std::pair<Actor*, Actor*>, CollisionInfos*,
 		CollisionUtils::ActorPairHash, CollisionUtils::ActorPairEqual> mPhysicCollisions;
-	std::unordered_map<std::pair<ColliderComponent*, ColliderComponent*>, CollisionInfos,
+	std::unordered_map<std::pair<ColliderComponent*, ColliderComponent*>, CollisionInfos*,
 		CollisionUtils::CollisionPairHash, CollisionUtils::CollisionPairEqual> mQuerryCollisions;
 	std::unordered_map<Actor*, RigidbodyComponent*> mRigidbodies;
 };

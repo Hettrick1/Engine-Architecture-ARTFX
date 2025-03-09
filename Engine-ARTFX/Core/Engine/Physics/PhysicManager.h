@@ -27,7 +27,7 @@ public: // collision manager
 public: // collision resolver
 	void RegisterRigidBody(Actor* pOwner, RigidbodyComponent* pRigidbody);
 	void RemoveRigidBody(Actor* pOwner, RigidbodyComponent* pRigidbody);
-	void AddCollisionToQueue(CollisionInfos pCollisionInfo);
+	void AddCollisionToQueue(CollisionInfos* pCollisionInfo);
 private:
 	PhysicManager();
 	CollisionManager* mCollisionManager;

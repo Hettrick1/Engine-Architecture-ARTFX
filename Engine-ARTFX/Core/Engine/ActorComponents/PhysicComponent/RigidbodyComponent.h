@@ -18,6 +18,7 @@ public :
 	void Update();
 	void ApplyForce(Vector3D pForce);
 	void AddImpulse(Vector3D pImpulse);
+	void ResolveCollision(Vector3D pResolveForce);
 	void OnCollisionEnter(ColliderComponent* otherCollider);
 	void OnCollisionStay(ColliderComponent* otherCollider);
 	void OnCollisionExit(ColliderComponent* otherCollider);
@@ -30,6 +31,7 @@ public:
 	Vector3D GetVelocity() const { return mVelocity; }
 	float GetMass() const { return mMass; }
 	bool GetIsGrounded() const { return mIsGrounded; }
+	float GetBounciness() const { return mBounciness; }
 
 	void SetIsStatic(bool isStatic);
 	bool IsStatic() const { return mIsStatic; }

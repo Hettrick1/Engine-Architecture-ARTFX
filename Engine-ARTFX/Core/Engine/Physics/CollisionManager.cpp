@@ -3,6 +3,7 @@
 #include "ICollisionListener.h"
 #include "ColliderComponent.h"
 #include "RigidbodyComponent.h"
+#include "PhysicManager.h"
 #include <utility>
 #include <algorithm>
 
@@ -37,6 +38,22 @@ void CollisionManager::RegisterCollider(Actor* pOwner, ColliderComponent* pColli
 
 void CollisionManager::RemoveCollider(Actor* pOwner, ColliderComponent* pCollider)
 {
+    auto it = mColliders.find(pOwner);
+    if (it != mColliders.end())
+    {
+        std::vector<ColliderComponent*>& colliders = it->second;
+
+        auto colliderIt = std::find(colliders.begin(), colliders.end(), pCollider);
+        if (colliderIt != colliders.end())
+        {
+            colliders.erase(colliderIt);
+        }
+
+        if (colliders.empty())
+        {
+            mColliders.erase(it);
+        }
+    }
 }
 
 void CollisionManager::CheckCollisions()
@@ -70,24 +87,23 @@ void CollisionManager::CheckCollisions()
                         bool isNewCollision1 = mCurrentCollisions[collider1].find(collider2) == mCurrentCollisions[collider1].end();
                         bool isNewCollision2 = mCurrentCollisions[collider2].find(collider1) == mCurrentCollisions[collider2].end();
 
-                        if (isNewCollision1 && isNewCollision2) {
+                        std::pair<Actor*, Actor*> actorPair;
+                        actorPair.first = collider1->GetOwner();
+                        actorPair.second = collider2->GetOwner();
+
+                        std::pair<ColliderComponent*, ColliderComponent*> colliderPair;
+                        colliderPair.first = collider1;
+                        colliderPair.second = collider2;
+
+                        if (isNewCollision1 || isNewCollision2) { //enter
                             CalculateNormal(collider1, collider2);
+                            CollisionInfos* infos = new CollisionInfos(actorPair, colliderPair, CollisionType::Enter, Vector3D::unitZ, 0);
+                            PhysicManager::Instance().AddCollisionToQueue(infos);
                         }
-
-                        if (isNewCollision1 && collider1->GetIsTriggerable()) {
-                            collider1->NotifyListenersStarted();
+                        else { // stays
+                            CollisionInfos* infos = new CollisionInfos(actorPair, colliderPair, CollisionType::Stay, Vector3D::unitZ, 0);
+                            PhysicManager::Instance().AddCollisionToQueue(infos);
                         }
-                        else if (collider1->GetIsTriggerable()) {
-                            collider1->NotifyListenersStay();
-                        }
-
-                        if (isNewCollision2 && collider2->GetIsTriggerable()) {
-                            collider2->NotifyListenersStarted();
-                        }
-                        else if (collider2->GetIsTriggerable()) {
-                            collider2->NotifyListenersStay();
-                        }
-
                         newCollisions[collider1].insert(collider2);
                         newCollisions[collider2].insert(collider1);
                     }
@@ -105,14 +121,13 @@ void CollisionManager::CheckCollisions()
                 if (processedCollisions.find(collisionPair) == processedCollisions.end()) {
                     processedCollisions.insert(collisionPair);
 
-                    if (collider->GetIsTriggerable()) {
-                        collider->SetHitResult(false, nullptr, nullptr);
-                        collider->NotifyListenersEnded();
-                    }
-                    if (otherCollider->GetIsTriggerable()) {
-                        otherCollider->SetHitResult(false, nullptr, nullptr);
-                        otherCollider->NotifyListenersEnded();
-                    }
+                    std::pair<Actor*, Actor*> actorPair;
+                    actorPair.first = collisionPair.first->GetOwner(); 
+                    actorPair.second = collisionPair.second->GetOwner();
+
+                    // exit
+                    CollisionInfos* infos = new CollisionInfos(actorPair, collisionPair, CollisionType::Exit, Vector3D::unitZ, 0);
+                    PhysicManager::Instance().AddCollisionToQueue(infos);
                 }
             }
         }

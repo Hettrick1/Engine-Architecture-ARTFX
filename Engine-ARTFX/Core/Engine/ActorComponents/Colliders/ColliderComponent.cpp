@@ -3,7 +3,7 @@
 #include "Physics/PhysicManager.h"
 
 ColliderComponent::ColliderComponent(Actor* pOwner, int pUpdateOder)
-	: Component(pOwner, pUpdateOder), mIsTriggerable(true)
+	: Component(pOwner, pUpdateOder), mIsTriggerable(false)
 {
 	PhysicManager::Instance().RegisterCollider(pOwner, this);
 }

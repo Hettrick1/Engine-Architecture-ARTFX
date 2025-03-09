@@ -60,7 +60,7 @@ void PhysicManager::RemoveRigidBody(Actor* pOwner, RigidbodyComponent* pRigidbod
     mCollisionResolver->RemoveRigidBody(pOwner, pRigidbody);
 }
 
-void PhysicManager::AddCollisionToQueue(CollisionInfos pCollisionInfo)
+void PhysicManager::AddCollisionToQueue(CollisionInfos* pCollisionInfo)
 {
     mCollisionResolver->AddCollisionToQueue(pCollisionInfo);
 }

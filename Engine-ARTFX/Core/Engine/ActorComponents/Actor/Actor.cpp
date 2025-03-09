@@ -110,7 +110,14 @@ TransformComponent& Actor::GetTransformComponent()
 
 void Actor::SetRigidBody(RigidbodyComponent* pRigidbody)
 {
-    mRigidbody = pRigidbody;
+    if (mRigidbody == nullptr)
+    {
+        mRigidbody = pRigidbody;
+    }
+    else
+    {
+        Log::Error(LogType::System, "You already have a rigidbody attached to this actor !");
+    }
 }
 
 void Actor::UpdateComponentsTransform()

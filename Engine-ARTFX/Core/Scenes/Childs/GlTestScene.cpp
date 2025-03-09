@@ -32,7 +32,7 @@ void GlTestScene::Start(IRenderer* renderer)
 	ground->GetComponentOfType<RigidbodyComponent>()->SetMass(10000000); 
 	ground->GetComponentOfType<RigidbodyComponent>()->SetIsStatic(true);
 
-	Cube* quille = new Cube();
+	/*Cube* quille = new Cube();
 	AddActor(quille);
 	quille->GetTransformComponent().SetSize(Vector3D(1, 1, 2));
 	quille->SetPosition(Vector3D(0.6f, 30.0f, -2.5f));
@@ -46,7 +46,7 @@ void GlTestScene::Start(IRenderer* renderer)
 	quille1->SetPosition(Vector3D(-0.6f, 35.0f, -2.5f));
 	quille1->Start();
 	quille1->GetComponentOfType<RigidbodyComponent>()->SetMass(0.5);
-	quille1->GetComponentOfType<RigidbodyComponent>()->SetIsGrounded(true);
+	quille1->GetComponentOfType<RigidbodyComponent>()->SetIsGrounded(true);*/
 
 	Cube* ball = new Cube();
 	AddActor(ball);

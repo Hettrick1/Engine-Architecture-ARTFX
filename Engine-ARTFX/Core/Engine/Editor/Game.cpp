@@ -59,7 +59,7 @@ void Game::Loop()
 
 void Game::Update()
 {
-    //mCollisionManager.Update();
+    mPhysicManager.Update();
     mAllScenes[mLoadedScene]->Update();
 }
 

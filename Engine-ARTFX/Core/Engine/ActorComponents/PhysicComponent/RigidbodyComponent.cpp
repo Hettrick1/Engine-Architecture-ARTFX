@@ -48,6 +48,16 @@ void RigidbodyComponent::AddImpulse(Vector3D pImpulse)
     }
 }
 
+void RigidbodyComponent::ResolveCollision(Vector3D pResolveForce)
+{
+    Log::Info("aaaaaaaaaaa");
+    if (mIsStatic || !mUseGravity || mMass > 10000)
+    {
+        return;
+    }
+    SetVelocity(mVelocity + pResolveForce);
+}
+
 void RigidbodyComponent::OnCollisionEnter(ColliderComponent* otherCollider)
 {
     Log::Info("aaaaaaaaaaa");
@@ -55,72 +65,73 @@ void RigidbodyComponent::OnCollisionEnter(ColliderComponent* otherCollider)
     {
         return;
     }
-    HitResult hit = otherCollider->GetHitResult();
-    Vector3D n = hit.Normal;
 
-    if (mIsGrounded && hit.Normal.z > 0.01f)
-    {
-        return;
-    }
-    mOwner->GetTransformComponent().Translate(n * (hit.Depth + 0.001f));
+    //HitResult hit = otherCollider->GetHitResult();
+    //Vector3D n = hit.Normal;
 
-    // Get if existing the other rigidbody
-    RigidbodyComponent* otherRb = otherCollider->GetOwner()->GetRigidBody();
+    //if (mIsGrounded && hit.Normal.z > 0.01f)
+    //{
+    //    return;
+    //}
+    //mOwner->GetTransformComponent().Translate(n * (hit.Depth + 0.001f));
 
-    bool isGround = false;
+    //// Get if existing the other rigidbody
+    //RigidbodyComponent* otherRb = otherCollider->GetOwner()->GetRigidBody();
 
-    if (otherRb) {
-        isGround = otherRb->IsStatic() || (otherRb->GetMass() > mMass * 10.0f) || otherRb->GetIsGrounded();
-    }
-    else {
-        isGround = true;
-    }
+    //bool isGround = false;
 
-    if (isGround && hit.Normal.z > 0.01f) {
-        mIsGrounded = true;
-        mVelocity.z = 0.0f; 
-    }
+    //if (otherRb) {
+    //    isGround = otherRb->IsStatic() || (otherRb->GetMass() > mMass * 10.0f) || otherRb->GetIsGrounded();
+    //}
+    //else {
+    //    isGround = true;
+    //}
 
-    if (mIsGrounded && mUseGravity) {
-        mAcceleration.z = 0.0f;
-    }
+    //if (isGround && hit.Normal.z > 0.01f) {
+    //    mIsGrounded = true;
+    //    mVelocity.z = 0.0f; 
+    //}
 
-    Vector3D otherVelocity = (otherRb && !isGround) ? otherRb->GetVelocity() : Vector3D(0);
+    //if (mIsGrounded && mUseGravity) {
+    //    mAcceleration.z = 0.0f;
+    //}
 
-    // Calculate Velocity relative to the normal
-    Vector3D relativeVelocity = mVelocity - otherVelocity;
-    float vRel = Vector3D::Dot(relativeVelocity, n);
+    //Vector3D otherVelocity = (otherRb && !isGround) ? otherRb->GetVelocity() : Vector3D(0);
 
-    if (vRel >= 0)
-        return;
+    //// Calculate Velocity relative to the normal
+    //Vector3D relativeVelocity = mVelocity - otherVelocity;
+    //float vRel = Vector3D::Dot(relativeVelocity, n);
 
-    // bounciness
-    float e = mBounciness;
+    //if (vRel >= 0)
+    //    return;
 
-    // calculate invert mass
-    float invMass1 = (mMass > 0.0f) ? 1.0f / mMass : 0.0f;
-    float invMass2 = (otherRb && otherRb->GetMass() > 0.0f) ? 1.0f / otherRb->GetMass() : 0.0f;
+    //// bounciness
+    //float e = mBounciness;
 
-    // calculate impulse
-    float j = -(1 + e) * vRel / (invMass1 + invMass2);
+    //// calculate invert mass
+    //float invMass1 = (mMass > 0.0f) ? 1.0f / mMass : 0.0f;
+    //float invMass2 = (otherRb && otherRb->GetMass() > 0.0f) ? 1.0f / otherRb->GetMass() : 0.0f;
 
-    const float impulseThreshold = 0.8f;
-    if (fabs(j) < impulseThreshold * mMass)
-    {
-        SetVelocity(0);
-        j = 0;
-        return;
-    }
+    //// calculate impulse
+    //float j = -(1 + e) * vRel / (invMass1 + invMass2);
 
-    Vector3D impulse = j * n;
+    //const float impulseThreshold = 0.8f;
+    //if (fabs(j) < impulseThreshold * mMass)
+    //{
+    //    SetVelocity(0);
+    //    j = 0;
+    //    return;
+    //}
 
-    // apply impulse
-    mVelocity += impulse * invMass1;
+    //Vector3D impulse = j * n;
 
-    if (otherRb)
-    {
-        otherRb->SetVelocity(otherRb->GetVelocity() - impulse * invMass2);
-    }
+    //// apply impulse
+    //mVelocity += impulse * invMass1;
+
+    //if (otherRb)
+    //{
+    //    otherRb->SetVelocity(otherRb->GetVelocity() - impulse * invMass2);
+    //}
 }
 
 void RigidbodyComponent::OnCollisionStay(ColliderComponent* otherCollider)
@@ -130,7 +141,7 @@ void RigidbodyComponent::OnCollisionStay(ColliderComponent* otherCollider)
 
 void RigidbodyComponent::OnCollisionExit(ColliderComponent* otherCollider)
 {
-    RigidbodyComponent* otherRb = otherCollider->GetOwner()->GetRigidBody();
+    /*RigidbodyComponent* otherRb = otherCollider->GetOwner()->GetRigidBody();
 
     bool isGround = false;
 
@@ -146,7 +157,7 @@ void RigidbodyComponent::OnCollisionExit(ColliderComponent* otherCollider)
         mIsGrounded = false;
         otherRb->SetIsGrounded(false);
         mGravity = -9.81;
-    }
+    }*/
 }
 
 void RigidbodyComponent::SetVelocity(Vector3D pVelocity)
