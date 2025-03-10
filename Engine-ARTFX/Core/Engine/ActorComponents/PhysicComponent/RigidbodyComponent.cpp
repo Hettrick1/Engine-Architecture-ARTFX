@@ -7,7 +7,7 @@
 
 RigidbodyComponent::RigidbodyComponent(Actor* pOwner, int pUpdateOrder)
 	: Component(pOwner, pUpdateOrder), 
-	mVelocity(0.0), mAcceleration(0.0), mMass(1.0), mFriction(0.1f), mUseGravity(true), mGravity(-9.81), 
+	mVelocity(0.0), mAcceleration(0.0), mMass(1.0), mFriction(0.1f), mUseGravity(false), mGravity(-9.81), 
 	mBounciness(0.5), mIsGrounded(false), mIsStatic(false)
 {
     PhysicManager::Instance().RegisterRigidBody(pOwner, this);
@@ -21,11 +21,11 @@ void RigidbodyComponent::Update()
 		mAcceleration.z += mMass * mGravity;
 	}
 
-	mVelocity += mAcceleration * Timer::deltaTime;
+	mVelocity += mAcceleration;
 
 	mVelocity *= (1.0f - mFriction * Timer::deltaTime);
 
-	mOwner->GetTransformComponent().Translate(mVelocity * 0.5 * Timer::deltaTime);
+	mOwner->GetTransformComponent().Translate(mVelocity * Timer::deltaTime);
 
 	//Log::Info(std::to_string(mOwner->GetTransformComponent().GetPosition().z));
 
@@ -50,8 +50,7 @@ void RigidbodyComponent::AddImpulse(Vector3D pImpulse)
 
 void RigidbodyComponent::ResolveCollision(Vector3D pResolveForce)
 {
-    Log::Info("aaaaaaaaaaa");
-    if (mIsStatic || !mUseGravity || mMass > 10000)
+    if (mIsStatic || mMass > 10000)
     {
         return;
     }
@@ -60,78 +59,7 @@ void RigidbodyComponent::ResolveCollision(Vector3D pResolveForce)
 
 void RigidbodyComponent::OnCollisionEnter(ColliderComponent* otherCollider)
 {
-    Log::Info("aaaaaaaaaaa");
-    if (mIsStatic || !mUseGravity || mMass > 1000000)
-    {
-        return;
-    }
-
-    //HitResult hit = otherCollider->GetHitResult();
-    //Vector3D n = hit.Normal;
-
-    //if (mIsGrounded && hit.Normal.z > 0.01f)
-    //{
-    //    return;
-    //}
-    //mOwner->GetTransformComponent().Translate(n * (hit.Depth + 0.001f));
-
-    //// Get if existing the other rigidbody
-    //RigidbodyComponent* otherRb = otherCollider->GetOwner()->GetRigidBody();
-
-    //bool isGround = false;
-
-    //if (otherRb) {
-    //    isGround = otherRb->IsStatic() || (otherRb->GetMass() > mMass * 10.0f) || otherRb->GetIsGrounded();
-    //}
-    //else {
-    //    isGround = true;
-    //}
-
-    //if (isGround && hit.Normal.z > 0.01f) {
-    //    mIsGrounded = true;
-    //    mVelocity.z = 0.0f; 
-    //}
-
-    //if (mIsGrounded && mUseGravity) {
-    //    mAcceleration.z = 0.0f;
-    //}
-
-    //Vector3D otherVelocity = (otherRb && !isGround) ? otherRb->GetVelocity() : Vector3D(0);
-
-    //// Calculate Velocity relative to the normal
-    //Vector3D relativeVelocity = mVelocity - otherVelocity;
-    //float vRel = Vector3D::Dot(relativeVelocity, n);
-
-    //if (vRel >= 0)
-    //    return;
-
-    //// bounciness
-    //float e = mBounciness;
-
-    //// calculate invert mass
-    //float invMass1 = (mMass > 0.0f) ? 1.0f / mMass : 0.0f;
-    //float invMass2 = (otherRb && otherRb->GetMass() > 0.0f) ? 1.0f / otherRb->GetMass() : 0.0f;
-
-    //// calculate impulse
-    //float j = -(1 + e) * vRel / (invMass1 + invMass2);
-
-    //const float impulseThreshold = 0.8f;
-    //if (fabs(j) < impulseThreshold * mMass)
-    //{
-    //    SetVelocity(0);
-    //    j = 0;
-    //    return;
-    //}
-
-    //Vector3D impulse = j * n;
-
-    //// apply impulse
-    //mVelocity += impulse * invMass1;
-
-    //if (otherRb)
-    //{
-    //    otherRb->SetVelocity(otherRb->GetVelocity() - impulse * invMass2);
-    //}
+    
 }
 
 void RigidbodyComponent::OnCollisionStay(ColliderComponent* otherCollider)
@@ -141,23 +69,7 @@ void RigidbodyComponent::OnCollisionStay(ColliderComponent* otherCollider)
 
 void RigidbodyComponent::OnCollisionExit(ColliderComponent* otherCollider)
 {
-    /*RigidbodyComponent* otherRb = otherCollider->GetOwner()->GetRigidBody();
-
-    bool isGround = false;
-
-    if (otherRb) {
-        isGround = otherRb->IsStatic() || (otherRb->GetMass() > mMass * 10.0f);
-    }
-    else {
-        isGround = true;
-    }
-
-    if (isGround)
-    {
-        mIsGrounded = false;
-        otherRb->SetIsGrounded(false);
-        mGravity = -9.81;
-    }*/
+   
 }
 
 void RigidbodyComponent::SetVelocity(Vector3D pVelocity)

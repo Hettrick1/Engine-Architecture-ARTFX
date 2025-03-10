@@ -25,6 +25,9 @@ public:
 private:
     std::unordered_map<Actor*, std::vector<ColliderComponent*>> mColliders;
     std::unordered_map<ColliderComponent*, std::unordered_set<ColliderComponent*>> mCurrentCollisions;
+
+    Vector3D mCollisionNormal;
+    float mCollisionDepth;
 };
 
 struct CollisionPairHash { // hash to handle collision pair, to send only one OnTriggerEnd event

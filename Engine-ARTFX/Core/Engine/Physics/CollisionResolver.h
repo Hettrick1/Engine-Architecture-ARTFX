@@ -59,7 +59,7 @@ public:
 	void CalculateQuerryCollisions();
 	void CalculatePhysicCollisions();
 
-	void CalculateReactionForce();
+	void ApplyReactionForce();
 
 	void RegisterRigidBody(Actor* pOwner, RigidbodyComponent* pRigidbody);
 	void RemoveRigidBody(Actor* pOwner, RigidbodyComponent* pRigidbody);
@@ -70,4 +70,5 @@ private:
 	std::unordered_map<std::pair<ColliderComponent*, ColliderComponent*>, CollisionInfos*,
 		CollisionUtils::CollisionPairHash, CollisionUtils::CollisionPairEqual> mQuerryCollisions;
 	std::unordered_map<Actor*, RigidbodyComponent*> mRigidbodies;
+	std::unordered_map<RigidbodyComponent*, Vector3D> mReactionForce;
 };

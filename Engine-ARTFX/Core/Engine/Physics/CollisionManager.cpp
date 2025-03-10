@@ -8,6 +8,7 @@
 #include <algorithm>
 
 CollisionManager::CollisionManager()
+    : mCollisionNormal(0), mCollisionDepth(0)
 {
 }
 
@@ -95,13 +96,14 @@ void CollisionManager::CheckCollisions()
                         colliderPair.first = collider1;
                         colliderPair.second = collider2;
 
+                        CalculateNormal(collider1, collider2);
+
                         if (isNewCollision1 || isNewCollision2) { //enter
-                            CalculateNormal(collider1, collider2);
-                            CollisionInfos* infos = new CollisionInfos(actorPair, colliderPair, CollisionType::Enter, Vector3D::unitZ, 0);
+                            CollisionInfos* infos = new CollisionInfos(actorPair, colliderPair, CollisionType::Enter, mCollisionNormal, mCollisionDepth);
                             PhysicManager::Instance().AddCollisionToQueue(infos);
                         }
                         else { // stays
-                            CollisionInfos* infos = new CollisionInfos(actorPair, colliderPair, CollisionType::Stay, Vector3D::unitZ, 0);
+                            CollisionInfos* infos = new CollisionInfos(actorPair, colliderPair, CollisionType::Stay, mCollisionNormal, mCollisionDepth);
                             PhysicManager::Instance().AddCollisionToQueue(infos);
                         }
                         newCollisions[collider1].insert(collider2);
@@ -126,7 +128,7 @@ void CollisionManager::CheckCollisions()
                     actorPair.second = collisionPair.second->GetOwner();
 
                     // exit
-                    CollisionInfos* infos = new CollisionInfos(actorPair, collisionPair, CollisionType::Exit, Vector3D::unitZ, 0);
+                    CollisionInfos* infos = new CollisionInfos(actorPair, collisionPair, CollisionType::Exit, mCollisionNormal, 0);
                     PhysicManager::Instance().AddCollisionToQueue(infos);
                 }
             }
@@ -137,38 +139,35 @@ void CollisionManager::CheckCollisions()
 
 void CollisionManager::CalculateNormal(ColliderComponent* collider1, ColliderComponent* collider2)
 {
-    // Récupérer les positions centrales des acteurs
     Vector3D pos1 = collider1->GetOwner()->GetTransformComponent().GetPosition();
     Vector3D pos2 = collider2->GetOwner()->GetTransformComponent().GetPosition();
 
-    // Supposons que GetSize() retourne la taille complète du collider
     Vector3D halfSize1 = collider1->GetSize() * 0.5f;
     Vector3D halfSize2 = collider2->GetSize() * 0.5f;
 
-    // Calculer les coins min et max pour chaque AABB
+    // Min Max of the colliders
     Vector3D min1 = pos1 - halfSize1;
     Vector3D max1 = pos1 + halfSize1;
     Vector3D min2 = pos2 - halfSize2;
     Vector3D max2 = pos2 + halfSize2;
 
-    // Calculer les recouvrements (overlap) sur chaque axe
     float overlapX = std::min(max1.x, max2.x) - std::max(min1.x, min2.x);
     float overlapY = std::min(max1.y, max2.y) - std::max(min1.y, min2.y);
     float overlapZ = std::min(max1.z, max2.z) - std::max(min1.z, min2.z);
 
-    // Vérifier si une collision s'est produite
     if (overlapX <= 0 || overlapY <= 0 || overlapZ <= 0)
     {
-        // Pas de collision, retourner
+        
+
+
         return;
     }
 
-    // Déterminer l'axe avec le plus petit recouvrement
     Vector3D normal;
 
     float minOverlap = std::min({ overlapX, overlapY, overlapZ });
     float depth = minOverlap;
-    // Déterminer la direction avec une tolérance pour les égalités
+
     if (minOverlap == overlapX) {
         const float epsilon = 0.001f;
         if (pos1.x < pos2.x - epsilon) {
@@ -205,7 +204,6 @@ void CollisionManager::CalculateNormal(ColliderComponent* collider1, ColliderCom
             normal = (pos1.x < pos2.x) ? Vector3D(0, 0, -1) : Vector3D(0, 0, 1);
         }
     }
-     
-    collider1->SetHitResult(true, collider2->GetOwner(), collider2, normal, depth);
-    collider2->SetHitResult(true, collider1->GetOwner(), collider1, normal, depth);
+    mCollisionNormal = normal;
+    mCollisionDepth = minOverlap;
 }

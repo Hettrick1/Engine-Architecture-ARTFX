@@ -60,8 +60,6 @@ bool BoxCollider3DComponent::CheckCollisionWithBox3D(BoxCollider3DComponent* oth
             (minA.y <= maxB.y && maxA.y >= minB.y) &&
             (minA.z <= maxB.z && maxA.z >= minB.z))
         {
-            mOwner->GetTransformComponent().SetPosition(mLastPosition);
-            mPosition = mLastPosition;
             return true;
         }
         step += 0.01f;

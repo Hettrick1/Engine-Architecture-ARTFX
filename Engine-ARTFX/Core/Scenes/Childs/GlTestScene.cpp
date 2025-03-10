@@ -23,38 +23,45 @@ void GlTestScene::Start(IRenderer* renderer)
 	player->SetPosition(Vector3D(300, 0, 0));
 	player->GetTransformComponent().SetSize({ 1, 1, 0 });
 
-	Cube* ground = new Cube(); 
+	/*Cube* ground = new Cube(); 
 	AddActor(ground); 
 	ground->SetPosition(Vector3D(0.0f, 35.0f, -4.0f)); 
 	ground->GetTransformComponent().SetSize({ 20, 60, 1 }); 
 	ground->Start(); 
 	ground->GetComponentOfType<RigidbodyComponent>()->SetUseGravity(false); 
 	ground->GetComponentOfType<RigidbodyComponent>()->SetMass(10000000); 
-	ground->GetComponentOfType<RigidbodyComponent>()->SetIsStatic(true);
+	ground->GetComponentOfType<RigidbodyComponent>()->SetIsStatic(true);*/
 
-	/*Cube* quille = new Cube();
+	Cube* quille = new Cube();
 	AddActor(quille);
 	quille->GetTransformComponent().SetSize(Vector3D(1, 1, 2));
 	quille->SetPosition(Vector3D(0.6f, 30.0f, -2.5f));
 	quille->Start();
 	quille->GetComponentOfType<RigidbodyComponent>()->SetMass(0.5);
-	quille->GetComponentOfType<RigidbodyComponent>()->SetIsGrounded(true);
+	//quille->GetComponentOfType<RigidbodyComponent>()->SetIsGrounded(true);
 
 	Cube* quille1 = new Cube();
 	AddActor(quille1);
 	quille1->GetTransformComponent().SetSize(Vector3D(1, 1, 2));
-	quille1->SetPosition(Vector3D(-0.6f, 35.0f, -2.5f));
+	quille1->SetPosition(Vector3D(-0.6f, 30.0f, -2.5f));
 	quille1->Start();
 	quille1->GetComponentOfType<RigidbodyComponent>()->SetMass(0.5);
-	quille1->GetComponentOfType<RigidbodyComponent>()->SetIsGrounded(true);*/
+	//quille1->GetComponentOfType<RigidbodyComponent>()->SetIsGrounded(true);
+
+	Cube* quille2 = new Cube();
+	AddActor(quille2);
+	quille2->GetTransformComponent().SetSize(Vector3D(1, 1, 2));
+	quille2->SetPosition(Vector3D(-0.6f, 35.0f, -2.5f));
+	quille2->Start();
+	quille2->GetComponentOfType<RigidbodyComponent>()->SetMass(2);
 
 	Cube* ball = new Cube();
 	AddActor(ball);
 	ball->Start();
-	ball->SetPosition(Vector3D(0.0f, 2.0f, 2.5f));
+	ball->SetPosition(Vector3D(0.0f, 2.0f, -3.0f));
 	ball->GetComponentOfType<MeshComponent>()->SetTextureIndex(1);
 	ball->GetComponentOfType<RigidbodyComponent>()->SetMass(1.5);
-	ball->GetComponentOfType<RigidbodyComponent>()->AddImpulse(Vector3D(0, 25, 0));
+	ball->GetComponentOfType<RigidbodyComponent>()->AddImpulse(Vector3D(0, 50, 0));
 
 	CameraActor* camera = new CameraActor();
 	camera->Start();

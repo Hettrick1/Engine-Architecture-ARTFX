@@ -23,12 +23,15 @@ struct CollisionInfos
 	{
 		actorPair = pActorPair;
 		colliderPair = pColliderPair;
+		velocityPair.first = actorPair.first->GetRigidBody()->GetVelocity();
+		velocityPair.second = actorPair.second->GetRigidBody()->GetVelocity();
 		type = pType;
 		normal = pNormal;
 		depth = pDepth;
 	}
 	std::pair<Actor*, Actor*> actorPair;
 	std::pair<ColliderComponent*, ColliderComponent*> colliderPair;
+	std::pair<Vector3D, Vector3D> velocityPair;
 	CollisionType type;
 	Vector3D normal;
 	float depth;
