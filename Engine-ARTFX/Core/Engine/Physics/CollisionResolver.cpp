@@ -159,7 +159,8 @@ void CollisionResolver::CalculatePhysicCollisions()
 		bool isGroundedA = ((rbA && rbA->IsStatic()) || (rbA && rbA->GetMass() > 10000) || (rbA && rbA->GetIsGrounded()));
 		bool isGroundedB = ((rbB && rbB->IsStatic()) || (rbB && rbB->GetMass() > 10000) || (rbB && rbB->GetIsGrounded()));
 
-		Vector3D normal = Vector3D::unitY;//collision->normal;
+		Vector3D normal = Vector3D(0,1,0);//collision->normal;
+		normal = Vector3D::Normalize(normal);
 
 		if (!rbA && !rbB)
 		{
@@ -174,16 +175,16 @@ void CollisionResolver::CalculatePhysicCollisions()
 				ColliderComponent* colliderB = collision->colliderPair.second;
 				float penetrationDepth = collision->depth;
 
-				if (!isStaticA && !isStaticB) {
-					actors.first->GetTransformComponent().Translate((normal * -1) * ((penetrationDepth + 0.001) * 0.5f));
-					actors.second->GetTransformComponent().Translate(normal * ((penetrationDepth + 0.001) * 0.5f));
+				/*if (!isStaticA && !isStaticB) {
+					actors.first->GetTransformComponent().Translate((normal * -1) * ((penetrationDepth + 0.1) * 0.5f));
+					actors.second->GetTransformComponent().Translate(normal * ((penetrationDepth + 0.1) * 0.5f));
 				}
 				else if (!isStaticA) {
-					actors.first->GetTransformComponent().Translate((normal * -1) * (penetrationDepth + 0.001));
+					actors.first->GetTransformComponent().Translate((normal * -1) * (penetrationDepth + 0.1));
 				}
 				else if (!isStaticB) {
-					actors.second->GetTransformComponent().Translate(normal * (penetrationDepth + 0.001));
-				}
+					actors.second->GetTransformComponent().Translate(normal * (penetrationDepth + 0.1));
+				}*/
 
 				if (isGroundedA && normal.z > 0.1)
 				{
@@ -257,6 +258,15 @@ void CollisionResolver::ApplyReactionForce()
 {
 	for (auto it = mReactionForce.begin(); it != mReactionForce.end(); it++)
 	{
+		/*if (!isStaticA && !isStaticB) {
+			actors.first->GetTransformComponent().Translate((normal * -1) * ((penetrationDepth + 0.1) * 0.5f));
+		}
+		else if (!isStaticA) {
+			actors.first->GetTransformComponent().Translate((normal * -1) * (penetrationDepth + 0.1));
+		}
+		else if (!isStaticB) {
+			actors.second->GetTransformComponent().Translate(normal * (penetrationDepth + 0.1));
+		}*/
 		it->first->ResolveCollision(it->second);
 	}
 	mReactionForce.clear();
