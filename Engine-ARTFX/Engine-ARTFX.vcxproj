@@ -192,6 +192,8 @@
     <ClCompile Include="Core\Engine\Physics\PhysicManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Core\Engine\Graphics\MeshLoader\tiny_obj_loader.h" />
+    <ClInclude Include="Core\Engine\Graphics\Vertex.h" />
     <ClInclude Include="Core\Engine\Physics\CollisionInfos.h" />
     <ClInclude Include="Core\Engine\Physics\CollisionResolver.h" />
     <ClInclude Include="Core\Engine\ActorComponents\Colliders\BoxCollider3DComponent.h" />

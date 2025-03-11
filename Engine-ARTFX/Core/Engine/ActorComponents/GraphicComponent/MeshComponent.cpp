@@ -3,11 +3,12 @@
 #include "IRenderer.h"
 #include "Actor.h"
 #include "VertexArray.h"
+#include "Vertex.h"
 
 MeshComponent::MeshComponent(Actor* pOwner)
 	: Component(pOwner), mMesh(nullptr), mTextureIndex(0)
 {
-	mMesh = new Mesh();
+	mMesh = Assets::LoadMesh("Imports/Meshes/cube.obj", "cube");
 	mOwner->GetScene().GetRenderer()->AddMesh(this);
 }
 
@@ -30,7 +31,7 @@ void MeshComponent::Draw(Matrix4DRow viewProj)
 			tex->SetActive();
 		}
 		mMesh->GetVao()->SetActive();
-		glDrawElements(GL_TRIANGLES, mMesh->GetVao()->GetIndicesCount(), GL_UNSIGNED_INT, 0);
+		glDrawArrays(GL_TRIANGLES, 0, mMesh->GetVao()->GetVerticeCount());
 	}
 }
 

@@ -56,7 +56,7 @@ bool RendererOpenGl::Initialize(Window& pWindow)
 	mSpriteShaderProgramTemp.Compose({ &mSpriteVertexShader, &mSpriteFragmentShader });
 	SetSpriteShaderProgram(mSpriteShaderProgramTemp);
 
-	mVAO = new VertexArray(vertices, 4, indices, 6);
+	mVAO = new VertexArray(spriteVertices, 4);
 	mSpriteViewProj = Matrix4DRow::CreateSimpleViewProj(mWindow->GetDimensions().x, mWindow->GetDimensions().y);
 	mView = Matrix4DRow::CreateLookAt(Vector3D(0, 0, 5), Vector3D::unitX, Vector3D::unitZ);
 	mProj = Matrix4DRow::CreatePerspectiveFOV(70.0f, mWindow->GetDimensions().x, mWindow->GetDimensions().y, 0.01f, 10000.0f);
@@ -135,7 +135,7 @@ void RendererOpenGl::DrawSprite(Actor& pActor, Texture& pTexture, Rectangle pRec
 	Matrix4DRow world = scaleMat * pActor.GetTransformComponent().GetWorldTransform();
 	mSpriteShaderProgram->setMatrix4Row("uWorldTransform", world);
 	pTexture.SetActive();
-	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }
 
 void RendererOpenGl::DrawMeshes()
