@@ -1,6 +1,7 @@
 #include "GlTestScene.h"
 #include "TestOpenGl/testGlPlayer.h"
 #include "TestOpenGl/Cube.h"
+#include "TestOpenGl/Sphere.h"
 #include "CameraActor.h"
 #include "RigidbodyComponent.h"
 #include "MeshComponent.h"
@@ -76,11 +77,10 @@ void GlTestScene::Start(IRenderer* renderer)
 	quille2->Start();
 	quille2->GetComponentOfType<RigidbodyComponent>()->SetMass(0.5);
 
-	Cube* ball = new Cube();
+	Sphere* ball = new Sphere();
 	AddActor(ball);
 	ball->Start();
 	ball->SetPosition(Vector3D(0.0f, 2.0f, -3.0f));
-	ball->GetComponentOfType<MeshComponent>()->SetTextureIndex(1);
 	ball->GetComponentOfType<RigidbodyComponent>()->SetMass(5);
 	ball->GetComponentOfType<RigidbodyComponent>()->AddImpulse(Vector3D(0, 120, 0));
 

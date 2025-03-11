@@ -1,0 +1,56 @@
+#include "Sphere.h"
+#include "Scene.h"
+#include "MeshComponent.h"
+#include "RigidbodyComponent.h"
+#include "Timer.h"
+#include "Physics/CollisionManager.h"
+#include "BoxCollider3DComponent.h"
+
+Sphere::Sphere(Vector3D pPos, Vector3D pSize, Quaternion pRotation)
+	: Actor(pPos, pSize, pRotation)
+{
+}
+
+Sphere::~Sphere()
+{
+}
+
+void Sphere::Start()
+{
+	Actor::Start();
+	Texture* tex = Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/collider.png", "sphere");
+	Mesh* mesh = Assets::LoadMesh("Imports/Meshes/sphere.obj", "sphere");
+	mesh->AddTexture(tex);
+	MeshComponent* meshComp = new MeshComponent(this, mesh);
+	meshComp->SetTextureIndex(2);
+	AddComponent(meshComp);
+	RigidbodyComponent* rb = new RigidbodyComponent(this);
+	AddComponent(rb);
+	BoxCollider3DComponent* bc = new BoxCollider3DComponent(this, 10, GetTransformComponent().GetSize());
+}
+
+void Sphere::Update()
+{
+	Actor::Update();
+}
+
+void Sphere::Destroy()
+{
+	Actor::Destroy();
+}
+
+void Sphere::OnTriggerEnter(ColliderComponent* collider)
+{
+}
+
+void Sphere::OnCollision(ColliderComponent* collider)
+{
+}
+
+void Sphere::OnTriggerStay(ColliderComponent* collider)
+{
+}
+
+void Sphere::OnTriggerExit(ColliderComponent* collider)
+{
+}

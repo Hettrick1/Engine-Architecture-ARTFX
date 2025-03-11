@@ -74,19 +74,20 @@ Texture* Mesh::GetTexture(unsigned int pTextureIndex)
 
 float* Mesh::ToVerticeArray()
 {
+	if (mVertices.empty()) return nullptr;
+
 	float* array = new float[mVertices.size() * 8];
-	int counter = 0;
-	for (int i = 0; i < mVertices.size(); i++)
+	for (size_t i = 0; i < mVertices.size(); i++)
 	{
-		array[counter + 0] = mVertices[i].position.x;
-		array[counter + 1] = mVertices[i].position.y;
-		array[counter + 2] = mVertices[i].position.z;
-		array[counter + 3] = mVertices[i].normal.x;
-		array[counter + 4] = mVertices[i].normal.y;
-		array[counter + 5] = mVertices[i].normal.z;
-		array[counter + 6] = mVertices[i].texCoord.x;
-		array[counter + 7] = mVertices[i].texCoord.y;
-		counter += 8;
+		size_t index = i * 8;
+		array[index + 0] = mVertices[i].position.x;
+		array[index + 1] = mVertices[i].position.y;
+		array[index + 2] = mVertices[i].position.z;
+		array[index + 3] = mVertices[i].normal.x;
+		array[index + 4] = mVertices[i].normal.y;
+		array[index + 5] = mVertices[i].normal.z;
+		array[index + 6] = mVertices[i].texCoord.x;
+		array[index + 7] = mVertices[i].texCoord.y;
 	}
 	return array;
 }

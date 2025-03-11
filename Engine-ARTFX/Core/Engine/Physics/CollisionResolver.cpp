@@ -93,9 +93,9 @@ void CollisionResolver::AddCollisionToQueue(CollisionInfos* pCollisionInfo)
 
 void CollisionResolver::ResolveCollisions()
 {
-	Log::Info("" + std::to_string(mPhysicCollisions.size()));
 	if (!mPhysicCollisions.empty())
 	{
+		Log::Info("" + std::to_string(mPhysicCollisions.size()));
 		CalculatePhysicCollisions();
 	}
 	if (!mQuerryCollisions.empty())

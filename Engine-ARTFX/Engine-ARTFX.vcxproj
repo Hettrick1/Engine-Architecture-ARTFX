@@ -190,6 +190,7 @@
     <ClCompile Include="Core\Engine\ActorComponents\GraphicComponent\MeshComponent.cpp" />
     <ClCompile Include="Core\Engine\CoreComponents\PlayerController3D.cpp" />
     <ClCompile Include="Core\Engine\Physics\PhysicManager.cpp" />
+    <ClCompile Include="Game\TestOpenGl\Sphere.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Engine\Graphics\MeshLoader\tiny_obj_loader.h" />
@@ -254,6 +255,7 @@
     <ClInclude Include="Core\Engine\ActorComponents\GraphicComponent\MeshComponent.h" />
     <ClInclude Include="Core\Engine\CoreComponents\PlayerController3D.h" />
     <ClInclude Include="Core\Engine\Physics\PhysicManager.h" />
+    <ClInclude Include="Game\TestOpenGl\Sphere.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Imports\Shaders\BasicMesh.frag" />

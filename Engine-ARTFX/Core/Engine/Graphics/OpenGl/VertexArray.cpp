@@ -11,7 +11,7 @@ VertexArray::VertexArray(const float* pVertices, unsigned int pVerticeCount)
 	// VBO
 	glGenBuffers(1, &mVertexBufferId);
 	glBindBuffer(GL_ARRAY_BUFFER, mVertexBufferId);
-	glBufferData(GL_ARRAY_BUFFER, mVerticeCount * 5 * sizeof(float), pVertices, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, mVerticeCount * 8 * sizeof(float), pVertices, GL_STATIC_DRAW);
 
 	//Position
 	glEnableVertexAttribArray(0);
@@ -22,6 +22,7 @@ VertexArray::VertexArray(const float* pVertices, unsigned int pVerticeCount)
 	//Texture coordinates
 	glEnableVertexAttribArray(2);
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 8, (void*)(sizeof(float) * 6));
+
 }
 
 VertexArray::~VertexArray()
