@@ -6,11 +6,6 @@
 Mesh::Mesh()
 	: mVao(nullptr)
 {
-	mVertexShader.Load("BasicMesh.vert", ShaderType::VERTEX);
-	mFragmentShader.Load("BasicMesh.frag", ShaderType::FRAGMENT);
-	mShaderProgram.Compose({ &mVertexShader, &mFragmentShader });
-	mTextures.emplace_back(&Assets::GetTexture("cube"));
-	mTextures.emplace_back(&Assets::GetTexture("walk1"));
 }
 
 Mesh::Mesh(std::vector<Vertex> pVertices)

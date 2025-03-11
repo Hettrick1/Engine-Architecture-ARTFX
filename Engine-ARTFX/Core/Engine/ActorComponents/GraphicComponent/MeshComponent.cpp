@@ -5,10 +5,9 @@
 #include "VertexArray.h"
 #include "Vertex.h"
 
-MeshComponent::MeshComponent(Actor* pOwner)
-	: Component(pOwner), mMesh(nullptr), mTextureIndex(0)
+MeshComponent::MeshComponent(Actor* pOwner, Mesh* pMesh)
+	: Component(pOwner), mMesh(pMesh), mTextureIndex(0)
 {
-	mMesh = Assets::LoadMesh("Imports/Meshes/cube.obj", "cube");
 	mOwner->GetScene().GetRenderer()->AddMesh(this);
 }
 

@@ -19,9 +19,10 @@ void Cube::Start()
 {
 	Actor::Start();
 	Texture* tex = Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/pokeball.png", "cube");
-	MeshComponent* mesh = new MeshComponent(this);
-	mesh->SetTextureIndex(0);
-	AddComponent(mesh);
+	Mesh* mesh = Assets::LoadMesh("Imports/Meshes/cube.obj", "cube");
+	MeshComponent* meshComp = new MeshComponent(this, mesh);
+	meshComp->SetTextureIndex(0); 
+	AddComponent(meshComp);
 	RigidbodyComponent* rb = new RigidbodyComponent(this);
 	AddComponent(rb);
 	BoxCollider3DComponent* bc = new BoxCollider3DComponent(this, 10, GetTransformComponent().GetSize());

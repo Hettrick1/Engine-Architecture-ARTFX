@@ -6,7 +6,7 @@
 class MeshComponent : public Component
 {
 public:
-	MeshComponent(Actor* pOwner);
+	MeshComponent(Actor* pOwner, Mesh* pMesh);
 	virtual ~MeshComponent();
 	virtual void Draw(Matrix4DRow viewProj);
 	virtual void SetMesh(Mesh& pMesh);

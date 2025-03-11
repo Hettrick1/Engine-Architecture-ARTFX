@@ -5,8 +5,8 @@
 #define TINYOBJLOADER_IMPLEMENTATION
 #include "MeshLoader/tiny_obj_loader.h"
 
-std::map<std::string, Texture> Assets::mTextures = {};
-std::map<std::string, Mesh> Assets::mMeshes = {};
+std::map<std::string, Texture*> Assets::mTextures = {};
+std::map<std::string, Mesh*> Assets::mMeshes = {};
 
 Texture* Assets::LoadTexture(IRenderer& pRenderer, const std::string& pFilePath, const std::string& pName)
 {
@@ -27,7 +27,7 @@ Texture& Assets::GetTexture(const std::string& pName)
 Mesh* Assets::LoadMesh(const std::string& pFilePath, const std::string& pName)
 {
 	mMeshes[pName] = LoadMeshFromFile(pFilePath);
-	return &mMeshes[pName];
+	return mMeshes[pName];
 }
 
 void Assets::Clear()
@@ -46,7 +46,7 @@ Texture Assets::LoadTextureFromFile(IRenderer& pRenderer, const std::string& pFi
 	return texture;
 }
 
-Mesh Assets::LoadMeshFromFile(const std::string& pFilePath)
+Mesh* Assets::LoadMeshFromFile(const std::string& pFilePath)
 {
 	Mesh loaded; 
 	tinyobj::attrib_t attributes; 
@@ -58,7 +58,7 @@ Mesh Assets::LoadMeshFromFile(const std::string& pFilePath)
 	if (!success) 
 	{
 		Log::Error(LogType::Application, "Mesh " + pFilePath + " does not exist or is not .obj");
-		return Mesh();
+		return new Mesh();
 	}
 	else
 	{
@@ -91,5 +91,5 @@ Mesh Assets::LoadMeshFromFile(const std::string& pFilePath)
 		}
 
 	}
-	return Mesh(vertices);
+	return new Mesh(vertices);
 }
