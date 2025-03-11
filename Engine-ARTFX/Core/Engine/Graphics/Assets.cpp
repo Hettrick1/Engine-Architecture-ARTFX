@@ -5,7 +5,7 @@
 #define TINYOBJLOADER_IMPLEMENTATION
 #include "MeshLoader/tiny_obj_loader.h"
 
-std::map<std::string, Texture*> Assets::mTextures = {};
+std::map<std::string, Texture> Assets::mTextures = {};
 std::map<std::string, Mesh*> Assets::mMeshes = {};
 
 Texture* Assets::LoadTexture(IRenderer& pRenderer, const std::string& pFilePath, const std::string& pName)
