@@ -23,14 +23,14 @@ void GlTestScene::Start(IRenderer* renderer)
 	player->SetPosition(Vector3D(300, 0, 0));
 	player->GetTransformComponent().SetSize({ 1, 1, 0 });
 
-	/*Cube* ground = new Cube(); 
+	Cube* ground = new Cube(); 
 	AddActor(ground); 
-	ground->SetPosition(Vector3D(0.0f, 35.0f, -4.0f)); 
+	ground->SetPosition(Vector3D(0.0f, 35.0f, -8.0f)); 
 	ground->GetTransformComponent().SetSize({ 20, 60, 1 }); 
 	ground->Start(); 
 	ground->GetComponentOfType<RigidbodyComponent>()->SetUseGravity(false); 
 	ground->GetComponentOfType<RigidbodyComponent>()->SetMass(10000000); 
-	ground->GetComponentOfType<RigidbodyComponent>()->SetIsStatic(true);*/
+	ground->GetComponentOfType<RigidbodyComponent>()->SetIsStatic(true);
 
 	Cube* quille3 = new Cube();
 	AddActor(quille3);
@@ -82,7 +82,7 @@ void GlTestScene::Start(IRenderer* renderer)
 	ball->SetPosition(Vector3D(0.0f, 2.0f, -3.0f));
 	ball->GetComponentOfType<MeshComponent>()->SetTextureIndex(1);
 	ball->GetComponentOfType<RigidbodyComponent>()->SetMass(5);
-	ball->GetComponentOfType<RigidbodyComponent>()->AddImpulse(Vector3D(0, 80, 0));
+	ball->GetComponentOfType<RigidbodyComponent>()->AddImpulse(Vector3D(0, 120, 0));
 
 	CameraActor* camera = new CameraActor();
 	camera->Start();

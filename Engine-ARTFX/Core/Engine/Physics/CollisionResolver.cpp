@@ -159,6 +159,9 @@ void CollisionResolver::CalculatePhysicCollisions()
 		bool isGroundedA = ((rbA && rbA->IsStatic()) || (rbA && rbA->GetMass() > 10000) || (rbA && rbA->GetIsGrounded()));
 		bool isGroundedB = ((rbB && rbB->IsStatic()) || (rbB && rbB->GetMass() > 10000) || (rbB && rbB->GetIsGrounded()));
 
+		Vector3D colPos1 = collision->positionPair.first;
+		Vector3D colPos2 = collision->positionPair.second;
+
 		Vector3D normal = Vector3D(0,1,0);//collision->normal;
 		normal = Vector3D::Normalize(normal);
 
@@ -175,16 +178,28 @@ void CollisionResolver::CalculatePhysicCollisions()
 				ColliderComponent* colliderB = collision->colliderPair.second;
 				float penetrationDepth = collision->depth;
 
-				/*if (!isStaticA && !isStaticB) {
-					actors.first->GetTransformComponent().Translate((normal * -1) * ((penetrationDepth + 0.1) * 0.5f));
-					actors.second->GetTransformComponent().Translate(normal * ((penetrationDepth + 0.1) * 0.5f));
+				if (!isStaticA && !isStaticB) {
+					if (mCollisionPosition.find(actors.first) == mCollisionPosition.end())
+					{
+						mCollisionPosition[actors.first] = colPos1;
+					}
+					if (mCollisionPosition.find(actors.second) == mCollisionPosition.end())
+					{
+						mCollisionPosition[actors.second] = colPos2;
+					}
 				}
 				else if (!isStaticA) {
-					actors.first->GetTransformComponent().Translate((normal * -1) * (penetrationDepth + 0.1));
-				}
+					if (mCollisionPosition.find(actors.first) == mCollisionPosition.end())
+					{
+						mCollisionPosition[actors.first] = colPos1;
+					}
+				} 
 				else if (!isStaticB) {
-					actors.second->GetTransformComponent().Translate(normal * (penetrationDepth + 0.1));
-				}*/
+					if (mCollisionPosition.find(actors.second) == mCollisionPosition.end())
+					{
+						mCollisionPosition[actors.second] = colPos2;
+					}
+				}
 
 				if (isGroundedA && normal.z > 0.1)
 				{
@@ -200,9 +215,6 @@ void CollisionResolver::CalculatePhysicCollisions()
 
 				Vector3D relativeVelocity = velocityA - velocityB;
 				float vRel = Vector3D::Dot(relativeVelocity, normal);
-
-				/*if (vRel >= 0)
-					continue;*/
 
 				float e = (rbA ? rbA->GetBounciness() : 0.0f) * (rbB ? rbB->GetBounciness() : 0.0f);
 				float invMassA = (rbA && rbA->GetMass() > 0.0f) ? 1.0f / rbA->GetMass() : 0.0f;
@@ -256,17 +268,13 @@ void CollisionResolver::CalculatePhysicCollisions()
 
 void CollisionResolver::ApplyReactionForce()
 {
+	for (auto it = mCollisionPosition.begin(); it != mCollisionPosition.end(); it++)
+	{
+		it->first->SetPosition(it->second);
+	}
+	mCollisionPosition.clear();
 	for (auto it = mReactionForce.begin(); it != mReactionForce.end(); it++)
 	{
-		/*if (!isStaticA && !isStaticB) {
-			actors.first->GetTransformComponent().Translate((normal * -1) * ((penetrationDepth + 0.1) * 0.5f));
-		}
-		else if (!isStaticA) {
-			actors.first->GetTransformComponent().Translate((normal * -1) * (penetrationDepth + 0.1));
-		}
-		else if (!isStaticB) {
-			actors.second->GetTransformComponent().Translate(normal * (penetrationDepth + 0.1));
-		}*/
 		it->first->ResolveCollision(it->second);
 	}
 	mReactionForce.clear();

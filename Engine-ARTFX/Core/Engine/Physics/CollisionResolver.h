@@ -70,5 +70,6 @@ private:
 	std::unordered_map<std::pair<ColliderComponent*, ColliderComponent*>, CollisionInfos*,
 		CollisionUtils::CollisionPairHash, CollisionUtils::CollisionPairEqual> mQuerryCollisions;
 	std::unordered_map<Actor*, RigidbodyComponent*> mRigidbodies;
+	std::unordered_map<Actor*, Vector3D> mCollisionPosition;
 	std::unordered_map<RigidbodyComponent*, Vector3D> mReactionForce;
 };

@@ -18,16 +18,14 @@ void RigidbodyComponent::Update()
 {
 	if (mUseGravity && mGravity != 0 && !mIsGrounded)
 	{
-		mAcceleration.z += mMass * mGravity;
+		mAcceleration.z += mMass * mGravity * 0.01;
 	}
 
 	mVelocity += mAcceleration;
 
-	mVelocity *= (1.0f - mFriction * Timer::deltaTime);
+	mVelocity *= (1.0f - mFriction * 0.1);
 
 	mOwner->GetTransformComponent().Translate(mVelocity * Timer::deltaTime);
-
-	//Log::Info(std::to_string(mOwner->GetTransformComponent().GetPosition().z));
 
 	mAcceleration = 0;
 }
@@ -54,7 +52,8 @@ void RigidbodyComponent::ResolveCollision(Vector3D pResolveForce)
     {
         return;
     }
-    SetVelocity(mVelocity + pResolveForce);
+
+	mAcceleration = pResolveForce;
 }
 
 void RigidbodyComponent::OnCollisionEnter(ColliderComponent* otherCollider)

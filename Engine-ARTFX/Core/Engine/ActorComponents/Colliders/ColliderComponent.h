@@ -3,6 +3,7 @@
 #include "Component.h"
 #include "Physics/CollisionManager.h"
 #include "Physics/HitResult.h"
+#include <utility>
 
 class ICollisionListener;
 
@@ -16,6 +17,7 @@ public:
 	bool GetIsTriggerable();
 	virtual void Update();
 	virtual bool CheckCollisionWith(ColliderComponent* other);
+	virtual std::pair < Vector3D, Vector3D> GetCollisionPosition() const;
 
 public:
 	void AddListener(ICollisionListener* listener);

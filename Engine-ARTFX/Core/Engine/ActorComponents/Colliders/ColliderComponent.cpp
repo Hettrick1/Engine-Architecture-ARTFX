@@ -21,6 +21,11 @@ bool ColliderComponent::CheckCollisionWith(ColliderComponent* other)
 	return true;
 }
 
+std::pair<Vector3D, Vector3D> ColliderComponent::GetCollisionPosition() const
+{
+	return std::pair<Vector3D, Vector3D>();
+}
+
 bool ColliderComponent::GetIsTriggerable()
 {
 	return mIsTriggerable;

@@ -1,4 +1,5 @@
 #include "BoxCollider3DComponent.h"
+#include <algorithm>
 
 BoxCollider3DComponent::BoxCollider3DComponent(Actor* pOwner, int pUpdateOder, Vector3D pSize)
     : ColliderComponent(pOwner, pUpdateOder), mShowInGame(true)
@@ -19,6 +20,7 @@ void BoxCollider3DComponent::OnStart()
 
 void BoxCollider3DComponent::Update()
 {
+    ColliderComponent::Update();
     mLastPosition = mPosition;
     mPosition = mOwner->GetTransformComponent().GetPosition();
 }
@@ -40,6 +42,7 @@ bool BoxCollider3DComponent::CheckCollisionWith(ColliderComponent* other)
 
 bool BoxCollider3DComponent::CheckCollisionWithBox3D(BoxCollider3DComponent* other)
 {
+    mLastPosition = mPosition;
     mPosition = mOwner->GetTransformComponent().GetPosition();
     Vector3D delta = mPosition - mLastPosition;
     Vector3D predictedPosition = mLastPosition;
@@ -65,10 +68,14 @@ bool BoxCollider3DComponent::CheckCollisionWithBox3D(BoxCollider3DComponent* oth
             (minA.y <= maxB.y && maxA.y >= minB.y) &&
             (minA.z <= maxB.z && maxA.z >= minB.z))
         {
+            mCollisionPosition.first = mLastPosition;
+            mCollisionPosition.second = other->GetLastPosition();
             return true;
         }
         step += 0.001f;
     }
+    mCollisionPosition.first = 0;
+    mCollisionPosition.second = 0;
     mLastPosition = mPosition;
     return false;
 }

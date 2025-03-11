@@ -35,9 +35,10 @@ PhysicManager::~PhysicManager()
 
 void PhysicManager::Update()
 {
+    mCollisionResolver->UpdateRigidbodies(); 
+    mCollisionManager->UpdateColliders();
     mCollisionManager->CheckCollisions();
     mCollisionResolver->ResolveCollisions();
-    mCollisionResolver->UpdateRigidbodies();
 }
 
 void PhysicManager::RegisterCollider(Actor* pOwner, ColliderComponent* pCollider)

@@ -19,7 +19,8 @@ public:
 
     void RegisterCollider(Actor* pOwner, ColliderComponent* pCollider);
     void RemoveCollider(Actor* pOwner, ColliderComponent* pCollider);
-    void CheckCollisions();;
+    void UpdateColliders();
+    void CheckCollisions();
     void CalculateNormal(ColliderComponent* collider1, ColliderComponent* collider2);
 
 private:

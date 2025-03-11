@@ -1,5 +1,7 @@
 #pragma once
 #include "ColliderComponent.h"
+#include <utility>
+
 class BoxCollider3DComponent : public ColliderComponent
 {
 public:
@@ -21,9 +23,12 @@ public:
 	void SetSize(Vector3D pSize);
 
 	Vector3D GetLastPosition();
+
+	std::pair<Vector3D, Vector3D> GetCollisionPosition() const override { return mCollisionPosition; }
 private:
 	Vector3D mPosition;
 	Vector3D mLastPosition;
+	std::pair<Vector3D, Vector3D> mCollisionPosition;
 	bool mShowInGame;
 };
 
