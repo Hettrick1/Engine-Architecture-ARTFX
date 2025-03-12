@@ -50,14 +50,15 @@ bool BoxCollider3DComponent::CheckCollisionWithBox3D(BoxCollider3DComponent* oth
     Vector3D otherDelta = other->GetOwner()->GetTransformComponent().GetPosition() - other->GetLastPosition();
     Vector3D otherPredictedPosition = other->GetLastPosition();
 
-    float step = 0.0;
+    // Calculer un pas adaptatif basé sur la vitesse des objets
+    float maxDelta = std::max(delta.Length(), otherDelta.Length());
+    float stepSize = maxDelta > 0 ? std::min(0.001f, 0.5f / maxDelta) : 0.001f;
 
+    float step = 0.0;
     while (step < 1.0f)
     {
         predictedPosition = mLastPosition + delta * step;
         otherPredictedPosition = other->GetLastPosition() + otherDelta * step;
-
-        //Log::Info(std::to_string(predictedPosition.z));
 
         Vector3D minA = predictedPosition - (mSize * 0.5f);
         Vector3D maxA = predictedPosition + (mSize * 0.5f);
@@ -68,12 +69,14 @@ bool BoxCollider3DComponent::CheckCollisionWithBox3D(BoxCollider3DComponent* oth
             (minA.y <= maxB.y && maxA.y >= minB.y) &&
             (minA.z <= maxB.z && maxA.z >= minB.z))
         {
-            mCollisionPosition.first = mLastPosition;
-            mCollisionPosition.second = other->GetLastPosition();
+            // Stockez les positions au moment exact de la collision
+            mCollisionPosition.first = predictedPosition;
+            mCollisionPosition.second = otherPredictedPosition;
             return true;
         }
-        step += 0.001f;
+        step += stepSize;
     }
+
     mCollisionPosition.first = 0;
     mCollisionPosition.second = 0;
     mLastPosition = mPosition;

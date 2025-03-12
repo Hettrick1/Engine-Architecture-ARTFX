@@ -59,11 +59,14 @@ public:
 	void CalculateQuerryCollisions();
 	void CalculatePhysicCollisions();
 
+	void ResolvePenetration(Actor* actorA, Actor* actorB, Vector3D normal, float depth);
 	void ApplyReactionForce();
 
 	void RegisterRigidBody(Actor* pOwner, RigidbodyComponent* pRigidbody);
 	void RemoveRigidBody(Actor* pOwner, RigidbodyComponent* pRigidbody);
 	void AddCollisionToQueue(CollisionInfos* pCollisionInfo);
+
+	std::unordered_map<Actor*, RigidbodyComponent*> GetRigidbodies() const { return mRigidbodies; }
 private:
 	std::unordered_map<std::pair<Actor*, Actor*>, CollisionInfos*,
 		CollisionUtils::ActorPairHash, CollisionUtils::ActorPairEqual> mPhysicCollisions;

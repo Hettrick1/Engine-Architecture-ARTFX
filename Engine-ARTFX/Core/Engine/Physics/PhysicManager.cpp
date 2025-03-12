@@ -35,10 +35,33 @@ PhysicManager::~PhysicManager()
 
 void PhysicManager::Update()
 {
-    mCollisionResolver->UpdateRigidbodies(); 
+    std::unordered_map<Actor*, Vector3D> previousPositions;
+    for (auto& pair : mCollisionResolver->GetRigidbodies()) {
+        previousPositions[pair.first] = pair.first->GetTransformComponent().GetPosition();
+    }
+
+    mCollisionResolver->UpdateRigidbodies();
     mCollisionManager->UpdateColliders();
     mCollisionManager->CheckCollisions();
     mCollisionResolver->ResolveCollisions();
+
+    for (auto& pair : previousPositions) {
+        Actor* actor = pair.first;
+        Vector3D oldPos = pair.second;
+        Vector3D newPos = actor->GetTransformComponent().GetPosition();
+
+        float maxAllowedMovement = 10.0f;
+        if (Vector3D::Distance(oldPos, newPos) > maxAllowedMovement) {
+            Vector3D direction = Vector3D::Normalize(newPos - oldPos);
+            Vector3D limitedPos = oldPos + direction * maxAllowedMovement;
+            actor->SetPosition(limitedPos);
+
+            RigidbodyComponent* rb = actor->GetRigidBody();
+            if (rb) {
+                rb->SetVelocity(Vector3D(0));
+            }
+        }
+    }
 }
 
 void PhysicManager::RegisterCollider(Actor* pOwner, ColliderComponent* pCollider)

@@ -162,7 +162,6 @@ void CollisionManager::CalculateNormal(ColliderComponent* collider1, ColliderCom
     Vector3D halfSize1 = collider1->GetSize() * 0.5f;
     Vector3D halfSize2 = collider2->GetSize() * 0.5f;
 
-    // Min Max of the colliders
     Vector3D min1 = pos1 - halfSize1;
     Vector3D max1 = pos1 + halfSize1;
     Vector3D min2 = pos2 - halfSize2;
@@ -174,53 +173,28 @@ void CollisionManager::CalculateNormal(ColliderComponent* collider1, ColliderCom
 
     if (overlapX <= 0 || overlapY <= 0 || overlapZ <= 0)
     {
-        
-
-
         return;
     }
 
-    Vector3D normal;
+    Vector3D center1 = (max1 + min1) * 0.5f;
+    Vector3D center2 = (max2 + min2) * 0.5f;
+
+    Vector3D direction = center2 - center1;
 
     float minOverlap = std::min({ overlapX, overlapY, overlapZ });
-    float depth = minOverlap;
 
+    Vector3D normal(0, 0, 0);
     if (minOverlap == overlapX) {
-        const float epsilon = 0.001f;
-        if (pos1.x < pos2.x - epsilon) {
-            normal = Vector3D(1, 0, 0);
-        }
-        else if (pos1.x > pos2.x + epsilon) {
-            normal = Vector3D(-1, 0, 0);
-        }
-        else {
-            normal = (pos1.x < pos2.x) ? Vector3D(-1, 0, 0) : Vector3D(1, 0, 0);
-        }
+        normal = Vector3D((direction.x > 0) ? 1 : -1, 0, 0);
     }
-    if (minOverlap == overlapY) {
-        const float epsilon = 0.001f;
-        if (pos1.y < pos2.y - epsilon) {
-            normal = Vector3D(0, 1, 0);
-        }
-        else if (pos1.x > pos2.x + epsilon) {
-            normal = Vector3D(0, -1, 0);
-        }
-        else {
-            normal = (pos1.x < pos2.x) ? Vector3D(0, -1, 0) : Vector3D(0, 1, 0);
-        }
+    else if (minOverlap == overlapY) {
+        normal = Vector3D(0, (direction.y > 0) ? 1 : -1, 0);
     }
-    if (minOverlap == overlapZ) {
-        const float epsilon = 0.001f;
-        if (pos1.z < pos2.z - epsilon) {
-            normal = Vector3D(0, 0, 1);
-        }
-        else if (pos1.z > pos2.z + epsilon) {
-            normal = Vector3D(0, 0, -1);
-        }
-        else {
-            normal = (pos1.x < pos2.x) ? Vector3D(0, 0, -1) : Vector3D(0, 0, 1);
-        }
+    else if (minOverlap == overlapZ) {
+        normal = Vector3D(0, 0, (direction.z > 0) ? 1 : -1);
     }
+
     mCollisionNormal = normal;
     mCollisionDepth = minOverlap;
 }
+

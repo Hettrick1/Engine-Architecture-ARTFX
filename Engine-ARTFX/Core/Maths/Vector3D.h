@@ -154,6 +154,10 @@ struct Vector3D
 		return sqrt(((*this).x - vec.x) * ((*this).x - vec.x) + ((*this).y - vec.y) * ((*this).y - vec.y) + ((*this).z - vec.z) * ((*this).z - vec.z));
 	}
 
+	static float Distance(const Vector3D& a, const Vector3D& b) {
+		return sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y) + (a.z - b.z) * (a.z - b.z));
+	}
+
 	inline bool Equals(Vector3D& right, float acceptance) {
 		if (x < right.x - acceptance || x > right.y + acceptance || y < right.y - acceptance || y > right.y + acceptance || z < right.z - acceptance || z > right.z + acceptance) return true;
 		else return false;
