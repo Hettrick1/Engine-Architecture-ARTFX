@@ -30,6 +30,9 @@ public:
 	void SetHitResult(bool pHit, Actor* pHitActor, ColliderComponent* collision, Vector3D pNormal = 0, float pOverlap = 0);
 	HitResult& GetHitResult();
 
+	void SetName(std::string pName) { mName = pName; }
+	std::string GetName() const { return mName; }
+
 	Vector3D GetSize() const { return mSize; }
 
 protected :
@@ -37,5 +40,6 @@ protected :
 	std::vector<ICollisionListener*> mListeners;
 	HitResult mHitResult;
 	Vector3D mSize;
+	std::string mName;
 };
 

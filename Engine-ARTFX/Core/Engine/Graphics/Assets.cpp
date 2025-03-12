@@ -26,7 +26,20 @@ Texture& Assets::GetTexture(const std::string& pName)
 
 Mesh* Assets::LoadMesh(const std::string& pFilePath, const std::string& pName)
 {
-	mMeshes[pName] = LoadMeshFromFile(pFilePath);
+	if (mMeshes.find(pName) == mMeshes.end()) {
+		mMeshes[pName] = LoadMeshFromFile(pFilePath);
+		return mMeshes[pName];
+	}
+	return mMeshes[pName];
+}
+
+Mesh* Assets::GetMesh(const std::string& pName)
+{
+	if (mMeshes.find(pName) == mMeshes.end()) {
+		std::ostringstream loadError;
+		loadError << "Texture " << pName << " does not exists in assets manager\n";
+		Log::Error(LogType::Application, loadError.str());
+	}
 	return mMeshes[pName];
 }
 

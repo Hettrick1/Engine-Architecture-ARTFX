@@ -13,6 +13,7 @@ public:
 	static Texture* LoadTexture(IRenderer& pRenderer, const std::string& pFilePath, const std::string& pName);
 	static Texture& GetTexture(const std::string& pName);
 	static Mesh* LoadMesh(const std::string& pFilePath, const std::string& pName);
+	static Mesh* GetMesh(const std::string& pName);
 	static void Clear();
 private:
 	Assets() = default;

@@ -97,6 +97,7 @@ void CollisionResolver::ResolveCollisions()
 	{
 		Log::Info("" + std::to_string(mPhysicCollisions.size()));
 		CalculatePhysicCollisions();
+		mPhysicCollisions.clear();
 	}
 	if (!mQuerryCollisions.empty())
 	{
@@ -164,16 +165,14 @@ void CollisionResolver::CalculatePhysicCollisions()
 
 		float penetrationDepth = collision->depth;
 
-		Vector3D normal = Vector3D(0, 1, 0);//collision->normal;
+		Vector3D normal = Vector3D(collision->normal.x, collision->normal.y, 0);
 		normal = Vector3D::Normalize(normal);
-
-		
 
 		if (!rbA && !rbB)
 		{
 			continue;
 		}
-
+		ResolvePenetration(actors.first, actors.second, normal, penetrationDepth);
 		switch (collision->type)
 		{
 			case CollisionType::Enter:
@@ -181,7 +180,7 @@ void CollisionResolver::CalculatePhysicCollisions()
 				ColliderComponent* colliderA = collision->colliderPair.first;
 				ColliderComponent* colliderB = collision->colliderPair.second;
 				
-				ResolvePenetration(actors.first, actors.second, normal, penetrationDepth);
+				//ResolvePenetration(actors.first, actors.second, normal, penetrationDepth);
 
 				if (isGroundedA && normal.z > 0.1)
 				{
@@ -203,6 +202,7 @@ void CollisionResolver::CalculatePhysicCollisions()
 				float invMassB = (rbB && rbB->GetMass() > 0.0f) ? 1.0f / rbB->GetMass() : 0.0f;
 
 				float j = -(1 + e) * vRel / (invMassA + invMassB);
+				j *= 1.1;
 				Vector3D impulse = j * normal;
 
 				if (rbA && !isStaticA)
@@ -250,11 +250,6 @@ void CollisionResolver::CalculatePhysicCollisions()
 
 void CollisionResolver::ApplyReactionForce()
 {
-	/*for (auto it = mCollisionPosition.begin(); it != mCollisionPosition.end(); it++)
-	{
-		it->first->SetPosition(it->second);
-	}
-	mCollisionPosition.clear();*/
 	for (auto it = mReactionForce.begin(); it != mReactionForce.end(); it++)
 	{
 		it->first->ResolveCollision(it->second);

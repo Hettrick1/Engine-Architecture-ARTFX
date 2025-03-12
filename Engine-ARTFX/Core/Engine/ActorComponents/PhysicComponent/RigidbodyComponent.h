@@ -31,6 +31,7 @@ public:
 	Vector3D GetVelocity() const { return mVelocity; }
 	float GetMass() const { return mMass; }
 	bool GetIsGrounded() const { return mIsGrounded; }
+	void SetBounciness(float bounce) { bounce <= 1 ? mBounciness = bounce : mBounciness = 1.0f; }
 	float GetBounciness() const { return mBounciness; }
 
 	void SetIsStatic(bool isStatic);

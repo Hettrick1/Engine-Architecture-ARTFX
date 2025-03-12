@@ -27,6 +27,7 @@ void Sphere::Start()
 	RigidbodyComponent* rb = new RigidbodyComponent(this);
 	AddComponent(rb);
 	BoxCollider3DComponent* bc = new BoxCollider3DComponent(this, 10, GetTransformComponent().GetSize());
+	AddComponent(bc);
 }
 
 void Sphere::Update()

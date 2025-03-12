@@ -18,6 +18,9 @@ Actor::~Actor()
 
 void Actor::Start()
 {
+    for (auto* comp : mComponents) {
+        comp->OnStart();
+    }
 }
 
 void Actor::AttachScene(Scene& scene)

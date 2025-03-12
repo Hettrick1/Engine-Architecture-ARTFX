@@ -111,6 +111,15 @@ void CollisionManager::CheckCollisions()
 
                         CalculateNormal(collider1, collider2);
 
+                        if (collider1->GetName() == "A") Log::Info("Quille1 oui");
+                        if (collider2->GetName() == "B") Log::Info("Quille2 oui");
+                        if (collider2->GetName() == "A") Log::Info("Quille1 oui");
+                        if (collider1->GetName() == "B") Log::Info("Quille2 oui");
+                        if (collider1->GetName() == "C") Log::Info("Quille3 oui");
+                        if (collider2->GetName() == "C") Log::Info("Quille3 oui");
+                        if (collider2->GetName() == "D") Log::Info("ball oui");
+                        if (collider1->GetName() == "D") Log::Info("ball oui");
+
                         if (isNewCollision1 || isNewCollision2) { //enter
                             CollisionInfos* infos = new CollisionInfos(actorPair, colliderPair, CollisionType::Enter, mCollisionNormal, mCollisionDepth, collisionPos);
                             PhysicManager::Instance().AddCollisionToQueue(infos);
@@ -159,8 +168,10 @@ void CollisionManager::CalculateNormal(ColliderComponent* collider1, ColliderCom
     Vector3D pos1 = collider1->GetOwner()->GetTransformComponent().GetPosition();
     Vector3D pos2 = collider2->GetOwner()->GetTransformComponent().GetPosition();
 
-    Vector3D halfSize1 = collider1->GetSize() * 0.5f;
-    Vector3D halfSize2 = collider2->GetSize() * 0.5f;
+    Vector3D normal = pos2 - pos1;
+
+    Vector3D halfSize1 = collider1->GetSize();
+    Vector3D halfSize2 = collider2->GetSize();
 
     Vector3D min1 = pos1 - halfSize1;
     Vector3D max1 = pos1 + halfSize1;
@@ -171,28 +182,7 @@ void CollisionManager::CalculateNormal(ColliderComponent* collider1, ColliderCom
     float overlapY = std::min(max1.y, max2.y) - std::max(min1.y, min2.y);
     float overlapZ = std::min(max1.z, max2.z) - std::max(min1.z, min2.z);
 
-    if (overlapX <= 0 || overlapY <= 0 || overlapZ <= 0)
-    {
-        return;
-    }
-
-    Vector3D center1 = (max1 + min1) * 0.5f;
-    Vector3D center2 = (max2 + min2) * 0.5f;
-
-    Vector3D direction = center2 - center1;
-
     float minOverlap = std::min({ overlapX, overlapY, overlapZ });
-
-    Vector3D normal(0, 0, 0);
-    if (minOverlap == overlapX) {
-        normal = Vector3D((direction.x > 0) ? 1 : -1, 0, 0);
-    }
-    else if (minOverlap == overlapY) {
-        normal = Vector3D(0, (direction.y > 0) ? 1 : -1, 0);
-    }
-    else if (minOverlap == overlapZ) {
-        normal = Vector3D(0, 0, (direction.z > 0) ? 1 : -1);
-    }
 
     mCollisionNormal = normal;
     mCollisionDepth = minOverlap;
