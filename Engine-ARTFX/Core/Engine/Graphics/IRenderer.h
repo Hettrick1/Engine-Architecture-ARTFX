@@ -9,6 +9,7 @@
 class Texture;
 class SpriteComponent;
 class MeshComponent;
+class ColliderComponent;
 
 class IRenderer 
 {
@@ -38,10 +39,13 @@ public:
 	virtual void AddMesh(MeshComponent* pMesh) = 0;
 	virtual void RemoveMesh(MeshComponent* pMesh) = 0;
 
-	virtual void SetSpriteShaderProgram(class ShaderProgram& shaderProgram) {};
-	virtual void SetViewMatrix(Matrix4DRow pViewMatrix) {};
+	virtual void AddDebugCollider(ColliderComponent* pCol) {} // DEBUG PURPOSE ONLY
+
+	virtual void SetSpriteShaderProgram(class ShaderProgram& shaderProgram) {}
+	virtual void SetViewMatrix(Matrix4DRow pViewMatrix) {}
 
 	virtual RendererType GetType() = 0;
 	virtual void DrawSprite(Actor& pActor, Texture& pTex, Rectangle pSourceRect, Vector2D pOrigin, Flip pFlip = Flip::None) const = 0;
+	virtual void DrawDebugBox(Vector3D& pMin, Vector3D& pMax, Matrix4DRow pWorldTransform) {}
 	virtual SDL_Renderer* ToSdlRenderer() { return nullptr; }
 };

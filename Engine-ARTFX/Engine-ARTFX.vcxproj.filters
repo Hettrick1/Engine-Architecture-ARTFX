@@ -371,5 +371,7 @@
     <None Include="Imports\Shaders\Simple.frag" />
     <None Include="Imports\Shaders\BasicMesh.vert" />
     <None Include="Imports\Shaders\BasicMesh.frag" />
+    <None Include="Imports\Shaders\Debug.vert" />
+    <None Include="Imports\Shaders\Debug.frag" />
   </ItemGroup>
 </Project>

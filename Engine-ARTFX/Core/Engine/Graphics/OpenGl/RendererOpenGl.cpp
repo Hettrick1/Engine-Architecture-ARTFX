@@ -1,6 +1,7 @@
 #include "RendererOpenGl.h"
 #include "SpriteComponent.h"
 #include "MeshComponent.h"
+#include "ColliderComponent.h"
 #include "TransformComponent.h"
 #include "Maths.h"
 #include "Actor.h"
@@ -56,6 +57,10 @@ bool RendererOpenGl::Initialize(Window& pWindow)
 	mSpriteShaderProgramTemp.Compose({ &mSpriteVertexShader, &mSpriteFragmentShader });
 	SetSpriteShaderProgram(mSpriteShaderProgramTemp);
 
+	mSpriteVertexShader.Load("Debug.vert", ShaderType::VERTEX);
+	mSpriteFragmentShader.Load("Debug.frag", ShaderType::FRAGMENT);
+	mDebugShaderProgram.Compose({ &mSpriteVertexShader, &mSpriteFragmentShader });
+
 	mVAO = new VertexArray(spriteVertices, 4);
 	mSpriteViewProj = Matrix4DRow::CreateSimpleViewProj(mWindow->GetDimensions().x, mWindow->GetDimensions().y);
 	mView = Matrix4DRow::CreateLookAt(Vector3D(0, 0, 5), Vector3D::unitX, Vector3D::unitZ);
@@ -73,6 +78,10 @@ void RendererOpenGl::Draw()
 {
 	DrawMeshes();
 	DrawSprites();
+	for (auto& collider : mCollider) // DEBUG ONLY
+	{
+		collider->DebugDraw(*this);
+	}
 }
 
 void RendererOpenGl::EndDraw()
@@ -119,6 +128,11 @@ void RendererOpenGl::RemoveMesh(MeshComponent* pMesh)
 	mMeshes.erase(sc); 
 }
 
+void RendererOpenGl::AddDebugCollider(ColliderComponent* pCol)
+{
+	mCollider.push_back(pCol);
+}
+
 void RendererOpenGl::SetViewMatrix(Matrix4DRow pViewMatrix)
 {
 	mView = pViewMatrix;
@@ -136,6 +150,56 @@ void RendererOpenGl::DrawSprite(Actor& pActor, Texture& pTexture, Rectangle pRec
 	mSpriteShaderProgram->setMatrix4Row("uWorldTransform", world);
 	pTexture.SetActive();
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+}
+
+void RendererOpenGl::DrawDebugBox(Vector3D& pMin, Vector3D& pMax, Matrix4DRow pWorldTransform)
+{
+	GLfloat vertices[] = {
+		// Face avant
+		0.0f, 0.0f, 0.0f,  1.0f, 0.0f, 0.0f,
+		1.0f, 0.0f, 0.0f,  1.0f, 1.0f, 0.0f,
+		1.0f, 1.0f, 0.0f,  0.0f, 1.0f, 0.0f,
+		0.0f, 1.0f, 0.0f,  0.0f, 0.0f, 0.0f,
+
+		// Face arrière
+		0.0f, 0.0f, 1.0f,  1.0f, 0.0f, 1.0f,
+		1.0f, 0.0f, 1.0f,  1.0f, 1.0f, 1.0f,
+		1.0f, 1.0f, 1.0f,  0.0f, 1.0f, 1.0f,
+		0.0f, 1.0f, 1.0f,  0.0f, 0.0f, 1.0f,
+
+		// Liaisons entre les faces avant et arrière
+		0.0f, 0.0f, 0.0f,  0.0f, 0.0f, 1.0f,
+		1.0f, 0.0f, 0.0f,  1.0f, 0.0f, 1.0f,
+		1.0f, 1.0f, 0.0f,  1.0f, 1.0f, 1.0f,
+		0.0f, 1.0f, 0.0f,  0.0f, 1.0f, 1.0f
+	};
+
+	GLuint VAO, VBO; 
+	glGenVertexArrays(1, &VAO); 
+	glGenBuffers(1, &VBO); 
+	 
+	glBindVertexArray(VAO); 
+	glBindBuffer(GL_ARRAY_BUFFER, VBO); 
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW); 
+
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0); 
+	glEnableVertexAttribArray(0); 
+
+	mDebugShaderProgram.Use();
+	Matrix4DRow wt = pWorldTransform;
+	mDebugShaderProgram.setMatrix4Row("uViewProj", mView * mProj);
+	mDebugShaderProgram.setMatrix4Row("uWorldTransform", wt);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glEnable(GL_DEPTH_TEST); 
+
+	glBindVertexArray(VAO); 
+	glDrawArrays(GL_LINES, 0, 24);
+
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	glDisable(GL_DEPTH_TEST); 
+
+	glDeleteBuffers(1, &VBO); 
+	glDeleteVertexArrays(1, &VAO);
 }
 
 void RendererOpenGl::DrawMeshes()

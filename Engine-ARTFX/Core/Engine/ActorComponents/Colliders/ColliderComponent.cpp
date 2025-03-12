@@ -1,11 +1,14 @@
 #include "ColliderComponent.h"
 #include "Physics/ICollisionListener.h"
 #include "Physics/PhysicManager.h"
+#include "Scene.h"
+#include "IRenderer.h"
 
 ColliderComponent::ColliderComponent(Actor* pOwner, int pUpdateOder)
 	: Component(pOwner, pUpdateOder), mIsTriggerable(false)
 {
 	PhysicManager::Instance().RegisterCollider(pOwner, this);
+	mOwner->GetScene().GetRenderer()->AddDebugCollider(this);
 }
 
 ColliderComponent::~ColliderComponent()
@@ -24,6 +27,10 @@ bool ColliderComponent::CheckCollisionWith(ColliderComponent* other)
 std::pair<Vector3D, Vector3D> ColliderComponent::GetCollisionPosition() const
 {
 	return std::pair<Vector3D, Vector3D>();
+}
+
+void ColliderComponent::DebugDraw(IRenderer& renderer)
+{
 }
 
 bool ColliderComponent::GetIsTriggerable()

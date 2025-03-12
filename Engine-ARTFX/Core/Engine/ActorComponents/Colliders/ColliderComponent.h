@@ -6,6 +6,7 @@
 #include <utility>
 
 class ICollisionListener;
+class IRenderer;
 
 class ColliderComponent : public Component
 {
@@ -18,6 +19,7 @@ public:
 	virtual void Update();
 	virtual bool CheckCollisionWith(ColliderComponent* other);
 	virtual std::pair < Vector3D, Vector3D> GetCollisionPosition() const;
+	virtual void DebugDraw(IRenderer& renderer);
 
 public:
 	void AddListener(ICollisionListener* listener);

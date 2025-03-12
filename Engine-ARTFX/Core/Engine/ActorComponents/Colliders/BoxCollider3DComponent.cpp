@@ -1,5 +1,6 @@
 #include "BoxCollider3DComponent.h"
 #include "MeshComponent.h"
+#include "IRenderer.h"
 #include "Assets.h"
 #include <algorithm>
 #include <iostream>
@@ -88,6 +89,18 @@ void BoxCollider3DComponent::SetShowInGame(bool pShowInGame)
 void BoxCollider3DComponent::SetSize(Vector3D pSize)
 {
 	mSize = pSize;
+}
+
+void BoxCollider3DComponent::DebugDraw(IRenderer& renderer)
+{
+    Vector3D min = mPosition - mSize;
+    Vector3D max = mPosition + mSize;
+    Matrix4DRow wt;
+
+    wt = Matrix4DRow::CreateScale(mSize * 2);
+    wt *= Matrix4DRow::CreateTranslation(mPosition);
+
+    renderer.DrawDebugBox(min, max, wt);
 }
 
 Vector3D BoxCollider3DComponent::GetLastPosition()

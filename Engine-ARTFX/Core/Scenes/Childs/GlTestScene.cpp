@@ -36,28 +36,28 @@ void GlTestScene::Start(IRenderer* renderer)
 
 	Cube* quille3 = new Cube();
 	AddActor(quille3);
-	quille3->GetTransformComponent().SetSize(Vector3D(1, 1, 2));
+	quille3->GetTransformComponent().SetSize(Vector3D(1, 1, 1));
 	quille3->SetPosition(Vector3D(3.0f, 36.0f, -2.5f));
 	quille3->Start();
 	quille3->GetComponentOfType<RigidbodyComponent>()->SetMass(0.5);
 
 	Cube* quille4 = new Cube();
 	AddActor(quille4);
-	quille4->GetTransformComponent().SetSize(Vector3D(1, 1, 2));
+	quille4->GetTransformComponent().SetSize(Vector3D(1, 1, 1));
 	quille4->SetPosition(Vector3D(-3.0f, 36.0f, -2.5f));
 	quille4->Start();
 	quille4->GetComponentOfType<RigidbodyComponent>()->SetMass(0.5);
 
 	Cube* quille5 = new Cube();
 	AddActor(quille5);
-	quille5->GetTransformComponent().SetSize(Vector3D(1, 1, 2));
+	quille5->GetTransformComponent().SetSize(Vector3D(1, 1, 1));
 	quille5->SetPosition(Vector3D(0.0f, 36.0f, -2.5f));
 	quille5->Start();
 	quille5->GetComponentOfType<RigidbodyComponent>()->SetMass(0.5);
 
 	Cube* quille = new Cube();
 	AddActor(quille);
-	quille->GetTransformComponent().SetSize(Vector3D(1, 1, 2));
+	quille->GetTransformComponent().SetSize(Vector3D(1, 1, 1));
 	quille->SetPosition(Vector3D(1.5f, 33.0f, -2.5f));
 	quille->Start();
 	quille->GetComponentOfType<RigidbodyComponent>()->SetMass(0.5);
@@ -66,7 +66,7 @@ void GlTestScene::Start(IRenderer* renderer)
 
 	Cube* quille1 = new Cube();
 	AddActor(quille1);
-	quille1->GetTransformComponent().SetSize(Vector3D(1, 1, 2));
+	quille1->GetTransformComponent().SetSize(Vector3D(1, 1, 1));
 	quille1->SetPosition(Vector3D(-1.5f, 33.0f, -2.5f));
 	quille1->Start();
 	quille1->GetComponentOfType<RigidbodyComponent>()->SetMass(0.5);
@@ -75,7 +75,7 @@ void GlTestScene::Start(IRenderer* renderer)
 
 	Cube* quille2 = new Cube();
 	AddActor(quille2);
-	quille2->GetTransformComponent().SetSize(Vector3D(1, 1, 2));
+	quille2->GetTransformComponent().SetSize(Vector3D(1, 1, 1));
 	quille2->SetPosition(Vector3D(0.0f, 30.0f, -2.5f));
 	quille2->Start();
 	quille2->GetComponentOfType<RigidbodyComponent>()->SetMass(0.5);
@@ -91,8 +91,9 @@ void GlTestScene::Start(IRenderer* renderer)
 	ball->GetComponentOfType<BoxCollider3DComponent>()->SetName("D");
 
 	CameraActor* camera = new CameraActor();
-	camera->SetPosition(Vector3D(0.0f, 28.0f, 40.0f));
-	camera->GetTransformComponent().RotateX(-90);
+	//camera->SetPosition(Vector3D(0.0f, 28.0f, 40.0f));
+	camera->SetPosition(Vector3D(0.0f, 0.0f, 4.0f));
+	//camera->GetTransformComponent().RotateX(-90);
 	camera->Start();
 	AddActor(camera);
 }

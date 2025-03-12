@@ -2,6 +2,8 @@
 #include "ColliderComponent.h"
 #include <utility>
 
+class IRenderer;
+
 class BoxCollider3DComponent : public ColliderComponent
 {
 public:
@@ -21,6 +23,8 @@ public:
 public:
 	void SetShowInGame(bool pShowInGame);
 	void SetSize(Vector3D pSize);
+
+	void DebugDraw(IRenderer& renderer) override;
 
 	Vector3D GetLastPosition();
 
