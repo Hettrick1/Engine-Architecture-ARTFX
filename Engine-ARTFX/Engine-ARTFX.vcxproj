@@ -138,6 +138,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Game\TestOpenGl\BowlingPlayer.cpp" />
     <ClCompile Include="Game\TestOpenGl\BowlingPin.cpp" />
     <ClCompile Include="Core\Engine\Physics\CollisionResolver.cpp" />
     <ClCompile Include="Core\Engine\ActorComponents\Colliders\BoxCollider3DComponent.cpp" />
@@ -171,7 +172,7 @@
     <ClCompile Include="Core\Engine\Inputs\InputAxis2D.cpp" />
     <ClCompile Include="Core\Engine\Inputs\InputManager.cpp" />
     <ClCompile Include="Game\SpaceInvader\GroundActor.cpp" />
-    <ClCompile Include="Core\Scenes\Childs\GlTestScene.cpp" />
+    <ClCompile Include="Core\Scenes\Childs\BowlingOpenGl.cpp" />
     <ClCompile Include="Game\TestOpenGl\Cube.cpp" />
     <ClCompile Include="Game\TestOpenGl\testGlPlayer.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -194,6 +195,7 @@
     <ClCompile Include="Game\TestOpenGl\Sphere.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Game\TestOpenGl\BowlingPlayer.h" />
     <ClInclude Include="Game\TestOpenGl\BowlingPin.h" />
     <ClInclude Include="Core\Engine\Graphics\MeshLoader\tiny_obj_loader.h" />
     <ClInclude Include="Core\Engine\Graphics\Vertex.h" />
@@ -250,7 +252,7 @@
     <ClInclude Include="Core\Engine\ActorComponents\PhysicComponent\RigidbodyComponent.h" />
     <ClInclude Include="Core\Engine\CoreComponents\PlayerController2D.h" />
     <ClInclude Include="Game\SpaceInvader\GroundActor.h" />
-    <ClInclude Include="Core\Scenes\Childs\GlTestScene.h" />
+    <ClInclude Include="Core\Scenes\Childs\BowlingOpenGl.h" />
     <ClInclude Include="Game\TestOpenGl\Cube.h" />
     <ClInclude Include="Game\TestOpenGl\testGlPlayer.h" />
     <ClInclude Include="Core\Engine\Graphics\Mesh.h" />

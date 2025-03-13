@@ -1,32 +1,32 @@
-#include "CameraActor.h"
+#include "BowlingPlayer.h"
 #include "PlayerController3D.h"
 #include "CameraComponent.h"
 
-CameraActor::CameraActor()
+BowlingPlayer::BowlingPlayer()
 	: Actor()
 {
 }
 
-CameraActor::~CameraActor()
+BowlingPlayer::~BowlingPlayer()
 {
 }
 
-void CameraActor::Start()
+void BowlingPlayer::Start()
 {
 	Actor::Start();
 	CameraComponent* cc = new CameraComponent(this);
 	AddComponent(cc);
 	PlayerController3D* pc = new PlayerController3D(this, 100);
 	pc->SetMovementSpeed(5);
-	AddComponent(pc); 
+	AddComponent(pc);
 }
 
-void CameraActor::Update()
+void BowlingPlayer::Update()
 {
 	Actor::Update();
 }
 
-void CameraActor::Destroy()
+void BowlingPlayer::Destroy()
 {
-	Actor::Destroy();
+	Actor:Destroy();
 }

@@ -3,11 +3,11 @@
 #include "Scene.h"
 #include "Shaders/ShaderProgram.h"
 
-class GlTestScene : public Scene
+class BowlingOpenGl : public Scene
 {
 public:
-	GlTestScene();
-	~GlTestScene();
+	BowlingOpenGl();
+	~BowlingOpenGl();
 	void Start(IRenderer* renderer) override;
 	void Update() override;
 	void Render() override;

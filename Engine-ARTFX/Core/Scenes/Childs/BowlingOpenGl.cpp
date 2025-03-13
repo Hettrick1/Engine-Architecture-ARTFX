@@ -1,4 +1,4 @@
-#include "GlTestScene.h"
+#include "BowlingOpenGl.h"
 #include "TestOpenGl/testGlPlayer.h"
 #include "TestOpenGl/Cube.h"
 #include "TestOpenGl/Sphere.h"
@@ -8,15 +8,15 @@
 #include "BoxCollider3DComponent.h"
 #include "MeshComponent.h"
 
-GlTestScene::GlTestScene()
+BowlingOpenGl::BowlingOpenGl()
 {
 }
 
-GlTestScene::~GlTestScene()
+BowlingOpenGl::~BowlingOpenGl()
 {
 }
 
-void GlTestScene::Start(IRenderer* renderer)
+void BowlingOpenGl::Start(IRenderer* renderer)
 {
 	Scene::Start(renderer);
 
@@ -120,16 +120,16 @@ void GlTestScene::Start(IRenderer* renderer)
 	AddActor(camera);
 }
 
-void GlTestScene::Update()
+void BowlingOpenGl::Update()
 {
 	Scene::Update();
 }
 
-void GlTestScene::Render()
+void BowlingOpenGl::Render()
 {
 	Scene::Render();
 }
 
-void GlTestScene::Close()
+void BowlingOpenGl::Close()
 {
 }

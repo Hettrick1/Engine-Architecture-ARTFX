@@ -138,7 +138,7 @@
     <ClCompile Include="Core\Engine\Graphics\OpenGl\Shaders\ShaderProgram.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Scenes\Childs\GlTestScene.cpp">
+    <ClCompile Include="Core\Scenes\Childs\BowlingOpenGl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Game\TestOpenGl\testGlPlayer.cpp">
@@ -175,6 +175,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Game\TestOpenGl\BowlingPin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\TestOpenGl\BowlingPlayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -323,7 +326,7 @@
     <ClInclude Include="Core\Engine\Graphics\OpenGl\Shaders\ShaderProgram.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Scenes\Childs\GlTestScene.h">
+    <ClInclude Include="Core\Scenes\Childs\BowlingOpenGl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Game\TestOpenGl\testGlPlayer.h">
@@ -369,6 +372,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Game\TestOpenGl\BowlingPin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\TestOpenGl\BowlingPlayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
