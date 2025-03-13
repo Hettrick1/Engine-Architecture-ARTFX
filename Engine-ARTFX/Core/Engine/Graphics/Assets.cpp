@@ -10,7 +10,10 @@ std::map<std::string, Mesh*> Assets::mMeshes = {};
 
 Texture* Assets::LoadTexture(IRenderer& pRenderer, const std::string& pFilePath, const std::string& pName)
 {
-	mTextures[pName] = LoadTextureFromFile(pRenderer, pFilePath);
+	if (mTextures.find(pName) == mTextures.end()) {
+		mTextures[pName] = LoadTextureFromFile(pRenderer, pFilePath);
+		return &mTextures[pName];
+	}
 	return &mTextures[pName];
 }
 

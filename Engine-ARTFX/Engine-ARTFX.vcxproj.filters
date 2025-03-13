@@ -174,6 +174,9 @@
     <ClCompile Include="Game\TestOpenGl\Sphere.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Game\TestOpenGl\BowlingPin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Engine\DebugClasses\Log.h">
@@ -363,6 +366,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Game\TestOpenGl\Sphere.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\TestOpenGl\BowlingPin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

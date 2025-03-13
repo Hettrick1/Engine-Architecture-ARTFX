@@ -8,7 +8,7 @@ class BoxCollider3DComponent : public ColliderComponent
 {
 public:
 	BoxCollider3DComponent() = delete;
-	BoxCollider3DComponent(Actor* pOwner, int pUpdateOder, Vector3D pSize = 1);
+	BoxCollider3DComponent(Actor* pOwner, int pUpdateOder, Vector3D pSize = 1, Vector3D pRelativePosition = 0);
 	~BoxCollider3DComponent();
 	void OnStart() override;
 	void Update() override;

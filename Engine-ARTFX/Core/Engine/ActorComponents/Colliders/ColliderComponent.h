@@ -36,12 +36,14 @@ public:
 	std::string GetName() const { return mName; }
 
 	Vector3D GetSize() const { return mSize; }
+	Vector3D GetRelativePos() const { return mRelPosition; }
 
 protected :
 	bool mIsTriggerable;
 	std::vector<ICollisionListener*> mListeners;
 	HitResult mHitResult;
 	Vector3D mSize;
+	Vector3D mRelPosition;
 	std::string mName;
 };
 

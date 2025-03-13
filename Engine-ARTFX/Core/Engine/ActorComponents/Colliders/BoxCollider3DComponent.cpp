@@ -5,11 +5,12 @@
 #include <algorithm>
 #include <iostream>
 
-BoxCollider3DComponent::BoxCollider3DComponent(Actor* pOwner, int pUpdateOder, Vector3D pSize)
+BoxCollider3DComponent::BoxCollider3DComponent(Actor* pOwner, int pUpdateOder, Vector3D pSize, Vector3D pRelativePosition)
     : ColliderComponent(pOwner, pUpdateOder), mShowInGame(true)
 {
     pOwner->AddComponent(this);
-    mPosition = pOwner->GetTransformComponent().GetPosition();
+    mRelPosition = pRelativePosition;
+    mPosition = pOwner->GetTransformComponent().GetPosition() + mRelPosition; 
     mLastPosition = mPosition;
     mSize = pSize;
 }
@@ -25,7 +26,7 @@ void BoxCollider3DComponent::OnStart()
 void BoxCollider3DComponent::Update()
 {
     ColliderComponent::Update();
-    mPosition = mOwner->GetTransformComponent().GetPosition();
+    mPosition = mOwner->GetTransformComponent().GetPosition() + mRelPosition;
 }
 
 void BoxCollider3DComponent::OnEnd()
@@ -46,10 +47,10 @@ bool BoxCollider3DComponent::CheckCollisionWith(ColliderComponent* other)
 bool BoxCollider3DComponent::CheckCollisionWithBox3D(BoxCollider3DComponent* other)
 {
     mLastPosition = mPosition;
-    mPosition = mOwner->GetTransformComponent().GetPosition();
+    mPosition = mOwner->GetTransformComponent().GetPosition() + mRelPosition;
 
     Vector3D delta = mPosition - mLastPosition;
-    Vector3D otherDelta = other->GetOwner()->GetTransformComponent().GetPosition() - other->GetLastPosition();
+    Vector3D otherDelta = (other->GetOwner()->GetTransformComponent().GetPosition() + other->GetRelativePos()) - other->GetLastPosition();
 
     float maxDelta = std::max(delta.Length(), otherDelta.Length());
     int steps = std::max(1, static_cast<int>(maxDelta / 0.05f));
@@ -97,8 +98,8 @@ void BoxCollider3DComponent::DebugDraw(IRenderer& renderer)
     Vector3D max = mPosition + mSize;
     Matrix4DRow wt;
 
-    wt = Matrix4DRow::CreateScale(mSize * 2);
-    wt *= Matrix4DRow::CreateTranslation(mPosition);
+    wt = Matrix4DRow::CreateScale(mSize*2);
+    wt *= Matrix4DRow::CreateTranslation(mPosition - mSize);
 
     renderer.DrawDebugBox(min, max, wt);
 }

@@ -112,15 +112,6 @@ void CollisionManager::CheckCollisions()
 
                         CalculateNormal(collider1, collider2);
 
-                        if (collider1->GetName() == "A") Log::Info("Quille1 oui");
-                        if (collider2->GetName() == "B") Log::Info("Quille2 oui");
-                        if (collider2->GetName() == "A") Log::Info("Quille1 oui");
-                        if (collider1->GetName() == "B") Log::Info("Quille2 oui");
-                        if (collider1->GetName() == "C") Log::Info("Quille3 oui");
-                        if (collider2->GetName() == "C") Log::Info("Quille3 oui");
-                        if (collider2->GetName() == "D") Log::Info("ball oui");
-                        if (collider1->GetName() == "D") Log::Info("ball oui");
-
                         if (isNewCollision1 || isNewCollision2) { //enter
                             CollisionInfos* infos = new CollisionInfos(actorPair, colliderPair, CollisionType::Enter, mCollisionNormal, mCollisionDepth, collisionPos);
                             PhysicManager::Instance().AddCollisionToQueue(infos);
@@ -169,7 +160,7 @@ void CollisionManager::CalculateNormal(ColliderComponent* collider1, ColliderCom
     Vector3D pos1 = collider1->GetOwner()->GetTransformComponent().GetPosition();
     Vector3D pos2 = collider2->GetOwner()->GetTransformComponent().GetPosition();
 
-    Vector3D normal = pos2 - pos1;
+    Vector3D normal;
 
     Vector3D halfSize1 = collider1->GetSize();
     Vector3D halfSize2 = collider2->GetSize();
@@ -178,6 +169,9 @@ void CollisionManager::CalculateNormal(ColliderComponent* collider1, ColliderCom
     Vector3D max1 = pos1 + halfSize1;
     Vector3D min2 = pos2 - halfSize2;
     Vector3D max2 = pos2 + halfSize2;
+
+    normal = (pos2 - pos1);
+    normal = Vector3D(normal.x, normal.y, 0);
 
     float overlapX = std::min(max1.x, max2.x) - std::max(min1.x, min2.x);
     float overlapY = std::min(max1.y, max2.y) - std::max(min1.y, min2.y);
