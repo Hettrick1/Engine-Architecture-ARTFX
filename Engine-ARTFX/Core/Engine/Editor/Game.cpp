@@ -4,7 +4,7 @@
 #include "RendererOpenGl.h"
 
 Game::Game(std::string title, std::vector<Scene*> scenes) 
-    : mIsRunning(true), mAllScenes(scenes), mInputManager(InputManager::Instance()), mPhysicManager(PhysicManager::Instance())
+    : mIsRunning(true), mAllScenes(scenes), mInputManager(InputManager::Instance()), mPhysicManager(PhysicManager::Instance()), mCameraManager(CameraManager::Instance())
 {
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
     {
@@ -60,6 +60,7 @@ void Game::Loop()
 void Game::Update()
 {
     mPhysicManager.Update();
+    mCameraManager.UpdateCurrentCamera();
     mAllScenes[mLoadedScene]->Update();
 }
 

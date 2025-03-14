@@ -18,7 +18,7 @@ BowlingPin::~BowlingPin()
 void BowlingPin::Start()
 {
 	Actor::Start();
-	Texture* tex = Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/pin.png", "pinTex");
+	Texture* tex = Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/pin.jpg", "pinTex");
 	Mesh* mesh = Assets::LoadMesh("Imports/Meshes/pin.obj", "pin");
 	mesh->AddTexture(tex);
 	MeshComponent* meshComp = new MeshComponent(this, mesh);
@@ -26,7 +26,7 @@ void BowlingPin::Start()
 	AddComponent(meshComp);
 	RigidbodyComponent* rb = new RigidbodyComponent(this);
 	AddComponent(rb);
-	BoxCollider3DComponent* bc = new BoxCollider3DComponent(this, 10, Vector3D(GetTransformComponent().GetSize().x, GetTransformComponent().GetSize().y, 2), Vector3D(0,0,2.0));
+	BoxCollider3DComponent* bc = new BoxCollider3DComponent(this, 10, Vector3D(GetTransformComponent().GetSize().x, GetTransformComponent().GetSize().y , 2), Vector3D(0,0,2.0));
 	AddComponent(bc);
 }
 

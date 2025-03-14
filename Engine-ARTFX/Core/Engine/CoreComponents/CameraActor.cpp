@@ -15,10 +15,6 @@ void CameraActor::Start()
 {
 	Actor::Start();
 	CameraComponent* cc = new CameraComponent(this);
-	AddComponent(cc);
-	PlayerController3D* pc = new PlayerController3D(this, 100);
-	pc->SetMovementSpeed(5);
-	AddComponent(pc); 
 }
 
 void CameraActor::Update()

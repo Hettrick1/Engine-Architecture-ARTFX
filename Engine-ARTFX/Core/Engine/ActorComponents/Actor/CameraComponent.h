@@ -1,16 +1,17 @@
 #pragma once
 
-#include "Component.h"
 #include "Quaternion.h"
 #include "Matrix4DRow.h"
 
-class CameraComponent : public Component
+class Actor;
+
+class CameraComponent
 {
 public:
 	CameraComponent(Actor* pOwner);
 	~CameraComponent();
 
-	void Update() override;
+	void Update();
 
 	void SetRelativeRotation(float pRelRoll, float pRelPitch, float pRelYaw);
 
@@ -21,6 +22,7 @@ public:
 	Vector3D Up() const { return Vector3D(mRelRotation.AsMatrixRow().mat[0][2], mRelRotation.AsMatrixRow().mat[1][2], mRelRotation.AsMatrixRow().mat[2][2]); }
 
 private :
+	Actor* mOwner;
 	float mRelPitch;
 	float mRelYaw;
 	float mRelRoll;

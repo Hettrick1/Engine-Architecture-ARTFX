@@ -168,8 +168,6 @@ void CollisionResolver::CalculatePhysicCollisions()
 		Vector3D normal = collision->normal;
 		normal = Vector3D::Normalize(normal);
 
-		//ResolvePenetration(actors.first, actors.second, normal, penetrationDepth);
-
 		if (!rbA && !rbB)
 		{
 			continue;
@@ -178,7 +176,7 @@ void CollisionResolver::CalculatePhysicCollisions()
 		{
 			case CollisionType::Enter:
 			{
-				if (!isStaticA) {
+				/*if (!isStaticA) {
 					Vector3D newPos = Vector3D(colPos1.x, colPos1.y, actors.first->GetTransformComponent().GetPosition().z);
 					actors.first->SetPosition(newPos);
 				}
@@ -186,7 +184,7 @@ void CollisionResolver::CalculatePhysicCollisions()
 				if (!isStaticB) {
 					Vector3D newPos = Vector3D(colPos2.x, colPos2.y, actors.second->GetTransformComponent().GetPosition().z);
 					actors.second->SetPosition(newPos);
-				}
+				}*/
 
 				ColliderComponent* colliderA = collision->colliderPair.first;
 				ColliderComponent* colliderB = collision->colliderPair.second;
@@ -232,6 +230,7 @@ void CollisionResolver::CalculatePhysicCollisions()
 			}
 			case CollisionType::Stay:
 			{
+				ResolvePenetration(actors.first, actors.second, normal, penetrationDepth);
 				break;
 			}
 			case CollisionType::Exit:

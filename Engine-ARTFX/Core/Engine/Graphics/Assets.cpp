@@ -90,8 +90,8 @@ Mesh* Assets::LoadMeshFromFile(const std::string& pFilePath)
 			tinyobj::index_t i = mesh.indices[j];
 			Vector3D position = Vector3D{
 				attributes.vertices[i.vertex_index * 3],
-				attributes.vertices[i.vertex_index * 3 + 2], // inverser y et z car le up est différent
-				attributes.vertices[i.vertex_index * 3 + 1]
+				attributes.vertices[i.vertex_index * 3 + 1], 
+				attributes.vertices[i.vertex_index * 3 + 2]
 			};
 			Vector3D normal = Vector3D{
 				attributes.normals[i.normal_index * 3],

@@ -6,6 +6,7 @@
 #include "Log.h"
 #include "CameraComponent.h"
 #include "Timer.h"
+#include "CameraManager.h"
 #include "BowlingPlayer.h"
 
 BowlingPC::BowlingPC(Actor* pOwner, int pUpdateOrder)
@@ -15,6 +16,7 @@ BowlingPC::BowlingPC(Actor* pOwner, int pUpdateOrder)
 {
 	InputManager& inputManager = InputManager::Instance();
 	inputManager.CreateNewBooleanBinding(this, "shoot", SDLK_SPACE);
+	inputManager.CreateNewBooleanBinding(this, "tab", SDLK_TAB);
 	inputManager.CreateNewBooleanBinding(this, "d", SDLK_d);
 	inputManager.CreateNewBooleanBinding(this, "a", SDLK_a);
 	inputManager.CreateNewAxis2DBinding(this, "Mouse");
@@ -23,7 +25,15 @@ BowlingPC::BowlingPC(Actor* pOwner, int pUpdateOrder)
 
 void BowlingPC::OnActionStarted(InputActions* action)
 {
-
+	if (action->GetType() == ActionType::Boolean)
+	{
+		BooleanActions* Triggeredaction = static_cast<BooleanActions*>(action);
+		if (Triggeredaction && Triggeredaction->GetName() == "tab")
+		{
+			mCameraIndex = mCameraIndex == 0 ? 1 : 0;
+			CameraManager::Instance().SetCurrentCamera(mCameraIndex);
+		}
+	}
 }
 
 void BowlingPC::OnActionTriggered(InputActions* action)
@@ -64,17 +74,17 @@ void BowlingPC::OnActionTriggered(InputActions* action)
 
 		axis.x *= sensitivity;
 		mPitch += axis.x;
-		if (mPitch > -5 && mPitch < 5)
+		if (mPitch > -10 && mPitch < 10)
 		{
 			mPlayer->RotateSpawnPointZ(axis.x);
 		}
-		if (mPitch <= -5)
+		if (mPitch <= -10)
 		{
-			mPitch = -5;
+			mPitch = -10;
 		}
-		if (mPitch >= 5)
+		if (mPitch >= 10)
 		{
-			mPitch = 5;
+			mPitch = 10;
 		}
 	}
 }

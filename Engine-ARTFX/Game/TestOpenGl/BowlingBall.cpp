@@ -33,6 +33,9 @@ void BowlingBall::Start()
 void BowlingBall::Update()
 {
 	Actor::Update();
+	if (GetRigidBody()->GetVelocity().LengthSq() > 0.1) {
+		GetTransformComponent().RotateX(-GetRigidBody()->GetVelocity().LengthSq() * 2 * Timer::deltaTime);
+	}
 }
 
 void BowlingBall::Destroy()

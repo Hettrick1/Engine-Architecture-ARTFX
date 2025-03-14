@@ -7,7 +7,7 @@
 
 RigidbodyComponent::RigidbodyComponent(Actor* pOwner, int pUpdateOrder)
 	: Component(pOwner, pUpdateOrder), 
-	mVelocity(0.0), mAcceleration(0.0), mMass(1.0), mFriction(0.1f), mUseGravity(false), mGravity(-9.81), 
+	mVelocity(0.0), mAcceleration(0.0), mMass(1.0), mFriction(0.08f), mUseGravity(false), mGravity(-9.81), 
 	mBounciness(0.5), mIsGrounded(false), mIsStatic(false)
 {
     PhysicManager::Instance().RegisterRigidBody(pOwner, this);

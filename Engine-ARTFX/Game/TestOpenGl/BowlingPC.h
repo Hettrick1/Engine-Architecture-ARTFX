@@ -24,5 +24,6 @@ private:
 	bool mCanGoRight, mCanGoLeft, mCanGoUp, mCanGoDown, mCanGoForward, mCanGoBackward;
 	float mSpeed, mYaw, mPitch;
 	float mShootStrengh, mXPosition;
+	unsigned int mCameraIndex;
 	class BowlingPlayer* mPlayer;
 };

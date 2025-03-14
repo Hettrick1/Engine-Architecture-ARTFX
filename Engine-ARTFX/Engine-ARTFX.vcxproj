@@ -138,6 +138,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Core\Engine\Graphics\CameraManager.cpp" />
     <ClCompile Include="Game\TestOpenGl\BallSpawnPoint.cpp" />
     <ClCompile Include="Game\TestOpenGl\BowlingBall.cpp" />
     <ClCompile Include="Game\TestOpenGl\BowlingPC.cpp" />
@@ -198,6 +199,7 @@
     <ClCompile Include="Game\TestOpenGl\Sphere.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Core\Engine\Graphics\CameraManager.h" />
     <ClInclude Include="Game\TestOpenGl\BallSpawnPoint.h" />
     <ClInclude Include="Game\TestOpenGl\BowlingBall.h" />
     <ClInclude Include="Game\TestOpenGl\BowlingPC.h" />

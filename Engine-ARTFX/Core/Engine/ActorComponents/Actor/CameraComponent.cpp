@@ -3,12 +3,13 @@
 #include "Vector3D.h"
 #include "Log.h"
 #include "Matrix4DRow.h"
+#include "CameraManager.h"
 #include "Scene.h"
 
 CameraComponent::CameraComponent(Actor* pOwner)
-	: Component(pOwner)
+	: mOwner(pOwner)
 {
-
+	CameraManager::Instance().AddCamera(this);
 }
 
 CameraComponent::~CameraComponent()
@@ -17,7 +18,6 @@ CameraComponent::~CameraComponent()
 
 void CameraComponent::Update()
 {
-	Component::Update();
 	Vector3D camPosition = mOwner->GetTransformComponent().GetPosition();
 	Vector3D target = mOwner->GetTransformComponent().GetPosition() + mOwner->GetTransformComponent().Forward() * 400.0f;
 	Vector3D up = Vector3D::unitZ;

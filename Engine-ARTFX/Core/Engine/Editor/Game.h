@@ -5,6 +5,7 @@
 #include "Timer.h"
 #include "InputManager.h"
 #include "Physics/PhysicManager.h"
+#include "CameraManager.h"
 #include <iostream>
 #include <vector>
 
@@ -27,6 +28,7 @@ private:
 	IRenderer* mRenderer;
 	InputManager& mInputManager;
 	PhysicManager& mPhysicManager;
+	CameraManager& mCameraManager;
 	bool mIsRunning;
 	std::vector<Scene*> mAllScenes;
 	int mLoadedScene;
