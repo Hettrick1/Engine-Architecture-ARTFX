@@ -36,6 +36,11 @@ void Quaternion::Conjugate()
 	z *= -1.0f;
 }
 
+Quaternion Quaternion::ConjugateQuat()
+{
+	return Quaternion(-x, -y, -z, w);
+}
+
 void Quaternion::Normalize()
 {
 	float len = Length();

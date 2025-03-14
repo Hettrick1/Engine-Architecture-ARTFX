@@ -1,14 +1,16 @@
 #include "BowlingOpenGl.h"
 #include "TestOpenGl/testGlPlayer.h"
 #include "TestOpenGl/Cube.h"
-#include "TestOpenGl/Sphere.h"
+#include "TestOpenGl/BowlingBall.h"
 #include "TestOpenGl/BowlingPin.h"
 #include "CameraActor.h"
+#include "TestOpenGl/BowlingPlayer.h"
 #include "RigidbodyComponent.h"
 #include "BoxCollider3DComponent.h"
 #include "MeshComponent.h"
 
 BowlingOpenGl::BowlingOpenGl()
+	:mBowlingPlayer(nullptr)
 {
 }
 
@@ -103,21 +105,13 @@ void BowlingOpenGl::Start(IRenderer* renderer)
 	quille2->Start();
 	quille2->GetComponentOfType<RigidbodyComponent>()->SetMass(0.5);
 
-	Sphere* ball = new Sphere(0, 1.3);
-	AddActor(ball);
-	ball->Start();
-	ball->SetPosition(Vector3D(-0.3f, -30.0f, -3.6f));
-	ball->GetComponentOfType<RigidbodyComponent>()->SetMass(5);
-	ball->GetComponentOfType<RigidbodyComponent>()->SetBounciness(0.8);
-	ball->GetComponentOfType<RigidbodyComponent>()->AddImpulse(Vector3D(0, 240, 0));
-
-	CameraActor* camera = new CameraActor();
+	mBowlingPlayer = new BowlingPlayer();
 	/*camera->SetPosition(Vector3D(0.0f, 34.0f, 40.0f));
 	camera->GetTransformComponent().RotateX(-90);*/
-	camera->GetTransformComponent().RotateX(-5);
-	camera->SetPosition(Vector3D(0.0f, -40.0f, 5.0f));
-	camera->Start();
-	AddActor(camera);
+	mBowlingPlayer->GetTransformComponent().RotateX(-5);
+	mBowlingPlayer->SetPosition(Vector3D(0.0f, -40.0f, 5.0f));
+	AddActor(mBowlingPlayer);
+	mBowlingPlayer->Start();
 }
 
 void BowlingOpenGl::Update()

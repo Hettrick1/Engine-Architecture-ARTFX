@@ -1,5 +1,7 @@
 #pragma once
 #include "Actor.h"
+#include "BowlingBall.h"
+#include "BallSpawnPoint.h"
 class BowlingPlayer : public Actor
 {
 public:
@@ -8,7 +10,15 @@ public:
 	void Start() override;
 	void Update() override;
 	void Destroy() override;
-private:
 
+	void IncrementIndicatorSize(float strengthPercent);
+	void MoveSpawnPointX(float x);
+	void ThrowBowlingBall(float strengthPercent);
+
+	void RotateSpawnPointZ(float axis);
+private:
+	BowlingBall* mBall;
+	BallSpawnPoint* mBallSpawnPoint;
+	Vector3D mSpawnPosition;
 };
 

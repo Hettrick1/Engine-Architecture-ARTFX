@@ -138,6 +138,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Game\TestOpenGl\BallSpawnPoint.cpp" />
+    <ClCompile Include="Game\TestOpenGl\BowlingBall.cpp" />
+    <ClCompile Include="Game\TestOpenGl\BowlingPC.cpp" />
     <ClCompile Include="Game\TestOpenGl\BowlingPlayer.cpp" />
     <ClCompile Include="Game\TestOpenGl\BowlingPin.cpp" />
     <ClCompile Include="Core\Engine\Physics\CollisionResolver.cpp" />
@@ -195,6 +198,9 @@
     <ClCompile Include="Game\TestOpenGl\Sphere.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Game\TestOpenGl\BallSpawnPoint.h" />
+    <ClInclude Include="Game\TestOpenGl\BowlingBall.h" />
+    <ClInclude Include="Game\TestOpenGl\BowlingPC.h" />
     <ClInclude Include="Game\TestOpenGl\BowlingPlayer.h" />
     <ClInclude Include="Game\TestOpenGl\BowlingPin.h" />
     <ClInclude Include="Core\Engine\Graphics\MeshLoader\tiny_obj_loader.h" />
