@@ -3,6 +3,7 @@
 #include "Doom/DoomPC.h"
 #include "TestOpenGl/Cube.h"
 #include "CameraActor.h"
+#include "MeshComponent.h"
 
 LVLDoom::LVLDoom()
 	: mPlayer(nullptr)
@@ -27,6 +28,7 @@ void LVLDoom::Start(IRenderer* renderer)
 	Cube* cube = new Cube(3, 3);
 	AddActor(cube);
 	cube->Start();
+	cube->GetComponentOfType<MeshComponent>()->GetMesh()->SetTextureTiling(Vector2D(3, 2));
 }
 
 void LVLDoom::Update()

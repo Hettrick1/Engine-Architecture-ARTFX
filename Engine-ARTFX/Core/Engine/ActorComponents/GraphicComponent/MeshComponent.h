@@ -11,6 +11,7 @@ public:
 	virtual void Draw(Matrix4DRow viewProj);
 	virtual void SetMesh(Mesh& pMesh);
 	void SetTextureIndex(unsigned int pTextureIndex);
+	inline Mesh* GetMesh() const { return mMesh; }
 protected:
 	Mesh* mMesh;
 	unsigned int mTextureIndex;

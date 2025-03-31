@@ -17,6 +17,7 @@ Mesh::Mesh(std::vector<Vertex> pVertices)
 	mShaderProgram.Compose({ &mVertexShader, &mFragmentShader });
 	mTextures.emplace_back(&Assets::GetTexture("cube"));
 	mTextures.emplace_back(&Assets::GetTexture("walk1"));
+	mTextureTiling = Vector2D(1, 1);
 }
 
 Mesh::~Mesh()
@@ -90,4 +91,9 @@ float* Mesh::ToVerticeArray()
 		array[index + 7] = -mVertices[i].texCoord.y;
 	}
 	return array;
+}
+
+void Mesh::SetTextureTiling(Vector2D pTextureTiling)
+{
+	mTextureTiling = pTextureTiling;
 }

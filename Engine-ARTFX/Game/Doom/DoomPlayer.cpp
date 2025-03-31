@@ -39,7 +39,7 @@ void DoomPlayer::Start()
 	mGun = new FlipbookComponent(this, gunAnim, 10);
 	mGun->SetRelativePosition(Vector3D(0, 2, -0.5));
 	mGun->RelativeRotateX(90);
-	mGun->SetAnimationFps(4);
+	mGun->SetAnimationFps(8);
 	AddComponent(mGun);
 }
 
