@@ -6,6 +6,10 @@ Component::Component(Actor* owner, int updateOder) : mIsActive(true), mOwner(own
 	mOwner->AddComponent(this);
 }
 
+Component::~Component()
+{
+}
+
 void Component::OnStart()
 {
 }
