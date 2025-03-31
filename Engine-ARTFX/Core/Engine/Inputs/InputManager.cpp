@@ -25,7 +25,7 @@ InputManager::~InputManager()
     mActionKeyBindings.clear();
 }
 
-void InputManager::CreateNewBooleanBinding(IActionListener* listener, std::string name, SDL_Keycode key)
+void InputManager::CreateNewBooleanKeyBinding(IActionListener* listener, std::string name, SDL_Keycode key)
 {
     if (mActionKeyBindings.find(key) != mActionKeyBindings.end()) {
         std::vector<InputActions*> actionsToBind = mActionKeyBindings[key];
@@ -38,6 +38,13 @@ void InputManager::CreateNewBooleanBinding(IActionListener* listener, std::strin
         newAction->AddListener(listener);
         BindActionToKeys(newAction, { key });
     }
+}
+
+void InputManager::CreateNewBooleanBtnBinding(IActionListener* listener, std::string name, Uint8 mouseButton)
+{
+    BooleanActions* newAction = new BooleanActions(mouseButton, name);
+    newAction->AddListener(listener);
+    mActionMouseBindings.push_back(newAction);
 }
 
 void InputManager::CreateNewAxis2DBinding(IActionListener* listener, std::string name, SDL_Keycode positiveX, SDL_Keycode negativeX, SDL_Keycode positiveY, SDL_Keycode negativeY)

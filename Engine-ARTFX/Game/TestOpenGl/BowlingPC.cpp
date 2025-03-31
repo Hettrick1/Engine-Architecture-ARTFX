@@ -15,10 +15,10 @@ BowlingPC::BowlingPC(Actor* pOwner, int pUpdateOrder)
 	mSpeed(10), mYaw(0), mPitch(0), mShootStrengh(0), mXPosition(0)
 {
 	InputManager& inputManager = InputManager::Instance();
-	inputManager.CreateNewBooleanBinding(this, "shoot", SDLK_SPACE);
-	inputManager.CreateNewBooleanBinding(this, "tab", SDLK_TAB);
-	inputManager.CreateNewBooleanBinding(this, "d", SDLK_d);
-	inputManager.CreateNewBooleanBinding(this, "a", SDLK_a);
+	inputManager.CreateNewBooleanKeyBinding(this, "shoot", SDLK_SPACE);
+	inputManager.CreateNewBooleanKeyBinding(this, "tab", SDLK_TAB);
+	inputManager.CreateNewBooleanKeyBinding(this, "d", SDLK_d);
+	inputManager.CreateNewBooleanKeyBinding(this, "a", SDLK_a);
 	inputManager.CreateNewAxis2DBinding(this, "Mouse");
 	mPlayer = dynamic_cast<BowlingPlayer*>(mOwner);
 }

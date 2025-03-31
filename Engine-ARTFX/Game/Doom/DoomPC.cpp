@@ -7,18 +7,15 @@
 #include "Log.h"
 #include "Timer.h"
 #include "CameraComponent.h"
+#include "FlipbookComponent.h"
 
 DoomPC::DoomPC(Actor* pOwner, int pUpdateOrder)
 	: Component(pOwner, pUpdateOrder), playerRbRef(nullptr)
 {
 	InputManager& inputManager = InputManager::Instance();
 	inputManager.CreateNewAxis2DBinding(this, "movement", SDLK_d, SDLK_a, SDLK_w, SDLK_s);
-	/*inputManager.CreateNewBooleanBinding(this, "up", SDLK_SPACE);
-	inputManager.CreateNewBooleanBinding(this, "down", SDLK_LSHIFT);
-	inputManager.CreateNewBooleanBinding(this, "forward", SDLK_w);
-	inputManager.CreateNewBooleanBinding(this, "left", SDLK_a);
-	inputManager.CreateNewBooleanBinding(this, "backward", SDLK_s);
-	inputManager.CreateNewBooleanBinding(this, "right", SDLK_d);*/
+	inputManager.CreateNewBooleanBtnBinding(this, "shoot", SDL_BUTTON_LEFT);
+
 	inputManager.CreateNewAxis2DBinding(this, "Mouse");
 	if (playerRbRef == nullptr)
 	{
@@ -37,14 +34,12 @@ DoomPC::~DoomPC()
 
 void DoomPC::OnActionStarted(InputActions* action)
 {
-	if (action->GetType() == ActionType::Axis2D)
+	if (action->GetType() == ActionType::Boolean)
 	{
-		InputAxis2D* Triggeredaction = static_cast<InputAxis2D*>(action);
-		if (Triggeredaction && Triggeredaction->GetName() == "movement")
+		BooleanActions* Triggeredaction = static_cast<BooleanActions*>(action);
+		if (Triggeredaction && Triggeredaction->GetName() == "shoot")
 		{
-			Vector2D axis = Triggeredaction->GetAxis();
-			Vector3D forward = mOwner->GetComponentOfType<CameraComponent>()->GetWorldTransform().GetXAxis();
-			playerRbRef->SetVelocity(Vector3D(axis.x * 3, axis.y * 3, 0) * forward);
+			mOwner->GetComponentOfType<FlipbookComponent>()->PlayAnimation();
 		}
 	}
 }

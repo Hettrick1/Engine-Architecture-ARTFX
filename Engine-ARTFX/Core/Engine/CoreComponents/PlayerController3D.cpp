@@ -13,12 +13,12 @@ PlayerController3D::PlayerController3D(Actor* pOwner, int pUpdateOrder)
 	mSpeed(10), mYaw(0), mPitch(0)
 {
 	InputManager& inputManager = InputManager::Instance();
-	inputManager.CreateNewBooleanBinding(this, "up", SDLK_SPACE);
-	inputManager.CreateNewBooleanBinding(this, "down", SDLK_LSHIFT);
-	inputManager.CreateNewBooleanBinding(this, "forward", SDLK_w);
-	inputManager.CreateNewBooleanBinding(this, "left", SDLK_a);
-	inputManager.CreateNewBooleanBinding(this, "backward", SDLK_s);
-	inputManager.CreateNewBooleanBinding(this, "right", SDLK_d);
+	inputManager.CreateNewBooleanKeyBinding(this, "up", SDLK_SPACE);
+	inputManager.CreateNewBooleanKeyBinding(this, "down", SDLK_LSHIFT);
+	inputManager.CreateNewBooleanKeyBinding(this, "forward", SDLK_w);
+	inputManager.CreateNewBooleanKeyBinding(this, "left", SDLK_a);
+	inputManager.CreateNewBooleanKeyBinding(this, "backward", SDLK_s);
+	inputManager.CreateNewBooleanKeyBinding(this, "right", SDLK_d);
 	inputManager.CreateNewAxis2DBinding(this, "Mouse");
 }
 

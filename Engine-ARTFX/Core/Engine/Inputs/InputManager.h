@@ -8,7 +8,8 @@ class InputManager
 public:
     static InputManager& Instance();
     ~InputManager();
-    void CreateNewBooleanBinding(IActionListener* listener, std::string name, SDL_Keycode key);
+    void CreateNewBooleanKeyBinding(IActionListener* listener, std::string name, SDL_Keycode key);
+    void CreateNewBooleanBtnBinding(IActionListener* listener, std::string name, Uint8 mouseButton);
     void CreateNewAxis2DBinding(IActionListener* listener, std::string name, SDL_Keycode positiveX = SDLK_UNKNOWN, SDL_Keycode negativeX = SDLK_UNKNOWN, SDL_Keycode positiveY = SDLK_UNKNOWN, SDL_Keycode negativeY = SDLK_UNKNOWN);
     void Update();
 private:

@@ -52,8 +52,8 @@ bool RendererOpenGl::Initialize(Window& pWindow)
 		Log::Error(LogType::Video, "Failed to initialize SDL_Image");
 	}
 
-	mSpriteVertexShader.Load("BasicMesh.vert", ShaderType::VERTEX); 
-	mSpriteFragmentShader.Load("BasicMesh.frag", ShaderType::FRAGMENT);  
+	mSpriteVertexShader.Load("Simple.vert", ShaderType::VERTEX); 
+	mSpriteFragmentShader.Load("Simple.frag", ShaderType::FRAGMENT);  
 	mSpriteShaderProgramTemp.Compose({ &mSpriteVertexShader, &mSpriteFragmentShader });
 	SetSpriteShaderProgram(mSpriteShaderProgramTemp);
 

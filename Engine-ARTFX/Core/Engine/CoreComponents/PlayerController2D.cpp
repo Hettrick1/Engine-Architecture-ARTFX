@@ -9,11 +9,11 @@ PlayerController2D::PlayerController2D(Actor* pOwner, int pUpdateOrder)
 	: ActorMovementComponent(pOwner, pUpdateOrder), mCanGoRight(true), mCanGoLeft(true), mCanGoUp(true), mCanGoDown(true)
 {
 	InputManager& inputManager = InputManager::Instance();
-	inputManager.CreateNewBooleanBinding(this, "jump", SDLK_SPACE);
-	inputManager.CreateNewBooleanBinding(this, "up", SDLK_w);
-	inputManager.CreateNewBooleanBinding(this, "left", SDLK_a);
-	inputManager.CreateNewBooleanBinding(this, "down", SDLK_s);
-	inputManager.CreateNewBooleanBinding(this, "right", SDLK_d);
+	inputManager.CreateNewBooleanKeyBinding(this, "jump", SDLK_SPACE);
+	inputManager.CreateNewBooleanKeyBinding(this, "up", SDLK_w);
+	inputManager.CreateNewBooleanKeyBinding(this, "left", SDLK_a);
+	inputManager.CreateNewBooleanKeyBinding(this, "down", SDLK_s);
+	inputManager.CreateNewBooleanKeyBinding(this, "right", SDLK_d);
 }
 
 void PlayerController2D::OnActionStarted(InputActions* action)
