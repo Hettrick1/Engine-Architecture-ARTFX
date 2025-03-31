@@ -38,6 +38,16 @@ public:
 	{
 		return Vector3D(mRelativeTransform.mat[0][2], mRelativeTransform.mat[1][2], mRelativeTransform.mat[2][2]);
 	}
+
+	Vector3D GetRelativePosition() const
+	{
+		return mRelativePosition;
+	}
+	Vector3D GetRelativeSize() const
+	{
+		return mRelativeSize;
+	}
+
 	Actor* GetOwner();
 
 protected:

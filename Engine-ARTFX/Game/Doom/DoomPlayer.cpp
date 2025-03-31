@@ -6,9 +6,10 @@
 #include "Assets.h"
 #include "Scene.h"
 #include "MeshComponent.h"
+#include "Timer.h"
 
 DoomPlayer::DoomPlayer()
-	: Actor()
+	: Actor(), mGun(nullptr)
 {
 }
 
@@ -25,26 +26,40 @@ void DoomPlayer::Start()
 	AddComponent(playerController);
 	Texture* tex3 = Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/WalkAnim/Walk1.png", "walk1");
 
+	std::vector<Texture*> gunAnim = {
+		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/gun1.png", "gun1"),
+		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/gun2.png", "gun2"),
+		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/gun3.png", "gun3"),
+		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/gun4.png", "gun4")
+	};
+
 	CameraComponent* cameraComponent = new CameraComponent(this);
 	cameraComponent->SetRelativePosition(Vector3D(0, 0, 0));
 	AddComponent(cameraComponent);
-	SpriteComponent* sc = new SpriteComponent(this, *tex3, 1);
-	AddComponent(sc);
-	sc->SetRelativePosition(Vector3D(0, 10, 0));
-	sc->RelativeRotateX(90);
-
-	/*Texture* tex2 = Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/gray.png", "walls");
-	Texture* tex = Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/planks.png", "cube");
-	Mesh* mesh = Assets::LoadMesh("Imports/Meshes/cube.obj", "cube");
-	mesh->AddTexture(tex2);
-	MeshComponent* meshComp = new MeshComponent(this, mesh);
-	meshComp->SetTextureIndex(0);
-	AddComponent(meshComp);*/
+	mGun = new FlipbookComponent(this, gunAnim, 10);
+	mGun->SetRelativePosition(Vector3D(0, 2, -0.5));
+	mGun->RelativeRotateX(90);
+	mGun->SetAnimationFps(4);
+	AddComponent(mGun);
 }
 
 void DoomPlayer::Update()
 {
 	Actor::Update();
+	Vector3D bobbing = mGun->GetRelativePosition();
+	if (GetRigidBody()->GetVelocity().LengthSq() > 0) {
+		float time = SDL_GetTicks() * 0.01f;
+
+		bobbing.z -= Maths::Sin(time) * 0.005f;
+
+		bobbing.x += Maths::Sin(time * 0.5) * 0.005f;
+
+		mGun->SetRelativePosition(bobbing);
+	}
+	else 
+	{
+		mGun->SetRelativePosition(Vector3D(0, 2, -0.5));
+	}
 }
 
 void DoomPlayer::Destroy()

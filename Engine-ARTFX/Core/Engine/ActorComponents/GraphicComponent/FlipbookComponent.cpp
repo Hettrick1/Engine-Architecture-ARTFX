@@ -32,6 +32,11 @@ void FlipbookComponent::SetAnimationFps(float pFps)
 	mAnimationFps = pFps;
 }
 
+void FlipbookComponent::PlayAnimation()
+{
+	mPlayOnce = true;
+}
+
 void FlipbookComponent::Update()
 {
 	SpriteComponent::Update();
@@ -39,10 +44,14 @@ void FlipbookComponent::Update()
 	{
 		return;
 	}
-	mCurrentFrame += mAnimationFps * Timer::deltaTime;
-	while (mCurrentFrame >= mAnimationTextures.size())
+	if (mIsLooping || mPlayOnce)
 	{
-		mCurrentFrame -= mAnimationTextures.size();
+		mCurrentFrame += mAnimationFps * Timer::deltaTime;
+		while (mCurrentFrame >= mAnimationTextures.size())
+		{
+			mCurrentFrame -= mAnimationTextures.size();
+			mPlayOnce = false;
+		}
+		SetTexture(*mAnimationTextures[static_cast<int>(mCurrentFrame)]);
 	}
-	SetTexture(*mAnimationTextures[static_cast<int>(mCurrentFrame)]);
 }

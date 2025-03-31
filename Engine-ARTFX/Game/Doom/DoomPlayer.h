@@ -1,5 +1,6 @@
 #pragma once
 
+#include "FlipbookComponent.h"
 #include "Actor.h"
 
 class DoomPlayer : public Actor
@@ -11,6 +12,6 @@ public:
 	void Update() override;
 	void Destroy() override;
 private:
-
+	FlipbookComponent* mGun;
 };
 

@@ -14,11 +14,13 @@ public:
 	float GetAnimationFps() const { return mAnimationFps; }
 	void SetAnimationTextures(const std::vector<Texture*>& pTextures);
 	void SetAnimationFps(float pFps);
+	void PlayAnimation();
 
 	void Update() override;
 private:
 	std::vector<Texture*> mAnimationTextures;
 	float mCurrentFrame;
 	float mAnimationFps;
+	bool mIsLooping, mPlayOnce;
 };
 
