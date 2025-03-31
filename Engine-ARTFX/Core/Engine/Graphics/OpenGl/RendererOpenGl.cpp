@@ -52,8 +52,8 @@ bool RendererOpenGl::Initialize(Window& pWindow)
 		Log::Error(LogType::Video, "Failed to initialize SDL_Image");
 	}
 
-	mSpriteVertexShader.Load("Simple.vert", ShaderType::VERTEX); 
-	mSpriteFragmentShader.Load("Simple.frag", ShaderType::FRAGMENT);  
+	mSpriteVertexShader.Load("BasicMesh.vert", ShaderType::VERTEX); 
+	mSpriteFragmentShader.Load("BasicMesh.frag", ShaderType::FRAGMENT);  
 	mSpriteShaderProgramTemp.Compose({ &mSpriteVertexShader, &mSpriteFragmentShader });
 	SetSpriteShaderProgram(mSpriteShaderProgramTemp);
 
@@ -145,9 +145,6 @@ void RendererOpenGl::DrawSprite(Actor& pActor, Texture& pTexture, Rectangle pRec
 		return;
 	}
 	mSpriteShaderProgram->Use();
-	Matrix4DRow scaleMat = Matrix4DRow::CreateScale(pTexture.GetTextureSize());
-	Matrix4DRow world = scaleMat * pActor.GetTransformComponent().GetWorldTransform();
-	mSpriteShaderProgram->setMatrix4Row("uWorldTransform", world);
 	pTexture.SetActive();
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }
@@ -214,18 +211,19 @@ void RendererOpenGl::DrawMeshes()
 
 void RendererOpenGl::DrawSprites()
 {
-	glDisable(GL_DEPTH_TEST); 
-	glEnable(GL_BLEND); 
-	glBlendEquationSeparate(GL_FUNC_ADD, GL_FUNC_ADD);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); 
+	glEnable(GL_DEPTH_TEST);
+	glDisable(GL_BLEND);
 	if (mSpriteShaderProgram == nullptr)
 	{
 		return;
 	}
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	mSpriteShaderProgram->Use(); 
-	mSpriteShaderProgram->setMatrix4Row("uViewProj", mSpriteViewProj); 
+	mSpriteShaderProgram->setMatrix4Row("uViewProj", mView * mProj);
 	mVAO->SetActive(); 
 	for (SpriteComponent* sprite : mSprites) {
+		Matrix4DRow world = sprite->GetWorldTransform();
+		mSpriteShaderProgram->setMatrix4Row("uWorldTransform", world);
 		sprite->Draw(*this);
 	}
 }

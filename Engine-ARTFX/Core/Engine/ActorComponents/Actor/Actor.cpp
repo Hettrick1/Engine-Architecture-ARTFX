@@ -66,6 +66,26 @@ void Actor::SetPosition(Vector3D pPosition)
     mTransformComponent.SetPosition(pPosition);
 }
 
+void Actor::SetSize(Vector3D pSize)
+{
+    mTransformComponent.SetSize(pSize);
+}
+
+void Actor::RotateX(float pAnle)
+{
+    mTransformComponent.RotateX(pAnle);
+}
+
+void Actor::RotateY(float pAngle)
+{
+    mTransformComponent.RotateY(pAngle);
+}
+
+void Actor::RotateZ(float pAngle)
+{
+    mTransformComponent.RotateZ(pAngle);
+}
+
 void Actor::Update()
 {
     mIsUpdatingComponents = true;

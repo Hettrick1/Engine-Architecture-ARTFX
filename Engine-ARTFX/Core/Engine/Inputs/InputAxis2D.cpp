@@ -35,12 +35,18 @@ void InputAxis2D::Update()
     }
 
     if (newX != x || newY != y) {
+        x = newX;
+        y = newY;
         if (newX != 0 || newY != 0) {
             NotifyListenersStarted();
         }
         else {
             NotifyListenersEnded();
         }
+        NotifyListenersTriggered();
+    }
+    else if (!mUseMouse)
+    {
         x = newX;
         y = newY;
         NotifyListenersTriggered();

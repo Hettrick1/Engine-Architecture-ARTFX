@@ -13,10 +13,14 @@ InputManager::~InputManager()
     for (auto it = mActionKeyBindings.begin(); it != mActionKeyBindings.end(); ++it) {
         auto& key = it->first;
         auto& actions = it->second;
-        while (actions.size() > 0) {
-            delete actions.back();
-            actions.pop_back();
+        for (auto& action : actions)
+        {
+            if (action != nullptr)
+            {
+                action = nullptr;
+            }
         }
+        actions.clear();
     }
     mActionKeyBindings.clear();
 }

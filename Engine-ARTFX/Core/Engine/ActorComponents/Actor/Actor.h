@@ -20,6 +20,10 @@ public:
 	void RemoveComponent(Component* component);
 	void SetActive(ActorState state);
 	void SetPosition(Vector3D pPosition);
+	void SetSize(Vector3D pSize);
+	void RotateX(float pAnle);
+	void RotateY(float pAngle);
+	void RotateZ(float pAngle);
 	std::vector<Component*> GetComponents() const;
 	ActorState GetState();
 	Scene& GetScene();
