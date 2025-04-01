@@ -209,6 +209,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Engine\Graphics\CameraManager.h" />
+    <ClInclude Include="Core\Engine\Graphics\Hud\TextAlignementEnum.h" />
     <ClInclude Include="Game\Doom\DoomPC.h" />
     <ClInclude Include="Game\Doom\DoomPlayer.h" />
     <ClInclude Include="Game\TestOpenGl\BallSpawnPoint.h" />

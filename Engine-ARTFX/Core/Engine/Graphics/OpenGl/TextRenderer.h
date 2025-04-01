@@ -5,6 +5,7 @@
 #include "Matrix4DRow.h"
 #include "Shaders/ShaderProgram.h"
 #include "Window.h"
+#include "TextAlignementEnum.h"
 #include <map>
 
 /// Holds all state information relevant to a character as loaded using FreeType
@@ -21,7 +22,8 @@ public:
     static TextRenderer& Instance();
 
 	bool Init(Window& pWindow);
-    void RenderText(std::string text, float x, float y, float scale, Vector3D color);
+    void RenderText(std::string text, float x, float y, float scale, Vector3D color, TextAlignment alignment);
+    float ComputeTextWidth(const std::string& text, float scale);
 private:
     ~TextRenderer();
     TextRenderer() = default;

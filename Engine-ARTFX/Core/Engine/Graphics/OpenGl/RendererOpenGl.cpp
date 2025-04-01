@@ -70,6 +70,8 @@ bool RendererOpenGl::Initialize(Window& pWindow)
 
 	mHud = new HudManager();
 
+	SDL_GL_SetSwapInterval(0); // deactivate V-Sync
+
 	return true;
 }
 

@@ -12,6 +12,8 @@
 
 #include "HudElements/HudText.h"
 
+HudText* text2 = nullptr;
+
 DoomPlayer::DoomPlayer()
 	: Actor(), mGun(nullptr)
 {
@@ -41,13 +43,13 @@ void DoomPlayer::Start()
 	cameraComponent->SetRelativePosition(Vector3D(0, 0, 0));
 	AddComponent(cameraComponent);
 	mGun = new FlipbookComponent(this, gunAnim, 10);
-	mGun->SetRelativePosition(Vector3D(0, 2, -0.5));
+	mGun->SetRelativePosition(Vector3D(-0.16, 2, -0.5));
 	mGun->RelativeRotateX(90);
 	mGun->SetAnimationFps(8);
 	AddComponent(mGun);
 	
-	HudText* text = new HudText("Evy le BG", -450, 0, 1, Vector3D(1, 1, 1));
-	HudText* text2 = new HudText("AAAAAAAAA", -450, -100, 2, Vector3D(1, 0, 1));
+	HudText* text = new HudText("Evy le BG", 0, 0, 1, Vector3D(1, 1, 1), TextAlignment::CENTER);
+	text2 = new HudText("AAAAAAAAA", -1900, 1000, 0.5, Vector3D(1, 0, 1));
 	GetScene().GetRenderer()->GetHud()->AddElement(text);
 	GetScene().GetRenderer()->GetHud()->AddElement(text2);
 }
@@ -68,9 +70,10 @@ void DoomPlayer::Update()
 	else 
 	{
 		float lerpRelativeSpeed = 8;
-		Vector3D lerpRelative = Vector3D::Lerp(mGun->GetRelativePosition(), Vector3D(0, 2, -0.5), Timer::deltaTime * lerpRelativeSpeed);
+		Vector3D lerpRelative = Vector3D::Lerp(mGun->GetRelativePosition(), Vector3D(-0.16, 2, -0.5), Timer::deltaTime * lerpRelativeSpeed);
 		mGun->SetRelativePosition(lerpRelative);
 	}
+	text2->SetText("Fps : " + std::to_string(Timer::mFPS));
 }
 
 void DoomPlayer::Destroy()

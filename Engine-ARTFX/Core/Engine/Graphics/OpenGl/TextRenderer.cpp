@@ -1,10 +1,8 @@
 #include "TextRenderer.h"
 
 #include "glew.h"
-
 #include <ft2build.h>
 #include FT_FREETYPE_H
-
 #include "Log.h"
 #include <iostream>
 #include <string>
@@ -111,8 +109,19 @@ bool TextRenderer::Init(Window& pWindow)
     return true;
 }
 
-void TextRenderer::RenderText(std::string text, float x, float y, float scale, Vector3D color)
+void TextRenderer::RenderText(std::string text, float x, float y, float scale, Vector3D color, TextAlignment alignment)
 {
+    float textWidth = ComputeTextWidth(text, scale);
+
+    if (alignment == TextAlignment::CENTER)
+    {
+        x -= textWidth / 2.0f;
+    }
+    else if (alignment == TextAlignment::RIGHT)
+    {
+        x -= textWidth;
+    }
+
     // activate corresponding render state	
     mShaderProgram.Use();
     mShaderProgram.setVector3f("textColor", color);
@@ -156,6 +165,20 @@ void TextRenderer::RenderText(std::string text, float x, float y, float scale, V
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 
+float TextRenderer::ComputeTextWidth(const std::string& text, float scale)
+{
+    float width = 0.0f;
+    for (char c : text)
+    {
+        if (mCharacters.find(c) != mCharacters.end())
+        {
+            width += (mCharacters[c].Advance >> 6) * scale;  // Convertit 1/64 pixels en pixels
+        }
+    }
+    return width;
+}
+
 TextRenderer::~TextRenderer()
 {
 }
+
