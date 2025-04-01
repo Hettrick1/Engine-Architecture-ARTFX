@@ -40,6 +40,7 @@ public:
 	void DrawMeshes();
 	void DrawSprites();
 	void DrawHud();
+	void DrawHudImage(Texture& pTexture, Rectangle pRect, Vector2D pOrigin);
 
 	void SetSpriteShaderProgram(ShaderProgram& shaderProgram) override;
 

@@ -11,6 +11,7 @@
 #include "HudManager.h"
 
 #include "HudElements/HudText.h"
+#include "HudElements/HudImage.h"
 
 HudText* text2 = nullptr;
 
@@ -48,10 +49,14 @@ void DoomPlayer::Start()
 	mGun->SetAnimationFps(8);
 	AddComponent(mGun);
 	
-	HudText* text = new HudText("Evy le BG", 0, 0, 1, Vector3D(1, 1, 1), TextAlignment::CENTER);
+	//HudText* text = new HudText("Evy le BG", 0, 0, 1, Vector3D(1, 1, 1), TextAlignment::CENTER);
 	text2 = new HudText("AAAAAAAAA", -1900, 1000, 0.5, Vector3D(1, 0, 1));
-	GetScene().GetRenderer()->GetHud()->AddElement(text);
+
+	HudImage* img = new HudImage(*tex3, Vector2D(100, 300));
+
+	//GetScene().GetRenderer()->GetHud()->AddElement(text);
 	GetScene().GetRenderer()->GetHud()->AddElement(text2);
+	GetScene().GetRenderer()->GetHud()->AddElement(img);
 }
 
 void DoomPlayer::Update()

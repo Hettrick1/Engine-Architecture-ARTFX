@@ -1,21 +1,19 @@
 #pragma once
 #include "HudElement.h"
 #include "RendererOpenGl.h"
+#include "Texture.h"
+
 class HudImage :
     public HudElement
 {
 public:
-    HudImage(unsigned int textureID, float x, float y, float width, float height)
-        : mTextureID(textureID), mWidth(width), mHeight(height) {
-        SetPosition(x, y);
-    }
-
-    void Draw(RendererOpenGl& renderer) override {
-        //renderer.DrawImage(mTextureID, mPositionX, mPositionY, mWidth, mHeight);
-    }
+    HudImage(Texture& pTexture, Vector2D pPosition, Vector2D pOrigin = Vector2D(0.5, 0.5));
+        
+    void Draw(RendererOpenGl& renderer) override;
 
 private:
-    unsigned int mTextureID;
+    Texture mTexture;
     float mWidth, mHeight;
+    Vector2D mOrigin;
 };
 

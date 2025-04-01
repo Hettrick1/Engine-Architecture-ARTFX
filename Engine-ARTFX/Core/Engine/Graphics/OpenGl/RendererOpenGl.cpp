@@ -64,13 +64,13 @@ bool RendererOpenGl::Initialize(Window& pWindow)
 	mDebugShaderProgram.Compose({ &mSpriteVertexShader, &mSpriteFragmentShader });
 
 	mVAO = new VertexArray(spriteVertices, 4);
-	mSpriteViewProj = Matrix4DRow::CreateSimpleViewProj(mWindow->GetDimensions().x, mWindow->GetDimensions().y);
+	mSpriteViewProj = Matrix4DRow::CreateOrtho(static_cast<float>(pWindow.GetDimensions().x), static_cast<float>(pWindow.GetDimensions().y), 0.000001f, 100000);
 	mView = Matrix4DRow::CreateLookAt(Vector3D(0, 0, 5), Vector3D::unitX, Vector3D::unitZ);
 	mProj = Matrix4DRow::CreatePerspectiveFOV(70.0f, mWindow->GetDimensions().x, mWindow->GetDimensions().y, 0.01f, 10000.0f);
 
 	mHud = new HudManager();
 
-	SDL_GL_SetSwapInterval(0); // deactivate V-Sync
+	//SDL_GL_SetSwapInterval(0); // deactivate V-Sync
 
 	return true;
 }
@@ -244,6 +244,30 @@ void RendererOpenGl::DrawHud()
 	mHud->Draw(*this); 
 	glDisable(GL_CULL_FACE); 
 	glDisable(GL_BLEND); 
+}
+
+void RendererOpenGl::DrawHudImage(Texture& pTexture, Rectangle pRect, Vector2D pOrigin)
+{
+	glDisable(GL_CULL_FACE);
+	glDisable(GL_BLEND);
+	if (mSpriteShaderProgram == nullptr)
+	{
+		return;
+	}
+
+	mSpriteShaderProgram->Use();
+	mSpriteShaderProgram->setMatrix4Row("uViewProj", mSpriteViewProj);
+	Vector3D adjustedPosition = Vector3D(
+		pRect.position.x - (pOrigin.x * pRect.dimensions.x),
+		pRect.position.y - (pOrigin.y * pRect.dimensions.y),
+		0
+	);
+	Matrix4DRow scaleMat = Matrix4DRow::CreateScale(Vector3D(pRect.dimensions.x, pRect.dimensions.y, 0));
+	Matrix4DRow world = scaleMat * Matrix4DRow::CreateTranslation(adjustedPosition);
+	mSpriteShaderProgram->setMatrix4Row("uWorldTransform", world);
+	mVAO->SetActive();
+	pTexture.SetActive();
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }
 
 void RendererOpenGl::SetSpriteShaderProgram(ShaderProgram& shaderProgram)
