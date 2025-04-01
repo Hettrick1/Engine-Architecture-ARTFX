@@ -1,0 +1,54 @@
+﻿  autofit.c
+  bdf.c
+  cff.c
+  ftbase.c
+  ftbitmap.c
+  ftcache.c
+  ftfstype.c
+  ftgasp.c
+  ftglyph.c
+  ftgzip.c
+  ftinit.c
+  ftlzw.c
+  ftstroke.c
+  ftsystem.c
+  smooth.c
+  ftbbox.c
+  ftfntfmt.c
+  ftmm.c
+  ftpfr.c
+  ftsynth.c
+  fttype1.c
+  ftwinfnt.c
+  ftlcdfil.c
+  ftgxval.c
+  ftotval.c
+  ftpatent.c
+  pcf.c
+  pfr.c
+  psaux.c
+  pshinter.c
+C:\Users\evann.jacquot\Documents\GitHub\Engine-Architecture-ARTFX\Dependencies\freetype-2.6.1\src\base\ftobjs.c(4710,1): warning C4702: unreachable code
+C:\Users\evann.jacquot\Documents\GitHub\Engine-Architecture-ARTFX\Dependencies\freetype-2.6.1\src\base\ftoutln.c(962,1): warning C4701: potentially uninitialized local variable 'anchor' used
+C:\Users\evann.jacquot\Documents\GitHub\Engine-Architecture-ARTFX\Dependencies\freetype-2.6.1\src\base\ftoutln.c(975,1): warning C4701: potentially uninitialized local variable 'in' used
+C:\Users\evann.jacquot\Documents\GitHub\Engine-Architecture-ARTFX\Dependencies\freetype-2.6.1\src\base\ftobjs.c(4711,1): warning C4702: unreachable code
+  psmodule.c
+  raster.c
+  sfnt.c
+  truetype.c
+  type1.c
+  type1cid.c
+  type42.c
+  winfnt.c
+C:\Users\evann.jacquot\Documents\GitHub\Engine-Architecture-ARTFX\Dependencies\freetype-2.6.1\src\type1\t1load.c(1564,36): warning C4244: '=': conversion from '__int64' to 'FT_Int', possible loss of data
+C:\Users\evann.jacquot\Documents\GitHub\Engine-Architecture-ARTFX\Dependencies\freetype-2.6.1\src\type1\t1driver.c(263,46): warning C4267: '=': conversion from 'size_t' to 'FT_ULong', possible loss of data
+C:\Users\evann.jacquot\Documents\GitHub\Engine-Architecture-ARTFX\Dependencies\freetype-2.6.1\src\type1\t1driver.c(283,55): warning C4267: '=': conversion from 'size_t' to 'FT_ULong', possible loss of data
+C:\Users\evann.jacquot\Documents\GitHub\Engine-Architecture-ARTFX\Dependencies\freetype-2.6.1\src\type1\t1driver.c(315,62): warning C4267: '=': conversion from 'size_t' to 'FT_ULong', possible loss of data
+C:\Users\evann.jacquot\Documents\GitHub\Engine-Architecture-ARTFX\Dependencies\freetype-2.6.1\src\type1\t1driver.c(528,54): warning C4267: '=': conversion from 'size_t' to 'FT_ULong', possible loss of data
+C:\Users\evann.jacquot\Documents\GitHub\Engine-Architecture-ARTFX\Dependencies\freetype-2.6.1\src\type1\t1driver.c(534,53): warning C4267: '=': conversion from 'size_t' to 'FT_ULong', possible loss of data
+C:\Users\evann.jacquot\Documents\GitHub\Engine-Architecture-ARTFX\Dependencies\freetype-2.6.1\src\type1\t1driver.c(540,56): warning C4267: '=': conversion from 'size_t' to 'FT_ULong', possible loss of data
+C:\Users\evann.jacquot\Documents\GitHub\Engine-Architecture-ARTFX\Dependencies\freetype-2.6.1\src\type1\t1driver.c(546,58): warning C4267: '=': conversion from 'size_t' to 'FT_ULong', possible loss of data
+C:\Users\evann.jacquot\Documents\GitHub\Engine-Architecture-ARTFX\Dependencies\freetype-2.6.1\src\type1\t1driver.c(552,53): warning C4267: '=': conversion from 'size_t' to 'FT_ULong', possible loss of data
+C:\Users\evann.jacquot\Documents\GitHub\Engine-Architecture-ARTFX\Dependencies\freetype-2.6.1\src\truetype\ttgload.c(1748,1): warning C4701: potentially uninitialized local variable 'outline' used
+  ftdebug.c
+  freetype.vcxproj -> C:\Users\evann.jacquot\Documents\GitHub\Engine-Architecture-ARTFX\Dependencies\freetype-2.6.1\objs\vc2010\x64\freetype261d.lib
