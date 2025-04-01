@@ -49,12 +49,12 @@ void DoomPlayer::Start()
 	mGun->SetAnimationFps(8);
 	AddComponent(mGun);
 	
-	//HudText* text = new HudText("Evy le BG", 0, 0, 1, Vector3D(1, 1, 1), TextAlignment::CENTER);
+	HudText* text = new HudText("Evy le BG", 0, 0, 1, Vector3D(1, 1, 1), TextAlignment::CENTER); 
 	text2 = new HudText("AAAAAAAAA", -1900, 1000, 0.5, Vector3D(1, 0, 1));
 
-	HudImage* img = new HudImage(*tex3, Vector2D(100, 300));
+	HudImage* img = new HudImage(*tex3, Vector2D(0, 400), Vector2D(10, 10));
 
-	//GetScene().GetRenderer()->GetHud()->AddElement(text);
+	GetScene().GetRenderer()->GetHud()->AddElement(text);
 	GetScene().GetRenderer()->GetHud()->AddElement(text2);
 	GetScene().GetRenderer()->GetHud()->AddElement(img);
 }
