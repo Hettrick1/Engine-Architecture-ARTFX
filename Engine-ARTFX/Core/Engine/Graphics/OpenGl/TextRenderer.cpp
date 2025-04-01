@@ -46,7 +46,7 @@ bool TextRenderer::Init(Window& pWindow)
     }
     else {
         // set size to load glyphs as
-        FT_Set_Pixel_Sizes(face, 0, 48);
+        FT_Set_Pixel_Sizes(face, 0, 128);
 
         // disable byte-alignment restriction
         glPixelStorei(GL_UNPACK_ALIGNMENT, 1);

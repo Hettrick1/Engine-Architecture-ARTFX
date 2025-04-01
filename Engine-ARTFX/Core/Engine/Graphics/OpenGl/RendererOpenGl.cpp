@@ -79,7 +79,12 @@ void RendererOpenGl::Draw()
 {
 	DrawMeshes();
 	DrawSprites();
+	glEnable(GL_CULL_FACE);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	TextRenderer::Instance().RenderText("test", 100, 300, 1, Vector3D(1, 1, 1));
+	glDisable(GL_CULL_FACE);
+	glDisable(GL_BLEND);
 	for (auto& collider : mCollider) // DEBUG ONLY
 	{
 		collider->DebugDraw(*this);
