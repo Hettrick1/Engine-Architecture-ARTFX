@@ -13,8 +13,8 @@ DoomPC::DoomPC(Actor* pOwner, int pUpdateOrder)
 	: Component(pOwner, pUpdateOrder), playerRbRef(nullptr)
 {
 	InputManager& inputManager = InputManager::Instance();
-	inputManager.CreateNewAxis2DBinding(this, "movement", SDLK_d, SDLK_a, SDLK_w, SDLK_s);
-	inputManager.CreateNewBooleanBtnBinding(this, "shoot", SDL_BUTTON_LEFT);
+	inputManager.CreateNewAxis2DBinding(this, "Movement", SDLK_d, SDLK_a, SDLK_w, SDLK_s);
+	inputManager.CreateNewBooleanBtnBinding(this, "Shoot", SDL_BUTTON_LEFT);
 
 	inputManager.CreateNewAxis2DBinding(this, "Mouse");
 	if (playerRbRef == nullptr)
@@ -37,7 +37,7 @@ void DoomPC::OnActionStarted(InputActions* action)
 	if (action->GetType() == ActionType::Boolean)
 	{
 		BooleanActions* Triggeredaction = static_cast<BooleanActions*>(action);
-		if (Triggeredaction && Triggeredaction->GetName() == "shoot")
+		if (Triggeredaction && Triggeredaction->GetName() == "Shoot")
 		{
 			mOwner->GetComponentOfType<FlipbookComponent>()->PlayAnimation();
 		}
@@ -59,7 +59,7 @@ void DoomPC::OnActionTriggered(InputActions* action)
 			axis.x *= sensitivity;
 			mOwner->GetTransformComponent().RotateZ(axis.x);
 		}
-		if (Triggeredaction && Triggeredaction->GetName() == "movement")
+		if (Triggeredaction && Triggeredaction->GetName() == "Movement")
 		{
 			Vector2D axis = Triggeredaction->GetAxis();
 			Vector3D forward = mOwner->GetComponentOfType<CameraComponent>()->GetWorldTransform().GetYAxis();

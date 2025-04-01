@@ -68,9 +68,9 @@ void TransformComponent::RotateX(float pAngle)
     mPitch += pAngle;
     Quaternion newX(Vector3D::unitX, piAngle);
     mRotation = Quaternion::Concatenate(newX, mRotation);
-    Log::Info("x : " + std::to_string(Maths::ToDeg(mRotation.x)));
+    /*Log::Info("x : " + std::to_string(Maths::ToDeg(mRotation.x)));
     Log::Info("y : " + std::to_string(Maths::ToDeg(mRotation.y)));
-    Log::Info("z : " + std::to_string(Maths::ToDeg(mRotation.z)));
+    Log::Info("z : " + std::to_string(Maths::ToDeg(mRotation.z)));*/
     ComputeWorldTransform();
 }
 
@@ -80,9 +80,9 @@ void TransformComponent::RotateY(float pAngle)
     mRoll += pAngle;
     Quaternion newY(Vector3D::unitY, piAngle);
     mRotation = Quaternion::Concatenate(newY, mRotation);
-    Log::Info("x : " + std::to_string(Maths::ToDeg(mRotation.x)));
+    /*Log::Info("x : " + std::to_string(Maths::ToDeg(mRotation.x)));
     Log::Info("y : " + std::to_string(Maths::ToDeg(mRotation.y)));
-    Log::Info("z : " + std::to_string(Maths::ToDeg(mRotation.z)));
+    Log::Info("z : " + std::to_string(Maths::ToDeg(mRotation.z)));*/
     ComputeWorldTransform();
 } 
 
@@ -92,9 +92,9 @@ void TransformComponent::RotateZ(float pAngle)
     mYaw += pAngle;
     Quaternion newZ(Vector3D::unitZ, piAngle);
     mRotation = Quaternion::Concatenate(newZ, mRotation);
-    Log::Info("x : " + std::to_string(Maths::ToDeg(mRotation.x)));
+    /*Log::Info("x : " + std::to_string(Maths::ToDeg(mRotation.x)));
     Log::Info("y : " + std::to_string(Maths::ToDeg(mRotation.y)));
-    Log::Info("z : " + std::to_string(Maths::ToDeg(mRotation.z)));
+    Log::Info("z : " + std::to_string(Maths::ToDeg(mRotation.z)));*/
     ComputeWorldTransform(); 
 }
 

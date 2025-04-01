@@ -58,7 +58,9 @@ void DoomPlayer::Update()
 	}
 	else 
 	{
-		mGun->SetRelativePosition(Vector3D(0, 2, -0.5));
+		float lerpRelativeSpeed = 8;
+		Vector3D lerpRelative = Vector3D::Lerp(mGun->GetRelativePosition(), Vector3D(0, 2, -0.5), Timer::deltaTime * lerpRelativeSpeed);
+		mGun->SetRelativePosition(lerpRelative);
 	}
 }
 
