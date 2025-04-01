@@ -76,14 +76,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Dependencies\glew-2.2.0-win32\glew-2.2.0\include\GL;$(SolutionDir)\Dependencies\GL\SDL\include;$(SolutionDir)\Dependencies\SDL2_image-2.8.2\include;Core;Core\Engine;Core\Maths;Core\Scenes;Core\Engine\ActorComponents;Core\Engine\DebugClasses;Core\Engine\Editor;Core\Engine\Graphics;Core\Engine\ActorComponents\Colliders;Core\Engine\ActorComponents\Managers;Core\Scenes\Childs;Game;Core\Engine\Inputs;Core\Engine\Graphics\OpenGl;Core\Engine\Graphics\SDL;Core\Engine\ActorComponents\GraphicComponent;Core\Engine\ActorComponents\PhysicComponent;Core\Engine\ActorComponents\Actor;Core\Engine\CoreComponents</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Dependencies\glew-2.2.0-win32\glew-2.2.0\include\GL;$(SolutionDir)\Dependencies\GL\SDL\include;$(SolutionDir)\Dependencies\SDL2_image-2.8.2\include;Core;Core\Engine;Core\Maths;Core\Scenes;Core\Engine\ActorComponents;Core\Engine\DebugClasses;Core\Engine\Editor;Core\Engine\Graphics;Core\Engine\ActorComponents\Colliders;Core\Engine\ActorComponents\Managers;Core\Scenes\Childs;Game;Core\Engine\Inputs;Core\Engine\Graphics\OpenGl;Core\Engine\Graphics\SDL;Core\Engine\ActorComponents\GraphicComponent;Core\Engine\ActorComponents\PhysicComponent;Core\Engine\ActorComponents\Actor;Core\Engine\CoreComponents;$(SolutionDir)\Dependencies\freetype-2.6.1\include;$(SolutionDir)\Dependencies\freetype-2.6.1\include\freetype</AdditionalIncludeDirectories>
       <LanguageStandard>Default</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)\Dependencies\GL\SDL\lib\x86;$(SolutionDir)\Dependencies\glew-2.2.0-win32\glew-2.2.0\bin\Release\Win32;$(SolutionDir)\Dependencies\glew-2.2.0-win32\glew-2.2.0\lib\Release\Win32;$(SolutionDir)\Dependencies\SDL2_image-2.8.2\lib\x86</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glu32.lib;glew32.lib;opengl32.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\Dependencies\GL\SDL\lib\x86;$(SolutionDir)\Dependencies\glew-2.2.0-win32\glew-2.2.0\bin\Release\Win32;$(SolutionDir)\Dependencies\glew-2.2.0-win32\glew-2.2.0\lib\Release\Win32;$(SolutionDir)\Dependencies\SDL2_image-2.8.2\lib\x86;$(SolutionDir)\Dependencies\freetype-2.6.1\objs\vc2010\Win32</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glu32.lib;glew32.lib;opengl32.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;freetype261.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -94,7 +94,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Dependencies\glew-2.2.0-win32\glew-2.2.0\include\GL;$(SolutionDir)\Dependencies\GL\SDL\include;$(SolutionDir)\Dependencies\SDL2_image-2.8.2\include;Core;Core\Engine;Core\Maths;Core\Scenes;Core\Engine\ActorComponents;Core\Engine\DebugClasses;Core\Engine\Editor;Core\Engine\Graphics;Core\Engine\ActorComponents\Colliders;Core\Engine\ActorComponents\Managers;Core\Scenes\Childs;Game;Core\Engine\Inputs;Core\Engine\Graphics\OpenGl;Core\Engine\Graphics\SDL;Core\Engine\ActorComponents\GraphicComponent;Core\Engine\ActorComponents\PhysicComponent;Core\Engine\ActorComponents\Actor;Core\Engine\CoreComponents</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Dependencies\glew-2.2.0-win32\glew-2.2.0\include\GL;$(SolutionDir)\Dependencies\GL\SDL\include;$(SolutionDir)\Dependencies\SDL2_image-2.8.2\include;Core;Core\Engine;Core\Maths;Core\Scenes;Core\Engine\ActorComponents;Core\Engine\DebugClasses;Core\Engine\Editor;Core\Engine\Graphics;Core\Engine\ActorComponents\Colliders;Core\Engine\ActorComponents\Managers;Core\Scenes\Childs;Game;Core\Engine\Inputs;Core\Engine\Graphics\OpenGl;Core\Engine\Graphics\SDL;Core\Engine\ActorComponents\GraphicComponent;Core\Engine\ActorComponents\PhysicComponent;Core\Engine\ActorComponents\Actor;Core\Engine\CoreComponents;$(SolutionDir)\Dependencies\freetype-2.6.1\include;$(SolutionDir)\Dependencies\freetype-2.6.1\include\freetype</AdditionalIncludeDirectories>
       <LanguageStandard>Default</LanguageStandard>
     </ClCompile>
     <Link>
@@ -102,8 +102,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)\Dependencies\GL\SDL\lib\x86;$(SolutionDir)\Dependencies\glew-2.2.0-win32\glew-2.2.0\bin\Release\Win32;$(SolutionDir)\Dependencies\glew-2.2.0-win32\glew-2.2.0\lib\Release\Win32;$(SolutionDir)\Dependencies\SDL2_image-2.8.2\lib\x86</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glu32.lib;glew32.lib;opengl32.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\Dependencies\GL\SDL\lib\x86;$(SolutionDir)\Dependencies\glew-2.2.0-win32\glew-2.2.0\bin\Release\Win32;$(SolutionDir)\Dependencies\glew-2.2.0-win32\glew-2.2.0\lib\Release\Win32;$(SolutionDir)\Dependencies\SDL2_image-2.8.2\lib\x86;$(SolutionDir)\Dependencies\freetype-2.6.1\objs\vc2010\Win32</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glu32.lib;glew32.lib;opengl32.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;freetype261.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -200,6 +200,7 @@
     <ClCompile Include="Core\Engine\CoreComponents\PlayerController3D.cpp" />
     <ClCompile Include="Core\Engine\Physics\PhysicManager.cpp" />
     <ClCompile Include="Game\TestOpenGl\Sphere.cpp" />
+    <ClCompile Include="Core\Engine\Graphics\OpenGl\TextRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Engine\Graphics\CameraManager.h" />
@@ -274,6 +275,7 @@
     <ClInclude Include="Core\Engine\Physics\PhysicManager.h" />
     <ClInclude Include="Game\TestOpenGl\Sphere.h" />
     <ClInclude Include="Core\Scenes\Childs\LVLDoom.h" />
+    <ClInclude Include="Core\Engine\Graphics\OpenGl\TextRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Imports\Shaders\BasicMesh.frag" />
@@ -282,6 +284,8 @@
     <None Include="Imports\Shaders\Debug.vert" />
     <None Include="Imports\Shaders\Simple.frag" />
     <None Include="Imports\Shaders\Simple.vert" />
+    <None Include="Imports\Shaders\TextRenderer.vert" />
+    <None Include="Imports\Shaders\TextRenderer.frag" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

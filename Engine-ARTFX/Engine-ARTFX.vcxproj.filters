@@ -201,6 +201,9 @@
     <ClCompile Include="Core\Scenes\Childs\LVLDoom.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Core\Engine\Graphics\OpenGl\TextRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Engine\DebugClasses\Log.h">
@@ -419,6 +422,9 @@
     <ClInclude Include="Core\Scenes\Childs\LVLDoom.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Core\Engine\Graphics\OpenGl\TextRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Imports\Shaders\Simple.vert" />
@@ -427,5 +433,7 @@
     <None Include="Imports\Shaders\BasicMesh.frag" />
     <None Include="Imports\Shaders\Debug.vert" />
     <None Include="Imports\Shaders\Debug.frag" />
+    <None Include="Imports\Shaders\TextRenderer.vert" />
+    <None Include="Imports\Shaders\TextRenderer.frag" />
   </ItemGroup>
 </Project>

@@ -7,6 +7,7 @@
 #include "Actor.h"
 #include "Texture.h"
 #include "glew.h"
+#include "TextRenderer.h"
 
 RendererOpenGl::RendererOpenGl()
 	: mVAO(nullptr), mWindow(nullptr), mSpriteShaderProgram(nullptr)
@@ -78,6 +79,7 @@ void RendererOpenGl::Draw()
 {
 	DrawMeshes();
 	DrawSprites();
+	TextRenderer::Instance().RenderText("test", 100, 300, 1, Vector3D(1, 1, 1));
 	for (auto& collider : mCollider) // DEBUG ONLY
 	{
 		collider->DebugDraw(*this);

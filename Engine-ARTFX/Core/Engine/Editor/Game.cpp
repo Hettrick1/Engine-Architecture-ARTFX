@@ -1,7 +1,9 @@
 #include "Game.h"
 #include "Defs.h"
+#include "Log.h"
 #include "RendererSdl.h"
 #include "RendererOpenGl.h"
+#include "TextRenderer.h"
 
 Game::Game(std::string title, std::vector<Scene*> scenes) 
     : mIsRunning(true), mAllScenes(scenes), mInputManager(InputManager::Instance()), mPhysicManager(PhysicManager::Instance()), mCameraManager(CameraManager::Instance())
@@ -12,7 +14,7 @@ Game::Game(std::string title, std::vector<Scene*> scenes)
     }
     else
     {
-        std::cout << "SDL initialization succeeded!";
+        Log::Info("SDL initialization succeeded!");
     }
 
     mLoadedScene = 0;
@@ -30,7 +32,7 @@ void Game::Initialize()
 {
     mGameWindow = new Window(WINDOW_WIDTH, WINDOW_HEIGHT);
     mRenderer = new RendererOpenGl();
-    if (mGameWindow->Open() && mRenderer->Initialize(*mGameWindow)) {
+    if (mGameWindow->Open() && mRenderer->Initialize(*mGameWindow) && TextRenderer::Instance().Init(*mGameWindow)) {
         mAllScenes[mLoadedScene]->Load();
         Loop();
     }

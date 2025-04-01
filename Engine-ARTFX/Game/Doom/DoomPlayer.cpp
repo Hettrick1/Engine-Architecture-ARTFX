@@ -7,6 +7,7 @@
 #include "Scene.h"
 #include "MeshComponent.h"
 #include "Timer.h"
+#include "TextRenderer.h"
 
 DoomPlayer::DoomPlayer()
 	: Actor(), mGun(nullptr)
