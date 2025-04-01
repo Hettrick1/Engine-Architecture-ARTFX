@@ -22,7 +22,7 @@ public:
 	void AddSprite(SpriteComponent* pSprite) override;
 	void RemoveSprite(SpriteComponent* pSprite) override;
 
-	RendererType GetType() override { return IRenderer::RendererType::SDL; }
+	RendererType GetType() const override { return IRenderer::RendererType::SDL; }
 
 	void DrawRect(Rectangle& rRect);
 	void DrawSprite(Actor& pActor, Texture& pTexture, Rectangle pRect, Vector2D pOrigin, IRenderer::Flip pFlipMethod) const override;

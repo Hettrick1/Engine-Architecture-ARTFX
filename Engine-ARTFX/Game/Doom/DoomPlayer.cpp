@@ -8,6 +8,9 @@
 #include "MeshComponent.h"
 #include "Timer.h"
 #include "TextRenderer.h"
+#include "HudManager.h"
+
+#include "HudElements/HudText.h"
 
 DoomPlayer::DoomPlayer()
 	: Actor(), mGun(nullptr)
@@ -42,6 +45,11 @@ void DoomPlayer::Start()
 	mGun->RelativeRotateX(90);
 	mGun->SetAnimationFps(8);
 	AddComponent(mGun);
+	
+	HudText* text = new HudText("Evy le BG", -450, 0, 1, Vector3D(1, 1, 1));
+	HudText* text2 = new HudText("AAAAAAAAA", -450, -100, 2, Vector3D(1, 0, 1));
+	GetScene().GetRenderer()->GetHud()->AddElement(text);
+	GetScene().GetRenderer()->GetHud()->AddElement(text2);
 }
 
 void DoomPlayer::Update()

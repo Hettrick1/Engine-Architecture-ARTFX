@@ -7,10 +7,11 @@
 #include "Actor.h"
 #include "Texture.h"
 #include "glew.h"
+#include "HudManager.h"
 #include "TextRenderer.h"
 
 RendererOpenGl::RendererOpenGl()
-	: mVAO(nullptr), mWindow(nullptr), mSpriteShaderProgram(nullptr)
+	: mVAO(nullptr), mWindow(nullptr), mSpriteShaderProgram(nullptr), mHud(nullptr)
 {
 }
 
@@ -66,6 +67,9 @@ bool RendererOpenGl::Initialize(Window& pWindow)
 	mSpriteViewProj = Matrix4DRow::CreateSimpleViewProj(mWindow->GetDimensions().x, mWindow->GetDimensions().y);
 	mView = Matrix4DRow::CreateLookAt(Vector3D(0, 0, 5), Vector3D::unitX, Vector3D::unitZ);
 	mProj = Matrix4DRow::CreatePerspectiveFOV(70.0f, mWindow->GetDimensions().x, mWindow->GetDimensions().y, 0.01f, 10000.0f);
+
+	mHud = new HudManager();
+
 	return true;
 }
 
@@ -79,12 +83,7 @@ void RendererOpenGl::Draw()
 {
 	DrawMeshes();
 	DrawSprites();
-	glEnable(GL_CULL_FACE);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	TextRenderer::Instance().RenderText("Evy le BG", -450, 0, 1, Vector3D(1, 1, 1));
-	glDisable(GL_CULL_FACE);
-	glDisable(GL_BLEND);
+	DrawHud();
 	for (auto& collider : mCollider) // DEBUG ONLY
 	{
 		collider->DebugDraw(*this);
@@ -235,8 +234,23 @@ void RendererOpenGl::DrawSprites()
 	}
 }
 
+void RendererOpenGl::DrawHud()
+{
+	glEnable(GL_CULL_FACE); 
+	glEnable(GL_BLEND); 
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	mHud->Draw(*this); 
+	glDisable(GL_CULL_FACE); 
+	glDisable(GL_BLEND); 
+}
+
 void RendererOpenGl::SetSpriteShaderProgram(ShaderProgram& shaderProgram)
 {
 	mSpriteShaderProgram = &shaderProgram;
 	mSpriteShaderProgram->Use();
+}
+
+void RendererOpenGl::SetHud(HudManager* pHud)
+{
+	mHud = pHud;
 }

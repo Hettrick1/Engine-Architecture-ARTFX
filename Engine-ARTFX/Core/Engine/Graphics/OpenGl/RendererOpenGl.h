@@ -39,10 +39,14 @@ public:
 
 	void DrawMeshes();
 	void DrawSprites();
+	void DrawHud();
 
 	void SetSpriteShaderProgram(ShaderProgram& shaderProgram) override;
 
-	RendererType GetType() override { return IRenderer::RendererType::OPENGL; }
+	void SetHud(HudManager* pHud) override;
+	inline HudManager* GetHud() const override { return mHud; }
+
+	RendererType GetType() const override { return IRenderer::RendererType::OPENGL; }
 private:
 	Window* mWindow;
 	VertexArray* mVAO;
@@ -57,4 +61,5 @@ private:
 	Shader mSpriteVertexShader;
 	Shader mSpriteFragmentShader;
 	ShaderProgram mSpriteShaderProgramTemp;
+	HudManager* mHud;
 };

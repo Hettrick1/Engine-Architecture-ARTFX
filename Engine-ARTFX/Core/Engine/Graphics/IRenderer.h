@@ -10,6 +10,7 @@ class Texture;
 class SpriteComponent;
 class MeshComponent;
 class ColliderComponent;
+class HudManager;
 
 class IRenderer 
 {
@@ -44,8 +45,11 @@ public:
 	virtual void SetSpriteShaderProgram(class ShaderProgram& shaderProgram) {}
 	virtual void SetViewMatrix(Matrix4DRow pViewMatrix) {}
 
-	virtual RendererType GetType() = 0;
+	virtual RendererType GetType() const = 0;
 	virtual void DrawSprite(Actor& pActor, Texture& pTex, Rectangle pSourceRect, Vector2D pOrigin, Flip pFlip = Flip::None) const = 0;
 	virtual void DrawDebugBox(Vector3D& pMin, Vector3D& pMax, Matrix4DRow pWorldTransform) {}
 	virtual SDL_Renderer* ToSdlRenderer() { return nullptr; }
+
+	virtual void SetHud(HudManager* pHud) {};
+	virtual inline HudManager* GetHud() const { return nullptr; };
 };
