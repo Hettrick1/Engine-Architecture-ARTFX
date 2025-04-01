@@ -84,12 +84,12 @@ void RendererOpenGl::BeginDraw()
 void RendererOpenGl::Draw()
 {
 	DrawMeshes();
-	DrawSprites();
-	DrawHud();
 	for (auto& collider : mCollider) // DEBUG ONLY
 	{
 		collider->DebugDraw(*this);
 	}
+	DrawSprites();
+	DrawHud();
 }
 
 void RendererOpenGl::EndDraw()

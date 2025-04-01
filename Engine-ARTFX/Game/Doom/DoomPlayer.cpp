@@ -10,13 +10,8 @@
 #include "TextRenderer.h"
 #include "HudManager.h"
 
-#include "HudElements/HudText.h"
-#include "HudElements/HudImage.h"
-
-HudText* text2 = nullptr;
-
 DoomPlayer::DoomPlayer()
-	: Actor(), mGun(nullptr)
+	: Actor(), mGun(nullptr), mGunAmo(50), mHealth(100), mArmor(100), mFpsText(nullptr), mGunAmoText(nullptr), mHealthText(nullptr), mArmorText(nullptr), mWeaponIconImage(nullptr)
 {
 }
 
@@ -31,7 +26,8 @@ void DoomPlayer::Start()
 	SetRigidBody(rigidBody);
 	DoomPC* playerController = new DoomPC(this, 1);
 	AddComponent(playerController);
-	Texture* tex3 = Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/WalkAnim/Walk1.png", "walk1");
+	Texture* doomHud = Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/DoomHud.png", "doomHud");
+	Texture* gunIcon = Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/DoomHudGunIcon.png", "gunIcon");
 
 	std::vector<Texture*> gunAnim = {
 		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/gun1.png", "gun1"),
@@ -44,19 +40,25 @@ void DoomPlayer::Start()
 	cameraComponent->SetRelativePosition(Vector3D(0, 0, 0));
 	AddComponent(cameraComponent);
 	mGun = new FlipbookComponent(this, gunAnim, 10);
-	mGun->SetRelativePosition(Vector3D(-0.16, 2, -0.5));
+	mGun->SetRelativePosition(Vector3D(-0.16, 2, -0.25));
 	mGun->RelativeRotateX(90);
 	mGun->SetAnimationFps(8);
+	mGun->SetCullOff(true);
 	AddComponent(mGun);
-	
-	HudText* text = new HudText("Evy le BG", 0, 0, 1, Vector3D(1, 1, 1), TextAlignment::CENTER); 
-	text2 = new HudText("AAAAAAAAA", -1900, 1000, 0.5, Vector3D(1, 0, 1));
+	 
+	mFpsText = new HudText("AAAAAAAAA", -1900, 1000, 0.5, Vector3D(1, 0, 1));
+	mGunAmoText = new HudText(std::to_string(mGunAmo), -825, -930, 1, Vector3D(0.7, 0, 0), TextAlignment::CENTER);
+	mHealthText = new HudText(std::to_string(mHealth), -325, -930, 1, Vector3D(0.7, 0, 0), TextAlignment::CENTER);
+	mArmorText = new HudText(std::to_string(mArmor), 840, -930, 1, Vector3D(0.7, 0, 0), TextAlignment::CENTER);;
+	HudImage* doomHudImage = new HudImage(*doomHud, Vector2D(0, -920), Vector2D(10, 10));
+	mWeaponIconImage = new HudImage(*gunIcon, Vector2D(400, -980), Vector2D(10, 10));
 
-	HudImage* img = new HudImage(*tex3, Vector2D(0, 400), Vector2D(10, 10));
-
-	GetScene().GetRenderer()->GetHud()->AddElement(text);
-	GetScene().GetRenderer()->GetHud()->AddElement(text2);
-	GetScene().GetRenderer()->GetHud()->AddElement(img);
+	GetScene().GetRenderer()->GetHud()->AddElement(doomHudImage); 
+	GetScene().GetRenderer()->GetHud()->AddElement(mWeaponIconImage);
+	GetScene().GetRenderer()->GetHud()->AddElement(mFpsText);
+	GetScene().GetRenderer()->GetHud()->AddElement(mGunAmoText);
+	GetScene().GetRenderer()->GetHud()->AddElement(mHealthText);
+	GetScene().GetRenderer()->GetHud()->AddElement(mArmorText);
 }
 
 void DoomPlayer::Update()
@@ -75,10 +77,10 @@ void DoomPlayer::Update()
 	else 
 	{
 		float lerpRelativeSpeed = 8;
-		Vector3D lerpRelative = Vector3D::Lerp(mGun->GetRelativePosition(), Vector3D(-0.16, 2, -0.5), Timer::deltaTime * lerpRelativeSpeed);
+		Vector3D lerpRelative = Vector3D::Lerp(mGun->GetRelativePosition(), Vector3D(-0.16, 2, -0.25), Timer::deltaTime * lerpRelativeSpeed);
 		mGun->SetRelativePosition(lerpRelative);
 	}
-	text2->SetText("Fps : " + std::to_string(Timer::mFPS));
+	mFpsText->SetText("Fps : " + std::to_string(Timer::mFPS));
 }
 
 void DoomPlayer::Destroy()

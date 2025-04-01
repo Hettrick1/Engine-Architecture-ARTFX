@@ -4,7 +4,7 @@
 #include "../../Scenes/Scene.h"
 
 SpriteComponent::SpriteComponent(Actor* pOwner, Texture& pTexture, int pDrawOrder, Vector3D pSizeOverride)
-	: Component(pOwner), mTexture(pTexture), mDrawOrder(pDrawOrder), mFlipMethode(IRenderer::Flip::None)
+	: Component(pOwner), mTexture(pTexture), mDrawOrder(pDrawOrder), mFlipMethode(IRenderer::Flip::None), mCullOff(false)
 {
 	if (pSizeOverride.x == 0 || pSizeOverride.y == 0) {
 		mTexWidth = static_cast<int>(pTexture.GetTextureSize().x);
@@ -47,6 +47,13 @@ void SpriteComponent::SetFlipMethode(IRenderer::Flip pFlipMethode)
 
 void SpriteComponent::Draw(IRenderer& pRenderer)
 {
+	if (mCullOff)
+	{
+		glDisable(GL_DEPTH_TEST); 
+		glDisable(GL_CULL_FACE);
+		glDisable(GL_BLEND);
+	}
+
 	if (mTexHeightOverride != 0 && mTexWidthOverride != 0)
 	{
 		mTexture.OverrideTextureSize(mTexWidthOverride, mTexHeightOverride);
@@ -54,6 +61,11 @@ void SpriteComponent::Draw(IRenderer& pRenderer)
 	Vector2D origin = { ((mTexWidth * mOwner->GetTransformComponent().GetSize().x) / 2.0f),
 		((mTexHeight * mOwner->GetTransformComponent().GetSize().y) / 2.0f) };
 	pRenderer.DrawSprite(*mOwner, mTexture, Rectangle(), origin, mFlipMethode);
+}
+
+void SpriteComponent::SetCullOff(bool cull)
+{
+	mCullOff = cull;
 }
 
 Texture& SpriteComponent::GetTexture()

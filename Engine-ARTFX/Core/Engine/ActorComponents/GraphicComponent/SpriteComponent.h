@@ -18,6 +18,9 @@ public:
 	int GetDrawOrder() const { return mDrawOrder; }
 	int GetTexWidth() const { return mTexWidth; }
 	int GetTexHeight() const { return mTexHeight; }
+
+	void SetCullOff(bool cull);
+
 	Texture& GetTexture();
 protected:
 	Texture mTexture;
@@ -27,5 +30,6 @@ protected:
 	int mTexWidthOverride;
 	int mTexHeightOverride;
 	IRenderer::Flip mFlipMethode;
+	bool mCullOff;
 };
 
