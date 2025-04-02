@@ -29,7 +29,6 @@ DoomPC::~DoomPC()
 {
 	if (playerRbRef != nullptr)
 	{
-		delete playerRbRef;
 		playerRbRef = nullptr;
 	}
 }

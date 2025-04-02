@@ -93,5 +93,6 @@ void Game::Input()
 
 void Game::Close()
 {
+    mAllScenes[mLoadedScene]->Unload();
     mGameWindow->Close();
 }

@@ -13,7 +13,6 @@ MeshComponent::MeshComponent(Actor* pOwner, Mesh* pMesh)
 
 MeshComponent::~MeshComponent()
 {
-	mOwner->GetScene().GetRenderer()->RemoveMesh(this);
 }
 
 void MeshComponent::Draw(Matrix4DRow viewProj)

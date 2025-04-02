@@ -109,6 +109,7 @@ void DoomPlayer::Update()
 
 void DoomPlayer::Destroy()
 {
+	Actor::Destroy();
 }
 
 Actor* DoomPlayer::GetActorRef()

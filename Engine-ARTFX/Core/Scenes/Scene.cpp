@@ -37,10 +37,12 @@ void Scene::Unload()
 	while (!mAllActors.empty()) {
 		mAllActors.back()->Destroy();
 		delete mAllActors.back();
+		mAllActors.pop_back();
 	}
 	while (!mPendingActors.empty()) {
 		mPendingActors.back()->Destroy();
 		delete mPendingActors.back();
+		mAllActors.pop_back();
 	}
 	Assets::Clear();
 }

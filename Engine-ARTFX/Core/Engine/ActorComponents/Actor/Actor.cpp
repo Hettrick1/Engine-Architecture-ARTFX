@@ -103,12 +103,22 @@ void Actor::Update()
 
 void Actor::Destroy()
 {
-    while (!mComponents.empty()) {
-        delete mComponents.back();
+    for (auto component : mComponents) {
+        component->OnEnd();
     }
-    while (!mPendingComponents.empty()) {
-        delete mPendingComponents.back();
+
+    for (auto& component : mComponents) {
+        if (component != nullptr)
+        {
+            component = nullptr;
+        }
     }
+    mComponents.clear();
+
+    for (auto& component : mPendingComponents) {
+        component = nullptr;
+    }
+    mPendingComponents.clear();
 }
 
 std::vector<Component*> Actor::GetComponents() const

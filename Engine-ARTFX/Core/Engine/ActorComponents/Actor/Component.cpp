@@ -22,6 +22,7 @@ void Component::Update()
 
 void Component::OnEnd()
 {
+    mOwner = nullptr;
 }
 
 void Component::SetRelativePosition(Vector3D pPosition)
