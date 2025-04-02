@@ -227,6 +227,11 @@ void RendererOpenGl::DrawDebugLine(const Vector3D& start, const Vector3D& end, c
 
 	float lineVertices[] = { start.x, start.y, start.z, end.x, end.y, end.z };
 
+	if (start.x > 0.1)
+	{
+		int x = 0;
+	}
+
 	glBindVertexArray(debugVAO);
 	glBindBuffer(GL_ARRAY_BUFFER, debugVBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(lineVertices), lineVertices, GL_STATIC_DRAW);
@@ -234,7 +239,7 @@ void RendererOpenGl::DrawDebugLine(const Vector3D& start, const Vector3D& end, c
 	glEnableVertexAttribArray(0);
 
 	glUseProgram(mDebugShaderProgram.GetID());
-	mDebugShaderProgram.setMatrix4Row("uViewProj", mView * mProj);
+	//mDebugShaderProgram.setMatrix4Row("uViewProj", mView * mProj);
 	glDrawArrays(GL_LINES, 0, 2);
 
 	glDeleteBuffers(1, &debugVBO);
