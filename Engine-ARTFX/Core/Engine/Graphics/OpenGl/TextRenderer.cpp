@@ -81,8 +81,8 @@ bool TextRenderer::Init(Window& pWindow)
             // now store character for later use
             Character character = {
                 texture,
-                Vector2D(face->glyph->bitmap.width, face->glyph->bitmap.rows),
-                Vector2D(face->glyph->bitmap_left, face->glyph->bitmap_top),
+                Vector2D(static_cast<float>(face->glyph->bitmap.width), static_cast<float>(face->glyph->bitmap.rows)),
+                Vector2D(static_cast<float>(face->glyph->bitmap_left), static_cast<float>(face->glyph->bitmap_top)),
                 static_cast<unsigned int>(face->glyph->advance.x)
             };
             mCharacters.insert(std::pair<char, Character>(c, character));

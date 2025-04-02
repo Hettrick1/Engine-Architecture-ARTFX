@@ -65,42 +65,42 @@ void BowlingOpenGl::Start(IRenderer* renderer)
 
 	BowlingPin* quille3 = new BowlingPin();
 	AddActor(quille3);
-	quille3->GetTransformComponent().SetSize(0.7);
+	quille3->GetTransformComponent().SetSize(0.7f);
 	quille3->SetPosition(Vector3D(3.0f, 36.0f, -5.0f));
 	quille3->Start();
 	quille3->GetComponentOfType<RigidbodyComponent>()->SetMass(0.5);
 
 	BowlingPin* quille4 = new BowlingPin();
 	AddActor(quille4);
-	quille4->GetTransformComponent().SetSize(0.7);
+	quille4->GetTransformComponent().SetSize(0.7f);
 	quille4->SetPosition(Vector3D(-3.0f, 36.0f, -5.0f));
 	quille4->Start();
 	quille4->GetComponentOfType<RigidbodyComponent>()->SetMass(0.5);
 
 	BowlingPin* quille5 = new BowlingPin();
 	AddActor(quille5);
-	quille5->GetTransformComponent().SetSize(0.7);
+	quille5->GetTransformComponent().SetSize(0.7f);
 	quille5->SetPosition(Vector3D(0.0f, 36.0f, -5.0f));
 	quille5->Start();
 	quille5->GetComponentOfType<RigidbodyComponent>()->SetMass(0.5);
 
 	BowlingPin* quille = new BowlingPin();
 	AddActor(quille);
-	quille->GetTransformComponent().SetSize(0.7);
+	quille->GetTransformComponent().SetSize(0.7f);
 	quille->SetPosition(Vector3D(1.5f, 33.0f, -5.0f));
 	quille->Start();
 	quille->GetComponentOfType<RigidbodyComponent>()->SetMass(0.5);
 
 	BowlingPin* quille1 = new BowlingPin();
 	AddActor(quille1);
-	quille1->GetTransformComponent().SetSize(0.7);
+	quille1->GetTransformComponent().SetSize(0.7f);
 	quille1->SetPosition(Vector3D(-1.5f, 33.0f, -5.0f));
 	quille1->Start();
 	quille1->GetComponentOfType<RigidbodyComponent>()->SetMass(0.5);
 
 	BowlingPin* quille2 = new BowlingPin();
 	AddActor(quille2);
-	quille2->GetTransformComponent().SetSize(0.7);
+	quille2->GetTransformComponent().SetSize(0.7f);
 	quille2->SetPosition(Vector3D(0.0f, 30.0f, -5.0f));
 	quille2->Start();
 	quille2->GetComponentOfType<RigidbodyComponent>()->SetMass(0.5);

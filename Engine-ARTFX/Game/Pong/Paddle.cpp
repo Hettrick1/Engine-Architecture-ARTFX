@@ -33,7 +33,7 @@ void Paddle::MoveIA(float speed)
 	}
 }
 
-Rectangle& Paddle::GetPaddleRect()
+Rectangle Paddle::GetPaddleRect()
 {
 	Rectangle rect{ mPaddlePos, mPaddleSize };
 	return rect;

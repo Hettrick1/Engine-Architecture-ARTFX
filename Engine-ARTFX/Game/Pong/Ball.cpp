@@ -39,12 +39,12 @@ void Ball::CheckCollision(const int WIDTH, const int HEIGHT, Paddle* paddleL, Pa
 
 void Ball::BounceX()
 {
-    mBallSpeed.x *= -1.05;
+    mBallSpeed.x *= -1.05f;
 }
 
 void Ball::BounceY()
 {
-    mBallSpeed.y *= -1;
+    mBallSpeed.y *= -1.0f;
 }
 
 Vector2D Ball::GetPosition()
@@ -57,7 +57,7 @@ Vector2D Ball::GetBallSpeed()
     return mBallSpeed;
 }
 
-Rectangle& Ball::GetBallRect() const
+Rectangle Ball::GetBallRect() const
 {
     Rectangle rect{ mBallPos, {mBallRadius, mBallRadius} };
 	return rect;

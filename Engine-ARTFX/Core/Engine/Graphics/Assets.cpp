@@ -81,11 +81,11 @@ Mesh* Assets::LoadMeshFromFile(const std::string& pFilePath)
 		Log::Info("Mesh " + pFilePath + " successfully loaded");
 	}
 	std::vector<Vertex> vertices;
-	for (int i = 0; i < shapes.size(); i++)
+	for (int i = 0; i < static_cast<int>(shapes.size()); i++)
 	{
 		tinyobj::shape_t& shape = shapes[i];
 		tinyobj::mesh_t& mesh = shape.mesh;
-		for (int j = 0; j < mesh.indices.size(); j++)
+		for (int j = 0; j < static_cast<int>(mesh.indices.size()); j++)
 		{
 			tinyobj::index_t i = mesh.indices[j];
 			Vector3D position = Vector3D{

@@ -6,10 +6,10 @@ class Actor;
 class ColliderComponent;
 
 struct HitResult {
-    bool Hit;          
-    Vector3D HitPoint;  
-    Vector3D Normal;
-    Actor* HitActor;
-    ColliderComponent* HitCollider;
-    float Distance;
+    bool Hit = 0;          
+    Vector3D HitPoint = Vector3D::zero;  
+    Vector3D Normal = Vector3D::zero;
+    Actor* HitActor = nullptr;
+    ColliderComponent* HitCollider = nullptr;
+    float Distance = 0;
 };

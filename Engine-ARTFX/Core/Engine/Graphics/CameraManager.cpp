@@ -40,7 +40,7 @@ void CameraManager::UpdateCurrentCamera()
 
 void CameraManager::SetCurrentCamera(int pIndex)
 {
-	if (pIndex < mCameras.size())
+	if (pIndex < static_cast<int>(mCameras.size()))
 	{
 		mActiveCamera = mCameras[pIndex];
 	}

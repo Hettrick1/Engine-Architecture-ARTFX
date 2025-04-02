@@ -28,12 +28,12 @@ void BowlingPlayer::Start()
 	pc->SetMovementSpeed(5);
 	AddComponent(pc);
 
-	mBall = new BowlingBall(0, 1.3);
+	mBall = new BowlingBall(0.0f, 1.3f);
 	mBall->Start();
 	mBall->SetPosition(Vector3D(-0.3f, -30.0f, -3.6f));
 	mBall->GetComponentOfType<RigidbodyComponent>()->SetMass(5);
-	mBall->GetComponentOfType<RigidbodyComponent>()->SetBounciness(0.8);
-	mBallSpawnPoint = new BallSpawnPoint(Vector3D(0,-29.5, -1.0), Vector3D(0.1,0.5,0.1));
+	mBall->GetComponentOfType<RigidbodyComponent>()->SetBounciness(0.8f);
+	mBallSpawnPoint = new BallSpawnPoint(Vector3D(0.0f,-29.5f, -1.0f), Vector3D(0.1f, 0.5f, 0.1f));
 	mBallSpawnPoint->Start();
 	GetScene().AddActor(mBall);
 	GetScene().AddActor(mBallSpawnPoint);
@@ -43,7 +43,7 @@ void BowlingPlayer::Start()
 void BowlingPlayer::Update()
 {
 	Actor::Update();
-	if (mBall->GetRigidBody()->GetVelocity().LengthSq() <= 0.1)
+	if (mBall->GetRigidBody()->GetVelocity().LengthSq() <= 0.1f)
 	{
 		mBall->SetPosition(mSpawnPosition);
 	}
@@ -51,13 +51,13 @@ void BowlingPlayer::Update()
 
 void BowlingPlayer::Destroy()
 {
-	Actor:Destroy();
+	Actor::Destroy();
 }
 
 void BowlingPlayer::IncrementIndicatorSize(float strengthPercent)
 {
-	float y = 2.5 * strengthPercent + 0.5;
-	mBallSpawnPoint->GetTransformComponent().SetSize(Vector3D(0.1, y, 0.1));
+	float y = 2.5f * strengthPercent + 0.5f;
+	mBallSpawnPoint->GetTransformComponent().SetSize(Vector3D(0.1f, y, 0.1f));
 }
 
 void BowlingPlayer::MoveSpawnPointX(float x)

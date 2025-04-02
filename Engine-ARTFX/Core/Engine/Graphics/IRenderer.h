@@ -11,8 +11,8 @@ class SpriteComponent;
 class MeshComponent;
 class ColliderComponent;
 class HudManager;
-class HitResult;
-class Line;
+struct HitResult;
+struct Line;
 
 class IRenderer 
 {

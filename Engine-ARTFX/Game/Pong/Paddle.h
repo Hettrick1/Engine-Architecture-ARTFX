@@ -17,7 +17,7 @@ public:
 	~Paddle();
 	void MovePlayer(float direction);
 	void MoveIA(float speed);
-	Rectangle& GetPaddleRect();
+	Rectangle GetPaddleRect();
 	Vector2D GetPaddlePos() { return mPaddlePos; }
 	Vector2D GetPaddleSize() { return mPaddleSize; }
 };

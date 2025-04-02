@@ -25,8 +25,8 @@ void InputAxis2D::Update()
 
         int deltaX = 0, deltaY = 0; 
         SDL_GetRelativeMouseState(&deltaX, &deltaY);  
-        newX = deltaX; 
-        newY = deltaY; 
+        newX = static_cast<float>(deltaX); 
+        newY = static_cast<float>(deltaY);
 
     }
     else { // keyboard mode

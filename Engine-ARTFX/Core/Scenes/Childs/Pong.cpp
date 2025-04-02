@@ -20,7 +20,7 @@ void Pong::Update()
     mBall->Move();
     float speed = (mPaddleRight->GetPaddlePos().y + mPaddleRight->GetPaddleSize().y / 2 - mBall->GetSize() / 2)- mBall->GetPosition().y;
     mPaddleRight->MoveIA(speed);
-    mPaddleLeft->MovePlayer(mDirection);
+    mPaddleLeft->MovePlayer(static_cast<float>(mDirection));
     if (mBall->GetIsDead()) {
         ResetGame();
     }

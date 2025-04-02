@@ -10,10 +10,10 @@
 
 /// Holds all state information relevant to a character as loaded using FreeType
 struct Character {
-    unsigned int TextureID; // ID handle of the glyph texture
-    Vector2D Size;      // Size of glyph
-    Vector2D Bearing;   // Offset from baseline to left/top of glyph
-    unsigned int Advance;   // Horizontal offset to advance to next glyph
+    unsigned int TextureID = 0;            // ID handle of the glyph texture
+    Vector2D Size = Vector2D::Zero;        // Size of glyph
+    Vector2D Bearing = Vector2D::Zero; ;   // Offset from baseline to left/top of glyph
+    unsigned int Advance = 0;              // Horizontal offset to advance to next glyph
 };
 
 class TextRenderer

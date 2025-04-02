@@ -21,7 +21,7 @@ public:
 	void BounceY();
 	Vector2D GetPosition();
 	Vector2D GetBallSpeed();
-	Rectangle& GetBallRect() const;
+	Rectangle GetBallRect() const;
 	float GetSize();
 	bool GetIsDead();
 };

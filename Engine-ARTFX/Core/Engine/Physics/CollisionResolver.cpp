@@ -209,7 +209,7 @@ void CollisionResolver::CalculatePhysicCollisions()
 				float invMassB = (rbB && rbB->GetMass() > 0.0f) ? 1.0f / rbB->GetMass() : 0.0f;
 
 				float j = -(1 + e) * vRel / (invMassA + invMassB);
-				j *= 1.3;
+				j *= 1.3f;
 				Vector3D impulse = j * normal;
 
 				if (rbA && !isStaticA)
@@ -276,14 +276,22 @@ void CollisionResolver::ResolvePenetration(Actor* actorA, Actor* actorB, Vector3
 	if (isStaticA && isStaticB) return;
 
 	float totalMass = 0.0f;
-	if (!isStaticA) totalMass += rbA->GetMass();
-	if (!isStaticB) totalMass += rbB->GetMass();
+	if (rbA && !isStaticA) totalMass += rbA->GetMass();
+	if (rbB && !isStaticB) totalMass += rbB->GetMass();
 
 	if (totalMass <= 0.0f) return;
 
-	float percentA = isStaticA ? 0.0f : rbA->GetMass() / totalMass;
-	float percentB = isStaticB ? 0.0f : rbB->GetMass() / totalMass;
+	float percentA = 0;
+	float percentB = 0;
 
+	if (rbA)
+	{
+		percentA = isStaticA ? 0.0f : rbA->GetMass() / totalMass;
+	}
+	if (rbB)
+	{
+		percentB = isStaticB ? 0.0f : rbB->GetMass() / totalMass;
+	}
 	depth *= 1.1f;
 
 	if (!isStaticA) {

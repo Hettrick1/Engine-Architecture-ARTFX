@@ -59,19 +59,19 @@ void DoomPlayer::Start()
 	};
 
 	CameraComponent* cameraComponent = new CameraComponent(this);
-	cameraComponent->SetRelativePosition(Vector3D(0, 0, 0));
+	cameraComponent->SetRelativePosition(Vector3D::zero);
 	AddComponent(cameraComponent);
 	mGun = new FlipbookComponent(this, mGunAnim, 10);
-	mGun->SetRelativePosition(Vector3D(0, 2, -0.2));
+	mGun->SetRelativePosition(Vector3D(0.0f, 2.0f, -0.2f));
 	mGun->RelativeRotateX(90);
 	mGun->SetAnimationFps(8);
 	mGun->SetCullOff(true);
 	AddComponent(mGun);
 	 
-	mFpsText = new HudText("AAAAAAAAA", -1900, 1000, 0.5, Vector3D(1, 0, 1));
-	mGunAmoText = new HudText(std::to_string(mGunAmo), -825, -930, 1, Vector3D(0.7, 0, 0), TextAlignment::CENTER);
-	mHealthText = new HudText(std::to_string(mHealth), -325, -930, 1, Vector3D(0.7, 0, 0), TextAlignment::CENTER);
-	mArmorText = new HudText(std::to_string(mArmor), 840, -930, 1, Vector3D(0.7, 0, 0), TextAlignment::CENTER);;
+	mFpsText = new HudText("AAAAAAAAA", -1900, 1000, 0.5f, Vector3D(1, 0, 1));
+	mGunAmoText = new HudText(std::to_string(mGunAmo), -825, -930, 1, Vector3D(0.7f, 0, 0), TextAlignment::CENTER);
+	mHealthText = new HudText(std::to_string(mHealth), -325, -930, 1, Vector3D(0.7f, 0, 0), TextAlignment::CENTER);
+	mArmorText = new HudText(std::to_string(mArmor), 840, -930, 1, Vector3D(0.7f, 0, 0), TextAlignment::CENTER);;
 	HudImage* doomHudImage = new HudImage(*doomHud, Vector2D(0, -920), Vector2D(10, 10));
 	mWeaponIconImage = new HudImage(gunIcon, Vector2D(400, -980), Vector2D(10, 10));
 
@@ -93,14 +93,14 @@ void DoomPlayer::Update()
 
 		bobbing.z -= Maths::Sin(bobingTime) * 0.005f;
 
-		bobbing.x += Maths::Sin(bobingTime * 0.5) * 0.005f;
+		bobbing.x += Maths::Sin(bobingTime * 0.5f) * 0.005f;
 
 		mGun->SetRelativePosition(bobbing);
 	}
 	else 
 	{
 		float lerpRelativeSpeed = 8;
-		Vector3D lerpRelative = Vector3D::Lerp(mGun->GetRelativePosition(), Vector3D(0, 2, -0.2), Timer::deltaTime * lerpRelativeSpeed);
+		Vector3D lerpRelative = Vector3D::Lerp(mGun->GetRelativePosition(), Vector3D(0.0f, 2.0f, -0.2f), Timer::deltaTime * lerpRelativeSpeed);
 		mGun->SetRelativePosition(lerpRelative);
 		bobingTime = 0;
 	}
