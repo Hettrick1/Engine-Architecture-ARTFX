@@ -142,7 +142,7 @@ void DoomPlayer::ChangeWeapon()
 	}
 }
 
-void DoomPlayer::Shoot()
+void DoomPlayer::Shoot(float pAmoQuantity)
 {
 	switch (mWeapon) {
 		case Weapons::Gun:
@@ -155,6 +155,13 @@ void DoomPlayer::Shoot()
 			PhysicManager::Instance().LineTrace(start, end, hit);
 			Line* line = new Line(start, end, hit);
 			GetScene().GetRenderer()->AddDebugLine(line);
+			UseAmo(pAmoQuantity);
+
+			if (hit.HitActor != nullptr && hit.HitActor->GetTag() == "Wall")
+			{
+				Log::Info("CUBE !!!!");
+			}
+
 			break;
 		}
 		case Weapons::Shotgun:
@@ -163,7 +170,7 @@ void DoomPlayer::Shoot()
 			start.z -= 0.0f;
 			Vector3D baseDirection = GetTransformComponent().GetWorldTransform().GetYAxis();
 
-			const float spreadAngle = 15.0f;
+			const float spreadAngle = 5.0f;
 			const float range = 50.0f;       
 			float randomAngle = 0;
 
@@ -182,8 +189,45 @@ void DoomPlayer::Shoot()
 				PhysicManager::Instance().LineTrace(start, end, hit);
 				Line* line = new Line(start, end, hit);
 				GetScene().GetRenderer()->AddDebugLine(line);
+				if (hit.HitActor != nullptr && hit.HitActor->GetTag() == "Wall")
+				{
+					Log::Info("CUBE !!!!");
+				}
 			}
+			UseAmo(pAmoQuantity);
 			break;
 		}
 	}
+}
+
+void DoomPlayer::UseAmo(float pQuantity)
+{
+	mGunAmo -= pQuantity;
+	if (mGunAmo < 0)
+	{
+		mGunAmo = 0;
+	}
+	mGunAmoText->SetText(std::to_string(mGunAmo));
+}
+
+void DoomPlayer::TakeDamages(float pQuantity)
+{
+	if (mArmor > 0)
+	{
+		mArmor -= pQuantity;
+		if (mArmor < 0)
+		{
+			mArmor = 0;
+		}
+	}
+	else 
+	{
+		mHealth -= pQuantity;
+		if (mHealth < 0)
+		{
+			mHealth = 0;
+		}
+	}
+	mArmorText->SetText(std::to_string(mArmor));
+	mHealthText->SetText(std::to_string(mHealth));
 }

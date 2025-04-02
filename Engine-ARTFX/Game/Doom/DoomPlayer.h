@@ -23,7 +23,11 @@ public:
 	Actor* GetActorRef();
 public:
 	void ChangeWeapon();
-	void Shoot();
+	void Shoot(float pAmoQuantity);
+	void UseAmo(float pQuantity);
+	inline float GetAmo() const { return mGunAmo; }
+	inline Weapons GetWeapon() const { return mWeapon; }
+	void TakeDamages(float pQuantity);
 private:
 	FlipbookComponent* mGun;
 	HudText* mFpsText;

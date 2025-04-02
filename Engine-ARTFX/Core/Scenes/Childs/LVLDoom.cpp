@@ -29,6 +29,7 @@ void LVLDoom::Start(IRenderer* renderer)
 	AddActor(cube);
 	cube->Start();
 	cube->GetComponentOfType<MeshComponent>()->GetMesh()->SetTextureTiling(Vector2D(3, 2));
+	cube->SetTag("Wall");
 
 }
 

@@ -40,8 +40,21 @@ void DoomPC::OnActionStarted(InputActions* action)
 		BooleanActions* Triggeredaction = static_cast<BooleanActions*>(action);
 		if (Triggeredaction && Triggeredaction->GetName() == "Shoot")
 		{
-			mOwner->GetComponentOfType<FlipbookComponent>()->PlayAnimation();
-			mPlayerRef->Shoot();
+			FlipbookComponent* fb = mOwner->GetComponentOfType<FlipbookComponent>();
+			int amoNeeded = 0;
+			if (mPlayerRef->GetWeapon() == Weapons::Gun)
+			{
+				amoNeeded = 1;
+			}
+			else
+			{
+				amoNeeded = 2;
+			}
+			if (mPlayerRef->GetAmo() >= amoNeeded && fb->IsAnimationEnded())
+			{
+				fb->PlayAnimation();
+				mPlayerRef->Shoot(amoNeeded);
+			}
 		}
 		if (Triggeredaction && Triggeredaction->GetName() == "ChangeWeapon")
 		{

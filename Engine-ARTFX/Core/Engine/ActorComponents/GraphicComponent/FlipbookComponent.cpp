@@ -3,7 +3,7 @@
 #include "Timer.h"
 
 FlipbookComponent::FlipbookComponent(Actor* pOwner, const std::vector<Texture*>& pTextures, int pDrawOrder)
-	: SpriteComponent(pOwner, *pTextures[0], pDrawOrder), mCurrentFrame(0.0f), mAnimationFps(24.0f)
+	: SpriteComponent(pOwner, *pTextures[0], pDrawOrder), mCurrentFrame(0.0f), mAnimationFps(24.0f), mHasFinished(true)
 {
 	SetAnimationTextures(pTextures);
 }
@@ -48,11 +48,13 @@ void FlipbookComponent::Update()
 	}
 	if (mIsLooping || mPlayOnce)
 	{
+		mHasFinished = false;
 		mCurrentFrame += mAnimationFps * Timer::deltaTime;
 		while (mCurrentFrame >= mAnimationTextures.size())
 		{
 			mCurrentFrame -= mAnimationTextures.size();
 			mPlayOnce = false;
+			mHasFinished = true;
 		}
 		SetTexture(*mAnimationTextures[static_cast<int>(mCurrentFrame)]);
 	}

@@ -15,12 +15,13 @@ public:
 	void SetAnimationTextures(const std::vector<Texture*>& pTextures);
 	void SetAnimationFps(float pFps);
 	void PlayAnimation();
+	inline bool IsAnimationEnded() const { return mHasFinished; }
 
 	void Update() override;
 private:
 	std::vector<Texture*> mAnimationTextures;
 	float mCurrentFrame;
 	float mAnimationFps;
-	bool mIsLooping, mPlayOnce;
+	bool mIsLooping, mPlayOnce, mHasFinished;
 };
 

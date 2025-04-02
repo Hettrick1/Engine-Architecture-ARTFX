@@ -28,8 +28,11 @@ public:
 	ActorState GetState();
 	Scene& GetScene();
 	TransformComponent& GetTransformComponent();
-	RigidbodyComponent* GetRigidBody() const { return mRigidbody; }
+	inline RigidbodyComponent* GetRigidBody() const { return mRigidbody; }
 	void SetRigidBody(RigidbodyComponent* pRigidbody);
+	void SetTag(std::string pTag);
+	inline std::string GetTag() const { return mTag; }
+
 
 	template<typename  C>
 	C* GetComponentOfType() const
@@ -52,5 +55,6 @@ protected:
 	bool mIsUpdatingComponents;
 	std::vector<Component*> mComponents;
 	std::vector<Component*> mPendingComponents;
+	std::string mTag;
 };
 

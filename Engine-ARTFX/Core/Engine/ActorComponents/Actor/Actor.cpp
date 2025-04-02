@@ -4,7 +4,7 @@
 #include <algorithm>
 
 Actor::Actor(Vector3D position, Vector3D size, Quaternion rotation) : 
-    mState(ActorState::Active), mScene(*Scene::ActiveScene)
+    mState(ActorState::Active), mScene(*Scene::ActiveScene), mTag("")
 {
     mTransformComponent.SetPosition(position);
     mTransformComponent.SetSize(size);
@@ -151,6 +151,11 @@ void Actor::SetRigidBody(RigidbodyComponent* pRigidbody)
     {
         Log::Error(LogType::System, "You already have a rigidbody attached to this actor !");
     }
+}
+
+void Actor::SetTag(std::string pTag)
+{
+    mTag = pTag;
 }
 
 void Actor::UpdateComponentsTransform()
