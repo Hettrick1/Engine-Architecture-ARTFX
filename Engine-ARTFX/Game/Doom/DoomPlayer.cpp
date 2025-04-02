@@ -105,22 +105,6 @@ void DoomPlayer::Update()
 		bobingTime = 0;
 	}
 	mFpsText->SetText("Fps : " + std::to_string(Timer::mFPS));
-
-	// Lancer un rayon
-	Vector3D start = GetTransformComponent().GetPosition();
-	start.z += 0.1;
-	Vector3D end = start + GetTransformComponent().GetWorldTransform().GetYAxis() * 50;
-	HitResult hit;
-	if (PhysicManager::Instance().LineTrace(start, end, hit))
-	{
-		std::cout << "Ray hit at: " << hit.HitPoint.x << ", " << hit.HitPoint.y << ", " << hit.HitPoint.z << std::endl;
-	}
-	else
-	{
-		std::cout << "No hit" << std::endl;
-	}
-	Line* line = new Line(start, end, hit);
-	GetScene().GetRenderer()->AddDebugLine(line);
 }
 
 void DoomPlayer::Destroy()
@@ -152,6 +136,23 @@ void DoomPlayer::ChangeWeapon()
 		mGun->SetAnimationFps(8);
 		mGun->SetAnimationTextures(mShotgunAnim);
 		mWeaponIconImage->SetTexture(shotgunIcon);
+		break;
+	}
+}
+
+void DoomPlayer::Shoot()
+{
+	switch (mWeapon) {
+	case Weapons::Gun: 
+		Vector3D start = GetTransformComponent().GetPosition(); 
+		start.z -= 0.0f; 
+		Vector3D end = start + GetTransformComponent().GetWorldTransform().GetYAxis() * 50; 
+		HitResult hit; 
+		PhysicManager::Instance().LineTrace(start, end, hit); 
+		Line* line = new Line(start, end, hit); 
+		GetScene().GetRenderer()->AddDebugLine(line); 
+		break;
+	case Weapons::Shotgun:
 		break;
 	}
 }

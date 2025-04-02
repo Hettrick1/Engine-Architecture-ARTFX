@@ -23,6 +23,7 @@ public:
 	Actor* GetActorRef();
 public:
 	void ChangeWeapon();
+	void Shoot();
 private:
 	FlipbookComponent* mGun;
 	HudText* mFpsText;

@@ -256,6 +256,66 @@ void RendererOpenGl::DrawDebugLine(const Vector3D& start, const Vector3D& end, c
 
 	glDeleteBuffers(1, &debugVBO);
 	glDeleteVertexArrays(1, &debugVAO);
+
+	if (hit.HitActor)
+	{
+		GLuint cubeVAO, cubeVBO;
+		glGenVertexArrays(1, &cubeVAO);
+		glGenBuffers(1, &cubeVBO);
+
+		const float size = 0.1f;
+		Vector3D hitPos = hit.HitPoint;
+
+		// Vertices d'un cube (8 sommets)
+		float cubeVertices[] = {
+			// Face avant
+			hitPos.x - size, hitPos.y - size, hitPos.z + size,
+			hitPos.x + size, hitPos.y - size, hitPos.z + size,
+			hitPos.x + size, hitPos.y + size, hitPos.z + size,
+			hitPos.x - size, hitPos.y + size, hitPos.z + size,
+
+			// Face arrière
+			hitPos.x - size, hitPos.y - size, hitPos.z - size,
+			hitPos.x + size, hitPos.y - size, hitPos.z - size,
+			hitPos.x + size, hitPos.y + size, hitPos.z - size,
+			hitPos.x - size, hitPos.y + size, hitPos.z - size
+		};
+
+		// Indices pour dessiner les arêtes (12 arêtes)
+		unsigned int cubeIndices[] = {
+			0,1, 1,2, 2,3, 3,0, // Face avant
+			4,5, 5,6, 6,7, 7,4, // Face arrière
+			0,4, 1,5, 2,6, 3,7  // Liaisons
+		};
+
+		glBindVertexArray(cubeVAO);
+
+		// Buffer pour les vertices
+		glBindBuffer(GL_ARRAY_BUFFER, cubeVBO);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(cubeVertices), cubeVertices, GL_STATIC_DRAW);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+		glEnableVertexAttribArray(0);
+
+		// Buffer pour les indices
+		GLuint EBO;
+		glGenBuffers(1, &EBO);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(cubeIndices), cubeIndices, GL_STATIC_DRAW);
+
+		mDebugShaderProgram.Use();
+		mDebugShaderProgram.setMatrix4Row("uViewProj", mView * mProj);
+		mDebugShaderProgram.setMatrix4Row("uWorldTransform", Matrix4DRow::Identity);
+		mDebugShaderProgram.setVector3f("uColor", Vector3D(1, 1, 0)); // Jaune
+
+		glEnable(GL_DEPTH_TEST);
+		glDisable(GL_BLEND);
+		glDrawElements(GL_LINES, 24, GL_UNSIGNED_INT, 0);
+		glDisable(GL_DEPTH_TEST);
+
+		glDeleteBuffers(1, &EBO);
+		glDeleteBuffers(1, &cubeVBO);
+		glDeleteVertexArrays(1, &cubeVAO);
+	}
 }
 
 void RendererOpenGl::DrawMeshes()
