@@ -108,8 +108,8 @@ void DoomPlayer::Update()
 
 	// Lancer un rayon
 	Vector3D start = GetTransformComponent().GetPosition();
-	start.z += 0;
-	Vector3D end = start + GetTransformComponent().GetWorldTransform().GetYAxis() * 2;
+	start.z += 0.1;
+	Vector3D end = start + GetTransformComponent().GetWorldTransform().GetYAxis() * 50;
 	HitResult hit;
 	if (PhysicManager::Instance().LineTrace(start, end, hit))
 	{

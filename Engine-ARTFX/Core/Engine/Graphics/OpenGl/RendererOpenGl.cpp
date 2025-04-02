@@ -205,6 +205,7 @@ void RendererOpenGl::DrawDebugBox(Vector3D& pMin, Vector3D& pMax, Matrix4DRow pW
 	Matrix4DRow wt = pWorldTransform;
 	mDebugShaderProgram.setMatrix4Row("uViewProj", mView * mProj);
 	mDebugShaderProgram.setMatrix4Row("uWorldTransform", wt);
+	mDebugShaderProgram.setVector3f("uColor", Vector3D(0, 1, 0));
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	glEnable(GL_DEPTH_TEST); 
 
@@ -225,12 +226,10 @@ void RendererOpenGl::DrawDebugLine(const Vector3D& start, const Vector3D& end, c
 	glGenBuffers(1, &debugVBO);
 	glLineWidth(3);
 
-	float lineVertices[] = { start.x, start.y, start.z, end.x, end.y, end.z };
-
-	if (start.x > 0.1)
-	{
-		int x = 0;
-	}
+	float lineVertices[] = {
+		start.x, start.y, start.z,
+		end.x, end.y, end.z
+	};
 
 	glBindVertexArray(debugVAO);
 	glBindBuffer(GL_ARRAY_BUFFER, debugVBO);
@@ -238,9 +237,22 @@ void RendererOpenGl::DrawDebugLine(const Vector3D& start, const Vector3D& end, c
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
 
-	glUseProgram(mDebugShaderProgram.GetID());
-	//mDebugShaderProgram.setMatrix4Row("uViewProj", mView * mProj);
+	mDebugShaderProgram.Use();
+	mDebugShaderProgram.setMatrix4Row("uViewProj", mView * mProj);
+	Matrix4DRow identity = Matrix4DRow::Identity;
+	mDebugShaderProgram.setMatrix4Row("uWorldTransform", identity);
+
+	if (hit.HitActor) {
+		mDebugShaderProgram.setVector3f("uColor", Vector3D(1, 0, 0)); // Rouge si touché
+	}
+	else {
+		mDebugShaderProgram.setVector3f("uColor", Vector3D(0, 1, 0)); // Vert si non touché
+	}
+
+	glEnable(GL_DEPTH_TEST);
+	glDisable(GL_BLEND);
 	glDrawArrays(GL_LINES, 0, 2);
+	glDisable(GL_DEPTH_TEST);
 
 	glDeleteBuffers(1, &debugVBO);
 	glDeleteVertexArrays(1, &debugVAO);

@@ -201,6 +201,7 @@ bool CollisionManager::LineTrace(const Vector3D& start, const Vector3D& end, Hit
             if (aabb.RayIntersects(start, end, hitDistance) && hitDistance < closestHit)
             {
                 closestHit = hitDistance;
+                outHit.Hit = true;
                 outHit.HitPoint = start + rayDir * hitDistance;
                 outHit.Distance = hitDistance;
                 outHit.HitActor = pair.first;
