@@ -29,6 +29,8 @@ public:
 	Vector3D GetLastPosition();
 
 	std::pair<Vector3D, Vector3D> GetCollisionPosition() const override { return mCollisionPosition; }
+
+	AABB GetAABB() override;
 private:
 	Vector3D mPosition;
 	Vector3D mLastPosition;

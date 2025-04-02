@@ -20,8 +20,9 @@ RendererOpenGl::~RendererOpenGl()
 	if (mVAO != nullptr) {
 		delete mVAO;
 	}
-	if (mWindow != nullptr) {
-		delete mWindow;
+	if (mWindow) {
+		SDL_GL_DeleteContext(mContext);
+		mWindow = nullptr;
 	}
 }
 
@@ -88,6 +89,11 @@ void RendererOpenGl::Draw()
 	{
 		collider->DebugDraw(*this);
 	}
+	for (auto& line : mLines) // DEBUG ONLY
+	{
+		DrawDebugLine(line->Start, line->End, line->Hit);
+	}
+	mLines.clear();
 	DrawSprites();
 	DrawHud();
 }
@@ -139,6 +145,11 @@ void RendererOpenGl::RemoveMesh(MeshComponent* pMesh)
 void RendererOpenGl::AddDebugCollider(ColliderComponent* pCol)
 {
 	mCollider.push_back(pCol);
+}
+
+void RendererOpenGl::AddDebugLine(Line* pLine)
+{
+	mLines.push_back(pLine);
 }
 
 void RendererOpenGl::SetViewMatrix(Matrix4DRow pViewMatrix)
@@ -205,6 +216,29 @@ void RendererOpenGl::DrawDebugBox(Vector3D& pMin, Vector3D& pMax, Matrix4DRow pW
 
 	glDeleteBuffers(1, &VBO); 
 	glDeleteVertexArrays(1, &VAO);
+}
+
+void RendererOpenGl::DrawDebugLine(const Vector3D& start, const Vector3D& end, const HitResult& hit)
+{
+	GLuint debugVAO, debugVBO;
+	glGenVertexArrays(1, &debugVAO);
+	glGenBuffers(1, &debugVBO);
+	glLineWidth(3);
+
+	float lineVertices[] = { start.x, start.y, start.z, end.x, end.y, end.z };
+
+	glBindVertexArray(debugVAO);
+	glBindBuffer(GL_ARRAY_BUFFER, debugVBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(lineVertices), lineVertices, GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+
+	glUseProgram(mDebugShaderProgram.GetID());
+	mDebugShaderProgram.setMatrix4Row("uViewProj", mView * mProj);
+	glDrawArrays(GL_LINES, 0, 2);
+
+	glDeleteBuffers(1, &debugVBO);
+	glDeleteVertexArrays(1, &debugVAO);
 }
 
 void RendererOpenGl::DrawMeshes()

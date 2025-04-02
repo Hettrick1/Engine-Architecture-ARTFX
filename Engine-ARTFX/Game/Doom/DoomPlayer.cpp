@@ -9,6 +9,8 @@
 #include "Timer.h"
 #include "TextRenderer.h"
 #include "HudManager.h"
+#include "Physics/CollisionManager.h"
+#include "Physics/PhysicManager.h"
 
 float bobingTime = 0;
 
@@ -103,6 +105,22 @@ void DoomPlayer::Update()
 		bobingTime = 0;
 	}
 	mFpsText->SetText("Fps : " + std::to_string(Timer::mFPS));
+
+	// Lancer un rayon
+	Vector3D start = GetTransformComponent().GetPosition() + GetComponentOfType<CameraComponent>()->GetRelativePosition();
+	start.z += 0;
+	Vector3D end = start + GetTransformComponent().GetWorldTransform().GetYAxis() * 2;
+	HitResult hit;
+		Line* line = new Line(start, end, hit);
+	GetScene().GetRenderer()->AddDebugLine(line);
+	if (PhysicManager::Instance().LineTrace(start, end, hit))
+	{
+		std::cout << "Ray hit at: " << hit.HitPoint.x << ", " << hit.HitPoint.y << ", " << hit.HitPoint.z << std::endl;
+	}
+	else
+	{
+		std::cout << "No hit" << std::endl;
+	}
 }
 
 void DoomPlayer::Destroy()

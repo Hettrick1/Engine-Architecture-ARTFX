@@ -112,6 +112,13 @@ struct Vector3D
 		return (a.x * b.x + a.y * b.y + a.z * b.z);
 	}
 
+	static Vector3D Min(const Vector3D& a, const Vector3D& b) {
+		return Vector3D(std::min(a.x, b.x), std::min(a.y, b.y), std::min(a.z, b.z));
+	}
+	static Vector3D Max(const Vector3D& a, const Vector3D& b) {
+		return Vector3D(std::max(a.x, b.x), std::max(a.y, b.y), std::max(a.z, b.z));
+	}
+
 	// Cross product between two vectors (a cross b)
 	static Vector3D Cross(const Vector3D& a, const Vector3D& b)
 	{

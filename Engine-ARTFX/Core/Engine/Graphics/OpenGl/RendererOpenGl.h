@@ -3,6 +3,7 @@
 #include "IRenderer.h"
 #include "VertexArray.h"
 #include "Shaders/ShaderProgram.h"
+#include "Line.h"
 #include "IRenderer.h"
 #include <vector>
 #include <vector>
@@ -31,11 +32,13 @@ public:
 	void RemoveMesh(MeshComponent* pMesh) override;
 
 	void AddDebugCollider(ColliderComponent* pCol) override;
+	void AddDebugLine(Line* pLine) override;
 
 	void SetViewMatrix(Matrix4DRow pViewMatrix) override;
 
 	void DrawSprite(Actor& pActor, Texture& pTexture, Rectangle pRect, Vector2D pOrigin, IRenderer::Flip pFlipMethod) const override;
 	void DrawDebugBox(Vector3D& pMin, Vector3D& pMax, Matrix4DRow pWorldTransform) override;
+	void DrawDebugLine(const Vector3D& start, const Vector3D& end, const HitResult& hit) override;
 
 	void DrawMeshes();
 	void DrawSprites();
@@ -55,6 +58,7 @@ private:
 	std::vector<SpriteComponent*> mSprites;
 	std::vector<MeshComponent*> mMeshes;
 	std::vector<ColliderComponent*> mCollider;
+	std::vector<Line*> mLines;
 	ShaderProgram* mSpriteShaderProgram;
 	ShaderProgram mDebugShaderProgram;
 	Matrix4DRow mSpriteViewProj;

@@ -21,6 +21,7 @@ public:
 	virtual bool CheckCollisionWith(ColliderComponent* other);
 	virtual std::pair < Vector3D, Vector3D> GetCollisionPosition() const;
 	virtual void DebugDraw(IRenderer& renderer);
+	virtual AABB GetAABB() { return AABB(); }
 
 public:
 	void AddListener(ICollisionListener* listener);
@@ -35,18 +36,11 @@ public:
 	std::string GetName() const { return mName; }
 
 	Vector3D GetSize() const { return mSize; }
-	Vector3D GetRelativePos() const { return mRelPosition; }
-
-	AABB GetAABB() const
-	{
-		return AABB();
-	}
 
 protected :
 	bool mIsTriggerable;
 	std::vector<ICollisionListener*> mListeners;
 	Vector3D mSize;
-	Vector3D mRelPosition;
 	std::string mName;
 };
 

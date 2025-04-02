@@ -9,8 +9,8 @@ BoxCollider3DComponent::BoxCollider3DComponent(Actor* pOwner, int pUpdateOder, V
     : ColliderComponent(pOwner, pUpdateOder), mShowInGame(true)
 {
     pOwner->AddComponent(this);
-    mRelPosition = pRelativePosition;
-    mPosition = pOwner->GetTransformComponent().GetPosition() + mRelPosition; 
+    SetRelativePosition(pRelativePosition);
+    mPosition = pOwner->GetTransformComponent().GetPosition() + GetRelativePosition(); 
     mLastPosition = mPosition;
     mSize = pSize;
 }
@@ -26,7 +26,7 @@ void BoxCollider3DComponent::OnStart()
 void BoxCollider3DComponent::Update()
 {
     ColliderComponent::Update();
-    mPosition = mOwner->GetTransformComponent().GetPosition() + mRelPosition;
+    mPosition = mOwner->GetTransformComponent().GetPosition() + GetRelativePosition();
 }
 
 void BoxCollider3DComponent::OnEnd()
@@ -47,10 +47,10 @@ bool BoxCollider3DComponent::CheckCollisionWith(ColliderComponent* other)
 bool BoxCollider3DComponent::CheckCollisionWithBox3D(BoxCollider3DComponent* other)
 {
     mLastPosition = mPosition;
-    mPosition = mOwner->GetTransformComponent().GetPosition() + mRelPosition;
+    mPosition = mOwner->GetTransformComponent().GetPosition() + GetRelativePosition();
 
     Vector3D delta = mPosition - mLastPosition;
-    Vector3D otherDelta = (other->GetOwner()->GetTransformComponent().GetPosition() + other->GetRelativePos()) - other->GetLastPosition();
+    Vector3D otherDelta = (other->GetOwner()->GetTransformComponent().GetPosition() + other->GetRelativePosition()) - other->GetLastPosition();
 
     float maxDelta = std::max(delta.Length(), otherDelta.Length());
     int steps = std::max(1, static_cast<int>(maxDelta / 0.05f));
@@ -94,17 +94,22 @@ void BoxCollider3DComponent::SetSize(Vector3D pSize)
 
 void BoxCollider3DComponent::DebugDraw(IRenderer& renderer)
 {
-    Vector3D min = mPosition - mSize;
-    Vector3D max = mPosition + mSize;
+    AABB aabb = AABB(mPosition - mSize, mPosition + mSize);
+
     Matrix4DRow wt;
 
     wt = Matrix4DRow::CreateScale(mSize*2);
     wt *= Matrix4DRow::CreateTranslation(mPosition - mSize);
 
-    renderer.DrawDebugBox(min, max, wt);
+    renderer.DrawDebugBox(aabb.min, aabb.max, wt);
 }
 
 Vector3D BoxCollider3DComponent::GetLastPosition()
 {
     return mLastPosition;
+}
+
+AABB BoxCollider3DComponent::GetAABB()
+{
+    return AABB(mPosition - mSize, mPosition + mSize);
 }
