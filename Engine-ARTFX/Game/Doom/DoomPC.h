@@ -4,6 +4,8 @@
 #include "RigidbodyComponent.h"
 #include "Component.h"
 
+class DoomPlayer;
+
 class DoomPC : public IActionListener, public Component
 {
 public:
@@ -18,7 +20,9 @@ public:
 	void OnActionEnded(InputActions* action) override;
 public :
 	void Update() override;
+	void SetPlayerRef(DoomPlayer* playerRef);
 private:
 	RigidbodyComponent* playerRbRef;
+	DoomPlayer* mPlayerRef;
 };
 

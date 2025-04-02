@@ -11,6 +11,8 @@ public:
         
     void Draw(RendererOpenGl& renderer) override;
 
+    void SetTexture(Texture& pTexture);
+
 private:
     Texture mTexture;
     float mWidth, mHeight;

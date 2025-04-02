@@ -16,7 +16,6 @@ Mesh::Mesh(std::vector<Vertex> pVertices)
 	mFragmentShader.Load("BasicMesh.frag", ShaderType::FRAGMENT);
 	mShaderProgram.Compose({ &mVertexShader, &mFragmentShader });
 	mTextures.emplace_back(&Assets::GetTexture("cube"));
-	mTextures.emplace_back(&Assets::GetTexture("walk1"));
 	mTextureTiling = Vector2D(1, 1);
 }
 

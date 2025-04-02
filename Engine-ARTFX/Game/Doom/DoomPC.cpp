@@ -8,6 +8,7 @@
 #include "Timer.h"
 #include "CameraComponent.h"
 #include "FlipbookComponent.h"
+#include "DoomPlayer.h"
 
 DoomPC::DoomPC(Actor* pOwner, int pUpdateOrder)
 	: Component(pOwner, pUpdateOrder), playerRbRef(nullptr)
@@ -15,6 +16,7 @@ DoomPC::DoomPC(Actor* pOwner, int pUpdateOrder)
 	InputManager& inputManager = InputManager::Instance();
 	inputManager.CreateNewAxis2DBinding(this, "Movement", SDLK_d, SDLK_a, SDLK_w, SDLK_s);
 	inputManager.CreateNewBooleanBtnBinding(this, "Shoot", SDL_BUTTON_LEFT);
+	inputManager.CreateNewBooleanKeyBinding(this, "ChangeWeapon", SDLK_TAB);
 
 	inputManager.CreateNewAxis2DBinding(this, "Mouse");
 	if (playerRbRef == nullptr)
@@ -40,6 +42,10 @@ void DoomPC::OnActionStarted(InputActions* action)
 		if (Triggeredaction && Triggeredaction->GetName() == "Shoot")
 		{
 			mOwner->GetComponentOfType<FlipbookComponent>()->PlayAnimation();
+		}
+		if (Triggeredaction && Triggeredaction->GetName() == "ChangeWeapon")
+		{
+			mPlayerRef->ChangeWeapon();
 		}
 	}
 }
@@ -82,4 +88,9 @@ void DoomPC::Update()
 		playerRbRef = mOwner->GetRigidBody();
 		Log::Info("Rigidboy not set in the player controller");
 	}
+}
+
+void DoomPC::SetPlayerRef(DoomPlayer* playerRef)
+{
+	mPlayerRef = playerRef;
 }

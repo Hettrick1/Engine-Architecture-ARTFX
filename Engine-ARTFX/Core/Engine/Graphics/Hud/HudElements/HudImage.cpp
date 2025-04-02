@@ -14,3 +14,8 @@ void HudImage::Draw(RendererOpenGl& renderer)
 
     renderer.DrawHudImage(mTexture, rect, mOrigin);
 }
+
+void HudImage::SetTexture(Texture& pTexture)
+{
+    mTexture = pTexture;
+}

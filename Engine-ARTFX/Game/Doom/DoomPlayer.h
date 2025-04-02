@@ -5,6 +5,12 @@
 #include "HudElements/HudText.h"
 #include "HudElements/HudImage.h"
 
+enum class Weapons
+{
+	Gun,
+	Shotgun
+};
+
 class DoomPlayer : public Actor
 {
 public:
@@ -13,6 +19,10 @@ public:
 	void Start() override;
 	void Update() override;
 	void Destroy() override;
+
+	Actor* GetActorRef();
+public:
+	void ChangeWeapon();
 private:
 	FlipbookComponent* mGun;
 	HudText* mFpsText;
@@ -20,8 +30,13 @@ private:
 	HudText* mHealthText;
 	HudText* mArmorText;
 	HudImage* mWeaponIconImage;
+	Texture gunIcon;
+	Texture shotgunIcon;
+	std::vector<Texture*> mGunAnim;
+	std::vector<Texture*> mShotgunAnim;
 	int mGunAmo;
 	int mHealth;
 	int mArmor;
+	Weapons mWeapon;
 };
 

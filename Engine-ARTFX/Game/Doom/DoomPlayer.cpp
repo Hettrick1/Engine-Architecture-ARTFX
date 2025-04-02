@@ -10,13 +10,23 @@
 #include "TextRenderer.h"
 #include "HudManager.h"
 
+float bobingTime = 0;
+
 DoomPlayer::DoomPlayer()
-	: Actor(), mGun(nullptr), mGunAmo(50), mHealth(100), mArmor(100), mFpsText(nullptr), mGunAmoText(nullptr), mHealthText(nullptr), mArmorText(nullptr), mWeaponIconImage(nullptr)
+	: Actor(), mGun(nullptr), mGunAmo(50), mHealth(100), mArmor(100), 
+	mFpsText(nullptr), mGunAmoText(nullptr), mHealthText(nullptr), mArmorText(nullptr), 
+	mWeaponIconImage(nullptr), mWeapon(Weapons::Gun)
 {
 }
 
 DoomPlayer::~DoomPlayer()
 {
+	delete mGun;
+	delete mFpsText;
+	delete mGunAmoText;
+	delete mHealthText;
+	delete mArmorText;
+	delete mWeaponIconImage;
 }
 
 void DoomPlayer::Start()
@@ -25,22 +35,32 @@ void DoomPlayer::Start()
 	RigidbodyComponent* rigidBody = new RigidbodyComponent(this);
 	SetRigidBody(rigidBody);
 	DoomPC* playerController = new DoomPC(this, 1);
+	playerController->SetPlayerRef(this);
 	AddComponent(playerController);
 	Texture* doomHud = Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/DoomHud.png", "doomHud");
-	Texture* gunIcon = Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/DoomHudGunIcon.png", "gunIcon");
+	gunIcon = *Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/DoomHudGunIcon.png", "gunIcon");
+	shotgunIcon = *Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/DoomHudShotGunIcon.png", "shotgunIcon");
 
-	std::vector<Texture*> gunAnim = {
+	mGunAnim = {
 		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/gun1.png", "gun1"),
 		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/gun2.png", "gun2"),
 		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/gun3.png", "gun3"),
 		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/gun4.png", "gun4")
 	};
+	mShotgunAnim = {
+		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/shotgun1.png", "shotgun1"),
+		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/shotgun2.png", "shotgun2"),
+		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/shotgun3.png", "shotgun3"),
+		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/shotgun4.png", "shotgun4"),
+		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/shotgun5.png", "shotgun5"),
+		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/shotgun6.png", "shotgun6")
+	};
 
 	CameraComponent* cameraComponent = new CameraComponent(this);
 	cameraComponent->SetRelativePosition(Vector3D(0, 0, 0));
 	AddComponent(cameraComponent);
-	mGun = new FlipbookComponent(this, gunAnim, 10);
-	mGun->SetRelativePosition(Vector3D(-0.16, 2, -0.25));
+	mGun = new FlipbookComponent(this, mGunAnim, 10);
+	mGun->SetRelativePosition(Vector3D(0, 2, -0.2));
 	mGun->RelativeRotateX(90);
 	mGun->SetAnimationFps(8);
 	mGun->SetCullOff(true);
@@ -51,7 +71,7 @@ void DoomPlayer::Start()
 	mHealthText = new HudText(std::to_string(mHealth), -325, -930, 1, Vector3D(0.7, 0, 0), TextAlignment::CENTER);
 	mArmorText = new HudText(std::to_string(mArmor), 840, -930, 1, Vector3D(0.7, 0, 0), TextAlignment::CENTER);;
 	HudImage* doomHudImage = new HudImage(*doomHud, Vector2D(0, -920), Vector2D(10, 10));
-	mWeaponIconImage = new HudImage(*gunIcon, Vector2D(400, -980), Vector2D(10, 10));
+	mWeaponIconImage = new HudImage(gunIcon, Vector2D(400, -980), Vector2D(10, 10));
 
 	GetScene().GetRenderer()->GetHud()->AddElement(doomHudImage); 
 	GetScene().GetRenderer()->GetHud()->AddElement(mWeaponIconImage);
@@ -66,23 +86,54 @@ void DoomPlayer::Update()
 	Actor::Update();
 	Vector3D bobbing = mGun->GetRelativePosition();
 	if (GetRigidBody()->GetVelocity().LengthSq() > 0) {
-		float time = SDL_GetTicks() * 0.01f;
 
-		bobbing.z -= Maths::Sin(time) * 0.005f;
+		bobingTime += Timer::deltaTime * 10.0f;
 
-		bobbing.x += Maths::Sin(time * 0.5) * 0.005f;
+		bobbing.z -= Maths::Sin(bobingTime) * 0.005f;
+
+		bobbing.x += Maths::Sin(bobingTime * 0.5) * 0.005f;
 
 		mGun->SetRelativePosition(bobbing);
 	}
 	else 
 	{
 		float lerpRelativeSpeed = 8;
-		Vector3D lerpRelative = Vector3D::Lerp(mGun->GetRelativePosition(), Vector3D(-0.16, 2, -0.25), Timer::deltaTime * lerpRelativeSpeed);
+		Vector3D lerpRelative = Vector3D::Lerp(mGun->GetRelativePosition(), Vector3D(0, 2, -0.2), Timer::deltaTime * lerpRelativeSpeed);
 		mGun->SetRelativePosition(lerpRelative);
+		bobingTime = 0;
 	}
 	mFpsText->SetText("Fps : " + std::to_string(Timer::mFPS));
 }
 
 void DoomPlayer::Destroy()
 {
+}
+
+Actor* DoomPlayer::GetActorRef()
+{
+	return static_cast<Actor*>(this);
+}
+
+void DoomPlayer::ChangeWeapon()
+{
+	if (mWeapon == Weapons::Gun)
+	{
+		mWeapon = Weapons::Shotgun;
+	}
+	else
+	{
+		mWeapon = Weapons::Gun;
+	}
+	switch (mWeapon) {
+	case Weapons::Gun :
+		mGun->SetAnimationFps(8);
+		mGun->SetAnimationTextures(mGunAnim);
+		mWeaponIconImage->SetTexture(gunIcon);
+		break;
+	case Weapons::Shotgun:
+		mGun->SetAnimationFps(8);
+		mGun->SetAnimationTextures(mShotgunAnim);
+		mWeaponIconImage->SetTexture(shotgunIcon);
+		break;
+	}
 }
