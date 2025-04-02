@@ -4,6 +4,7 @@
 #include "Physics/CollisionManager.h"
 #include "Physics/HitResult.h"
 #include <utility>
+#include "Physics/AABB.h"
 
 class ICollisionListener;
 class IRenderer;
@@ -29,8 +30,6 @@ public:
 	void NotifyListenersStarted();
 	void NotifyListenersStay();
 	void NotifyListenersEnded();
-	void SetHitResult(bool pHit, Actor* pHitActor, ColliderComponent* collision, Vector3D pNormal = 0, float pOverlap = 0);
-	HitResult& GetHitResult();
 
 	void SetName(std::string pName) { mName = pName; }
 	std::string GetName() const { return mName; }
@@ -38,10 +37,14 @@ public:
 	Vector3D GetSize() const { return mSize; }
 	Vector3D GetRelativePos() const { return mRelPosition; }
 
+	AABB GetAABB() const
+	{
+		return AABB();
+	}
+
 protected :
 	bool mIsTriggerable;
 	std::vector<ICollisionListener*> mListeners;
-	HitResult mHitResult;
 	Vector3D mSize;
 	Vector3D mRelPosition;
 	std::string mName;

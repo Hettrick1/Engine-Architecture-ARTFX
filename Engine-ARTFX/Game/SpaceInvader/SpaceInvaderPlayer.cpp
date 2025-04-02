@@ -48,43 +48,43 @@ void SpaceInvaderPlayer::Destroy()
 
 void SpaceInvaderPlayer::OnTriggerEnter(ColliderComponent* collider)
 {
-    PlayerController2D* pc = GetComponentOfType<PlayerController2D>();
-    Actor* otherActor = collider->GetHitResult().hitActor;
+ //   PlayerController2D* pc = GetComponentOfType<PlayerController2D>();
+ //   Actor* otherActor = collider->GetHitResult().hitActor;
 
-    float playerX = GetTransformComponent().GetPosition().x;
-    float playerY = GetTransformComponent().GetPosition().y;
-    float otherX = otherActor->GetTransformComponent().GetPosition().x;
-    float otherY = otherActor->GetTransformComponent().GetPosition().y;
+ //   float playerX = GetTransformComponent().GetPosition().x;
+ //   float playerY = GetTransformComponent().GetPosition().y;
+ //   float otherX = otherActor->GetTransformComponent().GetPosition().x;
+ //   float otherY = otherActor->GetTransformComponent().GetPosition().y;
 
-	// calculate if the collider is on the left/right/up/down
-	float rightLeft = playerX - otherX;
-	float upDown = playerY - otherY;
-	float distX = Maths::Abs(rightLeft);
-	float distY = Maths::Abs(upDown);
+	//// calculate if the collider is on the left/right/up/down
+	//float rightLeft = playerX - otherX;
+	//float upDown = playerY - otherY;
+	//float distX = Maths::Abs(rightLeft);
+	//float distY = Maths::Abs(upDown);
 
-	// disable the input depending on where the collision
-	if (distX > distY) 
-	{ // collision up or down
-		if (upDown < 0) // down
-		{
-			pc->DisableDirection({ 0, -1 });
-		}
-		else if (upDown > 0) // up
-		{
-			pc->DisableDirection({ 0, 1 });
-		}
-	}
-	else if (distX < distY) 
-	{ // collision right or left
-		if (rightLeft < 0) // left
-		{
-			pc->DisableDirection({ 1, 0 });
-		}
-		else if (rightLeft > 0) // right
-		{
-			pc->DisableDirection({ -1, 0 });
-		}
-	}
+	//// disable the input depending on where the collision
+	//if (distX > distY) 
+	//{ // collision up or down
+	//	if (upDown < 0) // down
+	//	{
+	//		pc->DisableDirection({ 0, -1 });
+	//	}
+	//	else if (upDown > 0) // up
+	//	{
+	//		pc->DisableDirection({ 0, 1 });
+	//	}
+	//}
+	//else if (distX < distY) 
+	//{ // collision right or left
+	//	if (rightLeft < 0) // left
+	//	{
+	//		pc->DisableDirection({ 1, 0 });
+	//	}
+	//	else if (rightLeft > 0) // right
+	//	{
+	//		pc->DisableDirection({ -1, 0 });
+	//	}
+	//}
 }
 
 void SpaceInvaderPlayer::OnCollision(ColliderComponent* collider)
@@ -97,47 +97,47 @@ void SpaceInvaderPlayer::OnTriggerStay(ColliderComponent* collider)
 
 void SpaceInvaderPlayer::OnTriggerExit(ColliderComponent* collider)
 {
-	PlayerController2D* pc = GetComponentOfType<PlayerController2D>(); 
-	Actor* otherActor = collider->GetHitResult().hitActor; 
-	if (!otherActor) {
-		Log::Error(LogType::Error, "The other actor was nullptr");
-		return; 
-	}
+	//PlayerController2D* pc = GetComponentOfType<PlayerController2D>(); 
+	//Actor* otherActor = collider->GetHitResult().hitActor; 
+	//if (!otherActor) {
+	//	Log::Error(LogType::Error, "The other actor was nullptr");
+	//	return; 
+	//}
 
-	float playerX = GetTransformComponent().GetPosition().x; 
-	float playerY = GetTransformComponent().GetPosition().y; 
-	float otherX = otherActor->GetTransformComponent().GetPosition().x; 
-	float otherY = otherActor->GetTransformComponent().GetPosition().y; 
+	//float playerX = GetTransformComponent().GetPosition().x; 
+	//float playerY = GetTransformComponent().GetPosition().y; 
+	//float otherX = otherActor->GetTransformComponent().GetPosition().x; 
+	//float otherY = otherActor->GetTransformComponent().GetPosition().y; 
 
-	// calculate if the collider is on the left/right/up/down
-	float rightLeft = playerX - otherX; 
-	float upDown = playerY - otherY; 
-	float distX = Maths::Abs(rightLeft); 
-	float distY = Maths::Abs(upDown); 
+	//// calculate if the collider is on the left/right/up/down
+	//float rightLeft = playerX - otherX; 
+	//float upDown = playerY - otherY; 
+	//float distX = Maths::Abs(rightLeft); 
+	//float distY = Maths::Abs(upDown); 
 
-	// enable the inputs depending where de collision was
-	if (distX > distY)
-	{ // collision up or down
-		if (upDown < 0)
-		{
-			pc->EnableDirection({ 0, -1 });
-		}
-		else if (upDown > 0)
-		{
-			pc->EnableDirection({ 0, 1 });
-		}
-	}
-	if (distX < distY)
-	{ // collision right or left
-		if (rightLeft < 0)
-		{
-			pc->EnableDirection({ 1, 0 });
-		}
-		else if (rightLeft > 0)
-		{
-			pc->EnableDirection({ -1, 0 });
-		}
-	}
+	//// enable the inputs depending where de collision was
+	//if (distX > distY)
+	//{ // collision up or down
+	//	if (upDown < 0)
+	//	{
+	//		pc->EnableDirection({ 0, -1 });
+	//	}
+	//	else if (upDown > 0)
+	//	{
+	//		pc->EnableDirection({ 0, 1 });
+	//	}
+	//}
+	//if (distX < distY)
+	//{ // collision right or left
+	//	if (rightLeft < 0)
+	//	{
+	//		pc->EnableDirection({ 1, 0 });
+	//	}
+	//	else if (rightLeft > 0)
+	//	{
+	//		pc->EnableDirection({ -1, 0 });
+	//	}
+	//}
 }
 
 

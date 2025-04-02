@@ -4,6 +4,8 @@
 #include <vector>
 #include <unordered_map>
 #include <unordered_set>
+#include "HitResult.h"
+#include "AABB.h"
 
 // Collision Manager Class to handle all the collision check and to send all the event related to collisons
 
@@ -22,6 +24,8 @@ public:
     void UpdateColliders();
     void CheckCollisions();
     void CalculateNormal(ColliderComponent* collider1, ColliderComponent* collider2);
+
+    bool LineTraceAABB(const Vector3D& start, const Vector3D& end, const AABB& box, HitResult& outHit);
 
 private:
     std::unordered_map<Actor*, std::vector<ColliderComponent*>> mColliders;

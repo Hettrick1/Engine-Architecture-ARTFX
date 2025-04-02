@@ -183,3 +183,31 @@ void CollisionManager::CalculateNormal(ColliderComponent* collider1, ColliderCom
     mCollisionDepth = minOverlap;
 }
 
+bool CollisionManager::LineTraceAABB(const Vector3D& start, const Vector3D& end, const AABB& box, HitResult& outHit)
+{
+    Vector3D dir = end - start;
+    Vector3D invDir = 1.0f / dir; // Inverse de la direction
+    Vector3D t1 = (box.min - start) * invDir;
+    Vector3D t2 = (box.max - start) * invDir;
+
+    Vector3D tMin = Vector3D::Min(t1, t2);
+    Vector3D tMax = Vector3D::Max(t1, t2);
+
+    float tNear = std::max({ tMin.x, tMin.y, tMin.z });
+    float tFar = std::min({ tMax.x, tMax.y, tMax.z });
+
+    if (tNear > tFar || tFar < 0)
+        return false; // Pas d'intersection
+
+    outHit.Hit = true;
+    outHit.Distance = tNear;
+    outHit.HitPoint = start + dir * tNear;
+
+    // Déterminer la normale en fonction de l'axe dominant
+    if (tNear == tMin.x) outHit.Normal = Vector3D(-1, 0, 0);
+    else if (tNear == tMin.y) outHit.Normal = Vector3D(0, -1, 0);
+    else if (tNear == tMin.z) outHit.Normal = Vector3D(0, 0, -1);
+
+    return true;
+}
+
