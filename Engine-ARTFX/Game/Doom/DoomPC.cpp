@@ -42,6 +42,7 @@ void DoomPC::OnActionStarted(InputActions* action)
 		if (Triggeredaction && Triggeredaction->GetName() == "Shoot")
 		{
 			mOwner->GetComponentOfType<FlipbookComponent>()->PlayAnimation();
+			mPlayerRef->Shoot();
 		}
 		if (Triggeredaction && Triggeredaction->GetName() == "ChangeWeapon")
 		{

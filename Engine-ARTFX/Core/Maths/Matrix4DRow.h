@@ -148,6 +148,15 @@ public:
 		return Vector3D(mat[3][0], mat[3][1], mat[3][2]);
 	}
 
+	Vector3D TransformVector(const Vector3D& vec) const
+	{
+		return Vector3D(
+			mat[0][0] * vec.x + mat[0][1] * vec.y + mat[0][2] * vec.z,
+			mat[1][0] * vec.x + mat[1][1] * vec.y + mat[1][2] * vec.z,
+			mat[2][0] * vec.x + mat[2][1] * vec.y + mat[2][2] * vec.z
+		);
+	}
+
 	Vector3D GetXAxis() const
 	{
 		return Vector3D::Normalize(Vector3D(mat[0][0], mat[0][1], mat[0][2]));

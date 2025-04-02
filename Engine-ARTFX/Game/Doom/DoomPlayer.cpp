@@ -126,33 +126,63 @@ void DoomPlayer::ChangeWeapon()
 	{
 		mWeapon = Weapons::Gun;
 	}
-	switch (mWeapon) {
-	case Weapons::Gun :
-		mGun->SetAnimationFps(8);
-		mGun->SetAnimationTextures(mGunAnim);
-		mWeaponIconImage->SetTexture(gunIcon);
-		break;
-	case Weapons::Shotgun:
-		mGun->SetAnimationFps(8);
-		mGun->SetAnimationTextures(mShotgunAnim);
-		mWeaponIconImage->SetTexture(shotgunIcon);
-		break;
+	switch (mWeapon) 
+	{
+		case Weapons::Gun :
+			mGun->SetAnimationFps(8);
+			mGun->SetAnimationTextures(mGunAnim);
+			mWeaponIconImage->SetTexture(gunIcon);
+			break;
+		case Weapons::Shotgun:
+			mGun->SetAnimationFps(8);
+			mGun->SetAnimationTextures(mShotgunAnim);
+			mWeaponIconImage->SetTexture(shotgunIcon);
+			break;
 	}
 }
 
 void DoomPlayer::Shoot()
 {
 	switch (mWeapon) {
-	case Weapons::Gun: 
-		Vector3D start = GetTransformComponent().GetPosition(); 
-		start.z -= 0.0f; 
-		Vector3D end = start + GetTransformComponent().GetWorldTransform().GetYAxis() * 50; 
-		HitResult hit; 
-		PhysicManager::Instance().LineTrace(start, end, hit); 
-		Line* line = new Line(start, end, hit); 
-		GetScene().GetRenderer()->AddDebugLine(line); 
-		break;
-	case Weapons::Shotgun:
-		break;
+		case Weapons::Gun:
+		{
+			const float range = 50.0f;
+			Vector3D start = GetTransformComponent().GetPosition();
+			start.z -= 0.0f;
+			Vector3D end = start + GetTransformComponent().GetWorldTransform().GetYAxis() * range;
+			HitResult hit;
+			PhysicManager::Instance().LineTrace(start, end, hit);
+			Line* line = new Line(start, end, hit);
+			GetScene().GetRenderer()->AddDebugLine(line);
+			break;
+		}
+		case Weapons::Shotgun:
+		{
+			Vector3D start = GetTransformComponent().GetPosition();
+			start.z -= 0.0f;
+			Vector3D baseDirection = GetTransformComponent().GetWorldTransform().GetYAxis();
+
+			const float spreadAngle = 15.0f;
+			const float range = 50.0f;       
+			float randomAngle = 0;
+
+			for (int i = 0; i < 4; ++i)
+			{
+				randomAngle = Maths::RandomRange(-spreadAngle, spreadAngle);
+				float randomRadians = Maths::ToRad(randomAngle);
+
+				// Création d'une matrice de rotation autour de l'axe Z (vertical)
+				Matrix4DRow rotation = Matrix4DRow::CreateRotationZ(randomRadians); 
+				Vector3D dir = rotation.TransformVector(baseDirection);
+				dir.Normalize();
+
+				Vector3D end = start + dir * range;
+				HitResult hit;
+				PhysicManager::Instance().LineTrace(start, end, hit);
+				Line* line = new Line(start, end, hit);
+				GetScene().GetRenderer()->AddDebugLine(line);
+			}
+			break;
+		}
 	}
 }

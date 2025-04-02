@@ -2,6 +2,8 @@
 
 #include <limits>
 #include <cmath>
+#include <cstdlib>
+#include <ctime>
 
 namespace Maths
 {
@@ -33,4 +35,32 @@ namespace Maths
     inline float Sqrt(float val){return sqrtf(val);}
     inline float Fmod(float numer, float denom){return std::fmod(numer, denom);}
     inline int Round(float val){return static_cast<int>(val);}
+    inline void InitRandom()
+    {
+        std::srand(static_cast<unsigned>(std::time(nullptr)));
+    }
+    inline float RandomRange(float min, float max) // max included
+    {
+        static bool initialized = false;
+        if (!initialized)
+        {
+            InitRandom();
+            initialized = true;
+        }
+
+        float random = static_cast<float>(std::rand()) / static_cast<float>(RAND_MAX);
+        return min + random * (max - min);
+    }
+    inline int RandomRange(int min, int max) // max included
+    {
+        static bool initialized = false;
+        if (!initialized)
+        {
+            InitRandom();
+            initialized = true;
+        }
+
+        return min + (std::rand() % (max - min + 1));
+    }
+
 }
