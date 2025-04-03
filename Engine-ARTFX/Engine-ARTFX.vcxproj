@@ -138,6 +138,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Core\Engine\DebugClasses\DebugRenderer.cpp" />
     <ClCompile Include="Core\Engine\Graphics\CameraManager.cpp" />
     <ClCompile Include="Core\Engine\Physics\AABB.cpp" />
     <ClCompile Include="Game\Doom\DoomPC.cpp" />
@@ -209,6 +210,7 @@
     <ClCompile Include="Core\Engine\Graphics\OpenGl\TextRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Core\Engine\DebugClasses\DebugRenderer.h" />
     <ClInclude Include="Core\Engine\Graphics\CameraManager.h" />
     <ClInclude Include="Core\Engine\Graphics\Hud\TextAlignementEnum.h" />
     <ClInclude Include="Core\Engine\Physics\AABB.h" />

@@ -6,7 +6,7 @@
 #include "Line.h"
 #include "IRenderer.h"
 #include <vector>
-#include <vector>
+#include "DebugRenderer.h"
 
 class Actor;
 class Texture;
@@ -67,4 +67,5 @@ private:
 	Shader mSpriteFragmentShader;
 	ShaderProgram mSpriteShaderProgramTemp;
 	HudManager* mHud;
+	DebugRenderer* mDebugRenderer;
 };
