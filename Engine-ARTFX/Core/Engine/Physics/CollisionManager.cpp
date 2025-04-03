@@ -84,6 +84,25 @@ void CollisionManager::CheckCollisions()
             activeActors.push_back(pair.first);
         }
     }
+    for (auto it = mCurrentCollisions.begin(); it != mCurrentCollisions.end(); ) {
+        ColliderComponent* collider = it->first;
+        Actor* owner = collider->GetOwner();
+
+        if (owner->GetState() != ActorState::Active) {
+            it = mCurrentCollisions.erase(it);
+        }
+        else {
+            for (auto otherIt = it->second.begin(); otherIt != it->second.end(); ) {
+                if ((*otherIt)->GetOwner()->GetState() != ActorState::Active) {
+                    otherIt = it->second.erase(otherIt);
+                }
+                else {
+                    ++otherIt;
+                }
+            }
+            ++it;
+        }
+    }
 
     // Begin and stay collision handling
     for (size_t i = 0; i < activeActors.size(); ++i) {

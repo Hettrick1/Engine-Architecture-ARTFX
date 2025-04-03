@@ -47,11 +47,12 @@ void SpriteComponent::SetFlipMethode(IRenderer::Flip pFlipMethode)
 
 void SpriteComponent::Draw(IRenderer& pRenderer)
 {
+	glEnable(GL_DEPTH_TEST);
+	glDisable(GL_BLEND);
+	glDisable(GL_CULL_FACE);
 	if (mCullOff)
 	{
 		glDisable(GL_DEPTH_TEST); 
-		glDisable(GL_CULL_FACE);
-		glDisable(GL_BLEND);
 	}
 
 	if (mTexHeightOverride != 0 && mTexWidthOverride != 0)

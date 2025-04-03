@@ -5,7 +5,7 @@
 #include "IRenderer.h"
 
 ColliderComponent::ColliderComponent(Actor* pOwner, int pUpdateOder)
-	: Component(pOwner, pUpdateOder), mIsTriggerable(false)
+	: Component(pOwner, pUpdateOder), mIsQuerry(false)
 {
 	PhysicManager::Instance().RegisterCollider(pOwner, this);
 	mOwner->GetScene().GetRenderer()->AddDebugCollider(this);
@@ -33,9 +33,14 @@ void ColliderComponent::DebugDraw(IRenderer& renderer)
 {
 }
 
-bool ColliderComponent::GetIsTriggerable()
+bool ColliderComponent::GetIsQuerry()
 {
-	return mIsTriggerable;
+	return mIsQuerry;
+}
+
+void ColliderComponent::SetIsQuerry(bool isQuerry)
+{
+	mIsQuerry = isQuerry;
 }
 
 void ColliderComponent::AddListener(ICollisionListener* listener)
@@ -50,22 +55,37 @@ void ColliderComponent::RemoveListener(ICollisionListener* listenerToRemove)
 
 void ColliderComponent::NotifyListenersStarted()
 {
-	for (ICollisionListener* listener : mListeners) {
-		listener->OnTriggerEnter(this);
+	if (mListeners.size() > 0) {
+		for (ICollisionListener* listener : mListeners) {
+			if (listener != nullptr)
+			{
+				listener->OnTriggerEnter(this);
+			}
+		}
 	}
 }
 
 void ColliderComponent::NotifyListenersStay()
 {
-	for (ICollisionListener* listener : mListeners) {
-		listener->OnTriggerStay(this);
+	if (mListeners.size() > 0) {
+		for (ICollisionListener* listener : mListeners) {
+			if (listener != nullptr)
+			{
+				listener->OnTriggerStay(this);
+			}
+		}
 	}
 }
 
 void ColliderComponent::NotifyListenersEnded()
 {
-	for (ICollisionListener* listener : mListeners) {
-		listener->OnTriggerExit(this);
+	if (mListeners.size() > 0) {
+		for (ICollisionListener* listener : mListeners) {
+			if (listener != nullptr)
+			{
+				listener->OnTriggerExit(this);
+			}
+		}
 	}
 }
 

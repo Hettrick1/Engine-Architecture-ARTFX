@@ -4,7 +4,7 @@
 #include <algorithm>
 
 Actor::Actor(Vector3D position, Vector3D size, Quaternion rotation) : 
-    mState(ActorState::Active), mScene(*Scene::ActiveScene), mTag("")
+    mState(ActorState::Active), mScene(*Scene::ActiveScene), mTag(""), mRigidbody(nullptr)
 {
     mTransformComponent.SetPosition(position);
     mTransformComponent.SetSize(size);

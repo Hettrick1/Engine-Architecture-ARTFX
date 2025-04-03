@@ -182,8 +182,6 @@ void RendererOpenGl::DrawMeshes()
 
 void RendererOpenGl::DrawSprites()
 {
-	glEnable(GL_DEPTH_TEST);
-	glDisable(GL_BLEND);
 	if (mSpriteShaderProgram == nullptr)
 	{
 		return;

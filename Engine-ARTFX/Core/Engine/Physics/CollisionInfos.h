@@ -24,8 +24,16 @@ struct CollisionInfos
 	{
 		actorPair = pActorPair;
 		colliderPair = pColliderPair;
-		velocityPair.first = actorPair.first->GetRigidBody()->GetVelocity();
-		velocityPair.second = actorPair.second->GetRigidBody()->GetVelocity();
+		if (actorPair.first->GetRigidBody() != nullptr && actorPair.second->GetRigidBody() != nullptr)
+		{
+			velocityPair.first = actorPair.first->GetRigidBody()->GetVelocity();
+			velocityPair.second = actorPair.second->GetRigidBody()->GetVelocity();
+		}
+		else 
+		{
+			velocityPair.first = Vector3D(0);
+			velocityPair.second = Vector3D(0);
+		}
 		positionPair = pPositionPair;
 		type = pType;
 		normal = pNormal;

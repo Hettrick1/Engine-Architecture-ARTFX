@@ -76,7 +76,7 @@ void CollisionResolver::AddCollisionToQueue(CollisionInfos* pCollisionInfo)
 {
 	std::pair<ColliderComponent*, ColliderComponent*> colliders = pCollisionInfo->colliderPair;
 	std::pair<Actor*, Actor*> actors = pCollisionInfo->actorPair;
-	if (colliders.first->GetIsTriggerable() || colliders.second->GetIsTriggerable())
+	if (colliders.first->GetIsQuerry() || colliders.second->GetIsQuerry())
 	{
 		if (mQuerryCollisions.find(colliders) == mQuerryCollisions.end())
 		{

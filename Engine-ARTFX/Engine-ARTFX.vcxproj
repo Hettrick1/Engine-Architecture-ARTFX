@@ -141,6 +141,7 @@
     <ClCompile Include="Core\Engine\DebugClasses\DebugRenderer.cpp" />
     <ClCompile Include="Core\Engine\Graphics\CameraManager.cpp" />
     <ClCompile Include="Core\Engine\Physics\AABB.cpp" />
+    <ClCompile Include="Game\Doom\AmoPickup.cpp" />
     <ClCompile Include="Game\Doom\DoomPC.cpp" />
     <ClCompile Include="Game\Doom\DoomPlayer.cpp" />
     <ClCompile Include="Game\TestOpenGl\BallSpawnPoint.cpp" />
@@ -215,6 +216,7 @@
     <ClInclude Include="Core\Engine\Graphics\Hud\TextAlignementEnum.h" />
     <ClInclude Include="Core\Engine\Physics\AABB.h" />
     <ClInclude Include="Core\Engine\DebugClasses\DebugLine.h" />
+    <ClInclude Include="Game\Doom\AmoPickup.h" />
     <ClInclude Include="Game\Doom\DoomPC.h" />
     <ClInclude Include="Game\Doom\DoomPlayer.h" />
     <ClInclude Include="Game\TestOpenGl\BallSpawnPoint.h" />

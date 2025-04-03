@@ -24,11 +24,8 @@ void Cube::Start()
 	mesh->AddTexture(tex2);
 	MeshComponent* meshComp = new MeshComponent(this, mesh);
 	meshComp->SetTextureIndex(0); 
-	AddComponent(meshComp);
 	RigidbodyComponent* rb = new RigidbodyComponent(this);
-	AddComponent(rb);
 	BoxCollider3DComponent* bc = new BoxCollider3DComponent(this, 10, GetTransformComponent().GetSize());
-	AddComponent(bc);
 }
 
 void Cube::Update()

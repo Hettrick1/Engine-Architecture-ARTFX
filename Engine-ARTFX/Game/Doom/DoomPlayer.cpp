@@ -11,6 +11,7 @@
 #include "HudManager.h"
 #include "Physics/CollisionManager.h"
 #include "Physics/PhysicManager.h"
+#include "BoxCollider3DComponent.h"
 
 float bobingTime = 0;
 
@@ -38,7 +39,6 @@ void DoomPlayer::Start()
 	SetRigidBody(rigidBody);
 	DoomPC* playerController = new DoomPC(this, 1);
 	playerController->SetPlayerRef(this);
-	AddComponent(playerController);
 	Texture* doomHud = Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/DoomHud.png", "doomHud");
 	gunIcon = *Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/DoomHudGunIcon.png", "gunIcon");
 	shotgunIcon = *Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/DoomHudShotGunIcon.png", "shotgunIcon");
@@ -60,13 +60,11 @@ void DoomPlayer::Start()
 
 	CameraComponent* cameraComponent = new CameraComponent(this);
 	cameraComponent->SetRelativePosition(Vector3D::zero);
-	AddComponent(cameraComponent);
-	mGun = new FlipbookComponent(this, mGunAnim, 10);
+	mGun = new FlipbookComponent(this, mGunAnim, 100000000);
 	mGun->SetRelativePosition(Vector3D(0.0f, 2.0f, -0.2f));
 	mGun->RelativeRotateX(90);
 	mGun->SetAnimationFps(8);
 	mGun->SetCullOff(true);
-	AddComponent(mGun);
 	 
 	mFpsText = new HudText("AAAAAAAAA", -1900, 1000, 0.5f, Vector3D(1, 0, 1));
 	mGunAmoText = new HudText(std::to_string(mGunAmo), -825, -930, 1, Vector3D(0.7f, 0, 0), TextAlignment::CENTER);
@@ -81,6 +79,9 @@ void DoomPlayer::Start()
 	GetScene().GetRenderer()->GetHud()->AddElement(mGunAmoText);
 	GetScene().GetRenderer()->GetHud()->AddElement(mHealthText);
 	GetScene().GetRenderer()->GetHud()->AddElement(mArmorText);
+
+	BoxCollider3DComponent* bc = new BoxCollider3DComponent(this, 10, 0.2);
+	bc->SetIsQuerry(true);
 }
 
 void DoomPlayer::Update()

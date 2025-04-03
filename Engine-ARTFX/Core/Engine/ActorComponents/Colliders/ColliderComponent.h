@@ -16,7 +16,8 @@ public:
 	ColliderComponent(Actor* owner, int updateOder);
 	~ColliderComponent();
 
-	bool GetIsTriggerable();
+	bool GetIsQuerry();
+	void SetIsQuerry(bool isQuerry);
 	virtual void Update();
 	virtual bool CheckCollisionWith(ColliderComponent* other);
 	virtual std::pair < Vector3D, Vector3D> GetCollisionPosition() const;
@@ -38,7 +39,7 @@ public:
 	Vector3D GetSize() const { return mSize; }
 
 protected :
-	bool mIsTriggerable;
+	bool mIsQuerry;
 	std::vector<ICollisionListener*> mListeners;
 	Vector3D mSize;
 	std::string mName;
