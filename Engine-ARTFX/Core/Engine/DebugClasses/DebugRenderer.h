@@ -17,7 +17,7 @@ public:
 	void Draw(IRenderer& pRenderer);
 
 	void AddDebugCollider(ColliderComponent* pCol);
-	void AddDebugLine(Line* pLine);
+	void AddDebugLine(DebugLine* pLine);
 
 	void DrawDebugBox(Vector3D& pMin, Vector3D& pMax, Matrix4DRow pWorldTransform);
 	void DrawDebugLine(const Vector3D& start, const Vector3D& end, const HitResult& hit);
@@ -30,5 +30,6 @@ private:
 	ShaderProgram mDebugShaderProgram;
 	Matrix4DRow mView, mProj;
 	std::vector<ColliderComponent*> mCollider;
-	std::vector<Line*> mLines;
+	std::vector<DebugLine*> mLines;
+	GLuint mDebugBoxVao, mDebugBoxVbo, mDebugLineVao, mDebugLineVbo;
 };

@@ -12,7 +12,8 @@ class MeshComponent;
 class ColliderComponent;
 class HudManager;
 struct HitResult;
-struct Line;
+struct DebugLine;
+struct DebugBox;
 
 class IRenderer 
 {
@@ -43,7 +44,7 @@ public:
 	virtual void RemoveMesh(MeshComponent* pMesh) = 0;
 
 	virtual void AddDebugCollider(ColliderComponent* pCol) {} // DEBUG PURPOSE ONLY
-	virtual void AddDebugLine(Line* pLine) {} // DEBUG PURPOSE ONLY
+	virtual void AddDebugLine(DebugLine* pLine) {} // DEBUG PURPOSE ONLY
 
 	virtual void SetSpriteShaderProgram(class ShaderProgram& shaderProgram) {}
 	virtual void SetViewMatrix(Matrix4DRow pViewMatrix) {}

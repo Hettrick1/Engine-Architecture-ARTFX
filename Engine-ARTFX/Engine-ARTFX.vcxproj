@@ -214,7 +214,7 @@
     <ClInclude Include="Core\Engine\Graphics\CameraManager.h" />
     <ClInclude Include="Core\Engine\Graphics\Hud\TextAlignementEnum.h" />
     <ClInclude Include="Core\Engine\Physics\AABB.h" />
-    <ClInclude Include="Core\Maths\Line.h" />
+    <ClInclude Include="Core\Engine\DebugClasses\DebugLine.h" />
     <ClInclude Include="Game\Doom\DoomPC.h" />
     <ClInclude Include="Game\Doom\DoomPlayer.h" />
     <ClInclude Include="Game\TestOpenGl\BallSpawnPoint.h" />

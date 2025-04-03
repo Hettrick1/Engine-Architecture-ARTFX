@@ -3,7 +3,7 @@
 #include "IRenderer.h"
 #include "VertexArray.h"
 #include "Shaders/ShaderProgram.h"
-#include "Line.h"
+#include "DebugLine.h"
 #include "IRenderer.h"
 #include <vector>
 #include "DebugRenderer.h"
@@ -32,7 +32,7 @@ public:
 	void RemoveMesh(MeshComponent* pMesh) override;
 
 	void AddDebugCollider(ColliderComponent* pCol) override;
-	void AddDebugLine(Line* pLine) override;
+	void AddDebugLine(DebugLine* pLine) override;
 
 	void SetViewMatrix(Matrix4DRow pViewMatrix) override;
 
@@ -58,7 +58,7 @@ private:
 	std::vector<SpriteComponent*> mSprites;
 	std::vector<MeshComponent*> mMeshes;
 	std::vector<ColliderComponent*> mCollider;
-	std::vector<Line*> mLines;
+	std::vector<DebugLine*> mLines;
 	ShaderProgram* mSpriteShaderProgram;
 	ShaderProgram mDebugShaderProgram;
 	Matrix4DRow mSpriteViewProj;

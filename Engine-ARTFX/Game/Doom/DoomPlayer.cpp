@@ -153,7 +153,7 @@ void DoomPlayer::Shoot(float pAmoQuantity)
 			Vector3D end = start + GetTransformComponent().GetWorldTransform().GetYAxis() * range;
 			HitResult hit;
 			PhysicManager::Instance().LineTrace(start, end, hit);
-			Line* line = new Line(start, end, hit);
+			DebugLine* line = new DebugLine(start, end, hit);
 			GetScene().GetRenderer()->AddDebugLine(line);
 			UseAmo(pAmoQuantity);
 
@@ -187,7 +187,7 @@ void DoomPlayer::Shoot(float pAmoQuantity)
 				Vector3D end = start + dir * range;
 				HitResult hit;
 				PhysicManager::Instance().LineTrace(start, end, hit);
-				Line* line = new Line(start, end, hit);
+				DebugLine* line = new DebugLine(start, end, hit);
 				GetScene().GetRenderer()->AddDebugLine(line);
 				if (hit.HitActor != nullptr && hit.HitActor->GetTag() == "Wall")
 				{

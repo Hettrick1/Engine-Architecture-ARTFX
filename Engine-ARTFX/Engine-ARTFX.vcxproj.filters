@@ -467,7 +467,7 @@
     <ClInclude Include="Core\Engine\Physics\AABB.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Maths\Line.h">
+    <ClInclude Include="Core\Engine\DebugClasses\DebugLine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Core\Engine\DebugClasses\DebugRenderer.h">

@@ -3,9 +3,9 @@
 #include "Vector3D.h"
 #include "Physics/HitResult.h"
 
-struct Line
+struct DebugLine
 {
-	Line(Vector3D pStart,Vector3D pEnd,HitResult pHit)
+	DebugLine(Vector3D pStart,Vector3D pEnd,HitResult pHit)
 		: Start(pStart), End(pEnd), Hit(pHit)
 	{
 	}

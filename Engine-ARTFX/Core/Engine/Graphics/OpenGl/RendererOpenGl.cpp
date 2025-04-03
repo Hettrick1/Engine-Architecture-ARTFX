@@ -140,7 +140,7 @@ void RendererOpenGl::AddDebugCollider(ColliderComponent* pCol)
 	mDebugRenderer->AddDebugCollider(pCol);
 }
 
-void RendererOpenGl::AddDebugLine(Line* pLine)
+void RendererOpenGl::AddDebugLine(DebugLine* pLine)
 {
 	mDebugRenderer->AddDebugLine(pLine);
 }
