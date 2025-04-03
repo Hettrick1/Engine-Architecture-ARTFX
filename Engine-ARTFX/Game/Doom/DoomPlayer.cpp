@@ -142,7 +142,7 @@ void DoomPlayer::ChangeWeapon()
 	}
 }
 
-void DoomPlayer::Shoot(float pAmoQuantity)
+void DoomPlayer::Shoot(int pAmoQuantity)
 {
 	switch (mWeapon) {
 		case Weapons::Gun:
@@ -200,7 +200,7 @@ void DoomPlayer::Shoot(float pAmoQuantity)
 	}
 }
 
-void DoomPlayer::UseAmo(float pQuantity)
+void DoomPlayer::UseAmo(int pQuantity)
 {
 	mGunAmo -= pQuantity;
 	if (mGunAmo < 0)
@@ -210,7 +210,7 @@ void DoomPlayer::UseAmo(float pQuantity)
 	mGunAmoText->SetText(std::to_string(mGunAmo));
 }
 
-void DoomPlayer::TakeDamages(float pQuantity)
+void DoomPlayer::TakeDamages(int pQuantity)
 {
 	if (mArmor > 0)
 	{

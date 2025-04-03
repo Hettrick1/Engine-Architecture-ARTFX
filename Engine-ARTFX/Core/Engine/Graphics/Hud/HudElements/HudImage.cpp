@@ -11,7 +11,8 @@ void HudImage::Draw(RendererOpenGl& renderer)
     Rectangle rect;
     rect.dimensions = { mWidth, mHeight };
     rect.position = { mPositionX, mPositionY };
-
+    glDisable(GL_CULL_FACE);
+    glDisable(GL_BLEND);
     renderer.DrawHudImage(mTexture, rect, mOrigin);
 }
 

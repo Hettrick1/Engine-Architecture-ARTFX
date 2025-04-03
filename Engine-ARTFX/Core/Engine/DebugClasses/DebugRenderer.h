@@ -24,6 +24,9 @@ public:
 
 	void SetViewMatrix(Matrix4DRow pViewMatrix);
 
+	void SetDrawDebug(bool pDraw);
+	void SetDrawLines(bool pDraw);
+	void SetDrawBoxes(bool pDraw);
 private:
 	Shader mDebugVertex;
 	Shader mDebugFragment;
@@ -32,4 +35,5 @@ private:
 	std::vector<ColliderComponent*> mCollider;
 	std::vector<DebugLine*> mLines;
 	GLuint mDebugBoxVao, mDebugBoxVbo, mDebugLineVao, mDebugLineVbo;
+	bool mDrawDebug, mDrawLines, mDrawBoxes;
 };

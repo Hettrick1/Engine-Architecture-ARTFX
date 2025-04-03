@@ -57,10 +57,7 @@ private:
 	SDL_GLContext mContext;
 	std::vector<SpriteComponent*> mSprites;
 	std::vector<MeshComponent*> mMeshes;
-	std::vector<ColliderComponent*> mCollider;
-	std::vector<DebugLine*> mLines;
 	ShaderProgram* mSpriteShaderProgram;
-	ShaderProgram mDebugShaderProgram;
 	Matrix4DRow mSpriteViewProj;
 	Matrix4DRow mView, mProj;
 	Shader mSpriteVertexShader;

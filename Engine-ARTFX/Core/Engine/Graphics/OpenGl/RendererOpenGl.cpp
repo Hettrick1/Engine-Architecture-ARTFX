@@ -72,8 +72,6 @@ bool RendererOpenGl::Initialize(Window& pWindow)
 	mDebugRenderer = new DebugRenderer();
 	mDebugRenderer->Initialize(*mWindow);
 
-	//SDL_GL_SetSwapInterval(0); // deactivate V-Sync
-
 	return true;
 }
 
@@ -213,8 +211,6 @@ void RendererOpenGl::DrawHud()
 
 void RendererOpenGl::DrawHudImage(Texture& pTexture, Rectangle pRect, Vector2D pOrigin)
 {
-	glDisable(GL_CULL_FACE);
-	glDisable(GL_BLEND);
 	if (mSpriteShaderProgram == nullptr)
 	{
 		return;

@@ -13,6 +13,6 @@ public:
     inline Vector2D GetPosition() const { return { mPositionX, mPositionY }; }
 
 protected:
-    float mPositionX, mPositionY;
+    float mPositionX = 0, mPositionY = 0;
 };
 

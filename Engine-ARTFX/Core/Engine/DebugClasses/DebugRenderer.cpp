@@ -3,7 +3,8 @@
 #include "ColliderComponent.h"
 
 DebugRenderer::DebugRenderer()
-	: mDebugBoxVbo(0), mDebugBoxVao(0)
+	: mDebugBoxVbo(0), mDebugBoxVao(0), mDebugLineVbo(0), mDebugLineVao(0)
+	, mDrawDebug(true), mDrawLines(true), mDrawBoxes(true)
 {
 }
 
@@ -11,6 +12,8 @@ DebugRenderer::~DebugRenderer()
 {
 	glDeleteBuffers(1, &mDebugBoxVbo);
 	glDeleteVertexArrays(1, &mDebugBoxVao);
+	glDeleteBuffers(1, &mDebugLineVbo);
+	glDeleteVertexArrays(1, &mDebugLineVao);
 }
 
 void DebugRenderer::Initialize(Window& pWindow)
@@ -72,22 +75,30 @@ void DebugRenderer::Initialize(Window& pWindow)
 
 void DebugRenderer::Draw(IRenderer& pRenderer)
 {
-	mDebugShaderProgram.Use(); 
-	mDebugShaderProgram.setMatrix4Row("uViewProj", mView * mProj); 
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	glEnable(GL_DEPTH_TEST);
-	for (auto& collider : mCollider) // DEBUG ONLY
-	{
-		collider->DebugDraw(pRenderer);
+	if (mDrawDebug) {
+		mDebugShaderProgram.Use();
+		mDebugShaderProgram.setMatrix4Row("uViewProj", mView * mProj);
+		glEnable(GL_DEPTH_TEST);
+		if (mDrawBoxes)
+		{
+			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+			for (auto& collider : mCollider) // DEBUG ONLY
+			{
+				collider->DebugDraw(pRenderer);
+			}
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+			glDisable(GL_BLEND);
+		}
+		if (mDrawLines)
+		{
+			for (auto& line : mLines) // DEBUG ONLY
+			{
+				DrawDebugLine(line->Start, line->End, line->Hit);
+			}
+			mLines.clear();
+		}
+		glDisable(GL_DEPTH_TEST);
 	}
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	glDisable(GL_BLEND);
-	for (auto& line : mLines) // DEBUG ONLY
-	{
-		DrawDebugLine(line->Start, line->End, line->Hit);
-	}
-	mLines.clear();
-	glDisable(GL_DEPTH_TEST);
 }
 
 void DebugRenderer::AddDebugCollider(ColliderComponent* pCol)
@@ -137,7 +148,7 @@ void DebugRenderer::DrawDebugLine(const Vector3D& start, const Vector3D& end, co
 	glDrawArrays(GL_LINES, 0, 2);
 	glBindVertexArray(0);
 
-	if (hit.HitActor)
+	if (hit.HitActor) // draw a box where it was hit
 	{
 		const float size = 0.1f;
 
@@ -157,4 +168,19 @@ void DebugRenderer::DrawDebugLine(const Vector3D& start, const Vector3D& end, co
 void DebugRenderer::SetViewMatrix(Matrix4DRow pViewMatrix)
 {
 	mView = pViewMatrix;
+}
+
+void DebugRenderer::SetDrawDebug(bool pDraw)
+{
+	mDrawDebug = pDraw;
+}
+
+void DebugRenderer::SetDrawLines(bool pDraw)
+{
+	mDrawLines = pDraw;
+}
+
+void DebugRenderer::SetDrawBoxes(bool pDraw)
+{
+	mDrawBoxes = pDraw;
 }
