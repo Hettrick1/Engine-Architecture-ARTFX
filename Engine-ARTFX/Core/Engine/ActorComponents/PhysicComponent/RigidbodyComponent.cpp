@@ -81,6 +81,11 @@ void RigidbodyComponent::SetMass(float pMass)
 	mMass = (pMass > 0.0f) ? pMass : 1.0f;
 }
 
+void RigidbodyComponent::SetFriction(float pFriction)
+{
+	mFriction = pFriction;
+}
+
 void RigidbodyComponent::SetUseGravity(bool pUseGravity)
 {
 	mUseGravity = pUseGravity;

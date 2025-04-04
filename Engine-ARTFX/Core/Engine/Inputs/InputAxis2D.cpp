@@ -19,34 +19,36 @@ ActionType InputAxis2D::GetType() const
 
 void InputAxis2D::Update()
 {
-    float newX, newY;
+    float newX = 0, newY = 0;
 
     if (mUseMouse) { // mouse mode
-
-        int deltaX = 0, deltaY = 0; 
-        SDL_GetRelativeMouseState(&deltaX, &deltaY);  
-        newX = static_cast<float>(deltaX); 
+        int deltaX = 0, deltaY = 0;
+        SDL_GetRelativeMouseState(&deltaX, &deltaY);
+        newX = static_cast<float>(deltaX);
         newY = static_cast<float>(deltaY);
-
     }
     else { // keyboard mode
         newX = static_cast<float>((IsKeyPressed(mPositiveX) ? 1 : 0) - (IsKeyPressed(mNegativeX) ? 1 : 0));
         newY = static_cast<float>((IsKeyPressed(mPositiveY) ? 1 : 0) - (IsKeyPressed(mNegativeY) ? 1 : 0));
     }
 
-    if (newX != x || newY != y) {
+    bool hasChanged = (newX != x || newY != y);
+    bool isActive = (newX != 0 || newY != 0);
+
+    if (hasChanged) {
         x = newX;
         y = newY;
-        if (newX != 0 || newY != 0) {
+
+        if (isActive) {
             NotifyListenersStarted();
+            NotifyListenersTriggered(); 
         }
         else {
             NotifyListenersEnded();
         }
-        NotifyListenersTriggered();
     }
-    else if (!mUseMouse)
-    {
+
+    if (isActive) {
         x = newX;
         y = newY;
         NotifyListenersTriggered();

@@ -35,7 +35,7 @@ void LVLDoom::Start(IRenderer* renderer)
 	Cube* cube2 = new Cube(Vector3D(5, 5, -1.2), Vector3D(10,10,0.1));
 	AddActor(cube2);
 	cube2->Start();
-	cube2->GetRigidBody()->SetIsStatic(true);
+	cube2->RemoveComponent(cube2->GetRigidBody());
 	cube2->GetComponentOfType<MeshComponent>()->GetMesh()->SetTextureTiling(Vector2D(3, 2));
 	cube2->SetTag("Wall");
 	AmoPickup* amoPu = new AmoPickup(Vector3D(10, 10, -0.5));

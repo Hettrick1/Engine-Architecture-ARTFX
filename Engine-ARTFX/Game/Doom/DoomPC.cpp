@@ -17,7 +17,6 @@ DoomPC::DoomPC(Actor* pOwner, int pUpdateOrder)
 	inputManager.CreateNewAxis2DBinding(this, "Movement", SDLK_d, SDLK_a, SDLK_w, SDLK_s);
 	inputManager.CreateNewBooleanBtnBinding(this, "Shoot", SDL_BUTTON_LEFT);
 	inputManager.CreateNewBooleanKeyBinding(this, "ChangeWeapon", SDLK_TAB);
-
 	inputManager.CreateNewAxis2DBinding(this, "Mouse");
 	if (playerRbRef == nullptr)
 	{
@@ -83,7 +82,7 @@ void DoomPC::OnActionTriggered(InputActions* action)
 			Vector2D axis = Triggeredaction->GetAxis();
 			Vector3D forward = mOwner->GetComponentOfType<CameraComponent>()->GetWorldTransform().GetYAxis();
 			Vector3D right = mOwner->GetComponentOfType<CameraComponent>()->GetWorldTransform().GetXAxis();
-
+			Log::Info("Forward");
 			Vector3D moveDirection = forward * axis.y + right * -axis.x;
 			playerRbRef->SetVelocity(moveDirection * 3);
 		}

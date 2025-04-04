@@ -36,6 +36,8 @@ void DoomPlayer::Start()
 {
 	Actor::Start();
 	RigidbodyComponent* rigidBody = new RigidbodyComponent(this);
+	rigidBody->SetIsStatic(true);
+	rigidBody->SetFriction(1.0);
 	SetRigidBody(rigidBody);
 	DoomPC* playerController = new DoomPC(this, 1);
 	playerController->SetPlayerRef(this);
@@ -97,7 +99,7 @@ void DoomPlayer::Update()
 {
 	Actor::Update();
 	Vector3D bobbing = mGun->GetRelativePosition();
-	if (GetRigidBody()->GetVelocity().LengthSq() > 0) {
+	if (GetRigidBody()->GetVelocity().LengthSq() > 1) {
 
 		bobingTime += Timer::deltaTime * 10.0f;
 

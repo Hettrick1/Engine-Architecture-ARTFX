@@ -25,6 +25,7 @@ public :
 public:
 	void SetVelocity(Vector3D pVelocity);
 	void SetMass(float pMass);
+	void SetFriction(float pFriction);
 	void SetUseGravity(bool pUseGravity);
 	void SetIsGrounded(bool pIsGrounded);
 	void SetGravity(float pGravity);

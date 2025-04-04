@@ -85,9 +85,8 @@ void Game::Input()
                     break;
                 }
             }
-            mInputManager.Update();
-
         }
+        mInputManager.Update();
     }
 }
 
