@@ -82,7 +82,6 @@ void DoomPC::OnActionTriggered(InputActions* action)
 			Vector2D axis = Triggeredaction->GetAxis();
 			Vector3D forward = mOwner->GetComponentOfType<CameraComponent>()->GetWorldTransform().GetYAxis();
 			Vector3D right = mOwner->GetComponentOfType<CameraComponent>()->GetWorldTransform().GetXAxis();
-			Log::Info("Forward");
 			Vector3D moveDirection = forward * axis.y + right * -axis.x;
 			playerRbRef->SetVelocity(moveDirection * 3);
 		}
