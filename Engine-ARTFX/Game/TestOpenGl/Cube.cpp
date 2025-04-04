@@ -38,18 +38,14 @@ void Cube::Destroy()
 	Actor::Destroy();
 }
 
-void Cube::OnTriggerEnter(ColliderComponent* collider)
+void Cube::OnTriggerEnter(ColliderComponent* collider, HitResult* infos)
 {
 }
 
-void Cube::OnCollision(ColliderComponent* collider)
+void Cube::OnTriggerStay(ColliderComponent* collider, HitResult* infos)
 {
 }
 
-void Cube::OnTriggerStay(ColliderComponent* collider)
-{
-}
-
-void Cube::OnTriggerExit(ColliderComponent* collider)
+void Cube::OnTriggerExit(ColliderComponent* collider, HitResult* infos)
 {
 }

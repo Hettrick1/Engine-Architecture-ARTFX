@@ -6,6 +6,7 @@
 #include <utility>
 #include "Physics/AABB.h"
 
+struct HitResult;
 class ICollisionListener;
 class IRenderer;
 
@@ -29,9 +30,9 @@ public:
 	void RemoveListener(ICollisionListener* listener);
 
 public:
-	void NotifyListenersStarted();
-	void NotifyListenersStay();
-	void NotifyListenersEnded();
+	void NotifyListenersStarted(HitResult* infos);
+	void NotifyListenersStay(HitResult* infos);
+	void NotifyListenersEnded(HitResult* infos);
 
 	void SetName(std::string pName) { mName = pName; }
 	std::string GetName() const { return mName; }

@@ -26,6 +26,7 @@ void FlipbookComponent::SetAnimationTextures(const std::vector<Texture*>& pTextu
 		SetTexture(*mAnimationTextures[0]);
 		mCurrentFrame = 0.0f;
 		mPlayOnce = false;
+		mHasFinished = true;
 	}
 }
 

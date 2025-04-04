@@ -21,8 +21,8 @@ public:
 	void RelativeRotateY(float pAngle);
 	void RelativeRotateZ(float pAngle);
 
-	Matrix4DRow GetWorldTransform();
-	void ComputeRelativeTransform();
+	virtual Matrix4DRow GetWorldTransform();
+	virtual void ComputeRelativeTransform();
 	Matrix4DRow GetRelativeTransform() const { return mRelativeTransform; }
 	Vector3D RelativeRight() const
 	{

@@ -32,18 +32,14 @@ void GroundActor::Destroy()
 	Actor::Destroy();
 }
 
-void GroundActor::OnTriggerEnter(ColliderComponent* collider)
+void GroundActor::OnTriggerEnter(ColliderComponent* collider, HitResult* infos)
 {
 }
 
-void GroundActor::OnCollision(ColliderComponent* collider)
+void GroundActor::OnTriggerStay(ColliderComponent* collider, HitResult* infos)
 {
 }
 
-void GroundActor::OnTriggerStay(ColliderComponent* collider)
-{
-}
-
-void GroundActor::OnTriggerExit(ColliderComponent* collider)
+void GroundActor::OnTriggerExit(ColliderComponent* collider, HitResult* infos)
 {
 }

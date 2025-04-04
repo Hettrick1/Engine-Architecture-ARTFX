@@ -54,8 +54,15 @@ void DoomPlayer::Start()
 		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/shotgun2.png", "shotgun2"),
 		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/shotgun3.png", "shotgun3"),
 		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/shotgun4.png", "shotgun4"),
-		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/shotgun5.png", "shotgun5"),
-		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/shotgun6.png", "shotgun6")
+		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/shotgun4.png", "shotgun5"),
+		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/shotgun5.png", "shotgun6"),
+		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/shotgun5.png", "shotgun7"),
+		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/shotgun6.png", "shotgun8"),
+		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/shotgun6.png", "shotgun9"),
+		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/shotgun5.png", "shotgun10"),
+		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/shotgun5.png", "shotgun11"),
+		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/shotgun4.png", "shotgun12"),
+		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/shotgun4.png", "shotgun13"),
 	};
 
 	CameraComponent* cameraComponent = new CameraComponent(this);
@@ -80,8 +87,10 @@ void DoomPlayer::Start()
 	GetScene().GetRenderer()->GetHud()->AddElement(mHealthText);
 	GetScene().GetRenderer()->GetHud()->AddElement(mArmorText);
 
-	BoxCollider3DComponent* bc = new BoxCollider3DComponent(this, 10, 0.2);
+	BoxCollider3DComponent* bc = new BoxCollider3DComponent(this, 10, 0.1, Vector3D(0, 0, -0.12));
 	bc->SetIsQuerry(true);
+
+	SetTag("Player");
 }
 
 void DoomPlayer::Update()
@@ -120,26 +129,28 @@ Actor* DoomPlayer::GetActorRef()
 
 void DoomPlayer::ChangeWeapon()
 {
-	if (mWeapon == Weapons::Gun)
-	{
-		mWeapon = Weapons::Shotgun;
-	}
-	else
-	{
-		mWeapon = Weapons::Gun;
-	}
-	switch (mWeapon) 
-	{
-		case Weapons::Gun :
+	if (mGun->IsAnimationEnded()) {
+		if (mWeapon == Weapons::Gun)
+		{
+			mWeapon = Weapons::Shotgun;
+		}
+		else
+		{
+			mWeapon = Weapons::Gun;
+		}
+		switch (mWeapon)
+		{
+		case Weapons::Gun:
 			mGun->SetAnimationFps(8);
 			mGun->SetAnimationTextures(mGunAnim);
 			mWeaponIconImage->SetTexture(gunIcon);
 			break;
 		case Weapons::Shotgun:
-			mGun->SetAnimationFps(8);
+			mGun->SetAnimationFps(22);
 			mGun->SetAnimationTextures(mShotgunAnim);
 			mWeaponIconImage->SetTexture(shotgunIcon);
 			break;
+		}
 	}
 }
 

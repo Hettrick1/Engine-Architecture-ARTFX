@@ -94,14 +94,17 @@ void BoxCollider3DComponent::SetSize(Vector3D pSize)
 
 void BoxCollider3DComponent::DebugDraw(IRenderer& renderer)
 {
-    AABB aabb = AABB(mPosition - mSize, mPosition + mSize);
+    if (mOwner->GetState() == ActorState::Active)
+    {
+        AABB aabb = AABB(mPosition - mSize, mPosition + mSize);
 
-    Matrix4DRow wt;
+        Matrix4DRow wt;
 
-    wt = Matrix4DRow::CreateScale(mSize*2);
-    wt *= Matrix4DRow::CreateTranslation(mPosition - mSize);
+        wt = Matrix4DRow::CreateScale(mSize * 2);
+        wt *= Matrix4DRow::CreateTranslation(mPosition - mSize);
 
-    renderer.DrawDebugBox(aabb.min, aabb.max, wt);
+        renderer.DrawDebugBox(aabb.min, aabb.max, wt);
+    }
 }
 
 Vector3D BoxCollider3DComponent::GetLastPosition()

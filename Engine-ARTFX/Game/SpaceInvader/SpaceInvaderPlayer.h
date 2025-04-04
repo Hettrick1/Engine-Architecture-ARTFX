@@ -13,10 +13,9 @@ public:
 	void Update() override;
 	void Destroy() override;
 public :
-	void OnTriggerEnter(ColliderComponent* collider) override;
-	void OnCollision(ColliderComponent* collider) override;
-	void OnTriggerStay(ColliderComponent* collider) override;
-	void OnTriggerExit(ColliderComponent* collider) override;
+	void OnTriggerEnter(ColliderComponent* collider, HitResult* infos) override;
+	void OnTriggerStay(ColliderComponent* collider, HitResult* infos) override;
+	void OnTriggerExit(ColliderComponent* collider, HitResult* infos) override;
 private:
 };
 

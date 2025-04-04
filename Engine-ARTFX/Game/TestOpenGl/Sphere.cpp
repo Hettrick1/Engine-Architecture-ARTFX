@@ -40,18 +40,14 @@ void Sphere::Destroy()
 	Actor::Destroy();
 }
 
-void Sphere::OnTriggerEnter(ColliderComponent* collider)
+void Sphere::OnTriggerEnter(ColliderComponent* collider, HitResult* infos)
 {
 }
 
-void Sphere::OnCollision(ColliderComponent* collider)
+void Sphere::OnTriggerStay(ColliderComponent* collider, HitResult* infos)
 {
 }
 
-void Sphere::OnTriggerStay(ColliderComponent* collider)
-{
-}
-
-void Sphere::OnTriggerExit(ColliderComponent* collider)
+void Sphere::OnTriggerExit(ColliderComponent* collider, HitResult* infos)
 {
 }

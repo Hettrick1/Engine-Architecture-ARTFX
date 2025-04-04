@@ -53,37 +53,37 @@ void ColliderComponent::RemoveListener(ICollisionListener* listenerToRemove)
 	mListeners.erase(std::remove(mListeners.begin(), mListeners.end(), listenerToRemove), mListeners.end());
 }
 
-void ColliderComponent::NotifyListenersStarted()
+void ColliderComponent::NotifyListenersStarted(HitResult* infos)
 {
 	if (mListeners.size() > 0) {
 		for (ICollisionListener* listener : mListeners) {
 			if (listener != nullptr)
 			{
-				listener->OnTriggerEnter(this);
+				listener->OnTriggerEnter(this, infos);
 			}
 		}
 	}
 }
 
-void ColliderComponent::NotifyListenersStay()
+void ColliderComponent::NotifyListenersStay(HitResult* infos)
 {
 	if (mListeners.size() > 0) {
 		for (ICollisionListener* listener : mListeners) {
 			if (listener != nullptr)
 			{
-				listener->OnTriggerStay(this);
+				listener->OnTriggerStay(this, infos);
 			}
 		}
 	}
 }
 
-void ColliderComponent::NotifyListenersEnded()
+void ColliderComponent::NotifyListenersEnded(HitResult* infos)
 {
 	if (mListeners.size() > 0) {
 		for (ICollisionListener* listener : mListeners) {
 			if (listener != nullptr)
 			{
-				listener->OnTriggerExit(this);
+				listener->OnTriggerExit(this, infos);
 			}
 		}
 	}

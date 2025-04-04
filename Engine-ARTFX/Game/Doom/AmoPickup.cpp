@@ -2,6 +2,7 @@
 #include "Assets.h"
 #include "SpriteComponent.h"
 #include "BoxCollider3DComponent.h"
+#include "DoomPlayer.h"
 #include "Scene.h"
 
 AmoPickup::AmoPickup(Vector3D pPos, Vector3D pSize, Quaternion pRotation)
@@ -16,7 +17,7 @@ AmoPickup::~AmoPickup()
 void AmoPickup::Start()
 {
 	Actor::Start();
-	Texture* tex = Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/planks.png", "cube");
+	Texture* tex = Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/amoPu.png", "amoPickUp");
 	SpriteComponent* sc = new SpriteComponent(this, *tex);
 	sc->RelativeRotateX(90);
 	BoxCollider3DComponent* bc = new BoxCollider3DComponent(this, 10, 0.5);
@@ -34,20 +35,19 @@ void AmoPickup::Destroy()
 	Actor::Destroy();
 }
 
-void AmoPickup::OnTriggerEnter(ColliderComponent* collider)
+void AmoPickup::OnTriggerEnter(ColliderComponent* collider, HitResult* infos)
 {
 	SetActive(ActorState::Paused);
-	Log::Info("OUIIIIIIIIIIIIIII");
+	if (infos->HitActor->GetTag() == "Player")
+	{
+		DoomPlayer* Player = static_cast<DoomPlayer*>(infos->HitActor);
+	}
 }
 
-void AmoPickup::OnCollision(ColliderComponent* collider)
+void AmoPickup::OnTriggerStay(ColliderComponent* collider, HitResult* infos)
 {
 }
 
-void AmoPickup::OnTriggerStay(ColliderComponent* collider)
-{
-}
-
-void AmoPickup::OnTriggerExit(ColliderComponent* collider)
+void AmoPickup::OnTriggerExit(ColliderComponent* collider, HitResult* infos)
 {
 }

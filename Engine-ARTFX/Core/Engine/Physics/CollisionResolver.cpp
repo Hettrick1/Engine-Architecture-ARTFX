@@ -110,25 +110,29 @@ void CollisionResolver::CalculateQuerryCollisions()
 	for (auto it = mQuerryCollisions.begin(); it != mQuerryCollisions.end(); it++)
 	{
 		CollisionInfos* collision = it->second;
+		HitResult hit1 = HitResult();
+		hit1.HitActor = collision->actorPair.first;
+		HitResult hit2 = HitResult();
+		hit2.HitActor = collision->actorPair.second;
 		std::pair<ColliderComponent*, ColliderComponent*> colliders = collision->colliderPair;
 		switch (collision->type)
 		{
 		case CollisionType::Enter:
 		{
-			colliders.first->NotifyListenersStarted();
-			colliders.second->NotifyListenersStarted();
+			colliders.first->NotifyListenersStarted(&hit1);
+			colliders.second->NotifyListenersStarted(&hit2);
 			break;
 		}
 		case CollisionType::Stay:
 		{
-			colliders.first->NotifyListenersStay();
-			colliders.second->NotifyListenersStay();
+			colliders.first->NotifyListenersStay(&hit1);
+			colliders.second->NotifyListenersStay(&hit2);
 			break;
 		}
 		case CollisionType::Exit:
 		{
-			colliders.first->NotifyListenersEnded();
-			colliders.second->NotifyListenersEnded();
+			colliders.first->NotifyListenersEnded(&hit1);
+			colliders.second->NotifyListenersEnded(&hit2);
 			break;
 		}
 		default:

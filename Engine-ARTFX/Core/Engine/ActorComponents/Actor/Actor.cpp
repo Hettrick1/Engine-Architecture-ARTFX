@@ -158,6 +158,18 @@ void Actor::SetTag(std::string pTag)
     mTag = pTag;
 }
 
+bool Actor::HasTag(std::string tag)
+{
+    if (mTag == tag) 
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
 void Actor::UpdateComponentsTransform()
 {
 

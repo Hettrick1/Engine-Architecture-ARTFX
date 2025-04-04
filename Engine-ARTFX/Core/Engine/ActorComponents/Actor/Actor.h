@@ -32,7 +32,7 @@ public:
 	void SetRigidBody(RigidbodyComponent* pRigidbody);
 	void SetTag(std::string pTag);
 	inline std::string GetTag() const { return mTag; }
-
+	bool HasTag(std::string tag);
 
 	template<typename  C>
 	C* GetComponentOfType() const

@@ -43,18 +43,14 @@ void BowlingBall::Destroy()
 	Actor::Destroy();
 }
 
-void BowlingBall::OnTriggerEnter(ColliderComponent* collider)
+void BowlingBall::OnTriggerEnter(ColliderComponent* collider, HitResult* infos)
 {
 }
 
-void BowlingBall::OnCollision(ColliderComponent* collider)
+void BowlingBall::OnTriggerStay(ColliderComponent* collider, HitResult* infos)
 {
 }
 
-void BowlingBall::OnTriggerStay(ColliderComponent* collider)
-{
-}
-
-void BowlingBall::OnTriggerExit(ColliderComponent* collider)
+void BowlingBall::OnTriggerExit(ColliderComponent* collider, HitResult* infos)
 {
 }

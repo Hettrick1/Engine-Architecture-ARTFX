@@ -20,6 +20,7 @@ public:
 	int GetTexHeight() const { return mTexHeight; }
 
 	void SetCullOff(bool cull);
+	Matrix4DRow GetWorldTransform() override;
 
 	Texture& GetTexture();
 protected:
@@ -31,5 +32,6 @@ protected:
 	int mTexHeightOverride;
 	IRenderer::Flip mFlipMethode;
 	bool mCullOff;
+	float aspectRatio, aspectRatioInv;
 };
 

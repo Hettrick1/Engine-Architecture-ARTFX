@@ -46,7 +46,7 @@ void SpaceInvaderPlayer::Destroy()
 	Actor::Destroy();
 }
 
-void SpaceInvaderPlayer::OnTriggerEnter(ColliderComponent* collider)
+void SpaceInvaderPlayer::OnTriggerEnter(ColliderComponent* collider, HitResult* infos)
 {
  //   PlayerController2D* pc = GetComponentOfType<PlayerController2D>();
  //   Actor* otherActor = collider->GetHitResult().hitActor;
@@ -87,15 +87,11 @@ void SpaceInvaderPlayer::OnTriggerEnter(ColliderComponent* collider)
 	//}
 }
 
-void SpaceInvaderPlayer::OnCollision(ColliderComponent* collider)
+void SpaceInvaderPlayer::OnTriggerStay(ColliderComponent* collider, HitResult* infos)
 {
 }
 
-void SpaceInvaderPlayer::OnTriggerStay(ColliderComponent* collider)
-{
-}
-
-void SpaceInvaderPlayer::OnTriggerExit(ColliderComponent* collider)
+void SpaceInvaderPlayer::OnTriggerExit(ColliderComponent* collider, HitResult* infos)
 {
 	//PlayerController2D* pc = GetComponentOfType<PlayerController2D>(); 
 	//Actor* otherActor = collider->GetHitResult().hitActor; 
