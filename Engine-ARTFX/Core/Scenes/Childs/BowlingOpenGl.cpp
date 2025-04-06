@@ -10,7 +10,7 @@
 #include "MeshComponent.h"
 
 BowlingOpenGl::BowlingOpenGl()
-	:mBowlingPlayer(nullptr)
+	: mBowlingPlayer(nullptr)
 {
 }
 
@@ -26,7 +26,6 @@ void BowlingOpenGl::Start(IRenderer* renderer)
 	AddActor(player);
 	player->Start();
 	player->SetPosition(Vector3D(300, 0, 0));
-	player->GetTransformComponent().SetSize({ 1, 1, 0 });
 
 	Cube* ground = new Cube(); 
 	AddActor(ground); 
@@ -105,17 +104,18 @@ void BowlingOpenGl::Start(IRenderer* renderer)
 	quille2->Start();
 	quille2->GetComponentOfType<RigidbodyComponent>()->SetMass(0.5);
 
+	CameraActor* camera = new CameraActor();
+	camera->SetPosition(Vector3D(0.0f, 34.0f, 40.0f));
+	camera->GetTransformComponent().RotateX(-90);
+	AddActor(camera);
+	camera->Start();
+
 	mBowlingPlayer = new BowlingPlayer();
 	mBowlingPlayer->GetTransformComponent().RotateX(-5);
 	mBowlingPlayer->SetPosition(Vector3D(0.0f, -40.0f, 5.0f));
 	AddActor(mBowlingPlayer);
 	mBowlingPlayer->Start();
 
-	CameraActor* camera = new CameraActor();
-	camera->SetPosition(Vector3D(0.0f, 34.0f, 40.0f));
-	camera->GetTransformComponent().RotateX(-90);
-	AddActor(camera);
-	camera->Start();
 }
 
 void BowlingOpenGl::Update()

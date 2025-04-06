@@ -6,7 +6,7 @@
 
 int main(int argc, char** argv) {
 
-	Game* pong = new Game("myGame", { new LVLDoom()});
+	Game* pong = new Game("myGame", { new BowlingOpenGl()});
 
 	return 0;
 }

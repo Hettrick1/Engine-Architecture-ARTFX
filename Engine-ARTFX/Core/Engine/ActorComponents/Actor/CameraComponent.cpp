@@ -7,7 +7,7 @@
 #include "Scene.h"
 
 CameraComponent::CameraComponent(Actor* pOwner, int updateOder)
-	: Component(pOwner, updateOder)
+    : Component(pOwner, updateOder), mViewMatrix(Matrix4DRow::Identity)
 {
 	CameraManager::Instance().AddCamera(this);
 }
@@ -24,7 +24,7 @@ void CameraComponent::Update()
     Vector3D target = camPosition + forward * 400.0f;
     Vector3D up = worldTransform.GetZAxis(); // Récupère le vrai "up"
 
-    Matrix4DRow view = Matrix4DRow::CreateLookAt(camPosition, target, up);
-    mOwner->GetScene().GetRenderer()->SetViewMatrix(view);
+    mViewMatrix = Matrix4DRow::CreateLookAt(camPosition, target, up);
+    mOwner->GetScene().GetRenderer()->SetViewMatrix(mViewMatrix);
 }
 

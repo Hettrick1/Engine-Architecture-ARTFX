@@ -21,6 +21,29 @@ public:
 
 	}
 
+	float EPSILON = 1e-6f;
+
+	bool operator==(const Matrix4DRow& other) const
+	{
+		for (int i = 0; i < 4; ++i)
+		{
+			for (int j = 0; j < 4; ++j)
+			{
+				if (std::fabs(mat[i][j] - other.mat[i][j]) > EPSILON)
+				{
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+	// Comparaison de différence
+	bool operator!=(const Matrix4DRow& other) const
+	{
+		return !(*this == other);
+	}
+
 	// Cast to a const float pointer
 	const float* GetAsFloatPtr() const
 	{

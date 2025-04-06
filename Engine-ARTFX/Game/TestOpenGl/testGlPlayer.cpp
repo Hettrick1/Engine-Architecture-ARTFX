@@ -19,11 +19,6 @@ testGlPlayer::~testGlPlayer()
 void testGlPlayer::Start()
 {
 	Actor::Start();
-	Texture* walkAnimTextures = Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/WalkAnim/Walk1.png", "walk1");
-		
-	SpriteComponent* walkAnim = new SpriteComponent(this, *walkAnimTextures, 500000);
-	AddComponent(walkAnim);
-
 	mTransformComponent.RotateZ(45);
 }
 

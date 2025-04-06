@@ -22,7 +22,7 @@ void BowlingBall::Start()
 	Mesh* mesh = Assets::LoadMesh("Imports/Meshes/sphere.obj", "sphere");
 	mesh->AddTexture(tex);
 	MeshComponent* meshComp = new MeshComponent(this, mesh);
-	meshComp->SetTextureIndex(2);
+	meshComp->SetTextureIndex(1);
 	AddComponent(meshComp);
 	RigidbodyComponent* rb = new RigidbodyComponent(this);
 	AddComponent(rb);

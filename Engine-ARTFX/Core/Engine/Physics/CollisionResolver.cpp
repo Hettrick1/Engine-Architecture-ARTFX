@@ -119,20 +119,20 @@ void CollisionResolver::CalculateQuerryCollisions()
 		{
 		case CollisionType::Enter:
 		{
-			colliders.first->NotifyListenersStarted(&hit1);
-			colliders.second->NotifyListenersStarted(&hit2);
+			colliders.first->NotifyListenersStarted(&hit2);
+			colliders.second->NotifyListenersStarted(&hit1);
 			break;
 		}
 		case CollisionType::Stay:
 		{
-			colliders.first->NotifyListenersStay(&hit1);
-			colliders.second->NotifyListenersStay(&hit2);
+			colliders.first->NotifyListenersStay(&hit2);
+			colliders.second->NotifyListenersStay(&hit1);
 			break;
 		}
 		case CollisionType::Exit:
 		{
-			colliders.first->NotifyListenersEnded(&hit1);
-			colliders.second->NotifyListenersEnded(&hit2);
+			colliders.first->NotifyListenersEnded(&hit2);
+			colliders.second->NotifyListenersEnded(&hit1);
 			break;
 		}
 		default:

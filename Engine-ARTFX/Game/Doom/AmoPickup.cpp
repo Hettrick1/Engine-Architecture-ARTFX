@@ -40,7 +40,8 @@ void AmoPickup::OnTriggerEnter(ColliderComponent* collider, HitResult* infos)
 	SetActive(ActorState::Paused);
 	if (infos->HitActor->GetTag() == "Player")
 	{
-		DoomPlayer* Player = static_cast<DoomPlayer*>(infos->HitActor);
+		DoomPlayer* player = static_cast<DoomPlayer*>(infos->HitActor);
+		player->PickUpAmo(10);
 	}
 }
 

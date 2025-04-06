@@ -26,7 +26,6 @@ void BowlingPlayer::Start()
 	CameraComponent* cc = new CameraComponent(this);
 	BowlingPC* pc = new BowlingPC(this, 100);
 	pc->SetMovementSpeed(5);
-	AddComponent(pc);
 
 	mBall = new BowlingBall(0.0f, 1.3f);
 	mBall->Start();

@@ -13,6 +13,9 @@ public:
 	~CameraComponent();
 
 	void Update();
+
+	inline Matrix4DRow GetViewMatrix() const { return mViewMatrix; }
 private :
+	Matrix4DRow mViewMatrix;
 };
 

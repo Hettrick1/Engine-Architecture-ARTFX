@@ -224,6 +224,12 @@ void DoomPlayer::UseAmo(int pQuantity)
 	mGunAmoText->SetText(std::to_string(mGunAmo));
 }
 
+void DoomPlayer::PickUpAmo(int pQuantity)
+{
+	mGunAmo += pQuantity;
+	mGunAmoText->SetText(std::to_string(mGunAmo));
+}
+
 void DoomPlayer::TakeDamages(int pQuantity)
 {
 	if (mArmor > 0)
