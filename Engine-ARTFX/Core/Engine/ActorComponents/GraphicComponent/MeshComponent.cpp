@@ -30,7 +30,15 @@ void MeshComponent::Draw(Matrix4DRow viewProj)
 			tex->SetActive();
 		}
 		mMesh->GetVao()->SetActive();
-		glDrawArrays(GL_TRIANGLES, 0, mMesh->GetVao()->GetVerticeCount());
+		if (mMesh->GetShaderProgram().GetType() & (ShaderProgramType::TESSELLATION_CONTROL + ShaderProgramType::TESSELLATION_EVALUATION))
+		{
+			glPointSize(5.0f);
+			glDrawArrays(GL_PATCHES, 0, 3);
+		}
+		else
+		{
+			glDrawArrays(GL_TRIANGLES, 0, mMesh->GetVao()->GetVerticeCount());
+		}
 	}
 }
 

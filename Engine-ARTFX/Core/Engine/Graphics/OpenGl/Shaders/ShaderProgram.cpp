@@ -14,9 +14,26 @@ void ShaderProgram::Unload()
 void ShaderProgram::Compose(std::vector<Shader*> shaders)
 {
 	mId = glCreateProgram();
-
+	mShaderProgramType = 0;
 	for (int s = 0; s < static_cast<int>(shaders.size()); s++)
 	{
+		switch (shaders[s]->GetType()) {
+		case ShaderType::VERTEX:
+			mShaderProgramType += ShaderProgramType::VERTEX;
+			break;
+		case ShaderType::FRAGMENT:
+			mShaderProgramType += ShaderProgramType::FRAGMENT;
+			break;
+		case ShaderType::TESSELLATION_CONTROL:
+			mShaderProgramType += ShaderProgramType::TESSELLATION_CONTROL;
+			break;
+		case ShaderType::TESSELLATION_EVALUATION:
+			mShaderProgramType += ShaderProgramType::TESSELLATION_EVALUATION;
+			break;
+		case ShaderType::GEOMETRY:
+			mShaderProgramType += ShaderProgramType::GEOMETRY;
+			break;
+		}
 		glAttachShader(mId, shaders[s]->GetID());
 	}
 	glLinkProgram(mId);

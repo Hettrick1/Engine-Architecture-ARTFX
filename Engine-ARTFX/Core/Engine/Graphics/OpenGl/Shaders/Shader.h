@@ -5,7 +5,10 @@
 
 enum class ShaderType {
 	VERTEX,
-	FRAGMENT
+	FRAGMENT,
+	TESSELLATION_CONTROL,
+	TESSELLATION_EVALUATION,
+	GEOMETRY
 };
 class Shader
 {
@@ -23,6 +26,8 @@ public:
 	}
 
 	std::string& GetCode();
+
+	inline ShaderType GetType() const { return mType; }
 protected:
 	std::string mCode;
 	unsigned int mId;

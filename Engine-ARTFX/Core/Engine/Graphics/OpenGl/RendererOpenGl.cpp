@@ -43,6 +43,7 @@ bool RendererOpenGl::Initialize(Window& pWindow)
 	SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, 8);
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
+	//glPatchParameteri(GL_PATCH_VERTICES, 3);
 
 	mContext = SDL_GL_CreateContext(mWindow->GetSdlWindow());
 	glewExperimental = GL_TRUE;
