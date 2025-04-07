@@ -491,6 +491,9 @@
     <ClInclude Include="Core\Engine\CoreActors\BasicCube.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Core\Engine\Graphics\OpenGl\Shaders\ShaderProgrammType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Imports\Shaders\Simple.vert" />
@@ -501,7 +504,9 @@
     <None Include="Imports\Shaders\Debug.frag" />
     <None Include="Imports\Shaders\TextRenderer.vert" />
     <None Include="Imports\Shaders\TextRenderer.frag" />
-    <None Include="Imports\Shaders\Tesselation\BasicMesh.tcs" />
-    <None Include="Imports\Shaders\Tesselation\BasicMesh.tes" />
+    <None Include="Imports\Shaders\Tesselation\Advanced.tcs" />
+    <None Include="Imports\Shaders\Tesselation\Advanced.tes" />
+    <None Include="Imports\Shaders\VertFrag\Advanced.vert" />
+    <None Include="Imports\Shaders\VertFrag\Advanced.frag" />
   </ItemGroup>
 </Project>

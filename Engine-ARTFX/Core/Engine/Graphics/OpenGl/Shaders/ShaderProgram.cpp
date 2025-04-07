@@ -1,4 +1,5 @@
 #include "ShaderProgram.h"
+#include "Log.h"
 
 ShaderProgram::ShaderProgram()
 	:mId(0)
@@ -38,6 +39,13 @@ void ShaderProgram::Compose(std::vector<Shader*> shaders)
 	}
 	glLinkProgram(mId);
 	Use();
+	GLint success;
+	glGetProgramiv(mId, GL_LINK_STATUS, &success);
+	if (!success) {
+		GLchar infoLog[512];
+		glGetProgramInfoLog(mId, 512, NULL, infoLog);
+		Log::Info("Shader program linking failed: " + std::string(infoLog));
+	}
 }
 
 unsigned int ShaderProgram::GetID()

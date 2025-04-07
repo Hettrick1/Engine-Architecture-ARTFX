@@ -14,16 +14,13 @@ Mesh::Mesh(std::vector<Vertex> pVertices)
 {
 	Assets::LoadTexture(*(Scene::ActiveScene->GetRenderer()), "Imports/Sprites/planks.png", "cube");
 	mVao = new VertexArray(ToVerticeArray(), mVertices.size());
-	mVertexShader.Load("BasicMesh.vert", ShaderType::VERTEX);
-	mFragmentShader.Load("BasicMesh.frag", ShaderType::FRAGMENT);
-	mShaderProgram.Compose({ &mVertexShader, &mFragmentShader });
 	mTextures.emplace_back(&Assets::GetTexture("cube"));
 	mTextureTiling = Vector2D(1, 1);
 }
 
 Mesh::~Mesh()
 {
-	Unload();
+	Unload();	
 }
 
 void Mesh::Unload()
@@ -37,36 +34,6 @@ void Mesh::Unload()
 void Mesh::AddTexture(Texture* pTexture)
 {
 	mTextures.push_back(pTexture);
-}
-
-void Mesh::SetShaderProgram(ShaderProgram pShaderProgram)
-{
-	mShaderProgram = pShaderProgram;
-}
-
-void Mesh::SetVertexShader(Shader pVertexShader)
-{
-	mVertexShader = pVertexShader;
-}
-
-void Mesh::SetFragmentShader(Shader pFragmentShader)
-{
-	mFragmentShader = pFragmentShader;
-}
-
-ShaderProgram& Mesh::GetShaderProgram()
-{
-	return mShaderProgram;
-}
-
-Shader& Mesh::GetVertexShader()
-{
-	return mVertexShader;
-}
-
-Shader& Mesh::GetFragmentShader()
-{
-	return mFragmentShader;
 }
 
 Texture* Mesh::GetTexture(unsigned int pTextureIndex)

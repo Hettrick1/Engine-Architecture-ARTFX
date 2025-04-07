@@ -20,17 +20,11 @@ public:
 
 	void AddTexture(Texture* pTexture);
 
-	void SetShaderProgram(ShaderProgram pShaderProgram);
-	void SetVertexShader(Shader pVertexShader);
-	void SetFragmentShader(Shader pFragmentShader);
-
 	VertexArray* GetVao() const
 	{
 		return mVao;
 	}
-	ShaderProgram& GetShaderProgram();
-	Shader& GetVertexShader();
-	Shader& GetFragmentShader();
+
 	Texture* GetTexture(unsigned int pTextureIndex);
 	float* ToVerticeArray();
 
@@ -41,8 +35,6 @@ private:
 	std::vector<Texture*> mTextures;
 	std::vector<Vertex> mVertices;
 	VertexArray* mVao;
-	Shader mVertexShader, mFragmentShader;
-	ShaderProgram mShaderProgram;
 	Vector2D mTextureTiling;
 };
 

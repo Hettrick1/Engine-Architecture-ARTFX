@@ -5,6 +5,7 @@
 #include "CameraActor.h"
 #include "MeshComponent.h"
 #include "Doom/AmoPickup.h"
+#include "CoreActors/BasicCube.h"
 
 LVLDoom::LVLDoom()
 	: mPlayer(nullptr)

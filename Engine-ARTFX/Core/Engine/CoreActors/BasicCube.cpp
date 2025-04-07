@@ -6,7 +6,7 @@
 #include "BoxCollider3DComponent.h"
 
 BasicCube::BasicCube(Vector3D pPos, Vector3D pSize, Quaternion pRotation, ShaderProgram* program)
-	: mShaderProgram(program)
+	: Actor(pPos, pSize, pRotation), mShaderProgram(program)
 {
 }
 
@@ -20,10 +20,7 @@ void BasicCube::Start()
 	Texture* tex = Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/collider64x64.png", "collider");
 	Mesh* mesh = Assets::LoadMesh("Imports/Meshes/cube.obj", "cube");
 	mesh->AddTexture(tex);
-	if (mShaderProgram != nullptr) {
-		mesh->SetShaderProgram(*mShaderProgram);
-	}
-	MeshComponent* meshComp = new MeshComponent(this, mesh);
+	MeshComponent* meshComp = new MeshComponent(this, mesh, mShaderProgram);
 	meshComp->SetTextureIndex(1);
 	BoxCollider3DComponent* bc = new BoxCollider3DComponent(this, 10, GetTransformComponent().GetSize());
 }
