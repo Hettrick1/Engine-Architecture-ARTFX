@@ -17,14 +17,14 @@ BasicCube::~BasicCube()
 void BasicCube::Start()
 {
 	Actor::Start();
-	Texture* tex = Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/planks.png", "cube");
+	Texture* tex = Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/collider64x64.png", "collider");
 	Mesh* mesh = Assets::LoadMesh("Imports/Meshes/cube.obj", "cube");
 	mesh->AddTexture(tex);
 	if (mShaderProgram != nullptr) {
 		mesh->SetShaderProgram(*mShaderProgram);
 	}
 	MeshComponent* meshComp = new MeshComponent(this, mesh);
-	meshComp->SetTextureIndex(0);
+	meshComp->SetTextureIndex(1);
 	BoxCollider3DComponent* bc = new BoxCollider3DComponent(this, 10, GetTransformComponent().GetSize());
 }
 

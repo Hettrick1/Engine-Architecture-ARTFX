@@ -51,6 +51,7 @@ public:
 	inline HudManager* GetHud() const override { return mHud; }
 
 	RendererType GetType() const override { return IRenderer::RendererType::OPENGL; }
+	DebugRenderer* GetDebugRenderer() const override { return mDebugRenderer; }
 private:
 	Window* mWindow;
 	VertexArray* mVAO;

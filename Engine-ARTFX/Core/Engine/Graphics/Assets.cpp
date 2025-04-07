@@ -40,7 +40,7 @@ Mesh* Assets::GetMesh(const std::string& pName)
 {
 	if (mMeshes.find(pName) == mMeshes.end()) {
 		std::ostringstream loadError;
-		loadError << "Texture " << pName << " does not exists in assets manager\n";
+		loadError << "Mesh " << pName << " does not exists in assets manager\n";
 		Log::Error(LogType::Application, loadError.str());
 	}
 	return mMeshes[pName];

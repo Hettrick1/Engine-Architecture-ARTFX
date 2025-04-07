@@ -3,10 +3,11 @@
 #include "SpaceInvader.h"
 #include "BowlingOpenGl.h"
 #include "LVLDoom.h"
+#include "LVLAdvancedOpenGL.h"
 
 int main(int argc, char** argv) {
 
-	Game* pong = new Game("myGame", { new LVLDoom()});
+	Game* pong = new Game("myGame", { new LVLAdvancedOpenGl()});
 
 	return 0;
 }

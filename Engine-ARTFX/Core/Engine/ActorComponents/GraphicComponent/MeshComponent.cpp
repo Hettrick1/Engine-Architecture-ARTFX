@@ -32,8 +32,10 @@ void MeshComponent::Draw(Matrix4DRow viewProj)
 		mMesh->GetVao()->SetActive();
 		if (mMesh->GetShaderProgram().GetType() & (ShaderProgramType::TESSELLATION_CONTROL + ShaderProgramType::TESSELLATION_EVALUATION))
 		{
-			glPointSize(5.0f);
-			glDrawArrays(GL_PATCHES, 0, 3);
+			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+			glPointSize(10.0f);
+			glDrawArrays(GL_PATCHES, 0, mMesh->GetVao()->GetVerticeCount());
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		}
 		else
 		{

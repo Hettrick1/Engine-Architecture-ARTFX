@@ -14,6 +14,7 @@ class HudManager;
 struct HitResult;
 struct DebugLine;
 struct DebugBox;
+class DebugRenderer;
 
 class IRenderer 
 {
@@ -57,4 +58,6 @@ public:
 
 	virtual void SetHud(HudManager* pHud) {};
 	virtual inline HudManager* GetHud() const { return nullptr; };
+
+	virtual DebugRenderer* GetDebugRenderer() const { return nullptr; }
 };

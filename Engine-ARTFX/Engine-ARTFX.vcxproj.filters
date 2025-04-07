@@ -228,6 +228,12 @@
     <ClCompile Include="Game\Doom\AmoPickup.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Core\Scenes\Childs\LVLAdvancedOpenGL.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Engine\CoreActors\BasicCube.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Engine\DebugClasses\Log.h">
@@ -479,6 +485,12 @@
     <ClInclude Include="Game\Doom\AmoPickup.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Core\Scenes\Childs\LVLAdvancedOpenGL.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Engine\CoreActors\BasicCube.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Imports\Shaders\Simple.vert" />
@@ -489,5 +501,7 @@
     <None Include="Imports\Shaders\Debug.frag" />
     <None Include="Imports\Shaders\TextRenderer.vert" />
     <None Include="Imports\Shaders\TextRenderer.frag" />
+    <None Include="Imports\Shaders\Tesselation\BasicMesh.tcs" />
+    <None Include="Imports\Shaders\Tesselation\BasicMesh.tes" />
   </ItemGroup>
 </Project>
