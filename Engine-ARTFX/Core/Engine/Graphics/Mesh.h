@@ -28,13 +28,9 @@ public:
 	Texture* GetTexture(unsigned int pTextureIndex);
 	float* ToVerticeArray();
 
-	void SetTextureTiling(Vector2D pTextureTiling);
-	Vector2D GetTextureTiling() const { return mTextureTiling; }
-
 private:
 	std::vector<Texture*> mTextures;
 	std::vector<Vertex> mVertices;
 	VertexArray* mVao;
-	Vector2D mTextureTiling;
 };
 

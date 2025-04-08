@@ -17,10 +17,13 @@ public:
 
 	inline ShaderProgram& GetShaderProgram() { return mShaderProgram; }
 
+	void SetTiling(Vector2D pTiling);
+
 protected:
 	Mesh* mMesh;
 	Shader mVertexShader, mFragmentShader;
-	ShaderProgram mShaderProgram; 
+	ShaderProgram mShaderProgram;
+	Vector2D mTiling;
 	unsigned int mTextureIndex;
 };
 

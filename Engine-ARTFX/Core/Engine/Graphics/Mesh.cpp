@@ -15,7 +15,6 @@ Mesh::Mesh(std::vector<Vertex> pVertices)
 	Assets::LoadTexture(*(Scene::ActiveScene->GetRenderer()), "Imports/Sprites/planks.png", "cube");
 	mVao = new VertexArray(ToVerticeArray(), mVertices.size());
 	mTextures.emplace_back(&Assets::GetTexture("cube"));
-	mTextureTiling = Vector2D(1, 1);
 }
 
 Mesh::~Mesh()
@@ -59,9 +58,4 @@ float* Mesh::ToVerticeArray()
 		array[index + 7] = -mVertices[i].texCoord.y;
 	}
 	return array;
-}
-
-void Mesh::SetTextureTiling(Vector2D pTextureTiling)
-{
-	mTextureTiling = pTextureTiling;
 }

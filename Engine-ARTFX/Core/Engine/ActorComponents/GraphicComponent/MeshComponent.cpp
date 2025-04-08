@@ -6,7 +6,7 @@
 #include "Vertex.h"
 
 MeshComponent::MeshComponent(Actor* pOwner, Mesh* pMesh, ShaderProgram* pProgram)
-	: Component(pOwner), mMesh(pMesh), mTextureIndex(0)
+	: Component(pOwner), mMesh(pMesh), mTextureIndex(0), mTiling(1)
 {
 	mOwner->GetScene().GetRenderer()->AddMesh(this);
 	if (pProgram == nullptr)
@@ -32,7 +32,7 @@ void MeshComponent::Draw(Matrix4DRow viewProj)
 		mShaderProgram.Use();
 		mShaderProgram.setMatrix4Row("uViewProj", viewProj);
 		mShaderProgram.setMatrix4Row("uWorldTransform", wt);
-		mShaderProgram.setVector2f("uTiling", mMesh->GetTextureTiling());
+		mShaderProgram.setVector2f("uTiling", mTiling);
 		Texture* tex = mMesh->GetTexture(mTextureIndex);
 		if (tex)
 		{
@@ -64,4 +64,9 @@ void MeshComponent::SetTextureIndex(unsigned int pTextureIndex)
 void MeshComponent::SetShaderProgram(ShaderProgram pShaderProgram)
 {
 	mShaderProgram = pShaderProgram;
+}
+
+void MeshComponent::SetTiling(Vector2D pTiling)
+{
+	mTiling = pTiling;
 }

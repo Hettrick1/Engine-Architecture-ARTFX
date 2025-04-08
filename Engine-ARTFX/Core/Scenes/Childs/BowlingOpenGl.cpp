@@ -34,6 +34,7 @@ void BowlingOpenGl::Start(IRenderer* renderer)
 	ground->Start();  
 	ground->GetComponentOfType<RigidbodyComponent>()->SetMass(10000000); 
 	ground->GetComponentOfType<RigidbodyComponent>()->SetIsStatic(true);
+	ground->GetComponentOfType<MeshComponent>()->SetTiling(Vector2D(2, 1));
 
 	Cube* wall = new Cube();
 	AddActor(wall);
