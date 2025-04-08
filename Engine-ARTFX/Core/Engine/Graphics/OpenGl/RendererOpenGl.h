@@ -52,6 +52,10 @@ public:
 
 	RendererType GetType() const override { return IRenderer::RendererType::OPENGL; }
 	DebugRenderer* GetDebugRenderer() const override { return mDebugRenderer; }
+
+	void SetWireFrameMode(bool pWireframe) override;
+	inline bool GetWireFrame() const override { return mWireFrameMode; }
+
 private:
 	Window* mWindow;
 	VertexArray* mVAO;
@@ -66,4 +70,5 @@ private:
 	ShaderProgram mSpriteShaderProgramTemp;
 	HudManager* mHud;
 	DebugRenderer* mDebugRenderer;
+	bool mWireFrameMode;
 };

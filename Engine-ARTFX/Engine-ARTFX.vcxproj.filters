@@ -508,5 +508,11 @@
     <None Include="Imports\Shaders\Tesselation\Advanced.tes" />
     <None Include="Imports\Shaders\VertFrag\Advanced.vert" />
     <None Include="Imports\Shaders\VertFrag\Advanced.frag" />
+    <None Include="Imports\Shaders\Tesselation\Advanced.tesc" />
+    <None Include="Imports\Shaders\Tesselation\Advanced.tese" />
+    <None Include="Imports\Shaders\Tesselation\Quads.tesc" />
+    <None Include="Imports\Shaders\Tesselation\Quads.tese" />
+    <None Include="Imports\Shaders\VertFrag\Quads.frag" />
+    <None Include="Imports\Shaders\VertFrag\Quads.vert" />
   </ItemGroup>
 </Project>

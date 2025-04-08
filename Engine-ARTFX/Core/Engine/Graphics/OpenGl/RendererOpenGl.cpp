@@ -11,7 +11,7 @@
 #include "TextRenderer.h"
 
 RendererOpenGl::RendererOpenGl()
-	: mVAO(nullptr), mWindow(nullptr), mSpriteShaderProgram(nullptr), mHud(nullptr), mDebugRenderer(nullptr)
+	: mVAO(nullptr), mWindow(nullptr), mSpriteShaderProgram(nullptr), mHud(nullptr), mDebugRenderer(nullptr), mWireFrameMode(false)
 {
 }
 
@@ -173,6 +173,8 @@ void RendererOpenGl::DrawDebugLine(const Vector3D& start, const Vector3D& end, c
 
 void RendererOpenGl::DrawMeshes()
 {
+	int drawMethod = mWireFrameMode ? GL_LINE : GL_FILL;
+	glPolygonMode(GL_FRONT_AND_BACK, drawMethod);
 	glEnable(GL_DEPTH_TEST);
 	glDisable(GL_BLEND);
 	for (MeshComponent* m : mMeshes) 
@@ -239,4 +241,9 @@ void RendererOpenGl::SetSpriteShaderProgram(ShaderProgram& shaderProgram)
 void RendererOpenGl::SetHud(HudManager* pHud)
 {
 	mHud = pHud;
+}
+
+void RendererOpenGl::SetWireFrameMode(bool pWireframe)
+{
+	mWireFrameMode = pWireframe;
 }

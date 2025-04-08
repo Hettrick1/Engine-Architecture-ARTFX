@@ -305,6 +305,10 @@
     <None Include="Imports\Shaders\BasicMesh.vert" />
     <None Include="Imports\Shaders\Debug.frag" />
     <None Include="Imports\Shaders\Debug.vert" />
+    <None Include="Imports\Shaders\Tesselation\Advanced.tesc" />
+    <None Include="Imports\Shaders\Tesselation\Advanced.tese" />
+    <None Include="Imports\Shaders\Tesselation\Quads.tesc" />
+    <None Include="Imports\Shaders\Tesselation\Quads.tese" />
     <None Include="Imports\Shaders\VertFrag\Advanced.frag" />
     <None Include="Imports\Shaders\Simple.frag" />
     <None Include="Imports\Shaders\Simple.vert" />
@@ -313,6 +317,8 @@
     <None Include="Imports\Shaders\TextRenderer.vert" />
     <None Include="Imports\Shaders\TextRenderer.frag" />
     <None Include="Imports\Shaders\VertFrag\Advanced.vert" />
+    <None Include="Imports\Shaders\VertFrag\Quads.frag" />
+    <None Include="Imports\Shaders\VertFrag\Quads.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

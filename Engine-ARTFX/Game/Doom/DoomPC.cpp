@@ -9,6 +9,7 @@
 #include "CameraComponent.h"
 #include "FlipbookComponent.h"
 #include "DoomPlayer.h"
+#include "Scene.h"
 
 DoomPC::DoomPC(Actor* pOwner, int pUpdateOrder)
 	: Component(pOwner, pUpdateOrder), playerRbRef(nullptr)
@@ -17,6 +18,7 @@ DoomPC::DoomPC(Actor* pOwner, int pUpdateOrder)
 	inputManager.CreateNewAxis2DBinding(this, "Movement", SDLK_d, SDLK_a, SDLK_w, SDLK_s);
 	inputManager.CreateNewBooleanBtnBinding(this, "Shoot", SDL_BUTTON_LEFT);
 	inputManager.CreateNewBooleanKeyBinding(this, "ChangeWeapon", SDLK_TAB);
+	inputManager.CreateNewBooleanKeyBinding(this, "WireFrame", SDLK_F1);
 	inputManager.CreateNewAxis2DBinding(this, "Mouse");
 	if (playerRbRef == nullptr)
 	{
@@ -58,6 +60,17 @@ void DoomPC::OnActionStarted(InputActions* action)
 		if (Triggeredaction && Triggeredaction->GetName() == "ChangeWeapon")
 		{
 			mPlayerRef->ChangeWeapon();
+		}
+		if (Triggeredaction && Triggeredaction->GetName() == "WireFrame")
+		{
+			if (Scene::ActiveScene->GetRenderer()->GetWireFrame())
+			{
+				Scene::ActiveScene->GetRenderer()->SetWireFrameMode(false);
+			}
+			else
+			{
+				Scene::ActiveScene->GetRenderer()->SetWireFrameMode(true);
+			}
 		}
 	}
 }

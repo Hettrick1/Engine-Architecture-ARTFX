@@ -60,4 +60,7 @@ public:
 	virtual inline HudManager* GetHud() const { return nullptr; };
 
 	virtual DebugRenderer* GetDebugRenderer() const { return nullptr; }
+
+	virtual void SetWireFrameMode(bool pWireframe) { }
+	virtual inline bool GetWireFrame() const { return false; }
 };

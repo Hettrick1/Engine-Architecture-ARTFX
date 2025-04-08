@@ -17,7 +17,7 @@ BasicCube::~BasicCube()
 void BasicCube::Start()
 {
 	Actor::Start();
-	Texture* tex = Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/day.png", "day");
+	Texture* tex = Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/day.png", "LakeSkyTexture");
 	Mesh* mesh = Assets::LoadMesh("Imports/Meshes/cube.obj", "cube");
 	mesh->AddTexture(tex);
 	MeshComponent* meshComp = new MeshComponent(this, mesh, mShaderProgram);
