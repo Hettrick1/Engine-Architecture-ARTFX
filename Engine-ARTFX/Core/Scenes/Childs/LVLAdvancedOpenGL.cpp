@@ -30,7 +30,7 @@ void LVLAdvancedOpenGl::Start(IRenderer* renderer)
 
 	ShaderProgram* shaderProg = new ShaderProgram();
 	shaderProg->Compose({ &vert, &tcs, &tes, &frag });
-	BasicCube* cube = new BasicCube(Vector3D(-2, 0, 0), 1, Quaternion(0, 0, 0, 1), shaderProg);
+	BasicCube* cube = new BasicCube(Vector3D(-2, 0, -1), 3, Quaternion(0, 0, 0, 1), shaderProg);
 	AddActor(cube);
 	cube->Start();
 	DoomPlayer* player = new DoomPlayer();
