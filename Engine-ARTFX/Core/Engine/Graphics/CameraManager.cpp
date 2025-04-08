@@ -35,7 +35,7 @@ void CameraManager::RemoveCamera(CameraComponent* pCameraToRemove)
 
 void CameraManager::UpdateCurrentCamera()
 {
-	mActiveCamera->Update();
+	mActiveCamera->UpdateCam();
 }
 
 void CameraManager::SetCurrentCamera(int pIndex)

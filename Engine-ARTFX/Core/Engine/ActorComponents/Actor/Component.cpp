@@ -84,6 +84,10 @@ void Component::ComputeRelativeTransform()
         mRelativeTransform *= Matrix4DRow::CreateFromQuaternion(mRelativeRotation);
         mRelativeTransform *= Matrix4DRow::CreateTranslation(mRelativePosition);
     }
+    else
+    {
+        mRelativeTransform = Matrix4DRow::Identity;
+    }
 }
 
 Actor* Component::GetOwner()

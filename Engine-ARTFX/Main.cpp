@@ -7,7 +7,7 @@
 
 int main(int argc, char** argv) {
 
-	Game* pong = new Game("myGame", { new LVLAdvancedOpenGl()});
+	Game* pong = new Game("myGame", { new BowlingOpenGl()});
 
 	return 0;
 }

@@ -7,7 +7,7 @@
 #include "Scene.h"
 
 CameraComponent::CameraComponent(Actor* pOwner, int updateOder)
-    : Component(pOwner, updateOder), mViewMatrix(Matrix4DRow::Identity)
+    : Component(pOwner, updateOder)
 {
 	CameraManager::Instance().AddCamera(this);
 }
@@ -16,15 +16,38 @@ CameraComponent::~CameraComponent()
 {
 }
 
-void CameraComponent::Update()
+Matrix4DRow CameraComponent::GetWorldTransform()
+{
+    if (mOwner)
+    {
+        return mRelativeTransform * mOwner->GetTransformComponent().GetWorldTransform();
+    }
+    return mRelativeTransform;
+}
+
+void CameraComponent::ComputeRelativeTransform()
+{
+    if (mOwner)
+    {
+        mRelativeTransform = Matrix4DRow::CreateScale(mRelativeSize);
+        mRelativeTransform *= Matrix4DRow::CreateFromQuaternion(mRelativeRotation);
+        mRelativeTransform *= Matrix4DRow::CreateTranslation(mRelativePosition);
+    }
+    else
+    {
+        mRelativeTransform = Matrix4DRow::Identity;
+    }
+}
+
+void CameraComponent::UpdateCam()
 {
     Matrix4DRow worldTransform = GetWorldTransform();
-    Vector3D camPosition = worldTransform.GetTranslation();
+    Vector3D camPosition = mOwner->GetTransformComponent().GetPosition() + GetRelativePosition();
     Vector3D forward = worldTransform.GetYAxis();
     Vector3D target = camPosition + forward * 400.0f;
-    Vector3D up = worldTransform.GetZAxis(); // Récupère le vrai "up"
+    Vector3D up = worldTransform.GetZAxis(); 
 
-    mViewMatrix = Matrix4DRow::CreateLookAt(camPosition, target, up);
-    mOwner->GetScene().GetRenderer()->SetViewMatrix(mViewMatrix);
+    Matrix4DRow view = Matrix4DRow::CreateLookAt(camPosition, target, up);
+    mOwner->GetScene().GetRenderer()->SetViewMatrix(view);
 }
 

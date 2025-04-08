@@ -12,10 +12,9 @@ public:
 	CameraComponent(Actor* pOwner, int updateOder = 0);
 	~CameraComponent();
 
-	void Update();
+	Matrix4DRow GetWorldTransform();
+	void ComputeRelativeTransform();
 
-	inline Matrix4DRow GetViewMatrix() const { return mViewMatrix; }
-private :
-	Matrix4DRow mViewMatrix;
+	void UpdateCam();
 };
 
