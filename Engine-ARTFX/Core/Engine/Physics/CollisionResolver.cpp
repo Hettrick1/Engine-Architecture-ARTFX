@@ -298,13 +298,13 @@ void CollisionResolver::ResolvePenetration(Actor* actorA, Actor* actorB, Vector3
 	}
 	depth *= 1.1f;
 
-	if (!isStaticA) {
+	if (!isStaticA && rbA) {
 		Vector3D movement = normal * (-depth * (1.0f - percentA));
 		Vector3D newPos = actorA->GetTransformComponent().GetPosition() + movement;
 		actorA->SetPosition(newPos);
 	}
 
-	if (!isStaticB) {
+	if (!isStaticB && rbB) {
 		Vector3D movement = normal * (depth * (1.0f - percentB));
 		Vector3D newPos = actorB->GetTransformComponent().GetPosition() + movement;
 		actorB->SetPosition(newPos);

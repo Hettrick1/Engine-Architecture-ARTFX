@@ -52,9 +52,9 @@ void PhysicManager::RemoveCollider(Actor* pOwner, ColliderComponent* pCollider)
     mCollisionManager->RemoveCollider(pOwner, pCollider);
 }
 
-bool PhysicManager::LineTrace(const Vector3D& start, const Vector3D& end, HitResult& outHit)
+bool PhysicManager::LineTrace(const Vector3D& start, const Vector3D& end, HitResult& outHit, Actor* ignoreActor)
 {
-    return mCollisionManager->LineTrace(start, end, outHit);
+    return mCollisionManager->LineTrace(start, end, outHit, ignoreActor);
 }
 
 void PhysicManager::RegisterRigidBody(Actor* pOwner, RigidbodyComponent* pRigidbody)

@@ -25,7 +25,7 @@ public:
     void CheckCollisions();
     void CalculateNormal(ColliderComponent* collider1, ColliderComponent* collider2);
 
-    bool LineTrace(const Vector3D& start, const Vector3D& end, HitResult& outHit);
+    bool LineTrace(const Vector3D& start, const Vector3D& end, HitResult& outHit, Actor* ignoreActor);
 private:
     std::unordered_map<Actor*, std::vector<ColliderComponent*>> mColliders;
     std::unordered_map<ColliderComponent*, std::unordered_set<ColliderComponent*>> mCurrentCollisions;

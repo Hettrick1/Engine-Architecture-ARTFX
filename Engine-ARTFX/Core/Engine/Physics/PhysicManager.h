@@ -23,7 +23,7 @@ public:
 public: // collision manager
 	void RegisterCollider(Actor* pOwner, ColliderComponent* pCollider);
 	void RemoveCollider(Actor* pOwner, ColliderComponent* pCollider);
-	bool LineTrace(const Vector3D& start, const Vector3D& end, HitResult& outHit);
+	bool LineTrace(const Vector3D& start, const Vector3D& end, HitResult& outHit, Actor* ignoreActor);
 
 public: // collision resolver
 	void RegisterRigidBody(Actor* pOwner, RigidbodyComponent* pRigidbody);

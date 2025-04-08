@@ -202,7 +202,7 @@ void CollisionManager::CalculateNormal(ColliderComponent* collider1, ColliderCom
     mCollisionDepth = minOverlap;
 }
 
-bool CollisionManager::LineTrace(const Vector3D& start, const Vector3D& end, HitResult& outHit)
+bool CollisionManager::LineTrace(const Vector3D& start, const Vector3D& end, HitResult& outHit, Actor* ignoreActor)
 {
     bool bHasHit = false;
     float closestHit = FLT_MAX;
@@ -213,6 +213,10 @@ bool CollisionManager::LineTrace(const Vector3D& start, const Vector3D& end, Hit
         for (auto* collider : pair.second)
         {
             if (!collider) continue;
+            if (collider->GetOwner() == ignoreActor)
+            {
+                continue;
+            }
 
             AABB aabb = collider->GetAABB();
             float hitDistance;
