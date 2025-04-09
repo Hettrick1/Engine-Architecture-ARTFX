@@ -139,8 +139,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Core\Engine\CoreActors\BasicCube.cpp" />
+    <ClCompile Include="Core\Engine\CoreActors\SkySphere.cpp" />
+    <ClCompile Include="Core\Engine\CoreComponents\SkySphereComponent.cpp" />
     <ClCompile Include="Core\Engine\DebugClasses\DebugRenderer.cpp" />
     <ClCompile Include="Core\Engine\Graphics\CameraManager.cpp" />
+    <ClCompile Include="Core\Engine\Graphics\OpenGl\CubeTextureMap.cpp" />
     <ClCompile Include="Core\Engine\Physics\AABB.cpp" />
     <ClCompile Include="Core\Scenes\Childs\LVLAdvancedOpenGL.cpp" />
     <ClCompile Include="Game\Doom\AmoPickup.cpp" />
@@ -214,9 +217,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Engine\CoreActors\BasicCube.h" />
+    <ClInclude Include="Core\Engine\CoreActors\SkySphere.h" />
+    <ClInclude Include="Core\Engine\CoreComponents\SkySphereComponent.h" />
     <ClInclude Include="Core\Engine\DebugClasses\DebugRenderer.h" />
     <ClInclude Include="Core\Engine\Graphics\CameraManager.h" />
     <ClInclude Include="Core\Engine\Graphics\Hud\TextAlignementEnum.h" />
+    <ClInclude Include="Core\Engine\Graphics\OpenGl\CubeTextureMap.h" />
     <ClInclude Include="Core\Engine\Graphics\OpenGl\Shaders\ShaderProgrammType.h" />
     <ClInclude Include="Core\Engine\Physics\AABB.h" />
     <ClInclude Include="Core\Engine\DebugClasses\DebugLine.h" />
@@ -307,6 +313,8 @@
     <None Include="Imports\Shaders\Debug.vert" />
     <None Include="Imports\Shaders\Tesselation\Advanced.tesc" />
     <None Include="Imports\Shaders\Tesselation\Advanced.tese" />
+    <None Include="Imports\Shaders\Tesselation\CubeToSphere.tesc" />
+    <None Include="Imports\Shaders\Tesselation\CubeToSphere.tese" />
     <None Include="Imports\Shaders\Tesselation\Quads.tesc" />
     <None Include="Imports\Shaders\Tesselation\Quads.tese" />
     <None Include="Imports\Shaders\VertFrag\Advanced.frag" />
@@ -317,8 +325,12 @@
     <None Include="Imports\Shaders\TextRenderer.vert" />
     <None Include="Imports\Shaders\TextRenderer.frag" />
     <None Include="Imports\Shaders\VertFrag\Advanced.vert" />
+    <None Include="Imports\Shaders\VertFrag\CubeToSphere.frag" />
+    <None Include="Imports\Shaders\VertFrag\CubeToSphere.vert" />
     <None Include="Imports\Shaders\VertFrag\Quads.frag" />
     <None Include="Imports\Shaders\VertFrag\Quads.vert" />
+    <None Include="Imports\Shaders\VertFrag\SkySphere.frag" />
+    <None Include="Imports\Shaders\VertFrag\SkySphere.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

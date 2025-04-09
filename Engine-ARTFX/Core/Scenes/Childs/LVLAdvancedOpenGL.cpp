@@ -4,6 +4,9 @@
 #include "Shaders/ShaderProgram.h"
 #include "Doom/DoomPlayer.h"
 #include "TestOpenGl/Cube.h"
+#include "MeshComponent.h"
+#include "TestOpenGl/Sphere.h"
+#include "CoreActors/SkySphere.h"
 
 LVLAdvancedOpenGl::LVLAdvancedOpenGl()
 	: Scene()
@@ -17,6 +20,9 @@ LVLAdvancedOpenGl::~LVLAdvancedOpenGl()
 void LVLAdvancedOpenGl::Start(IRenderer* renderer)
 {
 	Scene::Start(renderer);
+	SkySphere* skySphere = new SkySphere();
+	skySphere->Start();
+	AddActor(skySphere);
 	Scene::ActiveScene->GetRenderer()->GetDebugRenderer()->SetDrawBoxes(false);
 
 	Shader vert, frag, tcs, tes = Shader();
@@ -31,6 +37,10 @@ void LVLAdvancedOpenGl::Start(IRenderer* renderer)
 	BasicCube* cube = new BasicCube(Vector3D(-3, 0, -1), 3, Quaternion(0, 0, 0, 1), shaderProg);
 	AddActor(cube);
 	cube->Start();
+
+	Sphere* sphere = new Sphere(Vector3D(20, 0, -1), 3, Quaternion(0, 0, 0, 1)); 
+	sphere->Start();
+	//sphere->GetComponentOfType<MeshComponent>()->SetShaderProgram(*shaderProg); 
 
 	vert.Load("VertFrag/CubeToSphere.vert", ShaderType::VERTEX);
 	frag.Load("VertFrag/CubeToSphere.frag", ShaderType::FRAGMENT);

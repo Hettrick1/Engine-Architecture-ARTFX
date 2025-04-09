@@ -22,6 +22,9 @@ public:
 	void AddSprite(SpriteComponent* pSprite) override;
 	void RemoveSprite(SpriteComponent* pSprite) override;
 
+	void AddSkySphere(SkySphereComponent* pSkySphere) override;
+	void RemoveSkySphere() override;
+
 	RendererType GetType() const override { return IRenderer::RendererType::SDL; }
 
 	void DrawRect(Rectangle& rRect);

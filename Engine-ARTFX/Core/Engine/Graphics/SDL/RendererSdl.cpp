@@ -68,6 +68,14 @@ void RendererSdl::RemoveSprite(SpriteComponent* pSprite)
     mSprites.erase(sc);
 }
 
+void RendererSdl::AddSkySphere(SkySphereComponent* pSkySphere)
+{
+}
+
+void RendererSdl::RemoveSkySphere()
+{
+}
+
 void RendererSdl::DrawRect(Rectangle& rRect)
 {
     SDL_SetRenderDrawColor(mSdlRenderer, 255, 255, 255, 255);

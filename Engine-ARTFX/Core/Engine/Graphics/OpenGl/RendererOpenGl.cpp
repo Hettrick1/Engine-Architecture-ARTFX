@@ -11,7 +11,7 @@
 #include "TextRenderer.h"
 
 RendererOpenGl::RendererOpenGl()
-	: mVAO(nullptr), mWindow(nullptr), mSpriteShaderProgram(nullptr), mHud(nullptr), mDebugRenderer(nullptr), mWireFrameMode(false)
+	: mVAO(nullptr), mWindow(nullptr), mSpriteShaderProgram(nullptr), mHud(nullptr), mDebugRenderer(nullptr), mWireFrameMode(false), mSkySphereComponent(nullptr)
 {
 }
 
@@ -84,6 +84,7 @@ void RendererOpenGl::BeginDraw()
 
 void RendererOpenGl::Draw()
 {
+	DrawSkySphere();
 	DrawMeshes();
 	mDebugRenderer->Draw(*this);
 	DrawSprites();
@@ -134,6 +135,19 @@ void RendererOpenGl::RemoveMesh(MeshComponent* pMesh)
 	mMeshes.erase(sc); 
 }
 
+void RendererOpenGl::AddSkySphere(SkySphereComponent* pSkySphere)
+{
+	if (mSkySphereComponent != nullptr) {
+		Log::Info("You had already a skysphere, the old one has been replaced");
+	}
+	mSkySphereComponent = pSkySphere;
+}
+
+void RendererOpenGl::RemoveSkySphere()
+{
+	mSkySphereComponent = nullptr;
+}
+
 void RendererOpenGl::AddDebugCollider(ColliderComponent* pCol)
 {
 	mDebugRenderer->AddDebugCollider(pCol);
@@ -169,6 +183,25 @@ void RendererOpenGl::DrawDebugBox(Vector3D& pMin, Vector3D& pMax, Matrix4DRow pW
 void RendererOpenGl::DrawDebugLine(const Vector3D& start, const Vector3D& end, const HitResult& hit)
 {
 	mDebugRenderer->DrawDebugLine(start, end, hit);
+}
+
+void RendererOpenGl::DrawSkySphere()
+{
+	if (mSkySphereComponent != nullptr) {
+		glEnable(GL_DEPTH_TEST);
+		glDepthMask(GL_FALSE);
+		mSkySphereComponent->GetShaderProgram().Use();
+		mSkySphereComponent->GetShaderProgram().setMatrix4Row("uWorld", Matrix4DRow::Identity);
+
+		Matrix4DRow skyView = Matrix4DRow::DeleteTranslation(mView);
+		mSkySphereComponent->GetShaderProgram().setMatrix4Row("uViewProj", skyView * mProj);
+		mSkySphereComponent->GetVao()->SetActive();
+		glBindTexture(mSkySphereComponent->GetTextureType(), mSkySphereComponent->GetTextureIndex());
+		GLenum drawMode = mSkySphereComponent->GetTextureType() == GL_TEXTURE_2D ? GL_TRIANGLES : GL_PATCHES;
+		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		glDrawArrays(drawMode, 0, mSkySphereComponent->GetVao()->GetVerticeCount());
+		glDepthMask(GL_TRUE);
+	}
 }
 
 void RendererOpenGl::DrawMeshes()

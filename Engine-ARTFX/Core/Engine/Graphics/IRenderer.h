@@ -15,6 +15,7 @@ struct HitResult;
 struct DebugLine;
 struct DebugBox;
 class DebugRenderer;
+class SkySphereComponent;
 
 class IRenderer 
 {
@@ -43,6 +44,9 @@ public:
 
 	virtual void AddMesh(MeshComponent* pMesh) = 0;
 	virtual void RemoveMesh(MeshComponent* pMesh) = 0;
+
+	virtual void AddSkySphere(SkySphereComponent* pSkySphere) = 0;
+	virtual void RemoveSkySphere() = 0;
 
 	virtual void AddDebugCollider(ColliderComponent* pCol) {} // DEBUG PURPOSE ONLY
 	virtual void AddDebugLine(DebugLine* pLine) {} // DEBUG PURPOSE ONLY

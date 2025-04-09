@@ -234,6 +234,15 @@
     <ClCompile Include="Core\Engine\CoreActors\BasicCube.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Core\Engine\CoreActors\SkySphere.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Engine\CoreComponents\SkySphereComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Engine\Graphics\OpenGl\CubeTextureMap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Engine\DebugClasses\Log.h">
@@ -494,6 +503,15 @@
     <ClInclude Include="Core\Engine\Graphics\OpenGl\Shaders\ShaderProgrammType.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Core\Engine\CoreActors\SkySphere.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Engine\CoreComponents\SkySphereComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Engine\Graphics\OpenGl\CubeTextureMap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Imports\Shaders\Simple.vert" />
@@ -514,5 +532,11 @@
     <None Include="Imports\Shaders\Tesselation\Quads.tese" />
     <None Include="Imports\Shaders\VertFrag\Quads.frag" />
     <None Include="Imports\Shaders\VertFrag\Quads.vert" />
+    <None Include="Imports\Shaders\VertFrag\SkySphere.vert" />
+    <None Include="Imports\Shaders\VertFrag\SkySphere.frag" />
+    <None Include="Imports\Shaders\VertFrag\CubeToSphere.vert" />
+    <None Include="Imports\Shaders\VertFrag\CubeToSphere.frag" />
+    <None Include="Imports\Shaders\Tesselation\CubeToSphere.tese" />
+    <None Include="Imports\Shaders\Tesselation\CubeToSphere.tesc" />
   </ItemGroup>
 </Project>

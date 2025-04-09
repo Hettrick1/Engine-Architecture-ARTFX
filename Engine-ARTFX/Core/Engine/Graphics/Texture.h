@@ -22,7 +22,8 @@ public:
 	void OverrideTextureSize(int pWidth, int pHeight);
 	Vector3D GetTextureSize();
 	SDL_Texture* GetSdlTexture() const { return mSdlTexture; }
-
+	inline unsigned int& GetId() { return mTextureId; }
+ 
 private:
 	std::string mFilePath;
 	SDL_Texture* mSdlTexture;

@@ -204,6 +204,18 @@ public:
 		return retVal;
 	}
 
+	static Matrix4DRow DeleteTranslation(Matrix4DRow& matrix) 
+	{
+		float temp[4][4] =
+		{
+			{ matrix.mat[0][0], matrix.mat[0][1], matrix.mat[0][2], matrix.mat[0][3]},
+			{ matrix.mat[1][0], matrix.mat[1][1], matrix.mat[1][2], matrix.mat[1][3]},
+			{ matrix.mat[2][0], matrix.mat[2][1], matrix.mat[2][2], matrix.mat[2][3]},
+			{ 0.0f, 0.0f, 0.0f, 1.0f }
+		};
+		return Matrix4DRow(temp);
+	}
+
 	static Matrix4DRow CreateScale(float xScale, float yScale, float zScale)
 	{
 		float temp[4][4] =

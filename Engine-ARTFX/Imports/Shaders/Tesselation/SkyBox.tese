@@ -2,20 +2,19 @@
 
 layout(triangles, equal_spacing, cw) in;
 
-uniform float uTimer;
-uniform mat4 uWorldTransform;
+uniform mat4 uWorld;
 uniform mat4 uViewProj;
 
 in TESC_OUT{
    vec4 color;
    vec3 normal;
-   vec2 texCoord;
+   vec3 texCoord;
 
 } tese_in[];
 out TESE_OUT{
    vec4 color;
    vec3 normal;
-   vec2 texCoord;
+   vec3 texCoord;
 
 } tese_out;
 
@@ -48,8 +47,8 @@ void main(void)
    gl_Position = pos;
    tese_out.normal = interpolate3D(tese_in[0].normal, tese_in[1].normal, tese_in[2].normal);
 
-   gl_Position *= uWorldTransform * uViewProj;
+   gl_Position *= uWorld * uViewProj;
 
    tese_out.color = mix(tese_in[0].color, tese_in[1].color, gl_TessCoord.x);
-   tese_out.texCoord = interpolate2D(tese_in[0].texCoord, tese_in[1].texCoord, tese_in[2].texCoord);
+   tese_out.texCoord = interpolate3D(tese_in[0].texCoord, tese_in[1].texCoord, tese_in[2].texCoord);
 }

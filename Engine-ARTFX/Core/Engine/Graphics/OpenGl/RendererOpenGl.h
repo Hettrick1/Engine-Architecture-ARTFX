@@ -7,6 +7,7 @@
 #include "IRenderer.h"
 #include <vector>
 #include "DebugRenderer.h"
+#include "SkySphereComponent.h"
 
 class Actor;
 class Texture;
@@ -31,6 +32,9 @@ public:
 	void AddMesh(MeshComponent* pMesh) override;
 	void RemoveMesh(MeshComponent* pMesh) override;
 
+	void AddSkySphere(SkySphereComponent* pSkySphere) override;
+	void RemoveSkySphere() override;
+
 	void AddDebugCollider(ColliderComponent* pCol) override;
 	void AddDebugLine(DebugLine* pLine) override;
 
@@ -40,6 +44,7 @@ public:
 	void DrawDebugBox(Vector3D& pMin, Vector3D& pMax, Matrix4DRow pWorldTransform) override;
 	void DrawDebugLine(const Vector3D& start, const Vector3D& end, const HitResult& hit) override;
 
+	void DrawSkySphere();
 	void DrawMeshes();
 	void DrawSprites();
 	void DrawHud();
@@ -71,4 +76,5 @@ private:
 	HudManager* mHud;
 	DebugRenderer* mDebugRenderer;
 	bool mWireFrameMode;
+	SkySphereComponent* mSkySphereComponent;
 };

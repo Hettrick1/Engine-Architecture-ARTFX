@@ -18,11 +18,11 @@ Sphere::~Sphere()
 void Sphere::Start()
 {
 	Actor::Start();
-	Texture* tex = Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/ball.jpg", "sphere");
+	Texture* tex = Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/LakeSkyTexture.png", "sphere");
 	Mesh* mesh = Assets::LoadMesh("Imports/Meshes/sphere.obj", "sphere");
 	mesh->AddTexture(tex);
 	MeshComponent* meshComp = new MeshComponent(this, mesh);
-	meshComp->SetTextureIndex(2);
+	meshComp->SetTextureIndex(1);
 	AddComponent(meshComp);
 	RigidbodyComponent* rb = new RigidbodyComponent(this);
 	AddComponent(rb);
