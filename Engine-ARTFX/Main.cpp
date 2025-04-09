@@ -4,10 +4,11 @@
 #include "BowlingOpenGl.h"
 #include "LVLDoom.h"
 #include "LVLAdvancedOpenGL.h"
+#include "SplashScreen.h"
 
 int main(int argc, char** argv) {
 
-	Game* pong = new Game("myGame", { new LVLAdvancedOpenGl()});
+	Game* pong = new Game("myGame", { new SplashScreen()});
 
 	return 0;
 }

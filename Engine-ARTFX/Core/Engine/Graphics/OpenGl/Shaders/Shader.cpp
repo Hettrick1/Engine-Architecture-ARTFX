@@ -27,7 +27,7 @@ void Shader::Load(std::string pFileName, ShaderType pShaderType)
 	myFile.open(SHADER_PATH + pFileName);
 	if (myFile.fail())
 	{
-		Log::Error(LogType::Video, "Error - Failed to open" + pFileName);
+		Log::Info("Error - Failed to open" + pFileName);
 
 	}
 	std::string fileText = "";

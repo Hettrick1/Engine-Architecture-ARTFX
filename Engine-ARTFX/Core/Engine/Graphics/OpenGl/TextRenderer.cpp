@@ -6,6 +6,7 @@
 #include "Log.h"
 #include <iostream>
 #include <string>
+#include "Timer.h"
 
 TextRenderer& TextRenderer::Instance()
 {
@@ -15,84 +16,13 @@ TextRenderer& TextRenderer::Instance()
 
 bool TextRenderer::Init(Window& pWindow)
 {
+    mWindow = &pWindow;
     mVertexShader.Load("TextRenderer.vert", ShaderType::VERTEX);
     mFragmentShader.Load("TextRenderer.frag", ShaderType::FRAGMENT);
     mShaderProgram.Compose({ &mVertexShader, &mFragmentShader });
-    Matrix4DRow projection = Matrix4DRow::CreateOrtho(static_cast<float>(pWindow.GetDimensions().x), static_cast<float>(pWindow.GetDimensions().y), 0.000001f, 100000);
+    mProjection = Matrix4DRow::CreateOrtho(static_cast<float>(pWindow.GetDimensions().x), static_cast<float>(pWindow.GetDimensions().y), 0.000001f, 100000);
     mShaderProgram.Use();
-    mShaderProgram.setMatrix4Row("projection", projection);
-
-    FT_Library ft;
-    if (FT_Init_FreeType(&ft))
-    {
-        Log::Error(LogType::Render, "ERROR::FREETYPE: Could not init FreeType Library");
-        return false;
-    }
-
-    std::string font_name = "Imports/Fonts/RoadPixel.ttf";
-    if (font_name.empty())
-    {
-        std::cout << "ERROR::FREETYPE: Failed to load font_name" << std::endl;
-        return false;
-    }
-
-    FT_Face face;
-    if (FT_New_Face(ft, font_name.c_str(), 0, &face))
-    {
-        Log::Error(LogType::Render, "ERROR::FREETYPE: Failed to load font");
-        return false;
-    }
-    else {
-        // set size to load glyphs as
-        FT_Set_Pixel_Sizes(face, 0, 128);
-
-        // disable byte-alignment restriction
-        glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-
-        // load first 128 characters of ASCII set
-        for (unsigned char c = 0; c < 128; c++)
-        {
-            // Load character glyph 
-            if (FT_Load_Char(face, c, FT_LOAD_RENDER))
-            {
-                Log::Error(LogType::Render, "ERROR::FREETYTPE: Failed to load Glyph");
-                continue;
-            }
-            // generate texture
-            unsigned int texture;
-            glGenTextures(1, &texture);
-            glBindTexture(GL_TEXTURE_2D, texture);
-            glTexImage2D(
-                GL_TEXTURE_2D,
-                0,
-                GL_RED,
-                face->glyph->bitmap.width,
-                face->glyph->bitmap.rows,
-                0,
-                GL_RED,
-                GL_UNSIGNED_BYTE,
-                face->glyph->bitmap.buffer
-            );
-            // set texture options
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-            // now store character for later use
-            Character character = {
-                texture,
-                Vector2D(static_cast<float>(face->glyph->bitmap.width), static_cast<float>(face->glyph->bitmap.rows)),
-                Vector2D(static_cast<float>(face->glyph->bitmap_left), static_cast<float>(face->glyph->bitmap_top)),
-                static_cast<unsigned int>(face->glyph->advance.x)
-            };
-            mCharacters.insert(std::pair<char, Character>(c, character));
-        }
-        glBindTexture(GL_TEXTURE_2D, 0);
-    }
-    // destroy FreeType once we're finished
-    FT_Done_Face(face);
-    FT_Done_FreeType(ft);
-
+    mShaderProgram.setMatrix4Row("projection", mProjection);
 
     // configure VAO/VBO for texture quads
     glGenVertexArrays(1, &VAO);
@@ -109,9 +39,11 @@ bool TextRenderer::Init(Window& pWindow)
     return true;
 }
 
-void TextRenderer::RenderText(std::string text, float x, float y, float scale, Vector3D color, TextAlignment alignment)
+void TextRenderer::RenderText(std::string text, float x, float y, float scale, Vector4D color, Font pFont ,TextAlignment alignment, ShaderProgram* pShaderProgram)
 {
-    float textWidth = ComputeTextWidth(text, scale);
+    float textWidth = ComputeTextWidth(text, scale, pFont);
+
+    ShaderProgram* shaderProgram = pShaderProgram == nullptr ? &mShaderProgram : pShaderProgram;
 
     if (alignment == TextAlignment::CENTER)
     {
@@ -123,8 +55,12 @@ void TextRenderer::RenderText(std::string text, float x, float y, float scale, V
     }
 
     // activate corresponding render state	
-    mShaderProgram.Use();
-    mShaderProgram.setVector3f("textColor", color);
+    shaderProgram->Use();
+    shaderProgram->setMatrix4Row("projection", mProjection);
+    shaderProgram->setVector4f("textColor", color);
+    shaderProgram->setFloat("time", SDL_GetTicks());
+    shaderProgram->setFloat("screenWidth", mWindow->GetDimensions().x);
+    shaderProgram->setFloat("screenHeight", mWindow->GetDimensions().y);
     glActiveTexture(GL_TEXTURE0); 
     glBindVertexArray(VAO); 
 
@@ -132,7 +68,7 @@ void TextRenderer::RenderText(std::string text, float x, float y, float scale, V
     std::string::const_iterator c;
     for (c = text.begin(); c != text.end(); c++)
     {
-        Character ch = mCharacters[*c];
+        Character ch = pFont.GetCharacters()[*c];
 
         float xpos = x + ch.Bearing.x * scale;
         float ypos = y - (ch.Size.y - ch.Bearing.y) * scale;
@@ -165,14 +101,14 @@ void TextRenderer::RenderText(std::string text, float x, float y, float scale, V
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-float TextRenderer::ComputeTextWidth(const std::string& text, float scale)
+float TextRenderer::ComputeTextWidth(const std::string& text, float scale, Font pFont)
 {
     float width = 0.0f;
     for (char c : text)
     {
-        if (mCharacters.find(c) != mCharacters.end())
+        if (pFont.GetCharacters().find(c) != pFont.GetCharacters().end())
         {
-            width += (mCharacters[c].Advance >> 6) * scale;  // Convertit 1/64 pixels en pixels
+            width += (pFont.GetCharacters()[c].Advance >> 6) * scale;  // Convertit 1/64 pixels en pixels
         }
     }
     return width;

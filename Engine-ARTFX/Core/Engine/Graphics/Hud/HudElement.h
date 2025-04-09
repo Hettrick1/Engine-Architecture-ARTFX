@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Vector2D.h"
+#include "Vector4D.h"
 #include "RendererOpenGl.h"
 
 class HudElement

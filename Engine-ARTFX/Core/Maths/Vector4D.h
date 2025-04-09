@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Vector3D.h"
+
 class Vector4D
 {
     friend class Matrix4D;
@@ -10,11 +12,14 @@ public:
 	float z;
 	float w;
 
+	Vector3D xyz;
+
 	Vector4D()
 		:x(0.0f)
 		,y(0.0f)
 		,z(0.0f)
 		,w(0.0f)
+		,xyz(Vector3D(0,0,0))
 	{}
 
 	explicit Vector4D(float inX, float inY, float inZ, float inW)
@@ -22,13 +27,23 @@ public:
 		,y(inY)
 		,z(inZ)
 		,w(inW)
+		, xyz(Vector3D(inX, inY, inZ))
 	{}
 	explicit Vector4D(float in)
 		:x(in)
 		, y(in)
 		, z(in)
 		, w(in)
+		, xyz(Vector3D(in, in, in))
 	{}
+	explicit Vector4D(Vector3D in, float x = 1.0f)
+		:x(in.x)
+		, y(in.y)
+		, z(in.z)
+		, w(x)
+		, xyz(Vector3D(in.x, in.y, in.z))
+	{
+	}
 
 	float LengthSqr() const;
 	float Length() const;

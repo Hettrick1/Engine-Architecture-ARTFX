@@ -6,6 +6,7 @@
 #include "MeshLoader/tiny_obj_loader.h"
 
 std::map<std::string, Texture> Assets::mTextures = {};
+std::map<std::string, Font> Assets::mFonts = {};
 std::map<std::string, Mesh*> Assets::mMeshes = {};
 
 Texture* Assets::LoadTexture(IRenderer& pRenderer, const std::string& pFilePath, const std::string& pName)
@@ -44,6 +45,25 @@ Mesh* Assets::GetMesh(const std::string& pName)
 		Log::Error(LogType::Application, loadError.str());
 	}
 	return mMeshes[pName];
+}
+
+Font* Assets::LoadFont(const std::string& pFilePath, const std::string& pName)
+{
+	if (mFonts.find(pName) == mFonts.end()) {
+		mFonts[pName] = LoadFontFromFile(pFilePath);
+		return &mFonts[pName];
+	}
+	return &mFonts[pName];
+}
+
+Font& Assets::GetFont(const std::string& pName)
+{
+	if (mFonts.find(pName) == mFonts.end()) {
+		std::ostringstream loadError;
+		loadError << "Font " << pName << " does not exists in assets manager\n";
+		Log::Error(LogType::Application, loadError.str());
+	}
+	return mFonts[pName];
 }
 
 void Assets::Clear()
@@ -108,4 +128,11 @@ Mesh* Assets::LoadMeshFromFile(const std::string& pFilePath)
 
 	}
 	return new Mesh(vertices);
+}
+
+Font Assets::LoadFontFromFile(const std::string& pFilePath)
+{
+	Font font;
+	font.Load(pFilePath);
+	return font;
 }

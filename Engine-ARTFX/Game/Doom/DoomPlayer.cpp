@@ -75,10 +75,10 @@ void DoomPlayer::Start()
 	mGun->SetAnimationFps(8);
 	mGun->SetCullOff(true);
 	 
-	mFpsText = new HudText("AAAAAAAAA", -1900, 1000, 0.5f, Vector3D(1, 0, 1));
-	mGunAmoText = new HudText(std::to_string(mGunAmo), -825, -930, 1, Vector3D(0.7f, 0, 0), TextAlignment::CENTER);
-	mHealthText = new HudText(std::to_string(mHealth), -325, -930, 1, Vector3D(0.7f, 0, 0), TextAlignment::CENTER);
-	mArmorText = new HudText(std::to_string(mArmor), 840, -930, 1, Vector3D(0.7f, 0, 0), TextAlignment::CENTER);;
+	mFpsText = new HudText("AAAAAAAAA", -1900, 1000, 0.5f, Vector4D(1, 0, 1, 1));
+	mGunAmoText = new HudText(std::to_string(mGunAmo), -825, -930, 1, Vector4D(0.7f, 0, 0, 1), TextAlignment::CENTER);
+	mHealthText = new HudText(std::to_string(mHealth), -325, -930, 1, Vector4D(0.7f, 0, 0, 1), TextAlignment::CENTER);
+	mArmorText = new HudText(std::to_string(mArmor), 840, -930, 1, Vector4D(0.7f, 0, 0, 1), TextAlignment::CENTER);;
 	HudImage* doomHudImage = new HudImage(*doomHud, Vector2D(0, -920), Vector2D(10, 10));
 	mWeaponIconImage = new HudImage(gunIcon, Vector2D(400, -980), Vector2D(10, 10));
 

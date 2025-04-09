@@ -8,16 +8,23 @@ class HudText :
     public HudElement
 {
 public:
-    HudText(const std::string& text, float x, float y, float scale, Vector3D color, TextAlignment alignment = TextAlignment::LEFT);
+    HudText(const std::string& text, float x, float y, float scale, Vector4D color,TextAlignment alignment = TextAlignment::LEFT, Font* pFont = nullptr);
 
     void Draw(RendererOpenGl& renderer) override;
 
     void SetText(std::string pText);
+    void SetColor(Vector4D color);
+
+    inline Vector4D GetColor() const { return mColor; }
+
+    void SetShaderProgram(ShaderProgram* pShaderProgram);
 
 private:
     std::string mText;
     float mScale;
-    Vector3D mColor;
+    Vector4D mColor;
     TextAlignment mAlignment;
+    Font* mFont;
+    ShaderProgram* mShaderProgram;
 };
 
