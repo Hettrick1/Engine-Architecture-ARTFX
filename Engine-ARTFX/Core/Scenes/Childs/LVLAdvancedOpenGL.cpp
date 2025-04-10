@@ -34,21 +34,13 @@ void LVLAdvancedOpenGl::Start(IRenderer* renderer)
 	Scene::ActiveScene->GetRenderer()->GetDebugRenderer()->SetDrawBoxes(false);
 
 	Shader vert, frag, tcs, tes = Shader();
-	vert.Load("VertFrag/Advanced.vert", ShaderType::VERTEX);
-	frag.Load("VertFrag/Advanced.frag", ShaderType::FRAGMENT);
-	tcs.Load("Tesselation/Advanced.tesc", ShaderType::TESSELLATION_CONTROL);
-	tes.Load("Tesselation/Advanced.tese", ShaderType::TESSELLATION_EVALUATION);
+	vert.Load("VertFrag/CubePlanet.vert", ShaderType::VERTEX);
+	frag.Load("VertFrag/CubePlanet.frag", ShaderType::FRAGMENT);
+	tcs.Load("Tesselation/CubePlanet.tesc", ShaderType::TESSELLATION_CONTROL);
+	tes.Load("Tesselation/CubePlanet.tese", ShaderType::TESSELLATION_EVALUATION);
 
 	ShaderProgram* shaderProg = new ShaderProgram();
 	shaderProg->Compose({ &vert, &tcs, &tes, &frag });
-
-	BasicCube* cube = new BasicCube(Vector3D(-3, 0, -1), 3, Quaternion(0, 0, 0, 1), shaderProg);
-	AddActor(cube);
-	cube->Start();
-
-	Sphere* sphere = new Sphere(Vector3D(20, 0, -1), 3, Quaternion(0, 0, 0, 1)); 
-	sphere->Start();
-	//sphere->GetComponentOfType<MeshComponent>()->SetShaderProgram(*shaderProg); 
 
 	vert.Load("VertFrag/CubeToSphere.vert", ShaderType::VERTEX);
 	frag.Load("VertFrag/CubeToSphere.frag", ShaderType::FRAGMENT);
@@ -58,13 +50,17 @@ void LVLAdvancedOpenGl::Start(IRenderer* renderer)
 	ShaderProgram* shaderProg2 = new ShaderProgram();
 	shaderProg2->Compose({ &vert, &tcs, &tes, &frag });
 
-	BasicCube* cube2 = new BasicCube(Vector3D(8, 0, -1), 3, Quaternion(0, 0, 0, 1), shaderProg2);
+	Planet* planet = new Planet(Vector3D(16, 10, -1), 3, Quaternion(0, 0, 0, 1), shaderProg);
+	AddActor(planet);
+	planet->Start();
+
+	BasicCube* cube2 = new BasicCube(Vector3D(8, 10, -1), 3, Quaternion(0, 0, 0, 1), shaderProg2);
 	AddActor(cube2);
 	cube2->Start();
 
-	Planet* planet = new Planet(Vector3D(-14, 0, -1), 3);
-	AddActor(planet);
-	planet->Start();
+	Planet* planet2 = new Planet(Vector3D(0, 10, -1), 3);
+	AddActor(planet2);
+	planet2->Start();
 
 	DoomPlayer* player = new DoomPlayer();
 	AddActor(player);

@@ -23,8 +23,12 @@ void Planet::Start()
 	tcs.Load("Tesselation/Planets.tesc", ShaderType::TESSELLATION_CONTROL);
 	tes.Load("Tesselation/Planets.tese", ShaderType::TESSELLATION_EVALUATION);
 
-	ShaderProgram* shaderProg = new ShaderProgram();
-	shaderProg->Compose({ &vert, &tcs, &tes, &frag });
+	if (mShaderProgram == nullptr)
+	{
+		ShaderProgram* shaderProg = new ShaderProgram();
+		shaderProg->Compose({ &vert, &tcs, &tes, &frag });
+		mShaderProgram = shaderProg;
+	}
 
 	CubeTextureMap cubemap;
 	cubemap.CreateCubeTextureMap({
@@ -36,7 +40,7 @@ void Planet::Start()
 		"Imports/Sprites/CubeMap/pz.png", 
 		});
 
-	CubeMapMeshComponent* meshComponent = new CubeMapMeshComponent(this, mesh, cubemap, shaderProg);
+	CubeMapMeshComponent* meshComponent = new CubeMapMeshComponent(this, mesh, cubemap, mShaderProgram);
 }
 
 void Planet::Update()
