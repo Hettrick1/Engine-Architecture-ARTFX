@@ -3,6 +3,7 @@
 #include "Assets.h"
 #include "CameraComponent.h"
 #include "CameraManager.h"
+#include "Timer.h"
 
 Planet::Planet(Vector3D pPos, Vector3D pSize, Quaternion pRotation, ShaderProgram* program)
 	:Actor(pPos, pSize, pRotation), mShaderProgram(program)
@@ -18,10 +19,10 @@ void Planet::Start()
 	Actor::Start();
 	Mesh* mesh = Assets::LoadMesh("Imports/Meshes/cube.obj", "cube");
 	Shader vert, frag, tcs, tes = Shader();
-	vert.Load("VertFrag/Planets.vert", ShaderType::VERTEX);
-	frag.Load("VertFrag/Planets.frag", ShaderType::FRAGMENT);
-	tcs.Load("Tesselation/Planets.tesc", ShaderType::TESSELLATION_CONTROL);
-	tes.Load("Tesselation/Planets.tese", ShaderType::TESSELLATION_EVALUATION);
+	vert.Load("VertFrag/PlanetsNoise.vert", ShaderType::VERTEX);
+	frag.Load("VertFrag/PlanetsNoise.frag", ShaderType::FRAGMENT);
+	tcs.Load("Tesselation/PlanetsNoise.tesc", ShaderType::TESSELLATION_CONTROL);
+	tes.Load("Tesselation/PlanetsNoise.tese", ShaderType::TESSELLATION_EVALUATION);
 
 	if (mShaderProgram == nullptr)
 	{
@@ -58,6 +59,9 @@ void Planet::Update()
 		mLod = 4;
 	else
 		mLod = 2;
+
+	mTransformComponent.RotateZ(Timer::deltaTime * 50);
+	mTransformComponent.RotateX(Timer::deltaTime * 50);
 }
 
 void Planet::Destroy()

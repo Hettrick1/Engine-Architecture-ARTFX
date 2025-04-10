@@ -20,6 +20,7 @@ void CubeMapMeshComponent::Draw(Matrix4DRow viewProj)
 		mShaderProgram.setMatrix4Row("uWorldTransform", wt);
 		mShaderProgram.setVector2f("uTiling", mTiling);
 		mShaderProgram.setFloat("uLod", mOwner->GetLod());
+		mShaderProgram.setFloat("uTime", SDL_GetTicks());
 		mCubeMapTexture.SetActive();
 		mMesh->GetVao()->SetActive();
 		if ((mShaderProgram.GetType() & ShaderProgramType::TESSELLATION_CONTROL) != 0)

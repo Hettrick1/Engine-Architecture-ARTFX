@@ -50,6 +50,14 @@ void LVLAdvancedOpenGl::Start(IRenderer* renderer)
 	ShaderProgram* shaderProg2 = new ShaderProgram();
 	shaderProg2->Compose({ &vert, &tcs, &tes, &frag });
 
+	vert.Load("VertFrag/FirePlanet.vert", ShaderType::VERTEX);
+	frag.Load("VertFrag/FirePlanet.frag", ShaderType::FRAGMENT);
+	tcs.Load("Tesselation/FirePlanet.tesc", ShaderType::TESSELLATION_CONTROL);
+	tes.Load("Tesselation/FirePlanet.tese", ShaderType::TESSELLATION_EVALUATION);
+
+	ShaderProgram* shaderProg3 = new ShaderProgram(); 
+	shaderProg3->Compose({ &vert, &tcs, &tes, &frag }); 
+
 	Planet* planet = new Planet(Vector3D(16, 10, -1), 3, Quaternion(0, 0, 0, 1), shaderProg);
 	AddActor(planet);
 	planet->Start();
@@ -61,6 +69,10 @@ void LVLAdvancedOpenGl::Start(IRenderer* renderer)
 	Planet* planet2 = new Planet(Vector3D(0, 10, -1), 3);
 	AddActor(planet2);
 	planet2->Start();
+
+	Planet* planet3 = new Planet(Vector3D(-8, 10, -1), 3, Quaternion(0, 0, 0, 1), shaderProg3);
+	AddActor(planet3);
+	planet3->Start();
 
 	DoomPlayer* player = new DoomPlayer();
 	AddActor(player);
