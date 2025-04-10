@@ -6,8 +6,10 @@
 #include "Vertex.h"
 #include "Scene.h"
 
-SkySphereComponent::SkySphereComponent(Actor* pOwner, bool isSphere, ShaderProgram* pProgram)
-	: Component(pOwner), mMesh(nullptr), mTextureIndex(0), mTiling(1), mIsSphere(isSphere), mTextureType(GL_TEXTURE_2D), mVao(nullptr)
+int SkySphereComponent::index = 0;
+
+SkySphereComponent::SkySphereComponent(Actor* pOwner, bool isSphere, std::vector<std::string> textures, ShaderProgram* pProgram)
+	: Component(pOwner), mMesh(nullptr), mTextureIndex(0), mTiling(1), mIsSphere(isSphere), mTextureType(GL_TEXTURE_2D), mVao(nullptr), mTextureToLoad(textures)
 {
 	mOwner->GetScene().GetRenderer()->AddSkySphere(this);
 	if (pProgram == nullptr)
@@ -33,7 +35,14 @@ SkySphereComponent::SkySphereComponent(Actor* pOwner, bool isSphere, ShaderProgr
 	}
 	if (isSphere)
 	{
-		Texture* tex = Assets::LoadTexture(*Scene::ActiveScene->GetRenderer(), "Imports/Sprites/LakeSkyTexture.png", "LakeSkyTexture");
+		Texture* tex = nullptr;
+		if (mTextureToLoad.empty()) {
+			tex = Assets::LoadTexture(*Scene::ActiveScene->GetRenderer(), "Imports/Sprites/LakeSkyTexture.png", "LakeSkyTexture");
+		}
+		else {
+			tex = Assets::LoadTexture(*Scene::ActiveScene->GetRenderer(), mTextureToLoad[0], "skysphere" + index);
+			index++;
+		}
 		mTextureIndex = tex->GetId();
 		mMesh = Assets::LoadMesh("Imports/Meshes/sphere.obj", "sphere");
 		mVao = mMesh->GetVao();
@@ -43,20 +52,27 @@ SkySphereComponent::SkySphereComponent(Actor* pOwner, bool isSphere, ShaderProgr
 	{
 		mMesh = Assets::LoadMesh("Imports/Meshes/cube.obj", "cube");
 		mVao = mMesh->GetVao();
-        std::vector<std::string> faces
-        {
-            "Imports/Sprites/SkyBox/DAY_CLOUDS_S.jpg",
-            "Imports/Sprites/SkyBox/DAY_CLOUDS_N.jpg",
-            "Imports/Sprites/SkyBox/DAY_CLOUDS_T.jpg",
-            "Imports/Sprites/SkyBox/DAY_CLOUDS_B.jpg",
-            "Imports/Sprites/SkyBox/DAY_CLOUDS_W.jpg",
-            "Imports/Sprites/SkyBox/DAY_CLOUDS_E.jpg",
-        };
+		std::vector<std::string> faces;
+		if (mTextureToLoad.empty() || mTextureToLoad.size() < 6) {
+			faces =
+			{
+				"Imports/Sprites/SkyBox/DAY_CLOUDS_S.jpg",
+				"Imports/Sprites/SkyBox/DAY_CLOUDS_N.jpg",
+				"Imports/Sprites/SkyBox/DAY_CLOUDS_T.jpg",
+				"Imports/Sprites/SkyBox/DAY_CLOUDS_B.jpg",
+				"Imports/Sprites/SkyBox/DAY_CLOUDS_W.jpg",
+				"Imports/Sprites/SkyBox/DAY_CLOUDS_E.jpg",
+			};
+		}
+		else
+		{
+			faces = mTextureToLoad;
+		}
+        
         mCubeMap.CreateCubeTextureMap(faces);
         mTextureIndex = mCubeMap.GetID();
         mTextureType = GL_TEXTURE_CUBE_MAP;
 	}
-
 }
 
 SkySphereComponent::~SkySphereComponent()

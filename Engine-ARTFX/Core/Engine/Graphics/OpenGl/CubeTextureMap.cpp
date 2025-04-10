@@ -46,3 +46,8 @@ bool CubeTextureMap::CreateCubeTextureMap(const std::vector<std::string>& cube_f
 
 	return true;
 }
+
+void CubeTextureMap::SetActive() const
+{
+	glBindTexture(GL_TEXTURE_CUBE_MAP, mTextureId);
+}

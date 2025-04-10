@@ -8,7 +8,7 @@
 
 int main(int argc, char** argv) {
 
-	Game* pong = new Game("myGame", { new SplashScreen()});
+	Game* pong = new Game("myGame", { new LVLAdvancedOpenGl()});
 
 	return 0;
 }

@@ -151,6 +151,8 @@
     <ClCompile Include="Game\Doom\AmoPickup.cpp" />
     <ClCompile Include="Game\Doom\DoomPC.cpp" />
     <ClCompile Include="Game\Doom\DoomPlayer.cpp" />
+    <ClCompile Include="Game\Planets\CubeMapMeshComponent.cpp" />
+    <ClCompile Include="Game\Planets\Planet.cpp" />
     <ClCompile Include="Game\TestOpenGl\BallSpawnPoint.cpp" />
     <ClCompile Include="Game\TestOpenGl\BowlingBall.cpp" />
     <ClCompile Include="Game\TestOpenGl\BowlingPC.cpp" />
@@ -234,6 +236,8 @@
     <ClInclude Include="Game\Doom\AmoPickup.h" />
     <ClInclude Include="Game\Doom\DoomPC.h" />
     <ClInclude Include="Game\Doom\DoomPlayer.h" />
+    <ClInclude Include="Game\Planets\CubeMapMeshComponent.h" />
+    <ClInclude Include="Game\Planets\Planet.h" />
     <ClInclude Include="Game\TestOpenGl\BallSpawnPoint.h" />
     <ClInclude Include="Game\TestOpenGl\BowlingBall.h" />
     <ClInclude Include="Game\TestOpenGl\BowlingPC.h" />

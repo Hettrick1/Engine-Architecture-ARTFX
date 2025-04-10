@@ -7,6 +7,7 @@
 #include "MeshComponent.h"
 #include "TestOpenGl/Sphere.h"
 #include "CoreActors/SkySphere.h"
+#include "Planets/Planet.h"
 
 LVLAdvancedOpenGl::LVLAdvancedOpenGl()
 	: Scene()
@@ -20,7 +21,14 @@ LVLAdvancedOpenGl::~LVLAdvancedOpenGl()
 void LVLAdvancedOpenGl::Start(IRenderer* renderer)
 {
 	Scene::Start(renderer);
-	SkySphere* skySphere = new SkySphere();
+	SkySphere* skySphere = new SkySphere(false, {
+		"Imports/Sprites/SkyBox/Stars/bottom.png",
+		"Imports/Sprites/SkyBox/Stars/top.png",
+		"Imports/Sprites/SkyBox/Stars/back.png",
+		"Imports/Sprites/SkyBox/Stars/left.png",
+		"Imports/Sprites/SkyBox/Stars/front.png",
+		"Imports/Sprites/SkyBox/Stars/right.png",
+		});
 	skySphere->Start();
 	AddActor(skySphere);
 	Scene::ActiveScene->GetRenderer()->GetDebugRenderer()->SetDrawBoxes(false);
@@ -53,6 +61,10 @@ void LVLAdvancedOpenGl::Start(IRenderer* renderer)
 	BasicCube* cube2 = new BasicCube(Vector3D(8, 0, -1), 3, Quaternion(0, 0, 0, 1), shaderProg2);
 	AddActor(cube2);
 	cube2->Start();
+
+	Planet* planet = new Planet(Vector3D(-14, 0, -1), 3);
+	AddActor(planet);
+	planet->Start();
 
 	DoomPlayer* player = new DoomPlayer();
 	AddActor(player);

@@ -47,6 +47,8 @@ public:
 	}
 	void UpdateComponentsTransform();
 
+	inline float GetLod() const { return mLod; }
+
 protected:
 	Scene& mScene;
 	ActorState mState;
@@ -56,5 +58,6 @@ protected:
 	std::vector<Component*> mComponents;
 	std::vector<Component*> mPendingComponents;
 	std::string mTag;
+	float mLod;
 };
 

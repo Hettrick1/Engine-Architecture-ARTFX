@@ -192,13 +192,11 @@ void RendererOpenGl::DrawSkySphere()
 		glDepthMask(GL_FALSE);
 		mSkySphereComponent->GetShaderProgram().Use();
 		mSkySphereComponent->GetShaderProgram().setMatrix4Row("uWorld", Matrix4DRow::Identity);
-
 		Matrix4DRow skyView = Matrix4DRow::DeleteTranslation(mView);
 		mSkySphereComponent->GetShaderProgram().setMatrix4Row("uViewProj", skyView * mProj);
 		mSkySphereComponent->GetVao()->SetActive();
 		glBindTexture(mSkySphereComponent->GetTextureType(), mSkySphereComponent->GetTextureIndex());
 		GLenum drawMode = mSkySphereComponent->GetTextureType() == GL_TEXTURE_2D ? GL_TRIANGLES : GL_PATCHES;
-		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		glDrawArrays(drawMode, 0, mSkySphereComponent->GetVao()->GetVerticeCount());
 		glDepthMask(GL_TRUE);
 	}

@@ -8,7 +8,7 @@
 class SkySphereComponent : public Component
 {
 public:
-	SkySphereComponent(Actor* pOwner, bool isSphere = false, ShaderProgram* pProgram = nullptr);
+	SkySphereComponent(Actor* pOwner, bool isSphere = false, std::vector<std::string> textures = {}, ShaderProgram* pProgram = nullptr);
 	virtual ~SkySphereComponent();
 	virtual void Draw(Matrix4DRow viewProj);
 	virtual void SetMesh(Mesh& pMesh);
@@ -25,6 +25,8 @@ public:
 
 	void SetTiling(Vector2D pTiling);
 
+	static int index;
+
 protected:
 	Mesh* mMesh;
 	Shader mVertexShader, mFragmentShader, mTessellationControlShader, mTessellationEvalShader;
@@ -35,4 +37,5 @@ protected:
 	bool mIsSphere;
 	VertexArray* mVao;
 	GLenum mTextureType;
+	std::vector<std::string> mTextureToLoad;
 };

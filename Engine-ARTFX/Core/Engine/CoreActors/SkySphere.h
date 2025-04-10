@@ -10,7 +10,7 @@
 class SkySphere : public Actor
 {
 public:
-	SkySphere(std::vector<Texture*> textures = { nullptr }, ShaderProgram* program = nullptr);
+	SkySphere(bool isSphere = false, std::vector<std::string> textures = {}, ShaderProgram* program = nullptr);
 	~SkySphere();
 	void Start() override;
 	void Update() override;
@@ -18,4 +18,6 @@ public:
 private:
 	ShaderProgram* mShaderProgram;
 	SkySphereComponent* mSkySphereComponent;
+	std::vector<std::string> mTextureToLoad;
+	bool mIsSphere;
 };

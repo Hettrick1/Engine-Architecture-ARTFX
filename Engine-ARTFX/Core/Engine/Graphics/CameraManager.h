@@ -17,6 +17,8 @@ public:
 
 	void SetCurrentCamera(int pIndex);
 	void SetCurrentCamera(CameraComponent* pCameraToActivate);
+
+	inline CameraComponent* GetCurrentCamera() const { return mActiveCamera; }
 private:
 	CameraManager();
 	CameraComponent* mActiveCamera;
