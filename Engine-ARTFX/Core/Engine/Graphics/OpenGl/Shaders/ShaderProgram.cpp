@@ -2,7 +2,7 @@
 #include "Log.h"
 
 ShaderProgram::ShaderProgram()
-	:mId(0)
+	:mId(0), mShaderProgramType(0)
 {
 
 }

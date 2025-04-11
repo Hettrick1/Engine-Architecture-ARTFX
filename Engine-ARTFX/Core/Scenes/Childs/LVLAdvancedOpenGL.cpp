@@ -33,7 +33,7 @@ void LVLAdvancedOpenGl::Start(IRenderer* renderer)
 	AddActor(skySphere);
 	Scene::ActiveScene->GetRenderer()->GetDebugRenderer()->SetDrawBoxes(false);
 
-	Shader vert, frag, tcs, tes = Shader();
+	Shader vert, frag, tcs, tes, geom = Shader();
 	vert.Load("VertFrag/CubePlanet.vert", ShaderType::VERTEX);
 	frag.Load("VertFrag/CubePlanet.frag", ShaderType::FRAGMENT);
 	tcs.Load("Tesselation/CubePlanet.tesc", ShaderType::TESSELLATION_CONTROL);
@@ -58,6 +58,16 @@ void LVLAdvancedOpenGl::Start(IRenderer* renderer)
 	ShaderProgram* shaderProg3 = new ShaderProgram(); 
 	shaderProg3->Compose({ &vert, &tcs, &tes, &frag }); 
 
+
+	vert.Load("VertFrag/EarthPlanet.vert", ShaderType::VERTEX); 
+	frag.Load("VertFrag/EarthPlanet.frag", ShaderType::FRAGMENT); 
+	tcs.Load("Tesselation/EarthPlanet.tesc", ShaderType::TESSELLATION_CONTROL); 
+	tes.Load("Tesselation/EarthPlanet.tese", ShaderType::TESSELLATION_EVALUATION);
+	geom.Load("Geometry/EarthPlanet.geom", ShaderType::GEOMETRY);
+
+	ShaderProgram* shaderProg4 = new ShaderProgram();
+	shaderProg4->Compose({ &vert, &tcs, &tes, &frag });
+
 	Planet* planet = new Planet(Vector3D(16, 10, -1), 3, Quaternion(0, 0, 0, 1), shaderProg);
 	AddActor(planet);
 	planet->Start();
@@ -73,6 +83,10 @@ void LVLAdvancedOpenGl::Start(IRenderer* renderer)
 	Planet* planet3 = new Planet(Vector3D(-8, 10, -1), 3, Quaternion(0, 0, 0, 1), shaderProg3);
 	AddActor(planet3);
 	planet3->Start();
+
+	Planet* planet4 = new Planet(Vector3D(-18, 10, -1), 3, Quaternion(0, 0, 0, 1), shaderProg4);
+	AddActor(planet4);
+	planet4->Start();
 
 	DoomPlayer* player = new DoomPlayer();
 	AddActor(player);
