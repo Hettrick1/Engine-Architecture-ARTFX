@@ -1,17 +1,18 @@
 #include "Planet.h"
-#include "CubeMapMeshComponent.h"
 #include "Assets.h"
 #include "CameraComponent.h"
 #include "CameraManager.h"
 #include "Timer.h"
 
-Planet::Planet(Vector3D pPos, Vector3D pSize, Quaternion pRotation, ShaderProgram* program)
-	:Actor(pPos, pSize, pRotation), mShaderProgram(program)
+Planet::Planet(Vector3D pPos, Vector3D pSize, Quaternion pRotation, ShaderProgram* program, CubeTextureMap* pCubemap)
+	:Actor(pPos, pSize, pRotation), mShaderProgram(program), mCubemap(pCubemap)
 {
 }
 
 Planet::~Planet()
 {
+	delete mShaderProgram;
+	delete mCubemap;
 }
 
 void Planet::Start()
@@ -31,17 +32,20 @@ void Planet::Start()
 		mShaderProgram = shaderProg;
 	}
 
-	CubeTextureMap cubemap;
-	cubemap.CreateCubeTextureMap({
-		"Imports/Sprites/CubeMap/nx.png",
-		"Imports/Sprites/CubeMap/px.png",
-		"Imports/Sprites/CubeMap/py.png",
-		"Imports/Sprites/CubeMap/ny.png",
-		"Imports/Sprites/CubeMap/nz.png",
-		"Imports/Sprites/CubeMap/pz.png", 
+	if (mCubemap == nullptr)
+	{
+		mCubemap = new CubeTextureMap();
+		mCubemap->CreateCubeTextureMap({
+			"Imports/Sprites/CubeMap/nx.png",
+			"Imports/Sprites/CubeMap/px.png",
+			"Imports/Sprites/CubeMap/py.png",
+			"Imports/Sprites/CubeMap/ny.png",
+			"Imports/Sprites/CubeMap/nz.png",
+			"Imports/Sprites/CubeMap/pz.png",
 		});
+	}
 
-	CubeMapMeshComponent* meshComponent = new CubeMapMeshComponent(this, mesh, cubemap, mShaderProgram);
+	CubeMapMeshComponent* meshComponent = new CubeMapMeshComponent(this, mesh, *mCubemap, mShaderProgram);
 }
 
 void Planet::Update()

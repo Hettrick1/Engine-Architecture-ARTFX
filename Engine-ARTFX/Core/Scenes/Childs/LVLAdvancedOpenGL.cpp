@@ -84,7 +84,17 @@ void LVLAdvancedOpenGl::Start(IRenderer* renderer)
 	AddActor(planet3);
 	planet3->Start();
 
-	Planet* planet4 = new Planet(Vector3D(-18, 10, -1), 3, Quaternion(0, 0, 0, 1), shaderProg4);
+	CubeTextureMap* cubemap = new CubeTextureMap();
+	cubemap->CreateCubeTextureMap({
+		"Imports/Sprites/CubeMap/nx1.png",
+		"Imports/Sprites/CubeMap/px1.png",
+		"Imports/Sprites/CubeMap/py1.png",
+		"Imports/Sprites/CubeMap/ny1.png",
+		"Imports/Sprites/CubeMap/nz1.png",
+		"Imports/Sprites/CubeMap/pz1.png",
+		});
+
+	Planet* planet4 = new Planet(Vector3D(-18, 10, -1), 3, Quaternion(0, 0, 0, 1), shaderProg4, cubemap);
 	AddActor(planet4);
 	planet4->Start();
 

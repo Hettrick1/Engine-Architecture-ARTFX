@@ -13,11 +13,11 @@ in TESC_OUT{
 
 } tese_in[];
 out TESE_OUT{
-   vec4 color;
-   vec3 normal;
-   vec3 texCoord;
-
+    vec4 color;
+    vec3 normal;
+    vec3 texCoord;
 } tese_out;
+
 
 uniform samplerCube uTexture;
 
@@ -43,7 +43,7 @@ void main(void)
 
    tese_out.texCoord = interpolate3D(tese_in[0].texCoord, tese_in[1].texCoord, tese_in[2].texCoord);
 
-   vec4 noise = texture(uTexture, tese_out.texCoord) * -4;
+   vec4 noise = texture(uTexture, tese_out.texCoord) * -6;
 
    vec4 pos = test;
 
@@ -51,7 +51,7 @@ void main(void)
    pos.y = test.y * sqrt(1 - (test.z*test.z)*0.5 - (test.x*test.x)*0.5 + (test.z*test.z * test.x*test.x) * 0.3333333333333);
    pos.z = test.z * sqrt(1 - (test.x*test.x)*0.5 - (test.y*test.y)*0.5 + (test.x*test.x * test.y*test.y) * 0.3333333333333);
 
-   pos *= noise + 15;
+   pos *= noise + 20;
 
    gl_Position = pos;
    tese_out.normal = interpolate3D(tese_in[0].normal, tese_in[1].normal, tese_in[2].normal);

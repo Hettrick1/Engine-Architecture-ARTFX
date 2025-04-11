@@ -21,24 +21,24 @@ void main()
     vec4 color4 = vec4(0.0f, 0.2f, 1.0f, 1.0f);  // eau
 
     float n = 1.0 - noise.r; // Inversé pour correspondre à "hauteur"
-     n = (n - 0.3) / (1.0 - 0.3); // Remap de [0.3, 1.0] vers [0.0, 1.0]
+     n = (n - 0.45) / (1.0 - 0.45);
      n = clamp(n, 0.0, 1.0);
 
     vec4 resultColor;
 
-     if (n < 0.6) {
+     if (n < 0.5) {
      // Eau vers plaine
-     float t = smoothstep(0.0, 0.6, n);
+     float t = smoothstep(0.0, 0.5, n);
      resultColor = mix(color4, color3, t);
      }
-     else if (n < 0.75) {
+     else if (n < 0.55) {
      // Plaine vers roche
-     float t = smoothstep(0.6, 0.75, n);
+     float t = smoothstep(0.5, 0.55, n);
      resultColor = mix(color3, color2, t);
      }
      else if (n < 0.9) {
      // Roche vers neige
-     float t = smoothstep(0.75, 0.9, n);
+     float t = smoothstep(0.65, 0.9, n);
      resultColor = mix(color2, color1, t);
      }
      else {
