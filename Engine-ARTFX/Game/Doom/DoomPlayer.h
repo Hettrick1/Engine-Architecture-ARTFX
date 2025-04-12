@@ -33,6 +33,7 @@ private:
 	HudText* mHealthText;
 	HudText* mArmorText;
 	HudImage* mWeaponIconImage;
+	HudImage* mDamageIndicatorImage;
 	Texture gunIcon;
 	Texture shotgunIcon;
 	std::vector<Texture*> mGunAnim;
@@ -41,5 +42,6 @@ private:
 	int mHealth;
 	int mArmor;
 	Weapons mWeapon;
+	float mDamageIndicatorAlpha;
 };
 

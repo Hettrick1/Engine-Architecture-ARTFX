@@ -15,11 +15,17 @@
 #include "DoomEnemy.h"
 
 float bobingTime = 0;
+const float gunDamages = 25;
+const float shotgunDamages = 25;
+const float gunRange = 20;
+const float shotgunRange = 20;
+const float shotgunSpreadAngle = 4;
+
 
 DoomPlayer::DoomPlayer()
 	: Actor(), mGun(nullptr), mGunAmo(50), mHealth(100), mArmor(100), 
 	mFpsText(nullptr), mGunAmoText(nullptr), mHealthText(nullptr), mArmorText(nullptr), 
-	mWeaponIconImage(nullptr), mWeapon(Weapons::Gun)
+	mWeaponIconImage(nullptr), mWeapon(Weapons::Gun), mDamageIndicatorImage(nullptr), mDamageIndicatorAlpha(0.0f)
 {
 }
 
@@ -31,6 +37,7 @@ DoomPlayer::~DoomPlayer()
 	delete mHealthText;
 	delete mArmorText;
 	delete mWeaponIconImage;
+	delete mDamageIndicatorImage;
 	mGunAnim.clear();
 	mShotgunAnim.clear();
 }
@@ -85,6 +92,11 @@ void DoomPlayer::Start()
 	HudImage* doomHudImage = new HudImage(*doomHud, Vector2D(0, -920), Vector2D(10, 10));
 	mWeaponIconImage = new HudImage(gunIcon, Vector2D(400, -980), Vector2D(10, 10));
 
+	Texture* damageIndicator = Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/DamageIndicator.png", "DamageIndicator");
+	mDamageIndicatorImage = new HudImage(*damageIndicator, Vector2D(0, 0), 2);
+	mDamageIndicatorImage->SetTint(Vector4D(1.0, 1.0, 1.0, 0.0));
+
+	GetScene().GetRenderer()->GetHud()->AddElement(mDamageIndicatorImage);
 	GetScene().GetRenderer()->GetHud()->AddElement(doomHudImage); 
 	GetScene().GetRenderer()->GetHud()->AddElement(mWeaponIconImage);
 	GetScene().GetRenderer()->GetHud()->AddElement(mFpsText);
@@ -94,6 +106,7 @@ void DoomPlayer::Start()
 
 	BoxCollider3DComponent* bc = new BoxCollider3DComponent(this, 10, 0.1, Vector3D(0, 0, -0.12));
 	bc->SetIsQuerry(true);
+
 
 	SetTag("Player");
 }
@@ -120,6 +133,12 @@ void DoomPlayer::Update()
 		bobingTime = 0;
 	}
 	mFpsText->SetText("Fps : " + std::to_string(Timer::mFPS));
+
+	if (mDamageIndicatorAlpha >= 0) 
+	{
+		mDamageIndicatorAlpha -= Timer::deltaTime;
+		mDamageIndicatorImage->SetTint(Vector4D(1.0, 1.0, 1.0, mDamageIndicatorAlpha));
+	}
 }
 
 void DoomPlayer::Destroy()
@@ -164,7 +183,7 @@ void DoomPlayer::Shoot(int pAmoQuantity)
 	switch (mWeapon) {
 		case Weapons::Gun:
 		{
-			const float range = 50.0f;
+			const float range = gunRange;
 			Vector3D start = GetTransformComponent().GetPosition();
 			start.z -= 0.0f;
 			Vector3D end = start + GetTransformComponent().GetWorldTransform().GetYAxis() * range;
@@ -177,7 +196,7 @@ void DoomPlayer::Shoot(int pAmoQuantity)
 			if (hit.HitActor != nullptr && hit.HitActor->HasTag("Enemy"))
 			{
 				DoomEnemy* enemy = static_cast<DoomEnemy*>(hit.HitActor);
-				enemy->TakeDamage(25, static_cast<int>(mWeapon));
+				enemy->TakeDamage(gunDamages, static_cast<int>(mWeapon));
 			}
 
 			break;
@@ -188,8 +207,8 @@ void DoomPlayer::Shoot(int pAmoQuantity)
 			start.z -= 0.0f;
 			Vector3D baseDirection = GetTransformComponent().GetWorldTransform().GetYAxis();
 
-			const float spreadAngle = 5.0f;
-			const float range = 50.0f;       
+			const float spreadAngle = shotgunSpreadAngle;
+			const float range = shotgunRange;       
 			float randomAngle = 0;
 
 			for (int i = 0; i < 4; ++i)
@@ -210,7 +229,7 @@ void DoomPlayer::Shoot(int pAmoQuantity)
 				if (hit.HitActor != nullptr && hit.HitActor->HasTag("Enemy"))
 				{
 					DoomEnemy* enemy = static_cast<DoomEnemy*>(hit.HitActor);
-					enemy->TakeDamage(25, static_cast<int>(mWeapon));
+					enemy->TakeDamage(shotgunDamages, static_cast<int>(mWeapon));
 				}
 			}
 			UseAmo(pAmoQuantity);
@@ -249,6 +268,7 @@ void DoomPlayer::PickUpHealth(int pQuantity)
 
 void DoomPlayer::TakeDamages(int pQuantity)
 {
+	mDamageIndicatorAlpha = 1.0;
 	if (mArmor > 0)
 	{
 		mArmor -= pQuantity;

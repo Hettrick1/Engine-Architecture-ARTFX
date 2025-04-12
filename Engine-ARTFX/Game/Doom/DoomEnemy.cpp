@@ -11,8 +11,14 @@
 #include "DebugLine.h"
 #include "DoomPlayer.h"
 
+const float damages = 20;
+const float weaponRange = 50;
+const float weaponSpreadAngle = 0.8;
+const float shootCooldown = 1;
+const float detectionRange = 500;
+
 DoomEnemy::DoomEnemy(DoomPlayer* pPlayerRef, Vector3D pPos, Vector3D pSize, Quaternion pRotation)
-	: Actor(pPos, pSize, pRotation), mPlayerRef(pPlayerRef), mEnemyFb(nullptr), mHealth(100), mShootCouldown(1.0f)
+	: Actor(pPos, pSize, pRotation), mPlayerRef(pPlayerRef), mEnemyFb(nullptr), mHealth(100), mShootCouldown(shootCooldown)
 	, mCanShoot(false), mIsDead(false)
 {
 }
@@ -80,7 +86,7 @@ void DoomEnemy::Update()
 	{
 		float dist = (GetTransformComponent().GetPosition() - mPlayerRef->GetTransformComponent().GetPosition()).LengthSq();
 
-		if (dist < 2000) {
+		if (dist < detectionRange) {
 			mCanShoot = true;
 		}
 		else {
@@ -99,13 +105,13 @@ void DoomEnemy::Update()
 			mShootCouldown -= Timer::deltaTime;
 		}
 		else {
-			mShootCouldown = 1;
+			mShootCouldown = shootCooldown;
 			Vector3D start = GetTransformComponent().GetPosition();
 			start.z -= 0.0f;
 			Vector3D baseDirection = GetTransformComponent().GetWorldTransform().GetYAxis();
 
-			const float spreadAngle = 5.0f;
-			const float range = 50.0f;
+			const float spreadAngle = weaponSpreadAngle;
+			const float range = weaponRange;
 			float randomAngle = 0;
 			randomAngle = Maths::RandomRange(-spreadAngle, spreadAngle);
 			float randomRadians = Maths::ToRad(randomAngle);
@@ -121,7 +127,7 @@ void DoomEnemy::Update()
 			GetScene().GetRenderer()->AddDebugLine(line);
 			if (hit.HitActor != nullptr && hit.HitActor->GetTag() == "Player")
 			{
-				mPlayerRef->TakeDamages(10);
+				mPlayerRef->TakeDamages(damages);
 			}
 		}
 	}
