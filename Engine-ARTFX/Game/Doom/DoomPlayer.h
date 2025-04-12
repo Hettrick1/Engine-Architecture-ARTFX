@@ -26,6 +26,8 @@ public:
 	void Shoot(int pAmoQuantity);
 	void UseAmo(int pQuantity);
 	void PickUpAmo(int pQuantity);
+	void PickUpShield(int pQuantity);
+	void PickUpHealth(int pQuantity);
 	inline int GetAmo() const { return mGunAmo; }
 	inline Weapons GetWeapon() const { return mWeapon; }
 	void TakeDamages(int pQuantity);

@@ -5,6 +5,8 @@
 #include "CameraActor.h"
 #include "MeshComponent.h"
 #include "Doom/AmoPickup.h"
+#include "Doom/HealthPickUp.h"
+#include "Doom/ShieldPickUp.h"
 #include "CoreActors/BasicCube.h"
 
 LVLDoom::LVLDoom()
@@ -42,6 +44,12 @@ void LVLDoom::Start(IRenderer* renderer)
 	AmoPickup* amoPu = new AmoPickup(Vector3D(10, 10, -0.5));
 	AddActor(amoPu);
 	amoPu->Start();
+	HealthPickUp* HealthPu = new HealthPickUp(Vector3D(20, 10, -0.5));
+	AddActor(HealthPu);
+	HealthPu->Start();
+	ShieldPickUp* shieldPu = new ShieldPickUp(Vector3D(30, 10, -0.5));
+	AddActor(shieldPu);
+	shieldPu->Start();
 }
 
 void LVLDoom::Update()

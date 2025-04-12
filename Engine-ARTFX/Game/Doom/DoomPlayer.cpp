@@ -230,6 +230,18 @@ void DoomPlayer::PickUpAmo(int pQuantity)
 	mGunAmoText->SetText(std::to_string(mGunAmo));
 }
 
+void DoomPlayer::PickUpShield(int pQuantity)
+{
+	mArmor += pQuantity;
+	mArmorText->SetText(std::to_string(mArmor));
+}
+
+void DoomPlayer::PickUpHealth(int pQuantity)
+{
+	mHealth += pQuantity;
+	mHealthText->SetText(std::to_string(mHealth));
+}
+
 void DoomPlayer::TakeDamages(int pQuantity)
 {
 	if (mArmor > 0)
