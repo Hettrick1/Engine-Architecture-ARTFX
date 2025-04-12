@@ -4,12 +4,7 @@
 #include "Actor.h"
 #include "HudElements/HudText.h"
 #include "HudElements/HudImage.h"
-
-enum class Weapons
-{
-	Gun,
-	Shotgun
-};
+#include "Weapons.h"
 
 class DoomPlayer : public Actor
 {

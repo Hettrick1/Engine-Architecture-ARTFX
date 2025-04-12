@@ -3,7 +3,8 @@
 #include "Timer.h"
 
 FlipbookComponent::FlipbookComponent(Actor* pOwner, const std::vector<Texture*>& pTextures, int pDrawOrder)
-	: SpriteComponent(pOwner, *pTextures[0], pDrawOrder), mCurrentFrame(0.0f), mAnimationFps(24.0f), mHasFinished(true)
+	: SpriteComponent(pOwner, *pTextures[0], pDrawOrder), mCurrentFrame(0.0f), mAnimationFps(24.0f)
+	, mHasFinished(true), mCanPlay(true), mCanPlayPending(false)
 {
 	SetAnimationTextures(pTextures);
 }
@@ -40,6 +41,11 @@ void FlipbookComponent::PlayAnimation()
 	mPlayOnce = true;
 }
 
+void FlipbookComponent::SetCanPlay(bool canPlay)
+{
+	mCanPlayPending = !canPlay;
+}
+
 void FlipbookComponent::Update()
 {
 	SpriteComponent::Update();
@@ -47,7 +53,7 @@ void FlipbookComponent::Update()
 	{
 		return;
 	}
-	if (mIsLooping || mPlayOnce)
+	if ((mIsLooping || mPlayOnce) && mCanPlay)
 	{
 		mHasFinished = false;
 		mCurrentFrame += mAnimationFps * Timer::deltaTime;
@@ -56,7 +62,18 @@ void FlipbookComponent::Update()
 			mCurrentFrame -= mAnimationTextures.size();
 			mPlayOnce = false;
 			mHasFinished = true;
+			if (mCanPlayPending) {
+				mCanPlay = false;
+			}
 		}
+		if (mCanPlay)
+		{
+			SetTexture(*mAnimationTextures[static_cast<int>(mCurrentFrame)]);
+		}
+	}
+	else if (!mCanPlay)
+	{
+		mCurrentFrame = mAnimationTextures.size() - 1;
 		SetTexture(*mAnimationTextures[static_cast<int>(mCurrentFrame)]);
 	}
 }

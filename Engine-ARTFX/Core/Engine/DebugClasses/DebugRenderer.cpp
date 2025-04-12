@@ -84,7 +84,9 @@ void DebugRenderer::Draw(IRenderer& pRenderer)
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 			for (auto& collider : mCollider) // DEBUG ONLY
 			{
-				collider->DebugDraw(pRenderer);
+				if (collider->GetIsActive()) {
+					collider->DebugDraw(pRenderer);
+				}
 			}
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 			glDisable(GL_BLEND);

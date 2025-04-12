@@ -5,7 +5,7 @@
 #include "IRenderer.h"
 
 ColliderComponent::ColliderComponent(Actor* pOwner, int pUpdateOder)
-	: Component(pOwner, pUpdateOder), mIsQuerry(false)
+	: Component(pOwner, pUpdateOder), mIsQuerry(false), mIsActive(true)
 {
 	PhysicManager::Instance().RegisterCollider(pOwner, this);
 	mOwner->GetScene().GetRenderer()->AddDebugCollider(this);
@@ -87,6 +87,11 @@ void ColliderComponent::NotifyListenersEnded(HitResult* infos)
 			}
 		}
 	}
+}
+
+void ColliderComponent::SetActive(bool pActive)
+{
+	mIsActive = pActive;
 }
 
 

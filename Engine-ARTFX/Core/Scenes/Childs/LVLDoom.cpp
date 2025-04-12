@@ -8,6 +8,7 @@
 #include "Doom/HealthPickUp.h"
 #include "Doom/ShieldPickUp.h"
 #include "CoreActors/BasicCube.h"
+#include "Doom/DoomEnemy.h"
 
 LVLDoom::LVLDoom()
 	: mPlayer(nullptr)
@@ -50,6 +51,10 @@ void LVLDoom::Start(IRenderer* renderer)
 	ShieldPickUp* shieldPu = new ShieldPickUp(Vector3D(30, 10, -0.5));
 	AddActor(shieldPu);
 	shieldPu->Start();
+
+	DoomEnemy* enemy = new DoomEnemy(mPlayer, Vector3D(10, 20, -0.1));
+	AddActor(enemy);
+	enemy->Start();
 }
 
 void LVLDoom::Update()

@@ -261,6 +261,9 @@
     <ClCompile Include="Game\Doom\HealthPickUp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Doom\DoomEnemy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Engine\DebugClasses\Log.h">
@@ -546,6 +549,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Game\Doom\HealthPickUp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Doom\DoomEnemy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Doom\Weapons.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

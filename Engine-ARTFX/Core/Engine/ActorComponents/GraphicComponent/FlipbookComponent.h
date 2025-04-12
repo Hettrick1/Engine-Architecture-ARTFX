@@ -17,11 +17,13 @@ public:
 	void PlayAnimation();
 	inline bool IsAnimationEnded() const { return mHasFinished; }
 
+	void SetCanPlay(bool canPlay);
+
 	void Update() override;
 private:
 	std::vector<Texture*> mAnimationTextures;
 	float mCurrentFrame;
 	float mAnimationFps;
-	bool mIsLooping, mPlayOnce, mHasFinished;
+	bool mIsLooping, mPlayOnce, mHasFinished, mCanPlay, mCanPlayPending;
 };
 

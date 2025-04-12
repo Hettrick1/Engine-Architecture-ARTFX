@@ -115,6 +115,10 @@ void CollisionManager::CheckCollisions()
 
             for (auto* collider1 : colliders1) {
                 for (auto* collider2 : colliders2) {
+                    if (!collider1->GetIsActive() || !collider2->GetIsActive())
+                    {
+                        continue;
+                    }
                     if (collider1->CheckCollisionWith(collider2)) {
                         bool isNewCollision1 = mCurrentCollisions[collider1].find(collider2) == mCurrentCollisions[collider1].end();
                         bool isNewCollision2 = mCurrentCollisions[collider2].find(collider1) == mCurrentCollisions[collider2].end();
@@ -212,8 +216,15 @@ bool CollisionManager::LineTrace(const Vector3D& start, const Vector3D& end, Hit
     {
         for (auto* collider : pair.second)
         {
-            if (!collider) continue;
+            if (!collider)
+            {
+                continue;
+            }
             if (collider->GetOwner() == ignoreActor)
+            {
+                continue;
+            }
+            if (!collider->GetIsActive())
             {
                 continue;
             }

@@ -39,8 +39,11 @@ public:
 
 	Vector3D GetSize() const { return mSize; }
 
+	void SetActive(bool pActive);
+	inline bool GetIsActive() const { return mIsActive; }
+
 protected :
-	bool mIsQuerry;
+	bool mIsQuerry, mIsActive;;
 	std::vector<ICollisionListener*> mListeners;
 	Vector3D mSize;
 	std::string mName;

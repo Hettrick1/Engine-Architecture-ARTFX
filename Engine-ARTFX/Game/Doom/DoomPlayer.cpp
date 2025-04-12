@@ -12,6 +12,7 @@
 #include "Physics/CollisionManager.h"
 #include "Physics/PhysicManager.h"
 #include "BoxCollider3DComponent.h"
+#include "DoomEnemy.h"
 
 float bobingTime = 0;
 
@@ -30,6 +31,8 @@ DoomPlayer::~DoomPlayer()
 	delete mHealthText;
 	delete mArmorText;
 	delete mWeaponIconImage;
+	mGunAnim.clear();
+	mShotgunAnim.clear();
 }
 
 void DoomPlayer::Start()
@@ -68,9 +71,9 @@ void DoomPlayer::Start()
 	};
 
 	CameraComponent* cameraComponent = new CameraComponent(this);
-	cameraComponent->SetRelativePosition(Vector3D::zero);
+	cameraComponent->SetRelativePosition(Vector3D(0,0, 0.4));
 	mGun = new FlipbookComponent(this, mGunAnim, 100000000);
-	mGun->SetRelativePosition(Vector3D(0.0f, 2.0f, -0.2f));
+	mGun->SetRelativePosition(Vector3D(0.0f, 2.0f, 0.2f));
 	mGun->RelativeRotateX(90);
 	mGun->SetAnimationFps(8);
 	mGun->SetCullOff(true);
@@ -112,7 +115,7 @@ void DoomPlayer::Update()
 	else 
 	{
 		float lerpRelativeSpeed = 8;
-		Vector3D lerpRelative = Vector3D::Lerp(mGun->GetRelativePosition(), Vector3D(0.0f, 2.0f, -0.2f), Timer::deltaTime * lerpRelativeSpeed);
+		Vector3D lerpRelative = Vector3D::Lerp(mGun->GetRelativePosition(), Vector3D(0.0f, 2.0f, 0.2f), Timer::deltaTime * lerpRelativeSpeed);
 		mGun->SetRelativePosition(lerpRelative);
 		bobingTime = 0;
 	}
@@ -171,9 +174,10 @@ void DoomPlayer::Shoot(int pAmoQuantity)
 			GetScene().GetRenderer()->AddDebugLine(line);
 			UseAmo(pAmoQuantity);
 
-			if (hit.HitActor != nullptr && hit.HitActor->GetTag() == "Wall")
+			if (hit.HitActor != nullptr && hit.HitActor->HasTag("Enemy"))
 			{
-				Log::Info("CUBE !!!!");
+				DoomEnemy* enemy = static_cast<DoomEnemy*>(hit.HitActor);
+				enemy->TakeDamage(25, static_cast<int>(mWeapon));
 			}
 
 			break;
@@ -203,9 +207,10 @@ void DoomPlayer::Shoot(int pAmoQuantity)
 				PhysicManager::Instance().LineTrace(start, end, hit, this);
 				DebugLine* line = new DebugLine(start, end, hit);
 				GetScene().GetRenderer()->AddDebugLine(line);
-				if (hit.HitActor != nullptr && hit.HitActor->GetTag() == "Wall")
+				if (hit.HitActor != nullptr && hit.HitActor->HasTag("Enemy"))
 				{
-					Log::Info("CUBE !!!!");
+					DoomEnemy* enemy = static_cast<DoomEnemy*>(hit.HitActor);
+					enemy->TakeDamage(25, static_cast<int>(mWeapon));
 				}
 			}
 			UseAmo(pAmoQuantity);
