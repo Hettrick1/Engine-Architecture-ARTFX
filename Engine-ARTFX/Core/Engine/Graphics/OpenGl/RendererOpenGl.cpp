@@ -227,6 +227,7 @@ void RendererOpenGl::DrawSprites()
 	for (SpriteComponent* sprite : mSprites) {
 		Matrix4DRow world = sprite->GetWorldTransform();
 		mSpriteShaderProgram->setMatrix4Row("uWorldTransform", world);
+		mSpriteShaderProgram->setVector4f("uTint", Vector4D(1.0f, 1.0f, 1.0f, 1.0f));
 		sprite->Draw(*this);
 	}
 }
@@ -241,7 +242,7 @@ void RendererOpenGl::DrawHud()
 	glDisable(GL_BLEND); 
 }
 
-void RendererOpenGl::DrawHudImage(Texture& pTexture, Rectangle pRect, Vector2D pOrigin)
+void RendererOpenGl::DrawHudImage(Texture& pTexture, Rectangle pRect, Vector2D pOrigin, Vector4D pTint)
 {
 	if (mSpriteShaderProgram == nullptr)
 	{
@@ -258,6 +259,7 @@ void RendererOpenGl::DrawHudImage(Texture& pTexture, Rectangle pRect, Vector2D p
 	Matrix4DRow scaleMat = Matrix4DRow::CreateScale(Vector3D(pRect.dimensions.x, pRect.dimensions.y, 0));
 	Matrix4DRow world = scaleMat * Matrix4DRow::CreateTranslation(adjustedPosition);
 	mSpriteShaderProgram->setMatrix4Row("uWorldTransform", world);
+	mSpriteShaderProgram->setVector4f("uTint", pTint);
 	mVAO->SetActive();
 	pTexture.SetActive();
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);

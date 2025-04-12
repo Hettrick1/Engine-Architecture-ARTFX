@@ -2,6 +2,7 @@
 #include "HudElement.h"
 #include "RendererOpenGl.h"
 #include "Texture.h"
+#include "Vector4D.h"
 
 class HudImage :
     public HudElement
@@ -13,9 +14,12 @@ public:
 
     void SetTexture(Texture& pTexture);
 
+    void SetTint(Vector4D pColor);
+
 private:
     Texture mTexture;
     float mWidth, mHeight;
     Vector2D mOrigin;
+    Vector4D mTint;
 };
 

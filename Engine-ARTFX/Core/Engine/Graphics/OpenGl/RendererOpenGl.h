@@ -48,7 +48,7 @@ public:
 	void DrawMeshes();
 	void DrawSprites();
 	void DrawHud();
-	void DrawHudImage(Texture& pTexture, Rectangle pRect, Vector2D pOrigin);
+	void DrawHudImage(Texture& pTexture, Rectangle pRect, Vector2D pOrigin, Vector4D pTint);
 
 	void SetSpriteShaderProgram(ShaderProgram& shaderProgram) override;
 
