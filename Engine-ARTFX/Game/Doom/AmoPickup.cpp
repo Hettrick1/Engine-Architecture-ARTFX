@@ -4,6 +4,8 @@
 #include "BoxCollider3DComponent.h"
 #include "DoomPlayer.h"
 #include "Scene.h"
+#include "CameraManager.h"
+#include "CameraComponent.h"
 
 AmoPickup::AmoPickup(Vector3D pPos, Vector3D pSize, Quaternion pRotation)
 	:Actor(pPos, pSize, pRotation)
@@ -28,6 +30,13 @@ void AmoPickup::Start()
 void AmoPickup::Update()
 {
 	Actor::Update();
+	Vector3D camPos = CameraManager::Instance().GetCurrentCamera()->GetWorldTransform().GetTranslation();
+	Vector3D direction = camPos - mTransformComponent.GetPosition();
+
+	float angleZ = Maths::ATan2(direction.y, direction.x);
+	angleZ -= Maths::ToRad(90);
+	Quaternion targetRotation = Quaternion(Vector3D::unitZ, angleZ);
+	mTransformComponent.SetRotation(targetRotation);
 }
 
 void AmoPickup::Destroy()
