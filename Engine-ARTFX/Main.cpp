@@ -5,11 +5,8 @@
 #include "LVLDoom.h"
 #include "LVLAdvancedOpenGL.h"
 #include "LVLDoomMainMenu.h"
-#include "SplashScreen.h"
 
 int main(int argc, char** argv) {
-
-	Game* pong = new Game("myGame", new SplashScreen(new LVLDoomMainMenu()));
-
+	Game* pong = new Game("myGame", new LVLDoomMainMenu());
 	return 0;
 }
