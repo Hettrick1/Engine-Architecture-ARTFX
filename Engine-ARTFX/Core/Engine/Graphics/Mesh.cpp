@@ -3,6 +3,7 @@
 #include "VertexArray.h"
 #include "Assets.h"
 #include "Scene.h"
+#include "SceneManager.h"
 
 Mesh::Mesh()
 	: mVao(nullptr)
@@ -12,7 +13,7 @@ Mesh::Mesh()
 Mesh::Mesh(std::vector<Vertex> pVertices)
 	: mVertices(std::move(pVertices)), mVao(nullptr)
 {
-	Assets::LoadTexture(*(Scene::ActiveScene->GetRenderer()), "Imports/Sprites/planks.png", "cube");
+	Assets::LoadTexture(*(SceneManager::ActiveScene->GetRenderer()), "Imports/Sprites/planks.png", "cube");
 	mVao = new VertexArray(ToVerticeArray(), mVertices.size());
 	mTextures.emplace_back(&Assets::GetTexture("cube"));
 }

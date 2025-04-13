@@ -73,6 +73,20 @@ void DebugRenderer::Initialize(Window& pWindow)
 	glBindVertexArray(0);
 }
 
+void DebugRenderer::Unload()
+{
+	mCollider.clear();
+	for (auto& line : mLines)
+	{
+		if (line)
+		{
+			delete line;
+			line = nullptr;
+		}
+	}
+	mLines.clear();
+}
+
 void DebugRenderer::Draw(IRenderer& pRenderer)
 {
 	if (mDrawDebug) {

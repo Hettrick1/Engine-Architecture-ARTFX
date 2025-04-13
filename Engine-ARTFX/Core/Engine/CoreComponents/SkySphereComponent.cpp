@@ -4,7 +4,7 @@
 #include "Actor.h"
 #include "VertexArray.h"
 #include "Vertex.h"
-#include "Scene.h"
+#include "SceneManager.h"
 
 int SkySphereComponent::index = 0;
 
@@ -37,10 +37,10 @@ SkySphereComponent::SkySphereComponent(Actor* pOwner, bool isSphere, std::vector
 	{
 		Texture* tex = nullptr;
 		if (mTextureToLoad.empty()) {
-			tex = Assets::LoadTexture(*Scene::ActiveScene->GetRenderer(), "Imports/Sprites/LakeSkyTexture.png", "LakeSkyTexture");
+			tex = Assets::LoadTexture(*SceneManager::ActiveScene->GetRenderer(), "Imports/Sprites/LakeSkyTexture.png", "LakeSkyTexture");
 		}
 		else {
-			tex = Assets::LoadTexture(*Scene::ActiveScene->GetRenderer(), mTextureToLoad[0], "skysphere" + index);
+			tex = Assets::LoadTexture(*SceneManager::ActiveScene->GetRenderer(), mTextureToLoad[0], "skysphere" + index);
 			index++;
 		}
 		mTextureIndex = tex->GetId();

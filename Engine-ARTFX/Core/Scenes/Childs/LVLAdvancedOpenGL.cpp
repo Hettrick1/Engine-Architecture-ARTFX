@@ -8,6 +8,7 @@
 #include "TestOpenGl/Sphere.h"
 #include "CoreActors/SkySphere.h"
 #include "Planets/Planet.h"
+#include "SceneManager.h"
 
 LVLAdvancedOpenGl::LVLAdvancedOpenGl()
 	: Scene()
@@ -31,7 +32,7 @@ void LVLAdvancedOpenGl::Start(IRenderer* renderer)
 		});
 	skySphere->Start();
 	AddActor(skySphere);
-	Scene::ActiveScene->GetRenderer()->GetDebugRenderer()->SetDrawBoxes(false);
+	SceneManager::ActiveScene->GetRenderer()->GetDebugRenderer()->SetDrawBoxes(false);
 
 	Shader vert, frag, tcs, tes, geom = Shader();
 	vert.Load("VertFrag/CubePlanet.vert", ShaderType::VERTEX);

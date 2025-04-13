@@ -8,7 +8,6 @@ class Actor;
 class Scene
 {
 public:
-	static Scene* ActiveScene;
 	Scene(std::string title = "Scene");
 	virtual void Start(IRenderer* renderer);
 	virtual void Load();

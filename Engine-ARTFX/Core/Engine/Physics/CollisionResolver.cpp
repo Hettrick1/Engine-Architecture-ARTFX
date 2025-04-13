@@ -56,6 +56,33 @@ void CollisionResolver::RemoveRigidBody(Actor* pOwner, RigidbodyComponent* pRigi
 	}
 }
 
+void CollisionResolver::Unload()
+{
+	for (auto& pair : mQuerryCollisions)
+	{
+		CollisionInfos* ci = pair.second;
+		if (ci != nullptr)
+		{
+			delete ci;
+		}
+		ci = nullptr;
+	}
+	mQuerryCollisions.clear();
+	for (auto& pair : mPhysicCollisions)
+	{
+		CollisionInfos* ci = pair.second;
+		if (ci != nullptr)
+		{
+			delete ci;
+		}
+		ci = nullptr;
+	}
+	mPhysicCollisions.clear();
+	mRigidbodies.clear();
+	mCollisionPosition.clear();
+	mReactionForce.clear();
+}
+
 void CollisionResolver::UpdateRigidbodies()
 {
 	if (mRigidbodies.empty())

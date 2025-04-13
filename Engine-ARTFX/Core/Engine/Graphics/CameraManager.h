@@ -10,6 +10,8 @@ public:
 	static CameraManager& Instance();
 	~CameraManager();
 
+	void Unload();
+
 	void AddCamera(CameraComponent* pCameraToAdd);
 	void RemoveCamera(CameraComponent* pCameraToRemove);
 

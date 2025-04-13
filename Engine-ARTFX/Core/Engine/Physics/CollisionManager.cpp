@@ -31,6 +31,12 @@ CollisionManager::~CollisionManager()
     mCurrentCollisions.clear();
 }
 
+void CollisionManager::Unload()
+{
+    mColliders.clear();
+    mCurrentCollisions.clear();
+}
+
 void CollisionManager::RegisterCollider(Actor* pOwner, ColliderComponent* pCollider)
 {
     if (pOwner && pCollider) {

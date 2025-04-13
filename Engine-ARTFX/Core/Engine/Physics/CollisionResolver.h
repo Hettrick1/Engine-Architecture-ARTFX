@@ -54,6 +54,8 @@ public:
 	CollisionResolver(const CollisionResolver&) = delete;
 	CollisionResolver& operator=(const CollisionResolver&) = delete;
 
+	void Unload();
+
 	void UpdateRigidbodies();
 	void ResolveCollisions();
 	void CalculateQuerryCollisions();

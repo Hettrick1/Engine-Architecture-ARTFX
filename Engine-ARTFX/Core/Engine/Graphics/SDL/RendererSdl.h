@@ -18,6 +18,7 @@ public:
 	void Draw() override;
 	void EndDraw() override;
 	void Close() override;
+	void Unload() override;
 
 	void AddSprite(SpriteComponent* pSprite) override;
 	void RemoveSprite(SpriteComponent* pSprite) override;

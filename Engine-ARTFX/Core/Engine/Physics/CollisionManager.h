@@ -19,6 +19,8 @@ public:
     CollisionManager();
     ~CollisionManager();
 
+    void Unload();
+
     void RegisterCollider(Actor* pOwner, ColliderComponent* pCollider);
     void RemoveCollider(Actor* pOwner, ColliderComponent* pCollider);
     void UpdateColliders();

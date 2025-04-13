@@ -10,6 +10,7 @@
 #include "FlipbookComponent.h"
 #include "DoomPlayer.h"
 #include "Scene.h"
+#include "SceneManager.h"
 
 DoomPC::DoomPC(Actor* pOwner, int pUpdateOrder)
 	: Component(pOwner, pUpdateOrder), playerRbRef(nullptr)
@@ -63,13 +64,13 @@ void DoomPC::OnActionStarted(InputActions* action)
 		}
 		if (Triggeredaction && Triggeredaction->GetName() == "WireFrame")
 		{
-			if (Scene::ActiveScene->GetRenderer()->GetWireFrame())
+			if (SceneManager::ActiveScene->GetRenderer()->GetWireFrame())
 			{
-				Scene::ActiveScene->GetRenderer()->SetWireFrameMode(false);
+				SceneManager::ActiveScene->GetRenderer()->SetWireFrameMode(false);
 			}
 			else
 			{
-				Scene::ActiveScene->GetRenderer()->SetWireFrameMode(true);
+				SceneManager::ActiveScene->GetRenderer()->SetWireFrameMode(true);
 			}
 		}
 	}

@@ -6,13 +6,14 @@
 #include "InputManager.h"
 #include "Physics/PhysicManager.h"
 #include "CameraManager.h"
+#include "SceneManager.h"
 #include <iostream>
 #include <vector>
 
 class Game
 {
 public:
-	Game(std::string title, std::vector<Scene*> scenes);
+	Game(std::string title, Scene* pStartupScene);
 	~Game();
 	void Initialize();
 	void Loop();
@@ -26,11 +27,10 @@ private:
 	std::string mTitle;
 	Window* mGameWindow;
 	IRenderer* mRenderer;
+	Scene* mStartUpScene;
 	InputManager& mInputManager;
 	PhysicManager& mPhysicManager;
 	CameraManager& mCameraManager;
 	bool mIsRunning;
-	std::vector<Scene*> mAllScenes;
-	int mLoadedScene;
 };
 

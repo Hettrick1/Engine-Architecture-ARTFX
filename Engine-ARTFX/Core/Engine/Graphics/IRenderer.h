@@ -38,6 +38,7 @@ public:
 	virtual void Draw() = 0;
 	virtual void EndDraw() = 0;
 	virtual void Close() = 0;
+	virtual void Unload() = 0;
 
 	virtual void AddSprite(SpriteComponent* pSprite) = 0;
 	virtual void RemoveSprite(SpriteComponent* pSprite) = 0;

@@ -17,6 +17,12 @@ CameraManager::~CameraManager()
 {
 }
 
+void CameraManager::Unload()
+{
+	mActiveCamera = nullptr;
+	mCameras.clear();
+}
+
 void CameraManager::AddCamera(CameraComponent* pCameraToAdd)
 {
 	mCameras.push_back(pCameraToAdd);

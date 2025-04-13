@@ -10,6 +10,14 @@ HudText::HudText(const std::string& text, float x, float y, float scale, Vector4
     SetPosition(x, y);
 }
 
+HudText::~HudText()
+{
+    if (mShaderProgram)
+    {
+        delete mShaderProgram;
+    }
+}
+
 void HudText::Draw(RendererOpenGl& renderer)
 {
     TextRenderer::Instance().RenderText(mText, mPositionX, mPositionY, mScale, mColor, *mFont, mAlignment, mShaderProgram);

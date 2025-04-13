@@ -5,8 +5,9 @@
 #include "RendererOpenGl.h"
 #include "TextRenderer.h"
 
-Game::Game(std::string title, std::vector<Scene*> scenes) 
-    : mIsRunning(true), mAllScenes(scenes), mInputManager(InputManager::Instance()), mPhysicManager(PhysicManager::Instance()), mCameraManager(CameraManager::Instance())
+Game::Game(std::string title, Scene* pStartupScene)
+    : mIsRunning(true), mStartUpScene(pStartupScene), mInputManager(InputManager::Instance()), mPhysicManager(PhysicManager::Instance())
+    , mCameraManager(CameraManager::Instance())
 {
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
     {
@@ -16,8 +17,6 @@ Game::Game(std::string title, std::vector<Scene*> scenes)
     {
         Log::Info("SDL initialization succeeded!");
     }
-
-    mLoadedScene = 0;
 
     Initialize();
 }
@@ -33,20 +32,14 @@ void Game::Initialize()
     mGameWindow = new Window(WINDOW_WIDTH, WINDOW_HEIGHT);
     mRenderer = new RendererOpenGl();
     if (mGameWindow->Open() && mRenderer->Initialize(*mGameWindow) && TextRenderer::Instance().Init(*mGameWindow)) {
-        mAllScenes[mLoadedScene]->Load();
+        SceneManager::LoadScene(mStartUpScene);
         Loop();
     }
 }
 
 void Game::Loop()
 {
-    if (mAllScenes.size() > 0) {
-        mAllScenes[mLoadedScene]->Start(mRenderer);
-    }
-    else {
-        Log::Error(LogType::Error, "No scene are available !");
-        return;
-    }
+    SceneManager::StartScene(mRenderer);
 
     while (mIsRunning) {
         Timer::ComputeDeltaTime();
@@ -63,12 +56,12 @@ void Game::Update()
 {
     mPhysicManager.Update();
     mCameraManager.UpdateCurrentCamera();
-    mAllScenes[mLoadedScene]->Update();
+    SceneManager::Update();
 }
 
 void Game::Render()
 {
-    mAllScenes[mLoadedScene]->Render();
+    SceneManager::Render();
 }
 
 void Game::Input()
@@ -92,6 +85,6 @@ void Game::Input()
 
 void Game::Close()
 {
-    mAllScenes[mLoadedScene]->Unload();
+    SceneManager::Unload();
     mGameWindow->Close();
 }

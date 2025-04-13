@@ -20,6 +20,8 @@ public:
 
 	void Update();
 
+	void Unload();
+
 public: // collision manager
 	void RegisterCollider(Actor* pOwner, ColliderComponent* pCollider);
 	void RemoveCollider(Actor* pOwner, ColliderComponent* pCollider);

@@ -6,15 +6,9 @@
 class HudManager
 {
 public:
-    void AddElement(HudElement* element) {
-        mHudElements.push_back(element);
-    }
-
-    void Draw(RendererOpenGl& renderer) {
-        for (auto& element : mHudElements) {
-            element->Draw(renderer);
-        }
-    }
+    void AddElement(HudElement* element);
+    void Draw(RendererOpenGl& renderer);
+    void Unload();
 private:
     std::vector<HudElement*> mHudElements;
 };

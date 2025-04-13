@@ -9,6 +9,7 @@ class HudText :
 {
 public:
     HudText(const std::string& text, float x, float y, float scale, Vector4D color,TextAlignment alignment = TextAlignment::LEFT, Font* pFont = nullptr);
+    ~HudText();
 
     void Draw(RendererOpenGl& renderer) override;
 

@@ -50,6 +50,10 @@ void RendererSdl::Close()
     SDL_DestroyRenderer(mSdlRenderer);
 }
 
+void RendererSdl::Unload()
+{
+}
+
 void RendererSdl::AddSprite(SpriteComponent* pSprite)
 {
     int spriteDrawOrder = pSprite->GetDrawOrder();

@@ -13,6 +13,7 @@ public:
 	~DebugRenderer();
 
 	void Initialize(Window& pWindow);
+	void Unload();
 
 	void Draw(IRenderer& pRenderer);
 

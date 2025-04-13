@@ -21,6 +21,7 @@ PhysicManager::PhysicManager()
 
 PhysicManager::~PhysicManager()
 {
+    Unload();
     if (mCollisionManager != nullptr)
     {
         delete mCollisionManager;
@@ -40,6 +41,12 @@ void PhysicManager::Update()
     mCollisionManager->CheckCollisions();
     mCollisionResolver->ResolveCollisions();
     mCollisionManager->UpdateColliders();
+}
+
+void PhysicManager::Unload()
+{
+    mCollisionManager->Unload();
+    mCollisionResolver->Unload();
 }
 
 void PhysicManager::RegisterCollider(Actor* pOwner, ColliderComponent* pCollider)

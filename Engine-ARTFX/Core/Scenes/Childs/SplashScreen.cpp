@@ -1,5 +1,4 @@
 #include "SplashScreen.h"
-
 #include "CameraActor.h"
 #include "MeshComponent.h"
 #include "Assets.h"
@@ -7,9 +6,12 @@
 #include "Timer.h"
 #include "TextRenderer.h"
 #include "HudManager.h" 
+#include "SceneManager.h"
+#include "LVLDoom.h"
+#include "LVLDoomMainMenu.h"
 
-SplashScreen::SplashScreen()
-	: Scene(), mZephyrusText(nullptr), mStudioText(nullptr), mTime(0)
+SplashScreen::SplashScreen(Scene* pNextScene)
+	: Scene(), mZephyrusText(nullptr), mStudioText(nullptr), mTime(0), mNextScene(pNextScene)
 {
 }
 
@@ -41,7 +43,8 @@ void SplashScreen::Start(IRenderer* renderer)
 	mZephyrusText->SetShaderProgram(shaderProgram);
 
 	mStudioText = new HudText("Engine", 0, -200, 0.5f, Vector4D(1, 1, 1, 0), TextAlignment::CENTER, Assets::LoadFont("Imports/Fonts/Chopsic.otf", "RoadPixel"));
-	GetRenderer()->GetHud()->AddElement(mStudioText);
+	GetRenderer()->GetHud()->AddElement(mStudioText); 
+	SDL_SetRelativeMouseMode(SDL_TRUE);
 }
 
 void SplashScreen::Update()
@@ -60,7 +63,7 @@ void SplashScreen::Update()
 	}
 	if (mTime > 3.0f)
 	{
-		Scene::ActiveScene->Close();
+		SceneManager::LoadScene(mNextScene);
 	}
 }
 

@@ -102,6 +102,15 @@ void RendererOpenGl::Close()
 	delete mVAO;
 }
 
+void RendererOpenGl::Unload()
+{
+	mSprites.clear();
+	mMeshes.clear();
+	mHud->Unload();
+	mDebugRenderer->Unload();
+	mSkySphereComponent = nullptr;
+}
+
 void RendererOpenGl::AddSprite(SpriteComponent* pSprite)
 {
 	int spriteDrawOrder = pSprite->GetDrawOrder();

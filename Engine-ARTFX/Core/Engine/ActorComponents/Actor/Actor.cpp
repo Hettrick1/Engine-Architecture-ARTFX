@@ -1,10 +1,11 @@
 #include "Actor.h"
 #include "Component.h"
 #include "Scene.h"
+#include "SceneManager.h"
 #include <algorithm>
 
 Actor::Actor(Vector3D position, Vector3D size, Quaternion rotation) : 
-    mState(ActorState::Active), mScene(*Scene::ActiveScene), mTag(""), mRigidbody(nullptr), mLod(16)
+    mState(ActorState::Active), mScene(*SceneManager::ActiveScene), mTag(""), mRigidbody(nullptr), mLod(16)
 {
     mTransformComponent.SetPosition(position);
     mTransformComponent.SetSize(size);

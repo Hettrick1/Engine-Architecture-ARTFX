@@ -1,14 +1,14 @@
 #include "Scene.h"
 
 #include "Actor.h"
+#include "Physics/PhysicManager.h"
+#include "CameraManager.h"
 #include <algorithm>
 
-Scene* Scene::ActiveScene = nullptr;
 
 Scene::Scene(std::string title) 
 	: mTitle(title), mIsUpdatingActor(false), mRenderer(nullptr)
 {
-	ActiveScene = this;
 }
 
 void Scene::Start(IRenderer* renderer)
@@ -34,6 +34,9 @@ void Scene::Render()
 
 void Scene::Unload()
 {
+	mRenderer->Unload();
+	PhysicManager::Instance().Unload();
+	CameraManager::Instance().Unload();
 	while (!mAllActors.empty()) {
 		mAllActors.back()->Destroy();
 		delete mAllActors.back();
@@ -49,6 +52,19 @@ void Scene::Unload()
 
 void Scene::Close()
 {
+	mRenderer->Unload();
+	PhysicManager::Instance().Unload();
+	CameraManager::Instance().Unload();
+	while (!mAllActors.empty()) {
+		mAllActors.back()->Destroy();
+		delete mAllActors.back();
+		mAllActors.pop_back();
+	}
+	while (!mPendingActors.empty()) {
+		mPendingActors.back()->Destroy();
+		delete mPendingActors.back();
+		mAllActors.pop_back();
+	}
 }
 
 void Scene::AddActor(Actor* actor)

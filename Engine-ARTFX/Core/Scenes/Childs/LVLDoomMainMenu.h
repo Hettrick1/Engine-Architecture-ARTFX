@@ -3,19 +3,19 @@
 #include "Scene.h"
 #include "Shaders/ShaderProgram.h"
 #include "HudElements/HudText.h"
+#include "HudElements/HudImage.h"
 
-class SplashScreen : public Scene
+class LVLDoomMainMenu : public Scene
 {
 public:
-	SplashScreen(Scene* pNextScene);
-	~SplashScreen();
+	LVLDoomMainMenu();
+	~LVLDoomMainMenu();
 	void Start(IRenderer* renderer) override;
 	void Update() override;
 	void Render() override;
 	void Close() override;
 private:
-	HudText* mZephyrusText;
-	HudText* mStudioText;
-	Scene* mNextScene;
-	float mTime;
+	HudImage* mDoomMenu;
+	HudText* mPressEnter;
+	float mTimer;
 };
