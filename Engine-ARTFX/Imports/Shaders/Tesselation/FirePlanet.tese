@@ -12,6 +12,7 @@ in TESC_OUT{
    vec3 texCoord;
 
 } tese_in[];
+
 out TESE_OUT{
    vec4 color;
    vec3 normal;

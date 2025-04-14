@@ -7,6 +7,6 @@
 #include "LVLDoomMainMenu.h"
 
 int main(int argc, char** argv) {
-	Game* pong = new Game("myGame", new LVLDoomMainMenu());
+	Game* pong = new Game("myGame", new LVLAdvancedOpenGl());
 	return 0;
 }

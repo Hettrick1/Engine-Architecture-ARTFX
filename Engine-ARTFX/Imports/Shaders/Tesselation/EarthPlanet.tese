@@ -35,6 +35,12 @@ float Distance(vec3 v0)
    return abs(v0.x * v0.x + v0.y * v0.y + v0.z * v0.z);
 }
 
+vec3 GetNormal(vec3 position)
+{
+    // Pour une sphère centrée à l'origine, la normale est simplement la position normalisée
+    return normalize(position);
+}  
+
 void main(void)
 {
    vec4 test = (gl_TessCoord.x * gl_in[0].gl_Position +
@@ -54,7 +60,7 @@ void main(void)
    pos *= noise + 20;
 
    gl_Position = pos;
-   tese_out.normal = interpolate3D(tese_in[0].normal, tese_in[1].normal, tese_in[2].normal);
+   tese_out.normal = GetNormal(pos.xyz);
 
    gl_Position *= uWorldTransform * uViewProj;
 

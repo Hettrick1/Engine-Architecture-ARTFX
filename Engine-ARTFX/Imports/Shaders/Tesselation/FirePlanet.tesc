@@ -7,6 +7,7 @@ in VS_OUT{
    vec3 normal;
    vec3 texCoord;
 } tesc_in[];
+
 out TESC_OUT{
    vec4 color;
    vec3 normal;

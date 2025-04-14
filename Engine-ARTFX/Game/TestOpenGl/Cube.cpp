@@ -18,12 +18,11 @@ Cube::~Cube()
 void Cube::Start()
 {
 	Actor::Start();
-	Texture* tex2 = Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/gray.png", "walls");
-	Texture* tex = Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/planks.png", "cube");
+	Texture* tex2 = Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/091.png", "groundTex");
 	Mesh* mesh = Assets::LoadMesh("Imports/Meshes/cube.obj", "cube");
 	mesh->AddTexture(tex2);
 	MeshComponent* meshComp = new MeshComponent(this, mesh);
-	meshComp->SetTextureIndex(0); 
+	meshComp->SetTextureIndex(1); 
 	RigidbodyComponent* rb = new RigidbodyComponent(this);
 	BoxCollider3DComponent* bc = new BoxCollider3DComponent(this, 10, GetTransformComponent().GetSize());
 }

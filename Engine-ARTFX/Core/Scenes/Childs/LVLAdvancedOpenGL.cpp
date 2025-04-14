@@ -34,6 +34,16 @@ void LVLAdvancedOpenGl::Start(IRenderer* renderer)
 	AddActor(skySphere);
 	SceneManager::ActiveScene->GetRenderer()->GetDebugRenderer()->SetDrawBoxes(false);
 
+	CubeTextureMap* cubemap = new CubeTextureMap();
+	cubemap->CreateCubeTextureMap({
+		"Imports/Sprites/CubeMap/nx1.png",
+		"Imports/Sprites/CubeMap/px1.png",
+		"Imports/Sprites/CubeMap/py1.png",
+		"Imports/Sprites/CubeMap/ny1.png",
+		"Imports/Sprites/CubeMap/nz1.png",
+		"Imports/Sprites/CubeMap/pz1.png",
+		});
+
 	Shader vert, frag, tcs, tes, geom = Shader();
 	vert.Load("VertFrag/CubePlanet.vert", ShaderType::VERTEX);
 	frag.Load("VertFrag/CubePlanet.frag", ShaderType::FRAGMENT);
@@ -59,15 +69,22 @@ void LVLAdvancedOpenGl::Start(IRenderer* renderer)
 	ShaderProgram* shaderProg3 = new ShaderProgram(); 
 	shaderProg3->Compose({ &vert, &tcs, &tes, &frag }); 
 
+	vert.Load("VertFrag/EarthPlanet.vert", ShaderType::VERTEX);
+	frag.Load("VertFrag/EarthPlanet.frag", ShaderType::FRAGMENT);
+	tcs.Load("Tesselation/EarthPlanet.tesc", ShaderType::TESSELLATION_CONTROL);
+	tes.Load("Tesselation/EarthPlanet.tese", ShaderType::TESSELLATION_EVALUATION);
+
+	ShaderProgram* shaderProg4 = new ShaderProgram();
+	shaderProg4->Compose({ &vert, &tcs, &tes, &frag });
 
 	vert.Load("VertFrag/EarthPlanet.vert", ShaderType::VERTEX); 
-	frag.Load("VertFrag/EarthPlanet.frag", ShaderType::FRAGMENT); 
+	frag.Load("VertFrag/EarthPlanetTree.frag", ShaderType::FRAGMENT); 
 	tcs.Load("Tesselation/EarthPlanet.tesc", ShaderType::TESSELLATION_CONTROL); 
 	tes.Load("Tesselation/EarthPlanet.tese", ShaderType::TESSELLATION_EVALUATION);
 	geom.Load("Geometry/EarthPlanet.geom", ShaderType::GEOMETRY);
 
-	ShaderProgram* shaderProg4 = new ShaderProgram();
-	shaderProg4->Compose({ &vert, &tcs, &tes, &frag });
+	ShaderProgram* shaderProg5 = new ShaderProgram();
+	shaderProg5->Compose({ &vert, &tcs, &tes, &geom, &frag });
 
 	Planet* planet = new Planet(Vector3D(16, 10, -1), 3, Quaternion(0, 0, 0, 1), shaderProg);
 	AddActor(planet);
@@ -85,19 +102,13 @@ void LVLAdvancedOpenGl::Start(IRenderer* renderer)
 	AddActor(planet3);
 	planet3->Start();
 
-	CubeTextureMap* cubemap = new CubeTextureMap();
-	cubemap->CreateCubeTextureMap({
-		"Imports/Sprites/CubeMap/nx1.png",
-		"Imports/Sprites/CubeMap/px1.png",
-		"Imports/Sprites/CubeMap/py1.png",
-		"Imports/Sprites/CubeMap/ny1.png",
-		"Imports/Sprites/CubeMap/nz1.png",
-		"Imports/Sprites/CubeMap/pz1.png",
-		});
-
 	Planet* planet4 = new Planet(Vector3D(-18, 10, -1), 3, Quaternion(0, 0, 0, 1), shaderProg4, cubemap);
 	AddActor(planet4);
 	planet4->Start();
+
+	Planet* planet5 = new Planet(Vector3D(-18, 10, -1), 3, Quaternion(0, 0, 0, 1), shaderProg5, cubemap);
+	AddActor(planet5);
+	planet5->Start();
 
 	DoomPlayer* player = new DoomPlayer();
 	AddActor(player);

@@ -30,17 +30,19 @@ void LVLDoom::Start(IRenderer* renderer)
 	mPlayer = new DoomPlayer();
 	AddActor(mPlayer);
 	mPlayer->Start();
+
 	Cube* cube = new Cube(Vector3D(3,3,0), 1);
 	AddActor(cube);
 	cube->Start();
-	cube->GetComponentOfType<MeshComponent>()->SetTiling(Vector2D(3, 2));
+	cube->GetComponentOfType<MeshComponent>()->SetTiling(Vector2D(10, 10));
 	cube->SetTag("Wall");
 	cube->GetRigidBody()->SetIsStatic(true);
+
 	Cube* cube2 = new Cube(Vector3D(5, 5, -1.2), Vector3D(100,100,0.1));
 	AddActor(cube2);
 	cube2->Start();
 	cube2->RemoveComponent(cube2->GetRigidBody());
-	cube2->GetComponentOfType<MeshComponent>()->SetTiling(Vector2D(300, 200));
+	cube2->GetComponentOfType<MeshComponent>()->SetTiling(Vector2D(100, 100));
 	cube2->SetTag("Wall");
 	AmoPickup* amoPu = new AmoPickup(Vector3D(10, 10, -0.5));
 	AddActor(amoPu);
