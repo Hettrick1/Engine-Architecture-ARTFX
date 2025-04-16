@@ -102,13 +102,21 @@ void LVLAdvancedOpenGl::Start(IRenderer* renderer)
 	AddActor(planet3);
 	planet3->Start();
 
-	Planet* planet4 = new Planet(Vector3D(-18, 10, -1), 3, Quaternion(0, 0, 0, 1), shaderProg4, cubemap);
+	Planet* planet4 = new Planet(Vector3D(-28, 10, -1), 3, Quaternion(0, 0, 0, 1), shaderProg5, cubemap);
 	AddActor(planet4);
 	planet4->Start();
 
-	Planet* planet5 = new Planet(Vector3D(-18, 10, -1), 3, Quaternion(0, 0, 0, 1), shaderProg5, cubemap);
+	Planet* planet5 = new Planet(Vector3D(-18, 10, -1), 3, Quaternion(0, 0, 0, 1), shaderProg4, cubemap);
 	AddActor(planet5);
 	planet5->Start();
+
+	Planet* planet6 = new Planet(Vector3D(-38, 10, -1), 3, Quaternion(0, 0, 0, 1), shaderProg4, cubemap);
+	AddActor(planet6);
+	planet6->Start();
+
+	Planet* planet7 = new Planet(Vector3D(-38, 10, -1), 3, Quaternion(0, 0, 0, 1), shaderProg5, cubemap);
+	AddActor(planet7);
+	planet7->Start();
 
 	DoomPlayer* player = new DoomPlayer();
 	AddActor(player);

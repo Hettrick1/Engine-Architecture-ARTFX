@@ -55,11 +55,11 @@ void Planet::Update()
 	Vector3D dist = camPos - GetTransformComponent().GetPosition();
 	float distSq = dist.LengthSq();
 
-	if (distSq < 800.0f)
+	if (distSq < 1800.0f)
 		mLod = 32;
-	else if (distSq < 1800.0f)
-		mLod = 10;
 	else if (distSq < 2800.0f)
+		mLod = 10;
+	else if (distSq < 3800.0f)
 		mLod = 4;
 	else
 		mLod = 2;
