@@ -56,7 +56,7 @@ void Planet::Update()
 	float distSq = dist.LengthSq();
 
 	if (distSq < 800.0f)
-		mLod = 16;
+		mLod = 32;
 	else if (distSq < 1800.0f)
 		mLod = 10;
 	else if (distSq < 2800.0f)

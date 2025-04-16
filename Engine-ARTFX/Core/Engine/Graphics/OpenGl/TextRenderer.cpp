@@ -56,7 +56,7 @@ void TextRenderer::RenderText(std::string text, float x, float y, float scale, V
 
     // activate corresponding render state	
     shaderProgram->Use();
-    shaderProgram->setMatrix4Row("projection", mProjection);
+    //shaderProgram->setMatrix4Row("projection", mProjection);
     shaderProgram->setVector4f("textColor", color);
     shaderProgram->setFloat("time", SDL_GetTicks());
     shaderProgram->setFloat("screenWidth", mWindow->GetDimensions().x);
