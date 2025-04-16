@@ -18,8 +18,10 @@ Cube::~Cube()
 void Cube::Start()
 {
 	Actor::Start();
+	Texture* tex1 = Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/268.png", "wallTex");
 	Texture* tex2 = Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/091.png", "groundTex");
 	Mesh* mesh = Assets::LoadMesh("Imports/Meshes/cube.obj", "cube");
+	mesh->AddTexture(tex1);
 	mesh->AddTexture(tex2);
 	MeshComponent* meshComp = new MeshComponent(this, mesh);
 	meshComp->SetTextureIndex(1); 
