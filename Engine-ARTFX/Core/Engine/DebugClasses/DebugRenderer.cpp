@@ -4,7 +4,7 @@
 
 DebugRenderer::DebugRenderer()
 	: mDebugBoxVbo(0), mDebugBoxVao(0), mDebugLineVbo(0), mDebugLineVao(0)
-	, mDrawDebug(true), mDrawLines(true), mDrawBoxes(true)
+	, mDrawDebug(false), mDrawLines(true), mDrawBoxes(true)
 {
 }
 
@@ -113,8 +113,8 @@ void DebugRenderer::Draw(IRenderer& pRenderer)
 			}
 			mLines.clear();
 		}
-		glDisable(GL_DEPTH_TEST);
 	}
+	glDisable(GL_DEPTH_TEST);
 }
 
 void DebugRenderer::AddDebugCollider(ColliderComponent* pCol)

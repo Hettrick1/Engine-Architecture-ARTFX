@@ -6,7 +6,7 @@
 #include "Vertex.h"
 
 MeshComponent::MeshComponent(Actor* pOwner, Mesh* pMesh, ShaderProgram* pProgram)
-	: Component(pOwner), mMesh(pMesh), mTextureIndex(0), mTiling(1)
+	: Component(pOwner), mMesh(pMesh), mTextureIndex(0), mTiling(Vector2D(pOwner->GetTransformComponent().GetSize().x, pOwner->GetTransformComponent().GetSize().y))
 {
 	mOwner->GetScene().GetRenderer()->AddMesh(this);
 	if (pProgram == nullptr)

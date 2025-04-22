@@ -17,9 +17,15 @@ BasicCube::~BasicCube()
 void BasicCube::Start()
 {
 	Actor::Start();
-	Texture* tex = Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/uv_mapper.jpg", "LakeSkyTexture");
+	Texture* tex1 = Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/268.png", "wallTex");
+	Texture* tex2 = Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/091.png", "groundTex");
+	Texture* tex3 = Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/268bis.png", "wallTex2");
+	Texture* tex4 = Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/uv_mapper.jpg", "uvMapper");
 	Mesh* mesh = Assets::LoadMesh("Imports/Meshes/cube.obj", "cube");
-	mesh->AddTexture(tex);
+	mesh->AddTexture(tex1);
+	mesh->AddTexture(tex2); 
+	mesh->AddTexture(tex3); 
+	mesh->AddTexture(tex4);
 	MeshComponent* meshComp = new MeshComponent(this, mesh, mShaderProgram);
 	meshComp->SetTextureIndex(1);
 	BoxCollider3DComponent* bc = new BoxCollider3DComponent(this, 10, GetTransformComponent().GetSize());
