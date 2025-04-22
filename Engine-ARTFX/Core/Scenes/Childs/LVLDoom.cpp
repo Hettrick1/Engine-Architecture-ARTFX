@@ -29,6 +29,7 @@ LVLDoom::~LVLDoom()
 void LVLDoom::Start(IRenderer* renderer)
 {
 	Scene::Start(renderer);
+
 	mPlayer = new DoomPlayer();
 	AddActor(mPlayer);
 	mPlayer->Start();

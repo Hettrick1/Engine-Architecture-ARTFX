@@ -12,10 +12,10 @@
 #include "DoomPlayer.h"
 
 const float damages = 20;
-const float weaponRange = 50;
+const float weaponRange = 60;
 const float weaponSpreadAngle = 0.8;
 const float shootCooldown = 1;
-const float detectionRange = 500;
+const float detectionRange = 800;
 
 DoomEnemy::DoomEnemy(DoomPlayer* pPlayerRef, Vector3D pPos, Vector3D pSize, Quaternion pRotation)
 	: Actor(pPos, pSize, pRotation), mPlayerRef(pPlayerRef), mEnemyFb(nullptr), mHealth(100), mShootCouldown(shootCooldown)

@@ -25,7 +25,6 @@ LVLDoomMainMenu::~LVLDoomMainMenu()
 void LVLDoomMainMenu::Start(IRenderer* renderer)
 {
 	Scene::Start(renderer);
-
 	CameraActor* cam = new CameraActor();
 	cam->Start();
 	AddActor(cam);

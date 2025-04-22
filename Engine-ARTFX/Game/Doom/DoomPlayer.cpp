@@ -17,7 +17,7 @@
 float bobingTime = 0;
 const float gunDamages = 25;
 const float shotgunDamages = 25;
-const float gunRange = 20;
+const float gunRange = 30;
 const float shotgunRange = 20;
 const float shotgunSpreadAngle = 4;
 
