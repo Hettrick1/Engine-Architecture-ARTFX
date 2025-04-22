@@ -11,9 +11,10 @@
 #include "DoomPlayer.h"
 #include "Scene.h"
 #include "SceneManager.h"
+#include "Physics/PhysicManager.h"
 
 DoomPC::DoomPC(Actor* pOwner, int pUpdateOrder)
-	: Component(pOwner, pUpdateOrder), playerRbRef(nullptr)
+	: Component(pOwner, pUpdateOrder), playerRbRef(nullptr), goRight(true), goLeft(true), goForward(true), goBackward(true)
 {
 	InputManager& inputManager = InputManager::Instance();
 	inputManager.CreateNewAxis2DBinding(this, "Movement", SDLK_d, SDLK_a, SDLK_w, SDLK_s);
@@ -93,11 +94,63 @@ void DoomPC::OnActionTriggered(InputActions* action)
 		}
 		if (Triggeredaction && Triggeredaction->GetName() == "Movement")
 		{
+			Vector3D start = mOwner->GetTransformComponent().GetPosition();
+			Vector3D end;
+			HitResult hit;
+
 			Vector2D axis = Triggeredaction->GetAxis();
-			Vector3D forward = mOwner->GetComponentOfType<CameraComponent>()->GetWorldTransform().GetYAxis();
+
+			Vector3D forward = mOwner->GetTransformComponent().GetWorldTransform().GetYAxis();
 			Vector3D right = mOwner->GetComponentOfType<CameraComponent>()->GetWorldTransform().GetXAxis();
 			Vector3D moveDirection = forward * axis.y + right * -axis.x;
-			playerRbRef->SetVelocity(moveDirection * 3);
+
+
+			moveDirection.Normalize();
+			moveDirection *= 4;
+			playerRbRef->SetVelocity(moveDirection);
+
+			end = start + Vector3D(0, 0.5, 0);
+			PhysicManager::Instance().LineTrace(start, end, hit, mOwner);
+			DebugLine* line = new DebugLine(start, end, hit);
+			SceneManager::ActiveScene->GetRenderer()->AddDebugLine(line); 
+
+			if (hit.HitActor != nullptr && hit.HitActor->HasTag("Wall") && playerRbRef->GetVelocity().y > 0)
+			{
+				playerRbRef->SetVelocity(Vector3D(playerRbRef->GetVelocity().x, 0, playerRbRef->GetVelocity().z));
+			}
+
+			end = start + Vector3D(0, -0.5, 0);
+			hit.Reset();
+			PhysicManager::Instance().LineTrace(start, end, hit, mOwner);
+			DebugLine* line3 = new DebugLine(start, end, hit);
+			SceneManager::ActiveScene->GetRenderer()->AddDebugLine(line3);
+
+			if (hit.HitActor != nullptr && hit.HitActor->HasTag("Wall") && playerRbRef->GetVelocity().y < 0)
+			{
+				playerRbRef->SetVelocity(Vector3D(playerRbRef->GetVelocity().x, 0, playerRbRef->GetVelocity().z));
+			}
+
+			end = start + Vector3D(0.5, 0, 0);
+			hit.Reset();
+			PhysicManager::Instance().LineTrace(start, end, hit, mOwner);
+			DebugLine* line1 = new DebugLine(start, end, hit);
+			SceneManager::ActiveScene->GetRenderer()->AddDebugLine(line1); 
+
+			if (hit.HitActor != nullptr && hit.HitActor->HasTag("Wall") && playerRbRef->GetVelocity().x > 0)
+			{
+				playerRbRef->SetVelocity(Vector3D(0, playerRbRef->GetVelocity().y, playerRbRef->GetVelocity().z));
+			}
+
+			end = start + Vector3D(-0.5, 0, 0);
+			hit.Reset();
+			PhysicManager::Instance().LineTrace(start, end, hit, mOwner);
+			DebugLine* line2 = new DebugLine(start, end, hit);
+			SceneManager::ActiveScene->GetRenderer()->AddDebugLine(line2);
+
+			if (hit.HitActor != nullptr && hit.HitActor->HasTag("Wall") && playerRbRef->GetVelocity().x < 0)
+			{
+				playerRbRef->SetVelocity(Vector3D(0, playerRbRef->GetVelocity().y, playerRbRef->GetVelocity().z));
+			}
 		}
 	}
 }

@@ -24,5 +24,6 @@ public :
 private:
 	RigidbodyComponent* playerRbRef;
 	DoomPlayer* mPlayerRef;
+	bool goRight, goLeft, goForward, goBackward;
 };
 
