@@ -18,6 +18,7 @@ public:
 	inline bool IsAnimationEnded() const { return mHasFinished; }
 
 	void SetCanPlay(bool canPlay);
+	void SetIsLooping(bool looping);
 
 	void Update() override;
 private:

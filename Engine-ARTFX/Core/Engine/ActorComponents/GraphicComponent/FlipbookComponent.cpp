@@ -46,6 +46,11 @@ void FlipbookComponent::SetCanPlay(bool canPlay)
 	mCanPlayPending = !canPlay;
 }
 
+void FlipbookComponent::SetIsLooping(bool looping)
+{
+	mIsLooping = looping;
+}
+
 void FlipbookComponent::Update()
 {
 	SpriteComponent::Update();

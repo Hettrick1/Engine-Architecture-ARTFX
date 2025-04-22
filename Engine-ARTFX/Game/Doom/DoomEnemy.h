@@ -17,9 +17,11 @@ public:
 	void TakeDamage(int pDamages, int weapon);
 private:
 	FlipbookComponent* mEnemyFb;
+	FlipbookComponent* mSplashBlood;
 	std::vector<Texture*> EnemyShootAnim;
 	std::vector<Texture*> EnemyDieAnim;
 	std::vector<Texture*> EnemyExplodesAnim;
+	std::vector<Texture*> EnemyDamagesAnim;
 	DoomPlayer* mPlayerRef;
 	int mHealth;
 	float mShootCouldown;

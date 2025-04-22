@@ -19,7 +19,7 @@ const float detectionRange = 500;
 
 DoomEnemy::DoomEnemy(DoomPlayer* pPlayerRef, Vector3D pPos, Vector3D pSize, Quaternion pRotation)
 	: Actor(pPos, pSize, pRotation), mPlayerRef(pPlayerRef), mEnemyFb(nullptr), mHealth(100), mShootCouldown(shootCooldown)
-	, mCanShoot(false), mIsDead(false)
+	, mCanShoot(false), mIsDead(false), mSplashBlood(nullptr)
 {
 }
 
@@ -29,7 +29,9 @@ DoomEnemy::~DoomEnemy()
 	EnemyShootAnim.clear();
 	EnemyDieAnim.clear();
 	EnemyExplodesAnim.clear();
+	EnemyDamagesAnim.clear();
 	delete mEnemyFb;
+	delete mSplashBlood;
 }
 
 void DoomEnemy::Start()
@@ -59,10 +61,41 @@ void DoomEnemy::Start()
 		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/Marine/MExplodes8.png", "MExplodes8"),
 		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/Marine/MExplodes9.png", "MExplodes9"),
 	};
+	EnemyDamagesAnim = {
+		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/SplashBlood/1_00.png", "MDamage0"),
+		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/SplashBlood/1_0.png", "MDamage1"),
+		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/SplashBlood/1_1.png", "MDamage2"),
+		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/SplashBlood/1_2.png", "MDamage3"),
+		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/SplashBlood/1_3.png", "MDamage4"),
+		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/SplashBlood/1_4.png", "MDamage5"),
+		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/SplashBlood/1_5.png", "MDamage6"),
+		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/SplashBlood/1_6.png", "MDamage7"),
+		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/SplashBlood/1_7.png", "MDamage8"),
+		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/SplashBlood/1_8.png", "MDamage9"),
+		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/SplashBlood/1_9.png", "MDamage10"),
+		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/SplashBlood/1_10.png", "MDamage11"),
+		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/SplashBlood/1_11.png", "MDamage12"),
+		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/SplashBlood/1_12.png", "MDamage13"),
+		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/SplashBlood/1_13.png", "MDamage14"),
+		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/SplashBlood/1_14.png", "MDamage15"),
+		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/SplashBlood/1_15.png", "MDamage16"),
+		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/SplashBlood/1_16.png", "MDamage17"),
+		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/SplashBlood/1_17.png", "MDamage18"),
+		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/SplashBlood/1_18.png", "MDamage19"),
+		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/SplashBlood/1_19.png", "MDamage20"),
+		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/SplashBlood/1_20.png", "MDamage21"),
+		Assets::LoadTexture(*GetScene().GetRenderer(), "Imports/Sprites/Doom/SplashBlood/1_21.png", "MDamage22"),
+	};
 	mEnemyFb = new FlipbookComponent(this, EnemyShootAnim, 100);
 	mEnemyFb->RelativeRotateX(90);
 	mEnemyFb->SetAnimationFps(4);
 	mEnemyFb->SetRelativeSize(2);
+
+	mSplashBlood = new FlipbookComponent(this, EnemyDamagesAnim, 1);
+	mSplashBlood->SetRelativePosition(Vector3D(0, 0.1, 0.3));
+	mSplashBlood->RelativeRotateX(90);
+	mSplashBlood->SetAnimationFps(40);
+	mSplashBlood->SetRelativeSize(1.3);
 
 	SetTag("Enemy");
 
@@ -140,6 +173,7 @@ void DoomEnemy::Destroy()
 
 void DoomEnemy::TakeDamage(int pDamages, int weapon)
 {
+	mSplashBlood->PlayAnimation();
 	mHealth -= pDamages;
 	if (mHealth <= 0)
 	{

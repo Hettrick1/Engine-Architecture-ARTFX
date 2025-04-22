@@ -149,19 +149,37 @@ void LVLDoom::Start(IRenderer* renderer)
 	cube2->GetComponentOfType<MeshComponent>()->SetTiling(Vector2D(300, 300));
 	cube2->SetTag("Wall");
 
-	AmoPickup* amoPu = new AmoPickup(Vector3D(10, 10, -0.5));
+	AmoPickup* amoPu = new AmoPickup(Vector3D(0, 0, -0.5));
 	AddActor(amoPu);
 	amoPu->Start();
-	HealthPickUp* HealthPu = new HealthPickUp(Vector3D(20, 10, -0.5));
+	HealthPickUp* HealthPu = new HealthPickUp(Vector3D(-20, -30, -0.5));
 	AddActor(HealthPu);
 	HealthPu->Start();
-	ShieldPickUp* shieldPu = new ShieldPickUp(Vector3D(30, 10, -0.5));
+	HealthPickUp* HealthPu2 = new HealthPickUp(Vector3D(-20, 30, -0.5));
+	AddActor(HealthPu2);
+	HealthPu2->Start();
+	ShieldPickUp* shieldPu = new ShieldPickUp(Vector3D(-40, -40, -0.5));
 	AddActor(shieldPu);
 	shieldPu->Start();
+	ShieldPickUp* shieldPu2 = new ShieldPickUp(Vector3D(-40, 40, -0.5));
+	AddActor(shieldPu2);
+	shieldPu2->Start();
 
-	DoomEnemy* enemy = new DoomEnemy(mPlayer, Vector3D(10, 20, -0.1));
+	DoomEnemy* enemy = new DoomEnemy(mPlayer, Vector3D(-10, -20, -0.1));
 	AddActor(enemy);
 	enemy->Start();
+	DoomEnemy* enemy2 = new DoomEnemy(mPlayer, Vector3D(-10, 20, -0.1));
+	AddActor(enemy2);
+	enemy2->Start();
+	DoomEnemy* enemy3 = new DoomEnemy(mPlayer, Vector3D(-10, 0, -0.1));
+	AddActor(enemy3);
+	enemy3->Start();
+	DoomEnemy* enemy4 = new DoomEnemy(mPlayer, Vector3D(-45, -45, -0.1));
+	AddActor(enemy4);
+	enemy4->Start();
+	DoomEnemy* enemy5 = new DoomEnemy(mPlayer, Vector3D(-45, 45, -0.1));
+	AddActor(enemy5);
+	enemy5->Start();
 }
 
 void LVLDoom::Update()
