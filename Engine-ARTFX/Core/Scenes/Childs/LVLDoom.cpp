@@ -29,7 +29,7 @@ LVLDoom::~LVLDoom()
 void LVLDoom::Start(IRenderer* renderer)
 {
 	Scene::Start(renderer);
-	GetRenderer()->GetDebugRenderer()->SetDrawDebug(true);
+	//GetRenderer()->GetDebugRenderer()->SetDrawDebug(true);
 
 	mPlayer = new DoomPlayer();
 	AddActor(mPlayer);
