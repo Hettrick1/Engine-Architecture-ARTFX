@@ -64,8 +64,8 @@ void Planet::Update()
 	else
 		mLod = 2;
 
-	//mTransformComponent.RotateZ(Timer::deltaTime * 50);
-	//mTransformComponent.RotateX(Timer::deltaTime * 50);
+	mTransformComponent.RotateZ(Timer::deltaTime * 50);
+	mTransformComponent.RotateX(Timer::deltaTime * 50);
 }
 
 void Planet::Destroy()

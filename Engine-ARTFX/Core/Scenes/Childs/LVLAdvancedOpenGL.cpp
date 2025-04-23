@@ -93,6 +93,7 @@ void LVLAdvancedOpenGl::Start(IRenderer* renderer)
 	BasicCube* cube2 = new BasicCube(Vector3D(8, 10, -1), 3, Quaternion(0, 0, 0, 1), shaderProg2);
 	AddActor(cube2);
 	cube2->Start();
+	cube2->GetComponentOfType<MeshComponent>()->SetTextureIndex(4);
 
 	Planet* planet2 = new Planet(Vector3D(0, 10, -1), 3);
 	AddActor(planet2);

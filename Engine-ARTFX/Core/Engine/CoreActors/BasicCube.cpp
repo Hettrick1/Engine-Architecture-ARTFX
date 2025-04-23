@@ -3,6 +3,7 @@
 #include "MeshComponent.h"
 #include "Assets.h"
 #include "Scene.h"
+#include "Timer.h"
 #include "BoxCollider3DComponent.h"
 
 BasicCube::BasicCube(Vector3D pPos, Vector3D pSize, Quaternion pRotation, ShaderProgram* program)
@@ -34,6 +35,8 @@ void BasicCube::Start()
 void BasicCube::Update()
 {
 	Actor::Update();
+	mTransformComponent.RotateZ(Timer::deltaTime * 50);
+	mTransformComponent.RotateX(Timer::deltaTime * 50);
 }
 
 void BasicCube::Destroy()
