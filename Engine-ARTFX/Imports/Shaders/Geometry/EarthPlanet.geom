@@ -63,14 +63,14 @@ void CreateCube(vec4 position, vec4 normal, float size, float height)
     top[3] = top[3] - vec4(0.4, 0.8, 0 , 0);
     
     // Faces latérales
-    EmitCubeFace(base[0], base[1], top[0], top[1], vec4(0.03, 0.28, 0.03, 1.0), vec4(0.23, 0.68, 0.23, 1.0), vec4(0.03, 0.28, 0.03, 1.0), vec4(0.23, 0.68, 0.23, 1.0)); // Face avant
-    EmitCubeFace(base[1], base[3], top[1], top[3], vec4(0.03, 0.28, 0.03, 1.0), vec4(0.23, 0.68, 0.23, 1.0), vec4(0.03, 0.28, 0.03, 1.0), vec4(0.23, 0.68, 0.23, 1.0)); // Face droite
-    EmitCubeFace(base[3], base[2], top[3], top[2], vec4(0.03, 0.28, 0.03, 1.0), vec4(0.23, 0.68, 0.23, 1.0), vec4(0.03, 0.28, 0.03, 1.0), vec4(0.23, 0.68, 0.23, 1.0)); // Face arrière
-    EmitCubeFace(base[2], base[0], top[2], top[0], vec4(0.03, 0.28, 0.03, 1.0), vec4(0.23, 0.68, 0.23, 1.0), vec4(0.03, 0.28, 0.03, 1.0), vec4(0.23, 0.68, 0.3, 1.0)); // Face gauche
+    EmitCubeFace(base[0], base[1], top[0], top[1], vec4(0.03, 0.28, 0.03, 1.0), vec4(0.53, 0.68, 0.33, 1.0), vec4(0.03, 0.28, 0.03, 1.0), vec4(0.53, 0.68, 0.33, 1.0)); // Face avant
+    EmitCubeFace(base[1], base[3], top[1], top[3], vec4(0.03, 0.28, 0.03, 1.0), vec4(0.53, 0.68, 0.33, 1.0), vec4(0.03, 0.28, 0.03, 1.0), vec4(0.53, 0.68, 0.33, 1.0)); // Face droite
+    EmitCubeFace(base[3], base[2], top[3], top[2], vec4(0.03, 0.28, 0.03, 1.0), vec4(0.53, 0.68, 0.33, 1.0), vec4(0.03, 0.28, 0.03, 1.0), vec4(0.53, 0.68, 0.33, 1.0)); // Face arrière
+    EmitCubeFace(base[2], base[0], top[2], top[0], vec4(0.03, 0.28, 0.03, 1.0), vec4(0.53, 0.68, 0.33, 1.0), vec4(0.03, 0.28, 0.03, 1.0), vec4(0.53, 0.68, 0.33, 1.0)); // Face gauche
     
     // Faces horizontales (bas et haut)
     EmitCubeFace(base[0], base[2], base[1], base[3], vec4(0.03, 0.28, 0.03, 1.0), vec4(0.03, 0.28, 0.03, 1.0), vec4(0.03, 0.28, 0.03, 1.0), vec4(0.03, 0.28, 0.03, 1.0)); // Face inférieure
-    EmitCubeFace(top[0], top[1], top[2], top[3], vec4(0.23, 0.68, 0.23, 1.0), vec4(0.23, 0.68, 0.23, 1.0), vec4(0.23, 0.68, 0.23, 1.0), vec4(0.23, 0.68, 0.23, 1.0)); // Face supérieure
+    EmitCubeFace(top[0], top[1], top[2], top[3], vec4(0.53, 0.68, 0.33, 1.0), vec4(0.53, 0.68, 0.33, 1.0), vec4(0.53, 0.68, 0.33, 1.0), vec4(0.53, 0.68, 0.33, 1.0)); // Face supérieure
 }
 
 void main() {
