@@ -12,6 +12,7 @@ public :
     bool CheckCollisionWith(ColliderComponent* other) override;
     AABB GetAABB() override;
     void Update() override;
+    void DebugDraw(IRenderer& renderer) override;
 
     std::vector<Vector3D> GetAxes();
     std::vector<Vector3D> GetVertices();

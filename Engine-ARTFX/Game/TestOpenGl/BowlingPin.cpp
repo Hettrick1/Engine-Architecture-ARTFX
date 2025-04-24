@@ -5,6 +5,7 @@
 #include "Timer.h"
 #include "Physics/CollisionManager.h"
 #include "BoxAABBComponent.h"
+#include "BoxSATComponent.h"
 
 BowlingPin::BowlingPin(Vector3D pPos, Vector3D pSize, Quaternion pRotation)
 	: Actor(pPos, pSize, pRotation)
@@ -22,10 +23,10 @@ void BowlingPin::Start()
 	Mesh* mesh = Assets::LoadMesh("Imports/Meshes/pin.obj", "pin");
 	mesh->AddTexture(tex);
 	MeshComponent* meshComp = new MeshComponent(this, mesh);
-	meshComp->SetTextureIndex(2);
+	meshComp->SetTextureIndex(0);
 	RigidbodyComponent* rb = new RigidbodyComponent(this);
-	BoxAABBComponent* bc = new BoxAABBComponent(this, 10, Vector3D(GetTransformComponent().GetSize().x, GetTransformComponent().GetSize().y , 2), Vector3D(0,0,2.0));
-	BoxAABBComponent* bc2 = new BoxAABBComponent(this, 10, Vector3D(GetTransformComponent().GetSize().x + 0.5, GetTransformComponent().GetSize().y + 0.5, 2), Vector3D(0,0,2.0));
+	BoxSATComponent* bc = new BoxSATComponent(this, 10, Vector3D(GetTransformComponent().GetSize().x, GetTransformComponent().GetSize().y , 2), Vector3D(0,0,2.0));
+	BoxSATComponent* bc2 = new BoxSATComponent(this, 10, Vector3D(GetTransformComponent().GetSize().x + 0.5, GetTransformComponent().GetSize().y + 0.5, 2), Vector3D(0,0,2.0));
 	bc2->SetIsQuerry(true);
 }
 

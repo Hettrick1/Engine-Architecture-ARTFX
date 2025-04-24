@@ -1,5 +1,6 @@
 #include "BoxSATComponent.h"
 #include "Matrix4DRow.h"
+#include "IRenderer.h"
 
 BoxSATComponent::BoxSATComponent(Actor* owner, int updateOrder, Vector3D size, Vector3D relativePosition)
     :ColliderComponent(owner, updateOrder)
@@ -38,29 +39,49 @@ std::vector<Vector3D> BoxSATComponent::GetAxes()
 {
     Matrix4DRow transform = GetWorldTransform();
     return {
-        Vector3D::Normalize(transform.GetXAxis()),
-        Vector3D::Normalize(transform.GetZAxis()),
-        Vector3D::Normalize(transform.GetYAxis()),
+        Vector3D::Normalize(transform.GetXAxis()), // Right (X)
+        Vector3D::Normalize(transform.GetYAxis()), // Forward (Y)
+        Vector3D::Normalize(transform.GetZAxis())  // Up
     };
 }
 
 std::vector<Vector3D> BoxSATComponent::GetVertices()
 {
     std::vector<Vector3D> vertices;
-    Vector3D halfSize = GetScaledSize() * 0.5f;
-    Matrix4DRow transform = mOwner->GetTransformComponent().GetWorldTransform();
+    Vector3D halfSize = GetScaledSize();
+    Matrix4DRow transform = GetWorldTransform();
 
     // Génération des 8 sommets avec la transformation complète
     for (float x : {-1.0f, 1.0f}) {
         for (float y : {-1.0f, 1.0f}) {
             for (float z : {-1.0f, 1.0f}) {
                 Vector3D vertex = Vector3D(x, y, z) * halfSize;
-                vertex = transform.TransformPoint(vertex);
+                vertex = transform.TransformVector(vertex);
                 vertices.push_back(vertex);
             }
         }
     }
     return vertices;
+}
+
+void BoxSATComponent::DebugDraw(IRenderer& renderer)
+{
+    if (mOwner->GetState() == ActorState::Active)
+    {
+        // Utilise les sommets calculés pour le SAT
+        std::vector<Vector3D> vertices = GetVertices();
+
+        // Dessine les arêtes de la boîte orientée
+        const std::vector<std::pair<int, int>> edges = {
+            {0,1}, {0,2}, {0,4}, {1,3}, {1,5}, {2,3}, {2,6}, {3,7}, {4,5}, {4,6}, {5,7}, {6,7}
+        };
+
+        for (const auto& edge : edges) {
+            HitResult hit;
+            renderer.DrawDebugLine(vertices[edge.first], vertices[edge.second], hit);
+            Log::Info(vertices[edge.first].ToString());
+        }
+    }
 }
 
 bool BoxSATComponent::CheckCollisionWithBoxSAT(BoxSATComponent* other)
@@ -98,5 +119,5 @@ std::pair<float, float> BoxSATComponent::CalculateProjection(const Vector3D& axi
 }
 
 Vector3D BoxSATComponent::GetScaledSize() {
-    return mSize * GetWorldTransform().GetScale();
+    return mSize * mOwner->GetTransformComponent().GetSize();
 }

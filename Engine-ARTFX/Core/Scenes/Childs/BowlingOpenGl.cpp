@@ -9,6 +9,11 @@
 #include "BoxAABBComponent.h"
 #include "MeshComponent.h"
 #include "CoreActors/BasicCube.h"
+#include "DebugRenderer.h"
+
+
+
+#include "Doom/DoomPlayer.h"
 
 BowlingOpenGl::BowlingOpenGl()
 	: mBowlingPlayer(nullptr)
@@ -22,6 +27,7 @@ BowlingOpenGl::~BowlingOpenGl()
 void BowlingOpenGl::Start(IRenderer* renderer)
 {
 	Scene::Start(renderer);
+	GetRenderer()->GetDebugRenderer()->SetDrawDebug(true);
 
 	testGlPlayer* player = new testGlPlayer();
 	AddActor(player);
@@ -42,7 +48,7 @@ void BowlingOpenGl::Start(IRenderer* renderer)
 	quille3->Start();
 	quille3->GetComponentOfType<RigidbodyComponent>()->SetMass(0.5);
 
-	BowlingPin* quille4 = new BowlingPin();
+	/*BowlingPin* quille4 = new BowlingPin();
 	AddActor(quille4);
 	quille4->GetTransformComponent().SetSize(0.8f);
 	quille4->SetPosition(Vector3D(-3.0f, 36.0f, -4.0f));
@@ -68,7 +74,7 @@ void BowlingOpenGl::Start(IRenderer* renderer)
 	quille1->GetTransformComponent().SetSize(0.8f);
 	quille1->SetPosition(Vector3D(-1.5f, 33.0f, -4.0f));
 	quille1->Start();
-	quille1->GetComponentOfType<RigidbodyComponent>()->SetMass(0.5);
+	quille1->GetComponentOfType<RigidbodyComponent>()->SetMass(0.5);*/
 
 	BowlingPin* quille2 = new BowlingPin();
 	AddActor(quille2);
@@ -98,17 +104,17 @@ void BowlingOpenGl::Start(IRenderer* renderer)
 	wall2->Start();
 	wall2->GetComponentOfType<MeshComponent>()->SetTextureIndex(3);
 
+	mBowlingPlayer = new DoomPlayer();
+	mBowlingPlayer->GetTransformComponent().RotateX(-5);
+	mBowlingPlayer->SetPosition(Vector3D(0.0f, -40.0f, 5.0f));
+	AddActor(mBowlingPlayer);
+	mBowlingPlayer->Start();
+
 	CameraActor* camera = new CameraActor();
 	camera->SetPosition(Vector3D(0.0f, 34.0f, 40.0f));
 	camera->GetTransformComponent().RotateX(-90);
 	AddActor(camera);
 	camera->Start();
-
-	mBowlingPlayer = new BowlingPlayer();
-	mBowlingPlayer->GetTransformComponent().RotateX(-5);
-	mBowlingPlayer->SetPosition(Vector3D(0.0f, -40.0f, 5.0f));
-	AddActor(mBowlingPlayer);
-	mBowlingPlayer->Start();
 
 }
 
