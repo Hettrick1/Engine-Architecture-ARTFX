@@ -18,9 +18,6 @@ public:
 	bool CheckCollisionWith(ColliderComponent* other) override;
 
 public:
-	bool CheckCollisionWithBox3D(BoxAABBComponent* other);
-
-public:
 	void SetShowInGame(bool pShowInGame);
 	void SetSize(Vector3D pSize);
 
@@ -31,6 +28,11 @@ public:
 	std::pair<Vector3D, Vector3D> GetCollisionPosition() const override { return mCollisionPosition; }
 
 	AABB GetAABB() override;
+	ColliderType GetColliderType() const override { return ColliderType::BoxAABB; }
+
+private:
+	bool CheckCollisionWithBoxAABB(BoxAABBComponent* other);
+
 private:
 	Vector3D mPosition;
 	Vector3D mLastPosition;

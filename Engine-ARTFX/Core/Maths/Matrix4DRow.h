@@ -180,6 +180,15 @@ public:
 		);
 	}
 
+	Vector3D TransformPoint(const Vector3D& point) const
+	{
+		Vector3D result;
+		result.x = mat[0][0] * point.x + mat[0][1] * point.y + mat[0][2] * point.z + mat[0][3];
+		result.y = mat[1][0] * point.x + mat[1][1] * point.y + mat[1][2] * point.z + mat[1][3];
+		result.z = mat[2][0] * point.x + mat[2][1] * point.y + mat[2][2] * point.z + mat[2][3];
+		return result;
+	}
+
 	Vector3D GetXAxis() const
 	{
 		return Vector3D::Normalize(Vector3D(mat[0][0], mat[0][1], mat[0][2]));

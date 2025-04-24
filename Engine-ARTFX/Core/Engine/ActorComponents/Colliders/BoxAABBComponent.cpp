@@ -8,7 +8,7 @@
 BoxAABBComponent::BoxAABBComponent(Actor* pOwner, int pUpdateOder, Vector3D pSize, Vector3D pRelativePosition)
     : ColliderComponent(pOwner, pUpdateOder), mShowInGame(true)
 {
-    pOwner->AddComponent(this);
+    //pOwner->AddComponent(this);
     SetRelativePosition(pRelativePosition);
     mPosition = pOwner->GetTransformComponent().GetPosition() + GetRelativePosition(); 
     mLastPosition = mPosition;
@@ -36,7 +36,7 @@ void BoxAABBComponent::OnEnd()
 bool BoxAABBComponent::CheckCollisionWith(ColliderComponent* other)
 {
     if (BoxAABBComponent* boxCollider = dynamic_cast<BoxAABBComponent*>(other)) {
-        if (CheckCollisionWithBox3D(boxCollider)) {
+        if (CheckCollisionWithBoxAABB(boxCollider)) {
             return true;
         }
         return false;
@@ -44,7 +44,7 @@ bool BoxAABBComponent::CheckCollisionWith(ColliderComponent* other)
     return false;
 }
 
-bool BoxAABBComponent::CheckCollisionWithBox3D(BoxAABBComponent* other)
+bool BoxAABBComponent::CheckCollisionWithBoxAABB(BoxAABBComponent* other)
 {
     mLastPosition = mPosition;
     mPosition = mOwner->GetTransformComponent().GetPosition() + GetRelativePosition();
