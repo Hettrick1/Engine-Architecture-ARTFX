@@ -4,7 +4,7 @@
 #include "RigidbodyComponent.h"
 #include "Timer.h"
 #include "Physics/CollisionManager.h"
-#include "BoxCollider3DComponent.h"
+#include "BoxAABBComponent.h"
 
 Cube::Cube(Vector3D pPos, Vector3D pSize, Quaternion pRotation)
 	: Actor(pPos, pSize, pRotation)
@@ -28,7 +28,7 @@ void Cube::Start()
 	MeshComponent* meshComp = new MeshComponent(this, mesh);
 	meshComp->SetTextureIndex(1); 
 	RigidbodyComponent* rb = new RigidbodyComponent(this);
-	BoxCollider3DComponent* bc = new BoxCollider3DComponent(this, 10, GetTransformComponent().GetSize());
+	BoxAABBComponent* bc = new BoxAABBComponent(this, 10, GetTransformComponent().GetSize());
 }
 
 void Cube::Update()

@@ -3,7 +3,7 @@
 #include "MeshComponent.h"
 #include "Assets.h"
 #include "Scene.h"
-#include "BoxCollider3DComponent.h"
+#include "BoxAABBComponent.h"
 
 BasicCube::BasicCube(Vector3D pPos, Vector3D pSize, Quaternion pRotation, ShaderProgram* program)
 	: Actor(pPos, pSize, pRotation), mShaderProgram(program)
@@ -28,7 +28,7 @@ void BasicCube::Start()
 	mesh->AddTexture(tex4);
 	MeshComponent* meshComp = new MeshComponent(this, mesh, mShaderProgram);
 	meshComp->SetTextureIndex(1);
-	BoxCollider3DComponent* bc = new BoxCollider3DComponent(this, 10, GetTransformComponent().GetSize());
+	BoxAABBComponent* bc = new BoxAABBComponent(this, 10, GetTransformComponent().GetSize());
 }
 
 void BasicCube::Update()

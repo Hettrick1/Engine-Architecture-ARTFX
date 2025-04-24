@@ -4,12 +4,12 @@
 
 class IRenderer;
 
-class BoxCollider3DComponent : public ColliderComponent
+class BoxAABBComponent : public ColliderComponent
 {
 public:
-	BoxCollider3DComponent() = delete;
-	BoxCollider3DComponent(Actor* pOwner, int pUpdateOder, Vector3D pSize = 1, Vector3D pRelativePosition = 0);
-	~BoxCollider3DComponent();
+	BoxAABBComponent() = delete;
+	BoxAABBComponent(Actor* pOwner, int pUpdateOder, Vector3D pSize = 1, Vector3D pRelativePosition = 0);
+	~BoxAABBComponent();
 	void OnStart() override;
 	void Update() override;
 	void OnEnd() override;
@@ -18,7 +18,7 @@ public:
 	bool CheckCollisionWith(ColliderComponent* other) override;
 
 public:
-	bool CheckCollisionWithBox3D(BoxCollider3DComponent* other);
+	bool CheckCollisionWithBox3D(BoxAABBComponent* other);
 
 public:
 	void SetShowInGame(bool pShowInGame);

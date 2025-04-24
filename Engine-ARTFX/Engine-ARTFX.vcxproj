@@ -166,7 +166,7 @@
     <ClCompile Include="Game\TestOpenGl\BowlingPlayer.cpp" />
     <ClCompile Include="Game\TestOpenGl\BowlingPin.cpp" />
     <ClCompile Include="Core\Engine\Physics\CollisionResolver.cpp" />
-    <ClCompile Include="Core\Engine\ActorComponents\Colliders\BoxCollider3DComponent.cpp" />
+    <ClCompile Include="Core\Engine\ActorComponents\Colliders\BoxAABBComponent.cpp" />
     <ClCompile Include="Core\Engine\CoreComponents\CameraActor.cpp" />
     <ClCompile Include="Core\Engine\ActorComponents\Actor\CameraComponent.cpp" />
     <ClCompile Include="Core\Engine\ActorComponents\PhysicComponent\ActorMovementComponent.cpp" />
@@ -262,7 +262,7 @@
     <ClInclude Include="Core\Engine\Graphics\Vertex.h" />
     <ClInclude Include="Core\Engine\Physics\CollisionInfos.h" />
     <ClInclude Include="Core\Engine\Physics\CollisionResolver.h" />
-    <ClInclude Include="Core\Engine\ActorComponents\Colliders\BoxCollider3DComponent.h" />
+    <ClInclude Include="Core\Engine\ActorComponents\Colliders\BoxAABBComponent.h" />
     <ClInclude Include="Core\Engine\CoreComponents\CameraActor.h" />
     <ClInclude Include="Core\Engine\ActorComponents\Actor\CameraComponent.h" />
     <ClInclude Include="Core\Engine\ActorComponents\PhysicComponent\ActorMovementComponent.h" />

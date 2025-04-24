@@ -6,7 +6,7 @@
 #include "CameraActor.h"
 #include "TestOpenGl/BowlingPlayer.h"
 #include "RigidbodyComponent.h"
-#include "BoxCollider3DComponent.h"
+#include "BoxAABBComponent.h"
 #include "MeshComponent.h"
 #include "CoreActors/BasicCube.h"
 

@@ -1,11 +1,11 @@
-#include "BoxCollider3DComponent.h"
+#include "BoxAABBComponent.h"
 #include "MeshComponent.h"
 #include "IRenderer.h"
 #include "Assets.h"
 #include <algorithm>
 #include <iostream>
 
-BoxCollider3DComponent::BoxCollider3DComponent(Actor* pOwner, int pUpdateOder, Vector3D pSize, Vector3D pRelativePosition)
+BoxAABBComponent::BoxAABBComponent(Actor* pOwner, int pUpdateOder, Vector3D pSize, Vector3D pRelativePosition)
     : ColliderComponent(pOwner, pUpdateOder), mShowInGame(true)
 {
     pOwner->AddComponent(this);
@@ -15,27 +15,27 @@ BoxCollider3DComponent::BoxCollider3DComponent(Actor* pOwner, int pUpdateOder, V
     mSize = pSize;
 }
 
-BoxCollider3DComponent::~BoxCollider3DComponent()
+BoxAABBComponent::~BoxAABBComponent()
 {
 }
 
-void BoxCollider3DComponent::OnStart()
+void BoxAABBComponent::OnStart()
 {
 }
 
-void BoxCollider3DComponent::Update()
+void BoxAABBComponent::Update()
 {
     ColliderComponent::Update();
     mPosition = mOwner->GetTransformComponent().GetPosition() + GetRelativePosition();
 }
 
-void BoxCollider3DComponent::OnEnd()
+void BoxAABBComponent::OnEnd()
 {
 }
 
-bool BoxCollider3DComponent::CheckCollisionWith(ColliderComponent* other)
+bool BoxAABBComponent::CheckCollisionWith(ColliderComponent* other)
 {
-    if (BoxCollider3DComponent* boxCollider = dynamic_cast<BoxCollider3DComponent*>(other)) {
+    if (BoxAABBComponent* boxCollider = dynamic_cast<BoxAABBComponent*>(other)) {
         if (CheckCollisionWithBox3D(boxCollider)) {
             return true;
         }
@@ -44,7 +44,7 @@ bool BoxCollider3DComponent::CheckCollisionWith(ColliderComponent* other)
     return false;
 }
 
-bool BoxCollider3DComponent::CheckCollisionWithBox3D(BoxCollider3DComponent* other)
+bool BoxAABBComponent::CheckCollisionWithBox3D(BoxAABBComponent* other)
 {
     mLastPosition = mPosition;
     mPosition = mOwner->GetTransformComponent().GetPosition() + GetRelativePosition();
@@ -83,16 +83,16 @@ bool BoxCollider3DComponent::CheckCollisionWithBox3D(BoxCollider3DComponent* oth
     return false;
 }
 
-void BoxCollider3DComponent::SetShowInGame(bool pShowInGame)
+void BoxAABBComponent::SetShowInGame(bool pShowInGame)
 {
 }
 
-void BoxCollider3DComponent::SetSize(Vector3D pSize)
+void BoxAABBComponent::SetSize(Vector3D pSize)
 {
 	mSize = pSize;
 }
 
-void BoxCollider3DComponent::DebugDraw(IRenderer& renderer)
+void BoxAABBComponent::DebugDraw(IRenderer& renderer)
 {
     if (mOwner->GetState() == ActorState::Active)
     {
@@ -107,12 +107,12 @@ void BoxCollider3DComponent::DebugDraw(IRenderer& renderer)
     }
 }
 
-Vector3D BoxCollider3DComponent::GetLastPosition()
+Vector3D BoxAABBComponent::GetLastPosition()
 {
     return mLastPosition;
 }
 
-AABB BoxCollider3DComponent::GetAABB()
+AABB BoxAABBComponent::GetAABB()
 {
     return AABB(mPosition - mSize, mPosition + mSize);
 }

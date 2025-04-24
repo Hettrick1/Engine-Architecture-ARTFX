@@ -4,7 +4,7 @@
 #include "RigidbodyComponent.h"
 #include "Timer.h"
 #include "Physics/CollisionManager.h"
-#include "BoxCollider3DComponent.h"
+#include "BoxAABBComponent.h"
 
 BowlingPin::BowlingPin(Vector3D pPos, Vector3D pSize, Quaternion pRotation)
 	: Actor(pPos, pSize, pRotation)
@@ -24,8 +24,8 @@ void BowlingPin::Start()
 	MeshComponent* meshComp = new MeshComponent(this, mesh);
 	meshComp->SetTextureIndex(2);
 	RigidbodyComponent* rb = new RigidbodyComponent(this);
-	BoxCollider3DComponent* bc = new BoxCollider3DComponent(this, 10, Vector3D(GetTransformComponent().GetSize().x, GetTransformComponent().GetSize().y , 2), Vector3D(0,0,2.0));
-	BoxCollider3DComponent* bc2 = new BoxCollider3DComponent(this, 10, Vector3D(GetTransformComponent().GetSize().x + 0.5, GetTransformComponent().GetSize().y + 0.5, 2), Vector3D(0,0,2.0));
+	BoxAABBComponent* bc = new BoxAABBComponent(this, 10, Vector3D(GetTransformComponent().GetSize().x, GetTransformComponent().GetSize().y , 2), Vector3D(0,0,2.0));
+	BoxAABBComponent* bc2 = new BoxAABBComponent(this, 10, Vector3D(GetTransformComponent().GetSize().x + 0.5, GetTransformComponent().GetSize().y + 0.5, 2), Vector3D(0,0,2.0));
 	bc2->SetIsQuerry(true);
 }
 

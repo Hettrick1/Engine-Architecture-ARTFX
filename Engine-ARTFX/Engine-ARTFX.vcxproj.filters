@@ -162,7 +162,7 @@
     <ClCompile Include="Core\Engine\CoreComponents\PlayerController3D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Engine\ActorComponents\Colliders\BoxCollider3DComponent.cpp">
+    <ClCompile Include="Core\Engine\ActorComponents\Colliders\BoxAABBComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Core\Engine\Physics\PhysicManager.cpp">
@@ -446,7 +446,7 @@
     <ClInclude Include="Core\Engine\CoreComponents\PlayerController3D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Engine\ActorComponents\Colliders\BoxCollider3DComponent.h">
+    <ClInclude Include="Core\Engine\ActorComponents\Colliders\BoxAABBComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Core\Engine\Physics\PhysicManager.h">
