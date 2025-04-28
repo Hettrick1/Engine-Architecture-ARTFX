@@ -12,9 +12,6 @@
 #include "DebugRenderer.h"
 
 
-
-#include "Doom/DoomPlayer.h"
-
 BowlingOpenGl::BowlingOpenGl()
 	: mBowlingPlayer(nullptr)
 {
@@ -104,7 +101,7 @@ void BowlingOpenGl::Start(IRenderer* renderer)
 	wall2->Start();
 	wall2->GetComponentOfType<MeshComponent>()->SetTextureIndex(3);
 
-	mBowlingPlayer = new DoomPlayer();
+	mBowlingPlayer = new BowlingPlayer();
 	mBowlingPlayer->GetTransformComponent().RotateX(-5);
 	mBowlingPlayer->SetPosition(Vector3D(0.0f, -40.0f, 5.0f));
 	AddActor(mBowlingPlayer);

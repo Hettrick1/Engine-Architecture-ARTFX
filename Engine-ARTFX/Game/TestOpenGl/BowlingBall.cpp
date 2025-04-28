@@ -4,7 +4,7 @@
 #include "RigidbodyComponent.h"
 #include "Timer.h"
 #include "Physics/CollisionManager.h"
-#include "BoxAABBComponent.h"
+#include "BoxSATComponent.h"
 
 BowlingBall::BowlingBall(Vector3D pPos, Vector3D pSize, Quaternion pRotation)
 	: Actor(pPos, pSize, pRotation)
@@ -26,7 +26,7 @@ void BowlingBall::Start()
 	AddComponent(meshComp);
 	RigidbodyComponent* rb = new RigidbodyComponent(this);
 	AddComponent(rb);
-	BoxAABBComponent* bc = new BoxAABBComponent(this, 10, GetTransformComponent().GetSize());
+	BoxSATComponent* bc = new BoxSATComponent(this, 10, GetTransformComponent().GetSize());
 	AddComponent(bc);
 }
 

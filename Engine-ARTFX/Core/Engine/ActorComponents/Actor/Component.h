@@ -48,6 +48,8 @@ public:
 		return mRelativeSize;
 	}
 
+	Vector3D GetWorldPosition();
+
 	Actor* GetOwner();
 
 protected:

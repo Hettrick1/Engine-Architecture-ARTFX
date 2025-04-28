@@ -3,7 +3,7 @@
 #include "Scene.h"
 #include "Shaders/ShaderProgram.h"
 
-class DoomPlayer;
+class BowlingPlayer;
 
 class BowlingOpenGl : public Scene
 {
@@ -15,6 +15,6 @@ public:
 	void Render() override;
 	void Close() override;
 private:
-	DoomPlayer* mBowlingPlayer;
+	BowlingPlayer* mBowlingPlayer;
 };
 

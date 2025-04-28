@@ -168,7 +168,7 @@ public:
 
 	Vector3D GetTranslation() const
 	{
-		return Vector3D(mat[3][0], mat[3][1], mat[3][2]);
+		return Vector3D(mat[0][3], mat[1][3], mat[2][3]);
 	}
 
 	Vector3D TransformVector(const Vector3D& vec) const

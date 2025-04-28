@@ -24,25 +24,8 @@ AABB BoxSATComponent::GetAABB()
 
 void BoxSATComponent::Update()
 {
-    std::vector<Vector3D> vertices = GetVertices();
-    Vector3D min = vertices[0];
-    Vector3D max = vertices[0];
-
-    for (const auto& v : vertices) {
-        min = Vector3D::Min(min, v);
-        max = Vector3D::Max(max, v);
-    }
-    mCachedAABB = AABB(min, max);
-}
-
-std::vector<Vector3D> BoxSATComponent::GetAxes()
-{
-    Matrix4DRow transform = GetWorldTransform();
-    return {
-        Vector3D::Normalize(transform.GetXAxis()), // Right (X)
-        Vector3D::Normalize(transform.GetYAxis()), // Forward (Y)
-        Vector3D::Normalize(transform.GetZAxis())  // Up
-    };
+    AABB aabb = AABB(GetWorldPosition() - mSize, GetWorldPosition() + mSize);
+    mCachedAABB = aabb;
 }
 
 std::vector<Vector3D> BoxSATComponent::GetVertices()
@@ -68,56 +51,79 @@ void BoxSATComponent::DebugDraw(IRenderer& renderer)
 {
     if (mOwner->GetState() == ActorState::Active)
     {
-        // Utilise les sommets calculés pour le SAT
-        std::vector<Vector3D> vertices = GetVertices();
+        AABB aabb = AABB(GetWorldPosition() - mSize, GetWorldPosition() + mSize);
 
-        // Dessine les arêtes de la boîte orientée
-        const std::vector<std::pair<int, int>> edges = {
-            {0,1}, {0,2}, {0,4}, {1,3}, {1,5}, {2,3}, {2,6}, {3,7}, {4,5}, {4,6}, {5,7}, {6,7}
-        };
+        Matrix4DRow wt;
 
-        for (const auto& edge : edges) {
-            HitResult hit;
-            renderer.DrawDebugLine(vertices[edge.first], vertices[edge.second], hit);
-            Log::Info(vertices[edge.first].ToString());
-        }
+        wt = Matrix4DRow::CreateScale(mSize * 2);
+        wt *= Matrix4DRow::CreateTranslation(GetWorldPosition() - mSize);
+
+        renderer.DrawDebugBox(aabb.min, aabb.max, wt);
     }
 }
 
 bool BoxSATComponent::CheckCollisionWithBoxSAT(BoxSATComponent* other)
 {
-    // Récupère tous les axes à tester
-    std::vector<Vector3D> axes = GetAxes();
-    const auto otherAxes = other->GetAxes();
-    axes.insert(axes.end(), otherAxes.begin(), otherAxes.end());
+    Vector3D axesA[3], axesB[3];
+    GetAxes(axesA);
+    other->GetAxes(axesB);
 
-    // Test des axes de séparation
-    for (const auto& axis : axes) {
-        auto proj1 = CalculateProjection(axis);
-        auto proj2 = other->CalculateProjection(axis);
+    Vector3D centerA = GetWorldPosition();
+    Vector3D centerB = other->GetWorldPosition();
+    Vector3D t = centerB - centerA;
 
-        if (proj1.second < proj2.first || proj2.second < proj1.first) {
-            return false;
+    // Test des 15 axes (3 de A, 3 de B, 9 croisés)
+    for (int i = 0; i < 3; i++) {
+        if (!OverlapOnAxis(other, axesA[i])) return false;
+    }
+    for (int i = 0; i < 3; i++) {
+        if (!OverlapOnAxis(other, axesB[i])) return false;
+    }
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            Vector3D axis = Vector3D::Cross(axesA[i], axesB[j]);
+            if (axis.LengthSq() > 0.001f && !OverlapOnAxis(other, Vector3D::Normalize(axis))) {
+                return false;
+            }
         }
     }
     return true;
 }
 
+bool BoxSATComponent::OverlapOnAxis(BoxSATComponent* other, const Vector3D& axis) {
+    auto projA = CalculateProjection(axis);
+    auto projB = other->CalculateProjection(axis);
+    return projA.second >= projB.first && projB.second >= projA.first;
+}
+
+void BoxSATComponent::GetAxes(Vector3D axes[3])
+{
+    Matrix4DRow transform = GetWorldTransform();
+    axes[0] = Vector3D::Normalize(transform.GetXAxis()); // Right
+    axes[1] = Vector3D::Normalize(transform.GetYAxis()); // Forward
+    axes[2] = Vector3D::Normalize(transform.GetZAxis()); // Up
+}
+
 std::pair<float, float> BoxSATComponent::CalculateProjection(const Vector3D& axis)
 {
-    std::vector<Vector3D> vertices = GetVertices();
-    float min = Vector3D::Dot(axis, vertices[0]);
-    float max = min;
+    Vector3D axes[3];
+    GetAxes(axes);
+    Vector3D scaledExtents = GetScaledSize();
 
-    for (const auto& v : vertices) {
-        float proj = Vector3D::Dot(axis, v);
-        min = std::min(min, proj);
-        max = std::max(max, proj);
-    }
+    float proj = Vector3D::Dot(GetWorldPosition(), axis);
+    float radius =
+        scaledExtents.x * std::abs(Vector3D::Dot(axes[0], axis)) +
+        scaledExtents.y * std::abs(Vector3D::Dot(axes[1], axis)) +
+        scaledExtents.z * std::abs(Vector3D::Dot(axes[2], axis));
 
-    return { min, max };
+    return { proj - radius, proj + radius };
 }
 
 Vector3D BoxSATComponent::GetScaledSize() {
-    return mSize * mOwner->GetTransformComponent().GetSize();
+    Vector3D scale = mOwner->GetTransformComponent().GetSize();
+    return Vector3D(
+        mSize.x * std::abs(scale.x),
+        mSize.y * std::abs(scale.y),
+        mSize.z * std::abs(scale.z)
+    );
 }

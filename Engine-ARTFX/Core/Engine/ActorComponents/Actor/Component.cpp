@@ -90,6 +90,11 @@ void Component::ComputeRelativeTransform()
     }
 }
 
+Vector3D Component::GetWorldPosition()
+{
+    return mOwner->GetTransformComponent().GetPosition() + mRelativePosition;
+}
+
 Actor* Component::GetOwner()
 {
 	return mOwner;

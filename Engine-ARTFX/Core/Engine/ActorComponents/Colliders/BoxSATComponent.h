@@ -14,12 +14,13 @@ public :
     void Update() override;
     void DebugDraw(IRenderer& renderer) override;
 
-    std::vector<Vector3D> GetAxes();
     std::vector<Vector3D> GetVertices();
 
 
 private : 
     bool CheckCollisionWithBoxSAT(BoxSATComponent* other);
+    void GetAxes(Vector3D axes[3]);
+    bool OverlapOnAxis(BoxSATComponent* other, const Vector3D& axis);
     std::pair<float, float> CalculateProjection(const Vector3D& axis);
     Vector3D GetScaledSize();
 private :
