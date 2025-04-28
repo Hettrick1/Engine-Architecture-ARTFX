@@ -2,6 +2,7 @@
 
 #include <memory.h>
 #include "Vector3D.h"
+#include "Vector4D.h"
 #include "Quaternion.h"
 
 // Row major order 4*4 matrix
@@ -155,6 +156,18 @@ public:
 			a.mat[3][3] * b.mat[3][3];
 
 		return retVal;
+	}
+
+	friend Vector3D operator*(Matrix4DRow& mat, Vector3D& vec) {
+		Vector4D vec4(vec);
+		Vector4D result;
+
+		result.x = mat.mat[0][0] * vec4.x + mat.mat[0][1] * vec4.y + mat.mat[0][2] * vec4.z + mat.mat[0][3] * vec4.w;
+		result.y = mat.mat[1][0] * vec4.x + mat.mat[1][1] * vec4.y + mat.mat[1][2] * vec4.z + mat.mat[1][3] * vec4.w;
+		result.z = mat.mat[2][0] * vec4.x + mat.mat[2][1] * vec4.y + mat.mat[2][2] * vec4.z + mat.mat[2][3] * vec4.w;
+		result.w = mat.mat[3][0] * vec4.x + mat.mat[3][1] * vec4.y + mat.mat[3][2] * vec4.z + mat.mat[3][3] * vec4.w;
+
+		return result.ToVector3D();
 	}
 
 	Matrix4DRow& operator*=(const Matrix4DRow& right)

@@ -28,6 +28,8 @@ public:
 	Texture* GetTexture(unsigned int pTextureIndex);
 	float* ToVerticeArray();
 
+	std::vector<Vertex> GetVertices() const { return mVertices; }
+
 private:
 	std::vector<Texture*> mTextures;
 	std::vector<Vertex> mVertices;

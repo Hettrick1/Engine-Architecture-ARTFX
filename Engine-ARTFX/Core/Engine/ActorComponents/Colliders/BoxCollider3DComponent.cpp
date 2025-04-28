@@ -13,6 +13,7 @@ BoxCollider3DComponent::BoxCollider3DComponent(Actor* pOwner, int pUpdateOder, V
     mPosition = pOwner->GetTransformComponent().GetPosition() + GetRelativePosition(); 
     mLastPosition = mPosition;
     mSize = pSize;
+    mMesh = Assets::LoadMesh("Imports/Meshes/cube.obj", "cube");
 }
 
 BoxCollider3DComponent::~BoxCollider3DComponent()

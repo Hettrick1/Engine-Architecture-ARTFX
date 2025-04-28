@@ -22,6 +22,9 @@ public:
 public:
 	void SetShowInGame(bool pShowInGame);
 	void SetSize(Vector3D pSize);
+
+	ColliderType GetColliderType() override { return ColliderType::Box2D; }
+
 private:
 	Vector3D mPosition;
 	Vector3D mSize;

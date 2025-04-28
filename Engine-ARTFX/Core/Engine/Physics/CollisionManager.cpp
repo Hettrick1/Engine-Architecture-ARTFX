@@ -7,6 +7,7 @@
 #include "Scene.h"
 #include <utility>
 #include <algorithm>
+#include "CollisionDetection.h"
 
 CollisionManager::CollisionManager()
     : mCollisionNormal(0), mCollisionDepth(0)
@@ -125,7 +126,7 @@ void CollisionManager::CheckCollisions()
                     {
                         continue;
                     }
-                    if (collider1->CheckCollisionWith(collider2)) {
+                    if (CollisionDetection::IsColliding(collider1, collider2, mCollisionNormal, mCollisionDepth)) {
                         bool isNewCollision1 = mCurrentCollisions[collider1].find(collider2) == mCurrentCollisions[collider1].end();
                         bool isNewCollision2 = mCurrentCollisions[collider2].find(collider1) == mCurrentCollisions[collider2].end();
 
@@ -139,7 +140,7 @@ void CollisionManager::CheckCollisions()
                         colliderPair.first = collider1;
                         colliderPair.second = collider2;
 
-                        CalculateNormal(collider1, collider2);
+                        //CalculateNormal(collider1, collider2);
 
                         if (isNewCollision1 || isNewCollision2) { //enter
                             CollisionInfos* infos = new CollisionInfos(actorPair, colliderPair, CollisionType::Enter, mCollisionNormal, mCollisionDepth, collisionPos);

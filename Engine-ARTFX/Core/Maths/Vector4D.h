@@ -1,5 +1,4 @@
 #pragma once
-
 #include "Vector3D.h"
 
 class Vector4D
@@ -53,6 +52,10 @@ public:
 	const float* GetAsFloatPtr() const
 	{
 		return reinterpret_cast<const float*>(&x);
+	}
+
+	Vector3D ToVector3D() const {
+		return Vector3D(x, y, z);
 	}
 
 	// Set all four components in one line

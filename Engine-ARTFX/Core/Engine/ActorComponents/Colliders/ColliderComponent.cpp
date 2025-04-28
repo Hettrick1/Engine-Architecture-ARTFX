@@ -94,4 +94,18 @@ void ColliderComponent::SetActive(bool pActive)
 	mIsActive = pActive;
 }
 
+std::vector<Vector3D> ColliderComponent::GetWorldVertices()
+{
+	std::vector<Vector3D> worldVertices;
+	Matrix4DRow worldTransform = GetWorldTransform();
+
+	for (auto vertex : mMesh->GetVertices())
+	{
+		Vector3D worldVertex = worldTransform * vertex.position;
+		worldVertices.push_back(worldVertex);
+	}
+
+	return worldVertices;
+}
+
 

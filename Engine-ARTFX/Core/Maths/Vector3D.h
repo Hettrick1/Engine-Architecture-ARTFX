@@ -97,6 +97,15 @@ struct Vector3D
 		return *this;
 	}
 
+	Vector3D operator-()
+	{
+		Vector3D temp;
+		temp.x = -x;
+		temp.y = -y;
+		temp.z = -z;
+		return temp;
+	}
+
 	// Normalize the provided vector
 	static Vector3D Normalize(const Vector3D& vec)
 	{

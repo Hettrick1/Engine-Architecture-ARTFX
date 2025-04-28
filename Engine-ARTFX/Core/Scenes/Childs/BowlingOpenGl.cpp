@@ -9,6 +9,7 @@
 #include "BoxCollider3DComponent.h"
 #include "MeshComponent.h"
 #include "CoreActors/BasicCube.h"
+#include "DebugRenderer.h"
 
 BowlingOpenGl::BowlingOpenGl()
 	: mBowlingPlayer(nullptr)
@@ -22,6 +23,8 @@ BowlingOpenGl::~BowlingOpenGl()
 void BowlingOpenGl::Start(IRenderer* renderer)
 {
 	Scene::Start(renderer);
+	renderer->GetDebugRenderer()->SetDrawDebug(true);
+
 
 	testGlPlayer* player = new testGlPlayer();
 	AddActor(player);
@@ -32,6 +35,7 @@ void BowlingOpenGl::Start(IRenderer* renderer)
 	AddActor(ground); 
 	ground->SetPosition(Vector3D(0.0, 35.0f, -6.0f)); 
 	ground->GetTransformComponent().SetSize({ 15, 60, 1 }); 
+	ground->RemoveComponent(ground->GetComponentOfType<BoxCollider3DComponent>());
 	ground->Start();
 	ground->GetComponentOfType<MeshComponent>()->SetTiling(Vector2D(2, 1));
 
@@ -42,14 +46,14 @@ void BowlingOpenGl::Start(IRenderer* renderer)
 	quille3->Start();
 	quille3->GetComponentOfType<RigidbodyComponent>()->SetMass(0.5);
 
-	BowlingPin* quille4 = new BowlingPin();
+	/*BowlingPin* quille4 = new BowlingPin();
 	AddActor(quille4);
 	quille4->GetTransformComponent().SetSize(0.8f);
 	quille4->SetPosition(Vector3D(-3.0f, 36.0f, -4.0f));
 	quille4->Start();
-	quille4->GetComponentOfType<RigidbodyComponent>()->SetMass(0.5);
+	quille4->GetComponentOfType<RigidbodyComponent>()->SetMass(0.5);*/
 
-	BowlingPin* quille5 = new BowlingPin();
+	/*BowlingPin* quille5 = new BowlingPin();
 	AddActor(quille5);
 	quille5->GetTransformComponent().SetSize(0.8f);
 	quille5->SetPosition(Vector3D(0.0f, 36.0f, -4.0f));
@@ -68,7 +72,7 @@ void BowlingOpenGl::Start(IRenderer* renderer)
 	quille1->GetTransformComponent().SetSize(0.8f);
 	quille1->SetPosition(Vector3D(-1.5f, 33.0f, -4.0f));
 	quille1->Start();
-	quille1->GetComponentOfType<RigidbodyComponent>()->SetMass(0.5);
+	quille1->GetComponentOfType<RigidbodyComponent>()->SetMass(0.5);*/
 
 	BowlingPin* quille2 = new BowlingPin();
 	AddActor(quille2);
@@ -77,7 +81,7 @@ void BowlingOpenGl::Start(IRenderer* renderer)
 	quille2->Start();
 	quille2->GetComponentOfType<RigidbodyComponent>()->SetMass(0.5);
 
-	BasicCube* wall = new BasicCube();
+	/*BasicCube* wall = new BasicCube();
 	AddActor(wall);
 	wall->SetPosition(Vector3D(15.0f, 35.0f, 0.0f));
 	wall->GetTransformComponent().SetSize({ 1, 60, 15 });
@@ -96,13 +100,7 @@ void BowlingOpenGl::Start(IRenderer* renderer)
 	wall2->SetPosition(Vector3D(0.0f, 90.0f, 0.0f));
 	wall2->GetTransformComponent().SetSize({ 15, 1, 15 });
 	wall2->Start();
-	wall2->GetComponentOfType<MeshComponent>()->SetTextureIndex(3);
-
-	CameraActor* camera = new CameraActor();
-	camera->SetPosition(Vector3D(0.0f, 34.0f, 40.0f));
-	camera->GetTransformComponent().RotateX(-90);
-	AddActor(camera);
-	camera->Start();
+	wall2->GetComponentOfType<MeshComponent>()->SetTextureIndex(3);*/
 
 	mBowlingPlayer = new BowlingPlayer();
 	mBowlingPlayer->GetTransformComponent().RotateX(-5);
@@ -110,6 +108,11 @@ void BowlingOpenGl::Start(IRenderer* renderer)
 	AddActor(mBowlingPlayer);
 	mBowlingPlayer->Start();
 
+	CameraActor* camera = new CameraActor();
+	camera->SetPosition(Vector3D(0.0f, 34.0f, 40.0f));
+	camera->GetTransformComponent().RotateX(-90);
+	AddActor(camera);
+	camera->Start();
 }
 
 void BowlingOpenGl::Update()

@@ -5,10 +5,19 @@
 #include "Physics/HitResult.h"
 #include <utility>
 #include "Physics/AABB.h"
+#include "Mesh.h"
 
 struct HitResult;
 class ICollisionListener;
 class IRenderer;
+
+enum class ColliderType
+{
+	Box,
+	Sphere,
+	Mesh,
+	Box2D
+};
 
 class ColliderComponent : public Component
 {
@@ -42,10 +51,15 @@ public:
 	void SetActive(bool pActive);
 	inline bool GetIsActive() const { return mIsActive; }
 
+	Mesh* GetMesh() const { return mMesh; }
+	virtual ColliderType GetColliderType() = 0;
+	std::vector<Vector3D> GetWorldVertices();
+
 protected :
 	bool mIsQuerry, mIsActive;;
 	std::vector<ICollisionListener*> mListeners;
 	Vector3D mSize;
 	std::string mName;
+	Mesh* mMesh;
 };
 
