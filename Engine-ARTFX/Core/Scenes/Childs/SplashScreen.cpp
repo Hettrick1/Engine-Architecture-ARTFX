@@ -10,6 +10,7 @@
 #include "LVLDoom.h"
 #include "LVLDoomMainMenu.h"
 
+
 SplashScreen::SplashScreen(Scene* pNextScene)
 	: Scene(), mZephyrusText(nullptr), mStudioText(nullptr), mTime(0), mNextScene(pNextScene)
 {
@@ -25,24 +26,28 @@ void SplashScreen::Start(IRenderer* renderer)
 {
 	Scene::Start(renderer);
 
+	renderer->GetDebugRenderer()->SetDrawDebug(true);
+
 	mTime = 0;
 
 	CameraActor* cam = new CameraActor();
 	cam->Start();
 	AddActor(cam);
 
-	mZephyrusText = new HudText("Zephyrus", 0, 0, 2.0f, Vector4D(1.0, 0.81176f, 0.0, 0), TextAlignment::CENTER, Assets::LoadFont("Imports/Fonts/Chopsic.otf", "RoadPixel"));
-	GetRenderer()->GetHud()->AddElement(mZephyrusText);
-
 	Shader vert;
 	vert.Load("VertFrag/TextSplashScreen.vert", ShaderType::VERTEX);
 	Shader frag;
 	frag.Load("VertFrag/TextSplashScreen.frag", ShaderType::FRAGMENT);
+
 	ShaderProgram* shaderProgram = new ShaderProgram();
 	shaderProgram->Compose({ &vert, &frag });
+
+	mZephyrusText = new HudText("Zephyrus", 0, 0, 2.0f, Vector4D(1.0, 0.81176f, 0.0, 0.0), TextAlignment::CENTER, Assets::LoadFont("Imports/Fonts/Chopsic.otf", "Chopsic"));
+	GetRenderer()->GetHud()->AddElement(mZephyrusText);
+
 	mZephyrusText->SetShaderProgram(shaderProgram);
 
-	mStudioText = new HudText("Engine", 0, -200, 0.5f, Vector4D(1, 1, 1, 0), TextAlignment::CENTER, Assets::LoadFont("Imports/Fonts/Chopsic.otf", "RoadPixel"));
+	mStudioText = new HudText("Engine", 0, -200, 0.5f, Vector4D(1, 1, 1, 0), TextAlignment::CENTER, Assets::LoadFont("Imports/Fonts/Chopsic.otf", "Chopsic"));
 	GetRenderer()->GetHud()->AddElement(mStudioText); 
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 }
@@ -53,13 +58,13 @@ void SplashScreen::Update()
 	mTime += Timer::deltaTime;
 	if (mTime > 0.2f && mTime < 0.7)
 	{
-		float alpha = (mTime - 0.2f) * 2;
-		mZephyrusText->SetColor(Vector4D(mZephyrusText->GetColor().xyz, alpha));
+		float alpha1 = (mTime - 0.2f) * 2;
+		mZephyrusText->SetColor(Vector4D(mZephyrusText->GetColor().xyz, alpha1));
 	}
 	if (mTime > 2.1f && mTime < 2.6)
 	{
-		float alpha = (mTime - 2.1f) * 2;
-		mStudioText->SetColor(Vector4D(mStudioText->GetColor().xyz, alpha));
+		float alpha2 = (mTime - 2.1f) * 2;
+		mStudioText->SetColor(Vector4D(mStudioText->GetColor().xyz, alpha2));
 	}
 	if (mTime > 3.0f)
 	{

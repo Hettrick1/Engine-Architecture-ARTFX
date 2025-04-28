@@ -61,6 +61,7 @@ void TextRenderer::RenderText(std::string text, float x, float y, float scale, V
     shaderProgram->setFloat("time", SDL_GetTicks());
     shaderProgram->setFloat("screenWidth", mWindow->GetDimensions().x);
     shaderProgram->setFloat("screenHeight", mWindow->GetDimensions().y);
+    shaderProgram->setMatrix4Row("projection", mProjection);
     glActiveTexture(GL_TEXTURE0); 
     glBindVertexArray(VAO); 
 

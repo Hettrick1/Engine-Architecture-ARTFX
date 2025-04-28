@@ -12,7 +12,7 @@ uniform float screenHeight;
 void main()
 {    
     float sampledAlpha = texture(text, TexCoords).r;
-    
+
     if (sampledAlpha < 0.2)
         discard;
 
@@ -22,15 +22,11 @@ void main()
         float width = 100.0;
         float slope = -0.5;
 
-        // Position du pixel actuel
         float x = gl_FragCoord.x;
         float y = gl_FragCoord.y;
 
-        // Position de la lame
         float center = mod(time * speed, screenWidth + width) - width; 
-        // ---> commence à -width puis avance
 
-        // Calcul position inclinée
         float bladePosition = x + y * slope;
 
         float distance = abs(bladePosition - center);
