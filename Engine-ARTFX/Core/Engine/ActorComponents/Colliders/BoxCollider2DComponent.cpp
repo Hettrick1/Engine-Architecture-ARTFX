@@ -31,7 +31,7 @@ void BoxCollider2DComponent::OnEnd()
 {
 }
 
-bool BoxCollider2DComponent::CheckCollisionWith(ColliderComponent* other)
+bool BoxCollider2DComponent::CheckCollisionWith(ColliderComponent* other, ContactManifold& infosOut)
 {
     if (BoxCollider2DComponent* boxCollider = dynamic_cast<BoxCollider2DComponent*>(other)) {
         if (CheckCollisionWithBox(boxCollider)) {

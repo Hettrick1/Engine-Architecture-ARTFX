@@ -3,6 +3,7 @@
 #include "Physics/PhysicManager.h"
 #include "Scene.h"
 #include "IRenderer.h"
+#include "Physics/ContactManifold.h"
 
 ColliderComponent::ColliderComponent(Actor* pOwner, int pUpdateOder)
 	: Component(pOwner, pUpdateOder), mIsQuerry(false), mIsActive(true)
@@ -19,7 +20,7 @@ void ColliderComponent::Update()
 {
 }
 
-bool ColliderComponent::CheckCollisionWith(ColliderComponent* other)
+bool ColliderComponent::CheckCollisionWith(ColliderComponent* other, ContactManifold& infosOut)
 {
 	return true;
 }

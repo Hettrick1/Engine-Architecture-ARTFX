@@ -1,6 +1,7 @@
 #include "BoxSATComponent.h"
 #include "Matrix4DRow.h"
 #include "IRenderer.h"
+#include "Physics/ContactManifold.h"
 
 BoxSATComponent::BoxSATComponent(Actor* owner, int updateOrder, Vector3D size, Vector3D relativePosition)
     :ColliderComponent(owner, updateOrder)
@@ -9,23 +10,22 @@ BoxSATComponent::BoxSATComponent(Actor* owner, int updateOrder, Vector3D size, V
     mSize = size;
 }
 
-bool BoxSATComponent::CheckCollisionWith(ColliderComponent* other)
+bool BoxSATComponent::CheckCollisionWith(ColliderComponent* other, ContactManifold& infosOut)
 {
     if (other->GetColliderType() == ColliderType::BoxSAT) {
-        return CheckCollisionWithBoxSAT(static_cast<BoxSATComponent*>(other));
+        return CheckCollisionWithBoxSAT(static_cast<BoxSATComponent*>(other), infosOut);
     }
     return false;
 }
 
 AABB BoxSATComponent::GetAABB()
 {
-    return mCachedAABB;
+    AABB aabb = AABB(GetWorldPosition() - mSize, GetWorldPosition() + mSize);
+    return aabb;
 }
 
 void BoxSATComponent::Update()
 {
-    AABB aabb = AABB(GetWorldPosition() - mSize, GetWorldPosition() + mSize);
-    mCachedAABB = aabb;
 }
 
 std::vector<Vector3D> BoxSATComponent::GetVertices()
@@ -51,18 +51,17 @@ void BoxSATComponent::DebugDraw(IRenderer& renderer)
 {
     if (mOwner->GetState() == ActorState::Active)
     {
-        AABB aabb = AABB(GetWorldPosition() - mSize, GetWorldPosition() + mSize);
+        AABB aabb = AABB(-mSize, mSize);
 
-        Matrix4DRow wt;
-
-        wt = Matrix4DRow::CreateScale(mSize * 2);
+        Matrix4DRow wt = Matrix4DRow::CreateScale(mSize * 2.0f);
+        //wt *= Matrix4DRow::CreateFromQuaternion(mOwner->GetTransformComponent().GetRotation());
         wt *= Matrix4DRow::CreateTranslation(GetWorldPosition() - mSize);
 
         renderer.DrawDebugBox(aabb.min, aabb.max, wt);
     }
 }
 
-bool BoxSATComponent::CheckCollisionWithBoxSAT(BoxSATComponent* other)
+bool BoxSATComponent::CheckCollisionWithBoxSAT(BoxSATComponent* other, ContactManifold& infosOut)
 {
     Vector3D axesA[3], axesB[3];
     GetAxes(axesA);
@@ -72,28 +71,81 @@ bool BoxSATComponent::CheckCollisionWithBoxSAT(BoxSATComponent* other)
     Vector3D centerB = other->GetWorldPosition();
     Vector3D t = centerB - centerA;
 
-    // Test des 15 axes (3 de A, 3 de B, 9 croisés)
+    float minOverlap = FLT_MAX;
+    Vector3D smallestAxis;
+
+    // --- Check axes of A
     for (int i = 0; i < 3; i++) {
-        if (!OverlapOnAxis(other, axesA[i])) return false;
+        Vector3D axis = axesA[i];
+        if (axis.LengthSq() < 0.001f) continue; // éviter des axes nuls
+
+        float overlap;
+        if (!OverlapOnAxis(other, axis, overlap))
+            return false;
+
+        if (overlap < minOverlap) {
+            minOverlap = overlap;
+            smallestAxis = axis;
+        }
     }
+
+    // --- Check axes of B
     for (int i = 0; i < 3; i++) {
-        if (!OverlapOnAxis(other, axesB[i])) return false;
+        Vector3D axis = axesB[i];
+        if (axis.LengthSq() < 0.001f) continue;
+
+        float overlap;
+        if (!OverlapOnAxis(other, axis, overlap))
+            return false;
+
+        if (overlap < minOverlap) {
+            minOverlap = overlap;
+            smallestAxis = axis;
+        }
     }
+
+    // --- Check cross products
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
             Vector3D axis = Vector3D::Cross(axesA[i], axesB[j]);
-            if (axis.LengthSq() > 0.001f && !OverlapOnAxis(other, Vector3D::Normalize(axis))) {
+            if (axis.LengthSq() < 0.001f) continue;
+
+            axis = Vector3D::Normalize(axis);
+
+            float overlap;
+            if (!OverlapOnAxis(other, axis, overlap))
                 return false;
+
+            if (overlap < minOverlap) {
+                minOverlap = overlap;
+                smallestAxis = axis;
             }
         }
     }
+
+    if (Vector3D::Dot(smallestAxis, centerB - centerA) < 0.0f) {
+        smallestAxis = -smallestAxis;
+    }
+
+    Vector3D flattenedNormal = Vector3D(smallestAxis.x, smallestAxis.y, 0.0f);
+    if (flattenedNormal.LengthSq() > 0.0001f)
+        flattenedNormal = Vector3D::Normalize(flattenedNormal);
+    infosOut.normal = flattenedNormal;
+    infosOut.penetrationDepth = minOverlap;
+
     return true;
 }
 
-bool BoxSATComponent::OverlapOnAxis(BoxSATComponent* other, const Vector3D& axis) {
+bool BoxSATComponent::OverlapOnAxis(BoxSATComponent* other, const Vector3D& axis, float& overlapOut) {
     auto projA = CalculateProjection(axis);
     auto projB = other->CalculateProjection(axis);
-    return projA.second >= projB.first && projB.second >= projA.first;
+
+    if (projA.second < projB.first || projB.second < projA.first)
+        return false;
+
+    // Calcul du overlap réel
+    overlapOut = std::min(projA.second, projB.second) - std::max(projA.first, projB.first);
+    return true;
 }
 
 void BoxSATComponent::GetAxes(Vector3D axes[3])

@@ -33,10 +33,10 @@ void BoxAABBComponent::OnEnd()
 {
 }
 
-bool BoxAABBComponent::CheckCollisionWith(ColliderComponent* other)
+bool BoxAABBComponent::CheckCollisionWith(ColliderComponent* other, ContactManifold& infosOut)
 {
     if (BoxAABBComponent* boxCollider = dynamic_cast<BoxAABBComponent*>(other)) {
-        if (CheckCollisionWithBoxAABB(boxCollider)) {
+        if (CheckCollisionWithBoxAABB(boxCollider, infosOut)) {
             return true;
         }
         return false;
@@ -44,7 +44,7 @@ bool BoxAABBComponent::CheckCollisionWith(ColliderComponent* other)
     return false;
 }
 
-bool BoxAABBComponent::CheckCollisionWithBoxAABB(BoxAABBComponent* other)
+bool BoxAABBComponent::CheckCollisionWithBoxAABB(BoxAABBComponent* other, ContactManifold& infosOut)
 {
     mLastPosition = mPosition;
     mPosition = mOwner->GetTransformComponent().GetPosition() + GetRelativePosition();

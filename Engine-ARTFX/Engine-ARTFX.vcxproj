@@ -140,6 +140,7 @@
   <ItemGroup>
     <ClCompile Include="Core\Engine\ActorComponents\Colliders\BoxSATComponent.cpp" />
     <ClCompile Include="Core\Engine\CoreActors\BasicCube.cpp" />
+    <ClCompile Include="Core\Engine\CoreActors\BasicSATCube.cpp" />
     <ClCompile Include="Core\Engine\CoreActors\EmptyActor.cpp" />
     <ClCompile Include="Core\Engine\CoreActors\SkySphere.cpp" />
     <ClCompile Include="Core\Engine\CoreComponents\SkySphereComponent.cpp" />
@@ -230,6 +231,7 @@
   <ItemGroup>
     <ClInclude Include="Core\Engine\ActorComponents\Colliders\BoxSATComponent.h" />
     <ClInclude Include="Core\Engine\CoreActors\BasicCube.h" />
+    <ClInclude Include="Core\Engine\CoreActors\BasicSATCube.h" />
     <ClInclude Include="Core\Engine\CoreActors\EmptyActor.h" />
     <ClInclude Include="Core\Engine\CoreActors\SkySphere.h" />
     <ClInclude Include="Core\Engine\CoreComponents\SkySphereComponent.h" />
@@ -242,6 +244,7 @@
     <ClInclude Include="Core\Engine\Graphics\OpenGl\Shaders\ShaderProgrammType.h" />
     <ClInclude Include="Core\Engine\Physics\AABB.h" />
     <ClInclude Include="Core\Engine\DebugClasses\DebugLine.h" />
+    <ClInclude Include="Core\Engine\Physics\ContactManifold.h" />
     <ClInclude Include="Core\Scenes\Childs\LVLAdvancedOpenGL.h" />
     <ClInclude Include="Core\Scenes\Childs\LVLDoomMainMenu.h" />
     <ClInclude Include="Core\Scenes\Childs\SplashScreen.h" />

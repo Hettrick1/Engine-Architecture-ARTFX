@@ -14,7 +14,7 @@ public:
 	void OnEnd() override;
 
 public:
-	bool CheckCollisionWith(ColliderComponent* other) override;
+	bool CheckCollisionWith(ColliderComponent* other, ContactManifold& infosOut) override;
 
 public:
 	bool CheckCollisionWithBox(BoxCollider2DComponent* other);

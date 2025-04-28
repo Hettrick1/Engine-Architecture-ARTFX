@@ -279,6 +279,9 @@
     <ClCompile Include="Core\Engine\ActorComponents\Colliders\BoxSATComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Core\Engine\CoreActors\BasicSATCube.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Engine\DebugClasses\Log.h">
@@ -585,6 +588,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Core\Engine\ActorComponents\Colliders\BoxSATComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Engine\Physics\ContactManifold.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Engine\CoreActors\BasicSATCube.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -15,7 +15,7 @@ public:
 	void OnEnd() override;
 
 public:
-	bool CheckCollisionWith(ColliderComponent* other) override;
+	bool CheckCollisionWith(ColliderComponent* other, ContactManifold& infosOut) override;
 
 public:
 	void SetShowInGame(bool pShowInGame);
@@ -31,7 +31,7 @@ public:
 	ColliderType GetColliderType() const override { return ColliderType::BoxAABB; }
 
 private:
-	bool CheckCollisionWithBoxAABB(BoxAABBComponent* other);
+	bool CheckCollisionWithBoxAABB(BoxAABBComponent* other, ContactManifold& infosOut);
 
 private:
 	Vector3D mPosition;

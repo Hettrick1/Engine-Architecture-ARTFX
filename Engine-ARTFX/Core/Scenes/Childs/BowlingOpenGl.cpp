@@ -8,6 +8,7 @@
 #include "RigidbodyComponent.h"
 #include "BoxAABBComponent.h"
 #include "MeshComponent.h"
+#include "CoreActors/BasicSATCube.h"
 #include "CoreActors/BasicCube.h"
 #include "DebugRenderer.h"
 
@@ -45,7 +46,7 @@ void BowlingOpenGl::Start(IRenderer* renderer)
 	quille3->Start();
 	quille3->GetComponentOfType<RigidbodyComponent>()->SetMass(0.5);
 
-	/*BowlingPin* quille4 = new BowlingPin();
+	BowlingPin* quille4 = new BowlingPin();
 	AddActor(quille4);
 	quille4->GetTransformComponent().SetSize(0.8f);
 	quille4->SetPosition(Vector3D(-3.0f, 36.0f, -4.0f));
@@ -71,7 +72,7 @@ void BowlingOpenGl::Start(IRenderer* renderer)
 	quille1->GetTransformComponent().SetSize(0.8f);
 	quille1->SetPosition(Vector3D(-1.5f, 33.0f, -4.0f));
 	quille1->Start();
-	quille1->GetComponentOfType<RigidbodyComponent>()->SetMass(0.5);*/
+	quille1->GetComponentOfType<RigidbodyComponent>()->SetMass(0.5);
 
 	BowlingPin* quille2 = new BowlingPin();
 	AddActor(quille2);
@@ -80,24 +81,30 @@ void BowlingOpenGl::Start(IRenderer* renderer)
 	quille2->Start();
 	quille2->GetComponentOfType<RigidbodyComponent>()->SetMass(0.5);
 
-	BasicCube* wall = new BasicCube();
+	BasicSATCube* wall = new BasicSATCube();
 	AddActor(wall);
 	wall->SetPosition(Vector3D(15.0f, 35.0f, 0.0f));
 	wall->GetTransformComponent().SetSize({ 1, 60, 15 });
+	wall->AddComponent(new RigidbodyComponent(wall));
+	wall->GetRigidBody()->SetMass(10000000);
 	wall->Start();
 	wall->GetComponentOfType<MeshComponent>()->SetTextureIndex(3);
 
-	BasicCube* wall1 = new BasicCube();
+	BasicSATCube* wall1 = new BasicSATCube();
 	AddActor(wall1);
 	wall1->SetPosition(Vector3D(-15.0f, 35.0f, 0.0f));
 	wall1->GetTransformComponent().SetSize({ 1, 60, 15 });
+	wall1->AddComponent(new RigidbodyComponent(wall1));
+	wall1->GetRigidBody()->SetMass(10000000);
 	wall1->Start();
 	wall1->GetComponentOfType<MeshComponent>()->SetTextureIndex(3);
 
-	BasicCube* wall2 = new BasicCube();
+	BasicSATCube* wall2 = new BasicSATCube();
 	AddActor(wall2);
-	wall2->SetPosition(Vector3D(0.0f, 90.0f, 0.0f));
+	wall2->SetPosition(Vector3D(0.0f, 80.0f, 0.0f));
 	wall2->GetTransformComponent().SetSize({ 15, 1, 15 });
+	wall2->AddComponent(new RigidbodyComponent(wall2));
+	wall2->GetRigidBody()->SetMass(10000000);
 	wall2->Start();
 	wall2->GetComponentOfType<MeshComponent>()->SetTextureIndex(3);
 

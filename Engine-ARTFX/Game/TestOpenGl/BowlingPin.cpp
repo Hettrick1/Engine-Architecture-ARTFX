@@ -25,9 +25,7 @@ void BowlingPin::Start()
 	MeshComponent* meshComp = new MeshComponent(this, mesh);
 	meshComp->SetTextureIndex(0);
 	RigidbodyComponent* rb = new RigidbodyComponent(this);
-	BoxSATComponent* bc = new BoxSATComponent(this, 10, Vector3D(GetTransformComponent().GetSize().x, GetTransformComponent().GetSize().y , 2.4), Vector3D(0,0,2.0));
-	/*BoxSATComponent* bc2 = new BoxSATComponent(this, 10, Vector3D(GetTransformComponent().GetSize().x + 0.5, GetTransformComponent().GetSize().y + 0.5, 2), Vector3D(0,0,2.0));
-	bc2->SetIsQuerry(true);*/
+	BoxSATComponent* bc = new BoxSATComponent(this, 10, Vector3D(GetTransformComponent().GetSize().x * 1.5, GetTransformComponent().GetSize().y * 1.5, 2.4), Vector3D(0,0,2.0));
 }
 
 void BowlingPin::Update()
