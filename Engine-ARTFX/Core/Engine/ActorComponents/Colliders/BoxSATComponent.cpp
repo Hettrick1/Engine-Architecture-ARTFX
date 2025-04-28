@@ -123,14 +123,23 @@ bool BoxSATComponent::CheckCollisionWithBoxSAT(BoxSATComponent* other, ContactMa
         }
     }
 
-    if (Vector3D::Dot(smallestAxis, centerB - centerA) < 0.0f) {
+    centerA = GetWorldPosition();
+    centerB = other->GetWorldPosition();
+    Vector3D direction = centerB - centerA;
+
+    Vector3D newDir = Vector3D(direction.x, direction.y, 0);
+
+    // On conserve l'axe de plus petite pénétration mais on le pondère avec la direction
+    if (Vector3D::Dot(smallestAxis, direction) < 0.0f) {
         smallestAxis = -smallestAxis;
     }
 
-    Vector3D flattenedNormal = Vector3D(smallestAxis.x, smallestAxis.y, 0.0f);
-    if (flattenedNormal.LengthSq() > 0.0001f)
-        flattenedNormal = Vector3D::Normalize(flattenedNormal);
-    infosOut.normal = flattenedNormal;
+    // Mélange entre l'axe de pénétration et la direction de collision (50/50)
+    Vector3D finalNormal = Vector3D::Normalize((smallestAxis + Vector3D::Normalize(direction)));
+
+    Vector3D newNorm = Vector3D(finalNormal.x, finalNormal.y, 0);
+    // Pour le bowling, on veut garder le mouvement latéral
+    infosOut.normal = Vector3D::Normalize(newNorm);
     infosOut.penetrationDepth = minOverlap;
 
     return true;

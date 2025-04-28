@@ -23,11 +23,9 @@ void BowlingBall::Start()
 	mesh->AddTexture(tex);
 	MeshComponent* meshComp = new MeshComponent(this, mesh);
 	meshComp->SetTextureIndex(1);
-	AddComponent(meshComp);
 	RigidbodyComponent* rb = new RigidbodyComponent(this);
-	AddComponent(rb);
 	BoxSATComponent* bc = new BoxSATComponent(this, 10, GetTransformComponent().GetSize());
-	AddComponent(bc);
+	SetPosition(Vector3D(mTransformComponent.GetPosition().x, mTransformComponent.GetPosition().y, mTransformComponent.GetPosition().z + 0.5));
 }
 
 void BowlingBall::Update()
