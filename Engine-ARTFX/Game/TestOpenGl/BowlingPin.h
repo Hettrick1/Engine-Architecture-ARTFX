@@ -16,4 +16,7 @@ public:
 	void OnTriggerEnter(ColliderComponent* collider, HitResult* infos) override;
 	void OnTriggerStay(ColliderComponent* collider, HitResult* infos) override;
 	void OnTriggerExit(ColliderComponent* collider, HitResult* infos) override;
+	Vector3D GetInitialPos() const { return mInitialPos; }
+private:
+	Vector3D mInitialPos;
 };

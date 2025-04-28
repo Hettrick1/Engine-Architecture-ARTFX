@@ -23,9 +23,10 @@ void BowlingPin::Start()
 	Mesh* mesh = Assets::LoadMesh("Imports/Meshes/pin.obj", "pin");
 	mesh->AddTexture(tex);
 	MeshComponent* meshComp = new MeshComponent(this, mesh);
-	meshComp->SetTextureIndex(0);
+	meshComp->SetTextureIndex(1);
 	RigidbodyComponent* rb = new RigidbodyComponent(this);
 	BoxSATComponent* bc = new BoxSATComponent(this, 10, Vector3D(GetTransformComponent().GetSize().x * 1.5, GetTransformComponent().GetSize().y * 1.5, 2.4), Vector3D(0,0,2.0));
+	mInitialPos = mTransformComponent.GetPosition();
 }
 
 void BowlingPin::Update()

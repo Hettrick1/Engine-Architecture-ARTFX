@@ -2,6 +2,7 @@
 #include "Actor.h"
 #include "BowlingBall.h"
 #include "BallSpawnPoint.h"
+#include "BowlingPin.h"
 class BowlingPlayer : public Actor
 {
 public:
@@ -19,6 +20,9 @@ public:
 private:
 	BowlingBall* mBall;
 	BallSpawnPoint* mBallSpawnPoint;
+	std::vector<BowlingPin*> mPins;
 	Vector3D mSpawnPosition;
+	bool mBeginTimer;
+	float mTimer;
 };
 
