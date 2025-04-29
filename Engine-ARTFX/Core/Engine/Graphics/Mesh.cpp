@@ -33,7 +33,11 @@ void Mesh::Unload()
 
 void Mesh::AddTexture(Texture* pTexture)
 {
-	mTextures.push_back(pTexture);
+	auto it = std::find(mTextures.begin(), mTextures.end(), pTexture);
+	if (it == mTextures.end())
+	{
+		mTextures.push_back(pTexture);
+	}
 }
 
 Texture* Mesh::GetTexture(unsigned int pTextureIndex)

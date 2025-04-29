@@ -9,6 +9,12 @@
 struct HitResult;
 class ICollisionListener;
 class IRenderer;
+struct ContactManifold;
+
+enum class ColliderType {
+	BoxAABB,
+	BoxSAT
+};
 
 class ColliderComponent : public Component
 {
@@ -20,10 +26,11 @@ public:
 	bool GetIsQuerry();
 	void SetIsQuerry(bool isQuerry);
 	virtual void Update();
-	virtual bool CheckCollisionWith(ColliderComponent* other);
+	virtual bool CheckCollisionWith(ColliderComponent* other, ContactManifold& infosOut);
 	virtual std::pair < Vector3D, Vector3D> GetCollisionPosition() const;
 	virtual void DebugDraw(IRenderer& renderer);
 	virtual AABB GetAABB() { return AABB(); }
+	virtual ColliderType GetColliderType() const = 0;
 
 public:
 	void AddListener(ICollisionListener* listener);

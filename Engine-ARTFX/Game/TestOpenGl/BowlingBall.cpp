@@ -4,7 +4,7 @@
 #include "RigidbodyComponent.h"
 #include "Timer.h"
 #include "Physics/CollisionManager.h"
-#include "BoxCollider3DComponent.h"
+#include "BoxSATComponent.h"
 
 BowlingBall::BowlingBall(Vector3D pPos, Vector3D pSize, Quaternion pRotation)
 	: Actor(pPos, pSize, pRotation)
@@ -23,11 +23,9 @@ void BowlingBall::Start()
 	mesh->AddTexture(tex);
 	MeshComponent* meshComp = new MeshComponent(this, mesh);
 	meshComp->SetTextureIndex(1);
-	AddComponent(meshComp);
 	RigidbodyComponent* rb = new RigidbodyComponent(this);
-	AddComponent(rb);
-	BoxCollider3DComponent* bc = new BoxCollider3DComponent(this, 10, GetTransformComponent().GetSize());
-	AddComponent(bc);
+	BoxSATComponent* bc = new BoxSATComponent(this, 10, GetTransformComponent().GetSize());
+	SetPosition(Vector3D(mTransformComponent.GetPosition().x, mTransformComponent.GetPosition().y, mTransformComponent.GetPosition().z + 0.5));
 }
 
 void BowlingBall::Update()

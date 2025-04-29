@@ -5,6 +5,7 @@
 #include "RigidbodyComponent.h"
 #include "PhysicManager.h"
 #include "Scene.h"
+#include "ContactManifold.h"
 #include <utility>
 #include <algorithm>
 
@@ -125,7 +126,8 @@ void CollisionManager::CheckCollisions()
                     {
                         continue;
                     }
-                    if (collider1->CheckCollisionWith(collider2)) {
+                    ContactManifold manifold;
+                    if (collider1->CheckCollisionWith(collider2, manifold)) {
                         bool isNewCollision1 = mCurrentCollisions[collider1].find(collider2) == mCurrentCollisions[collider1].end();
                         bool isNewCollision2 = mCurrentCollisions[collider2].find(collider1) == mCurrentCollisions[collider2].end();
 
@@ -139,14 +141,12 @@ void CollisionManager::CheckCollisions()
                         colliderPair.first = collider1;
                         colliderPair.second = collider2;
 
-                        CalculateNormal(collider1, collider2);
-
                         if (isNewCollision1 || isNewCollision2) { //enter
-                            CollisionInfos* infos = new CollisionInfos(actorPair, colliderPair, CollisionType::Enter, mCollisionNormal, mCollisionDepth, collisionPos);
+                            CollisionInfos* infos = new CollisionInfos(actorPair, colliderPair, CollisionType::Enter, manifold.normal, manifold.penetrationDepth, collisionPos);
                             PhysicManager::Instance().AddCollisionToQueue(infos);
                         }
                         else { // stays
-                            CollisionInfos* infos = new CollisionInfos(actorPair, colliderPair, CollisionType::Stay, mCollisionNormal, mCollisionDepth, collisionPos);
+                            CollisionInfos* infos = new CollisionInfos(actorPair, colliderPair, CollisionType::Stay, manifold.normal, manifold.penetrationDepth, collisionPos);
                             PhysicManager::Instance().AddCollisionToQueue(infos);
                         }
                         newCollisions[collider1].insert(collider2);

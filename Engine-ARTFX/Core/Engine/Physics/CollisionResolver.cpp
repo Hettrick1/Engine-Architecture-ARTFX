@@ -207,16 +207,6 @@ void CollisionResolver::CalculatePhysicCollisions()
 		{
 			case CollisionType::Enter:
 			{
-				/*if (!isStaticA) {
-					Vector3D newPos = Vector3D(colPos1.x, colPos1.y, actors.first->GetTransformComponent().GetPosition().z);
-					actors.first->SetPosition(newPos);
-				}
-
-				if (!isStaticB) {
-					Vector3D newPos = Vector3D(colPos2.x, colPos2.y, actors.second->GetTransformComponent().GetPosition().z);
-					actors.second->SetPosition(newPos);
-				}*/
-
 				ColliderComponent* colliderA = collision->colliderPair.first;
 				ColliderComponent* colliderB = collision->colliderPair.second;
 
@@ -245,17 +235,11 @@ void CollisionResolver::CalculatePhysicCollisions()
 
 				if (rbA && !isStaticA)
 				{
-					if (mReactionForce.find(rbA) == mReactionForce.end())
-					{
-						mReactionForce[rbA] = impulse * invMassA;
-					}
+					mReactionForce[rbA] = impulse * invMassA;
 				}
 				if (rbB && !isStaticB)
 				{
-					if (mReactionForce.find(rbB) == mReactionForce.end())
-					{
-						mReactionForce[rbB] = (impulse*-1) * invMassB;
-					}
+					mReactionForce[rbB] = (impulse*-1) * invMassB;
 				}
 				break;
 			}
@@ -323,7 +307,7 @@ void CollisionResolver::ResolvePenetration(Actor* actorA, Actor* actorB, Vector3
 	{
 		percentB = isStaticB ? 0.0f : rbB->GetMass() / totalMass;
 	}
-	depth *= 1.1f;
+	depth *= 1.01f;
 
 	if (!isStaticA && rbA) {
 		Vector3D movement = normal * (-depth * (1.0f - percentA));

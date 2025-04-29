@@ -11,7 +11,7 @@
 #include "HudManager.h"
 #include "Physics/CollisionManager.h"
 #include "Physics/PhysicManager.h"
-#include "BoxCollider3DComponent.h"
+#include "BoxAABBComponent.h"
 #include "DoomEnemy.h"
 
 float bobingTime = 0;
@@ -104,7 +104,7 @@ void DoomPlayer::Start()
 	GetScene().GetRenderer()->GetHud()->AddElement(mHealthText);
 	GetScene().GetRenderer()->GetHud()->AddElement(mArmorText);
 
-	BoxCollider3DComponent* bc = new BoxCollider3DComponent(this, 10, 0.1, Vector3D(0, 0, -0.12));
+	BoxAABBComponent* bc = new BoxAABBComponent(this, 10, 0.1, Vector3D(0, 0, -0.12));
 	bc->SetIsQuerry(true);
 
 

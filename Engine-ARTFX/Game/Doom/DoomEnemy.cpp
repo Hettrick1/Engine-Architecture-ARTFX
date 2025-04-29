@@ -1,7 +1,7 @@
 #include "DoomEnemy.h"
 #include "Assets.h"
 #include "Scene.h"
-#include "BoxCollider3DComponent.h"
+#include "BoxAABBComponent.h"
 #include "CameraManager.h"
 #include "CameraComponent.h"
 #include "Timer.h"
@@ -99,7 +99,7 @@ void DoomEnemy::Start()
 
 	SetTag("Enemy");
 
-	BoxCollider3DComponent* bc = new BoxCollider3DComponent(this, 10, Vector3D(0.4,0.4,1.0), Vector3D(0, 0, 0));
+	BoxAABBComponent* bc = new BoxAABBComponent(this, 10, Vector3D(0.4,0.4,1.0), Vector3D(0, 0, 0));
 }
 
 void DoomEnemy::Update()
@@ -192,6 +192,6 @@ void DoomEnemy::TakeDamage(int pDamages, int weapon)
 		mIsDead = true;
 		mEnemyFb->PlayAnimation();
 		mEnemyFb->SetCanPlay(false);
-		GetComponentOfType<BoxCollider3DComponent>()->SetActive(false);
+		GetComponentOfType<BoxAABBComponent>()->SetActive(false);
 	}
 }
