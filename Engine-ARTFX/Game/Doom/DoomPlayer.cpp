@@ -13,6 +13,8 @@
 #include "Physics/PhysicManager.h"
 #include "BoxAABBComponent.h"
 #include "DoomEnemy.h"
+#include "SceneManager.h"
+#include "LVLDoomMainMenu.h"
 
 float bobingTime = 0;
 const float gunDamages = 25;
@@ -280,9 +282,10 @@ void DoomPlayer::TakeDamages(int pQuantity)
 	else 
 	{
 		mHealth -= pQuantity;
-		if (mHealth < 0)
+		if (mHealth <= 0)
 		{
-			mHealth = 0;
+			SceneManager::LoadScene(new LVLDoomMainMenu());
+			return;
 		}
 	}
 	mArmorText->SetText(std::to_string(mArmor));

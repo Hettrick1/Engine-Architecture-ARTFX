@@ -4,6 +4,8 @@
 #include "Physics/PhysicManager.h"
 #include "CameraManager.h"
 #include <algorithm>
+#include "SceneManager.h"
+#include "InputManager.h"
 
 
 Scene::Scene(std::string title) 
@@ -34,6 +36,7 @@ void Scene::Render()
 
 void Scene::Unload()
 {
+	InputManager::Instance().Unload();
 	mRenderer->Unload();
 	PhysicManager::Instance().Unload();
 	CameraManager::Instance().Unload();
@@ -52,6 +55,7 @@ void Scene::Unload()
 
 void Scene::Close()
 {
+	InputManager::Instance().Unload();
 	mRenderer->Unload();
 	PhysicManager::Instance().Unload();
 	CameraManager::Instance().Unload();
@@ -82,14 +86,26 @@ void Scene::AddActor(Actor* actor)
 
 void Scene::UpdateAllActors()
 {
+	if (!SceneManager::mIsSceneLoaded)
+	{
+		return;
+	}
 	mIsUpdatingActor = true;
 	for (Actor* actor : mAllActors) 
 	{
+		if (!SceneManager::mIsSceneLoaded)
+		{
+			return;
+		}
 		actor->Update();
 	}
 	mIsUpdatingActor = false;
 	for (Actor* actor : mPendingActors) 
 	{
+		if (!SceneManager::mIsSceneLoaded)
+		{
+			return;
+		}
 		mAllActors.emplace_back(actor);
 	}
 	mPendingActors.clear();
@@ -97,6 +113,10 @@ void Scene::UpdateAllActors()
 	{
 		if (actor->GetState() == ActorState::Dead)
 		{
+			if (!SceneManager::mIsSceneLoaded)
+			{
+				return;
+			}
 			delete actor;
 		}
 	}

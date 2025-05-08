@@ -20,6 +20,7 @@ public :
 
 	void AddListener(IActionListener* listener);
 	void RemoveListener(IActionListener* listener);
+	void ClearListeners();
 protected:
 	void NotifyListenersStarted();
 	void NotifyListenersTriggered();

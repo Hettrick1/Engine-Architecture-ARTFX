@@ -1,6 +1,7 @@
 #include "InputManager.h"
 #include "BooleanActions.h"
 #include "InputAxis2D.h"
+#include "SceneManager.h"
 
 InputManager& InputManager::Instance()
 {
@@ -77,17 +78,52 @@ void InputManager::BindActionToMouse(InputActions* action)
 
 void InputManager::Update()
 {
+    if (mActionKeyBindings.empty() && mActionMouseBindings.empty()) 
+    {
+        return;
+    }
     for (auto it = mActionKeyBindings.begin(); it != mActionKeyBindings.end(); ++it) 
     {
+        if (!SceneManager::mIsSceneLoaded)
+        {
+            return;
+        }
         auto& key = it->first;        
         auto& actions = it->second;
         for (auto* action : actions) 
         {
             action->Update();
+            if (!SceneManager::mIsSceneLoaded)
+            {
+                return;
+            }
         }
     }
     for (InputActions* action : mActionMouseBindings)
     {
         action->Update();
+        if (!SceneManager::mIsSceneLoaded)
+        {
+            return;
+        }
     }
+}
+
+void InputManager::Unload()
+{
+    for (auto it = mActionKeyBindings.begin(); it != mActionKeyBindings.end(); ++it)
+    {
+        auto& key = it->first;
+        auto& actions = it->second;
+        for (auto* action : actions)
+        {
+            action->ClearListeners();
+        }
+    }
+    mActionKeyBindings.clear();
+    for (InputActions* action : mActionMouseBindings)
+    {
+        action->ClearListeners();
+    }
+    mActionMouseBindings.clear();
 }

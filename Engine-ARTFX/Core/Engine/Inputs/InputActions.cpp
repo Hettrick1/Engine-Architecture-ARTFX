@@ -26,6 +26,11 @@ void InputActions::RemoveListener(IActionListener* listenerToRemove)
 	mListeners.erase(std::remove(mListeners.begin(), mListeners.end(), listenerToRemove), mListeners.end());
 }
 
+void InputActions::ClearListeners()
+{
+	mListeners.clear();
+}
+
 void InputActions::NotifyListenersStarted()
 {
 	for (IActionListener* listener : mListeners) {
