@@ -5,7 +5,8 @@
 class SceneManager
 {
 public:
-	static Scene* ActiveScene;
+	static Scene* ActiveScene;	
+	static bool mIsSceneLoaded;
 	SceneManager() = default;
 	SceneManager(const SceneManager&) = delete;
 	SceneManager& operator=(const SceneManager&) = delete;
@@ -16,8 +17,4 @@ public:
 	static void Render();
 	static bool SceneLoaded();
 	static void Unload();
-
-private:
-	static bool mIsSceneLoaded;
-	
 };

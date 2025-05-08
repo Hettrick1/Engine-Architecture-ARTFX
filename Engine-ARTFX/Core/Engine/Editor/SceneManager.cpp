@@ -5,6 +5,7 @@ Scene* SceneManager::ActiveScene = nullptr;
 
 void SceneManager::LoadScene(Scene* pScene)
 {
+	mIsSceneLoaded = false;
 	IRenderer* renderer = nullptr;
 	if (ActiveScene != nullptr)
 	{
@@ -19,7 +20,6 @@ void SceneManager::LoadScene(Scene* pScene)
 	{
 		ActiveScene->Start(renderer);
 	}
-	mIsSceneLoaded = true;
 }
 
 void SceneManager::StartScene(IRenderer* pRenderer)
@@ -29,6 +29,7 @@ void SceneManager::StartScene(IRenderer* pRenderer)
 
 void SceneManager::Update()
 {
+	mIsSceneLoaded = true;
 	ActiveScene->Update();
 }
 

@@ -31,7 +31,7 @@ void SplashScreen::Start(IRenderer* renderer)
 	cam->Start();
 	AddActor(cam);
 
-	mZephyrusText = new HudText("Zephyrus", 0, 0, 2.0f, Vector4D(1.0, 0.81176f, 0.0, 0), TextAlignment::CENTER, Assets::LoadFont("Imports/Fonts/Chopsic.otf", "RoadPixel"));
+	mZephyrusText = new HudText("Zephyrus", 0, 0, 2.0f, Vector4D(1.0, 0.81176f, 0.0, 0), TextAlignment::CENTER, Assets::LoadFont("Imports/Fonts/Chopsic.otf", "Chopsic"));
 	GetRenderer()->GetHud()->AddElement(mZephyrusText);
 
 	Shader vert;
@@ -42,7 +42,7 @@ void SplashScreen::Start(IRenderer* renderer)
 	shaderProgram->Compose({ &vert, &frag });
 	mZephyrusText->SetShaderProgram(shaderProgram);
 
-	mStudioText = new HudText("Engine", 0, -200, 0.5f, Vector4D(1, 1, 1, 0), TextAlignment::CENTER, Assets::LoadFont("Imports/Fonts/Chopsic.otf", "RoadPixel"));
+	mStudioText = new HudText("Engine", 0, -200, 0.5f, Vector4D(1, 1, 1, 0), TextAlignment::CENTER, Assets::LoadFont("Imports/Fonts/Chopsic.otf", "Chopsic"));
 	GetRenderer()->GetHud()->AddElement(mStudioText); 
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 }
