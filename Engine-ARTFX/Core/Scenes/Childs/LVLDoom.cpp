@@ -29,7 +29,6 @@ LVLDoom::~LVLDoom()
 void LVLDoom::Start(IRenderer* renderer)
 {
 	Scene::Start(renderer);
-	//GetRenderer()->GetDebugRenderer()->SetDrawDebug(true);
 	
 	mPlayer = new DoomPlayer();
 	mPlayer->SetPosition(Vector3D(-48, 0, 0));
@@ -61,7 +60,6 @@ void LVLDoom::Start(IRenderer* renderer)
 	wall->SetTag("Wall");
 
 	BasicCube* wall1 = new BasicCube(Vector3D(0, -50, -0.21), Vector3D(50, 1, 1));
-
 	wall1->RotateX(90);
 	wall1->GetComponentOfType<MeshComponent>()->SetTextureIndex(3);
 	wall1->GetComponentOfType<MeshComponent>()->SetTiling(Vector2D(150, 6));

@@ -100,17 +100,8 @@ void DoomPlayer::Start()
 	mDamageIndicatorImage = new HudImage(*damageIndicator, Vector2D(0, 0), 2);
 	mDamageIndicatorImage->SetTint(Vector4D(1.0, 1.0, 1.0, 0.0));
 
-	GetScene().GetRenderer()->GetHud()->AddElement(mDamageIndicatorImage);
-	GetScene().GetRenderer()->GetHud()->AddElement(doomHudImage); 
-	GetScene().GetRenderer()->GetHud()->AddElement(mWeaponIconImage);
-	GetScene().GetRenderer()->GetHud()->AddElement(mFpsText);
-	GetScene().GetRenderer()->GetHud()->AddElement(mGunAmoText);
-	GetScene().GetRenderer()->GetHud()->AddElement(mHealthText);
-	GetScene().GetRenderer()->GetHud()->AddElement(mArmorText);
-
 	BoxAABBComponent* bc = new BoxAABBComponent(this, 10, 0.1, Vector3D(0, 0, -0.12));
 	bc->SetIsQuerry(true);
-
 
 	SetTag("Player");
 }

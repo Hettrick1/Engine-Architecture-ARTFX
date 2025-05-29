@@ -1,8 +1,8 @@
 #include "HudImage.h"
 
 HudImage::HudImage(Texture& pTexture, Vector2D pPosition, Vector2D pSize, Vector2D pOrigin)
-    : mTexture(pTexture), mWidth(pTexture.GetTextureSize().x * pSize.x), mHeight(pTexture.GetTextureSize().y * pSize.y)
-    , mOrigin(pOrigin), mTint(Vector4D(1.0f, 1.0f, 1.0f, 1.0f))
+    : HudElement(), mTexture(pTexture), mWidth(pTexture.GetTextureSize().x * pSize.x), mHeight(pTexture.GetTextureSize().y * pSize.y), 
+    mOrigin(pOrigin), mTint(Vector4D(1.0f, 1.0f, 1.0f, 1.0f))
 {
     SetPosition(pPosition.x, pPosition.y);
 }

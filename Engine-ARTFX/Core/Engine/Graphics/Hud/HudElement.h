@@ -7,6 +7,7 @@
 class HudElement
 {
 public:
+    HudElement();
     virtual ~HudElement() = default;
     virtual void Draw(RendererOpenGl& renderer) = 0;
 

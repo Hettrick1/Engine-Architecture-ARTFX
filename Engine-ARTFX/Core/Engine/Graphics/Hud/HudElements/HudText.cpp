@@ -2,7 +2,7 @@
 #include "Assets.h"
 
 HudText::HudText(const std::string& text, float x, float y, float scale, Vector4D color, TextAlignment alignment, Font* pFont)
-    : mText(text), mScale(scale), mColor(color), mAlignment(alignment), mFont(pFont), mShaderProgram(nullptr)
+    : HudElement(), mText(text), mScale(scale), mColor(color), mAlignment(alignment), mFont(pFont), mShaderProgram(nullptr)
 {
     if (pFont == nullptr) {
         mFont = Assets::LoadFont("Imports/Fonts/RoadPixel.ttf", "RoadPixel");

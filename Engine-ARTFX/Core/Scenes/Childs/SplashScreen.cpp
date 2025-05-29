@@ -26,8 +26,6 @@ void SplashScreen::Start(IRenderer* renderer)
 {
 	Scene::Start(renderer);
 
-	//renderer->GetDebugRenderer()->SetDrawDebug(true);
-
 	mTime = 0;
 
 	CameraActor* cam = new CameraActor();
@@ -41,12 +39,9 @@ void SplashScreen::Start(IRenderer* renderer)
 	shaderProgram->Compose({ &vert, &frag });
 
 	mZephyrusText = new HudText("Zephyrus", 0, 0, 2.0f, Vector4D(1.0, 0.81176f, 0.0, 0.0), TextAlignment::CENTER, Assets::LoadFont("Imports/Fonts/Chopsic.otf", "Chopsic"));
-	GetRenderer()->GetHud()->AddElement(mZephyrusText);
-
 	mZephyrusText->SetShaderProgram(shaderProgram);
 
 	mStudioText = new HudText("Engine", 0, -200, 0.5f, Vector4D(1, 1, 1, 0), TextAlignment::CENTER, Assets::LoadFont("Imports/Fonts/Chopsic.otf", "Chopsic"));
-	GetRenderer()->GetHud()->AddElement(mStudioText); 
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 }
 

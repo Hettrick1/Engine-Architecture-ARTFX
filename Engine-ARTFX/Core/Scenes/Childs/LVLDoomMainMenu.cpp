@@ -30,10 +30,8 @@ void LVLDoomMainMenu::Start(IRenderer* renderer)
 	Texture* damageIndicator = Assets::LoadTexture(*GetRenderer(), "Imports/Sprites/Doom/MainMenu.png", "MainMenu");
 	mDoomMenu = new HudImage(*damageIndicator, Vector2D(0, 0), 2);
 	mDoomMenu->SetTint(Vector4D(1.0, 1.0, 1.0, 1.0));
-	GetRenderer()->GetHud()->AddElement(mDoomMenu);
 
 	mPressEnter = new HudText("Press Enter To Begin", 0, -800, 1.0f, Vector4D(1.0, 1.0, 1.0, 0.0), TextAlignment::CENTER);
-	GetRenderer()->GetHud()->AddElement(mPressEnter);
 
 	EmptyActor* defaultPawn = new EmptyActor();
 	defaultPawn->AddComponent(new DoomMenuPC(defaultPawn, 1));
