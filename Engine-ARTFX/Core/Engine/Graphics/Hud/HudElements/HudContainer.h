@@ -8,15 +8,10 @@ class HudContainer
 	: public HudElement
 {
 public:
-    void AddElement(HudElement* element) {
-        mElements.push_back(element);
-    }
+    HudContainer();
+    void AddElement(HudElement* element);
 
-    void Draw(RendererOpenGl& renderer) override {
-        for (auto& element : mElements) {
-            element->Draw(renderer);
-        }
-    }
+    void Draw(RendererOpenGl& renderer) override;
 
 private:
     std::vector<HudElement*> mElements;
