@@ -8,6 +8,8 @@
 BasicCube::BasicCube(Vector3D pPos, Vector3D pSize, Quaternion pRotation, ShaderProgram* program)
 	: Actor(pPos, pSize, pRotation), mShaderProgram(program)
 {
+	Start();
+	mScene.AddActor(this);
 }
 
 BasicCube::~BasicCube()

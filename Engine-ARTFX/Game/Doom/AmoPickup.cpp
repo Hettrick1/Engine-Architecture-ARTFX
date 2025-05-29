@@ -10,6 +10,8 @@
 AmoPickup::AmoPickup(Vector3D pPos, Vector3D pSize, Quaternion pRotation)
 	:Actor(pPos, pSize, pRotation)
 {
+	Start();
+	mScene.AddActor(this);
 }
 
 AmoPickup::~AmoPickup()

@@ -29,6 +29,8 @@ DoomPlayer::DoomPlayer()
 	mFpsText(nullptr), mGunAmoText(nullptr), mHealthText(nullptr), mArmorText(nullptr), 
 	mWeaponIconImage(nullptr), mWeapon(Weapons::Gun), mDamageIndicatorImage(nullptr), mDamageIndicatorAlpha(0.0f)
 {
+	Start();
+	mScene.AddActor(this);
 }
 
 DoomPlayer::~DoomPlayer()

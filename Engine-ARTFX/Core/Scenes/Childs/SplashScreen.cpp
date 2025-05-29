@@ -26,13 +26,11 @@ void SplashScreen::Start(IRenderer* renderer)
 {
 	Scene::Start(renderer);
 
-	renderer->GetDebugRenderer()->SetDrawDebug(true);
+	//renderer->GetDebugRenderer()->SetDrawDebug(true);
 
 	mTime = 0;
 
 	CameraActor* cam = new CameraActor();
-	cam->Start();
-	AddActor(cam);
 
 	Shader vert;
 	vert.Load("VertFrag/TextSplashScreen.vert", ShaderType::VERTEX);

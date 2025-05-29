@@ -21,6 +21,8 @@ DoomEnemy::DoomEnemy(DoomPlayer* pPlayerRef, Vector3D pPos, Vector3D pSize, Quat
 	: Actor(pPos, pSize, pRotation), mPlayerRef(pPlayerRef), mEnemyFb(nullptr), mHealth(100), mShootCouldown(shootCooldown)
 	, mCanShoot(false), mIsDead(false), mSplashBlood(nullptr)
 {
+	Start();
+	mScene.AddActor(this);
 }
 
 DoomEnemy::~DoomEnemy()

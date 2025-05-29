@@ -26,8 +26,6 @@ void LVLDoomMainMenu::Start(IRenderer* renderer)
 {
 	Scene::Start(renderer);
 	CameraActor* cam = new CameraActor();
-	cam->Start();
-	AddActor(cam);
 
 	Texture* damageIndicator = Assets::LoadTexture(*GetRenderer(), "Imports/Sprites/Doom/MainMenu.png", "MainMenu");
 	mDoomMenu = new HudImage(*damageIndicator, Vector2D(0, 0), 2);
@@ -39,8 +37,7 @@ void LVLDoomMainMenu::Start(IRenderer* renderer)
 
 	EmptyActor* defaultPawn = new EmptyActor();
 	defaultPawn->AddComponent(new DoomMenuPC(defaultPawn, 1));
-	defaultPawn->Start();
-	AddActor(defaultPawn);
+
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 }
 
