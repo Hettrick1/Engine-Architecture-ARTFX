@@ -6,6 +6,12 @@
 class Actor;
 class Texture;
 
+/**
+ * @brief SDL-based renderer implementation for 2D sprite and sky sphere rendering.
+ * Manages the SDL renderer, sprite components, and sky sphere component.
+ * 
+ * INFO : Needs to be patch
+ */
 class RendererSdl : public IRenderer
 {
 public:
@@ -13,6 +19,7 @@ public:
 	RendererSdl(const RendererSdl&) = delete;
 	RendererSdl& operator = (const RendererSdl&) = delete;
 
+	// Initialize the SDL renderer with the given window
 	bool Initialize(Window& rWindow);
 	void BeginDraw() override;
 	void Draw() override;
@@ -28,11 +35,13 @@ public:
 
 	RendererType GetType() const override { return IRenderer::RendererType::SDL; }
 
+	// Draw a rectangle using SDL
 	void DrawRect(Rectangle& rRect);
+	// Draw a sprite for the given actor and texture
 	void DrawSprite(Actor& pActor, Texture& pTexture, Rectangle pRect, Vector2D pOrigin, IRenderer::Flip pFlipMethod) const override;
+	// Returns the underlying SDL_Renderer pointer
 	SDL_Renderer* ToSdlRenderer() override;
 private:
 	SDL_Renderer* mSdlRenderer;
 	std::vector<SpriteComponent*> mSprites;
 };
-

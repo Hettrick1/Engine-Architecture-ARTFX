@@ -10,6 +10,13 @@ enum class ShaderType {
 	TESSELLATION_EVALUATION,
 	GEOMETRY
 };
+
+/**
+ * @class Shader
+ * @brief Classe représentant un shader OpenGL.
+ *
+ * Permet de charger le code source d'un shader, de stocker son identifiant et son type.
+ */
 class Shader
 {
 public:
@@ -32,5 +39,5 @@ protected:
 	std::string mCode;
 	unsigned int mId;
 	ShaderType mType;
-	const char* mSource;
+	const char* mSource;    
 };

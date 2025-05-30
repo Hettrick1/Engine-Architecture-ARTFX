@@ -2,6 +2,7 @@
 
 #include "Vector3D.h"
 
+// Axis-Aligned Bounding Box (AABB) used for spatial queries and collision detection in 3D space.
 struct AABB
 {
     Vector3D min;
@@ -10,6 +11,7 @@ struct AABB
     AABB() : min(Vector3D(0, 0, 0)), max(Vector3D(0, 0, 0)) {}
     AABB(const Vector3D& min, const Vector3D& max) : min(min), max(max) {}
 
+    // Checks if the given point is inside the bounding box.
     bool Contains(const Vector3D& point) const
     {
         return (point.x >= min.x && point.x <= max.x &&
@@ -17,6 +19,7 @@ struct AABB
             point.z >= min.z && point.z <= max.z);
     }
 
+    // Checks if this bounding box intersects with another bounding box.
     bool Intersects(const AABB& other) const
     {
         return (min.x <= other.max.x && max.x >= other.min.x &&

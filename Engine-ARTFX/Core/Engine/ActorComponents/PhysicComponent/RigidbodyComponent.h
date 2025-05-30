@@ -7,6 +7,9 @@
 class Actor;
 class ColliderComponent;
 
+/**
+ * @brief RigidbodyComponent handles the physics simulation for an Actor, including velocity, mass, gravity, friction, and collision response.
+ */
 class RigidbodyComponent : public Component
 {
 public:
@@ -15,13 +18,13 @@ public:
 	RigidbodyComponent(const RigidbodyComponent&) = delete;
 	RigidbodyComponent& operator=(const RigidbodyComponent&) = delete;
 public :
-	void Update();
-	void ApplyForce(Vector3D pForce);
-	void AddImpulse(Vector3D pImpulse);
-	void ResolveCollision(Vector3D pResolveForce);
-	void OnCollisionEnter(ColliderComponent* otherCollider);
-	void OnCollisionStay(ColliderComponent* otherCollider);
-	void OnCollisionExit(ColliderComponent* otherCollider);
+	void Update(); // Updates the physics state of the rigidbody
+	void ApplyForce(Vector3D pForce); // Applies a continuous force to the rigidbody
+	void AddImpulse(Vector3D pImpulse); // Applies an instant impulse to the rigidbody
+	void ResolveCollision(Vector3D pResolveForce); // Resolves a collision by applying a force
+	void OnCollisionEnter(ColliderComponent* otherCollider); // Called when a collision starts
+	void OnCollisionStay(ColliderComponent* otherCollider); // Called while a collision persists
+	void OnCollisionExit(ColliderComponent* otherCollider); // Called when a collision ends
 public:
 	void SetVelocity(Vector3D pVelocity);
 	void SetMass(float pMass);
@@ -35,7 +38,7 @@ public:
 	void SetBounciness(float bounce) { bounce <= 1 ? mBounciness = bounce : mBounciness = 1.0f; }
 	float GetBounciness() const { return mBounciness; }
 
-	void SetIsStatic(bool isStatic);
+	void SetIsStatic(bool isStatic); // Sets whether the rigidbody is static (non-movable)
 	bool IsStatic() const { return mIsStatic; }
 
 private:
@@ -48,4 +51,3 @@ private:
 	float mBounciness;
 	bool mIsGrounded, mIsStatic;
 };
-

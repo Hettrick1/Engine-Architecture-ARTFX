@@ -9,13 +9,21 @@
 #include <map>
 #include "Font.h"
 
+/**
+ * @brief Singleton class responsible for rendering text using OpenGL.
+ * It manages text drawing, alignment, and font handling.
+ */
 class TextRenderer
 {
 public:
     static TextRenderer& Instance();
 
-	bool Init(Window& pWindow);
+    // Initializes the text renderer with the given window
+    bool Init(Window& pWindow);
+
     void RenderText(std::string text, float x, float y, float scale, Vector4D color, Font pFont, TextAlignment alignment, ShaderProgram* pShaderProgram = nullptr);
+
+    // Computes the width of the given text string at the specified scale and font
     float ComputeTextWidth(const std::string& text, float scale, Font pFont);
 private:
     ~TextRenderer();
@@ -28,4 +36,3 @@ private:
     ShaderProgram mShaderProgram;
     Matrix4DRow mProjection;
 };
-

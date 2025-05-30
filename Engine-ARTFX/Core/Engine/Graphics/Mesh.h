@@ -8,7 +8,7 @@
 class Texture;
 class VertexArray;
 
-
+// Represents a 3D mesh with vertices, textures, and a vertex array object for rendering.
 class Mesh
 {
 public:
@@ -16,8 +16,10 @@ public:
 	Mesh(std::vector<Vertex> pVertices);
 	~Mesh();
 
+	// Releases resources used by the mesh.
 	void Unload();
 
+	// Adds a texture to the mesh.
 	void AddTexture(Texture* pTexture);
 
 	VertexArray* GetVao() const
@@ -25,7 +27,10 @@ public:
 		return mVao;
 	}
 
+	// Returns the texture at the given index.
 	Texture* GetTexture(unsigned int pTextureIndex);
+
+	// Converts the mesh's vertices to a float array.
 	float* ToVerticeArray();
 
 private:
@@ -33,4 +38,3 @@ private:
 	std::vector<Vertex> mVertices;
 	VertexArray* mVao;
 };
-

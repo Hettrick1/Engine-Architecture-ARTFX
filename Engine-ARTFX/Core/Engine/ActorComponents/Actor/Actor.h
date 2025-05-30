@@ -7,14 +7,20 @@
 class Component;
 class Scene;
 
+/**
+ * @brief Represents an entity in the scene that can have components and interact with the world.
+ * The Actor class manages its own state, transform, components, and can be attached to a Scene.
+ */
 class Actor
 {
 public:
 	Actor(Vector3D position = 0, Vector3D size = 1, Quaternion rotation = Quaternion(0, 0));
 	~Actor();
+
 	virtual void Start() = 0;
 	virtual void Update() = 0;
 	virtual void Destroy() = 0;
+
 	void AttachScene(Scene& scene);
 	void AddComponent(Component* component);
 	void RemoveComponent(Component* component);
@@ -28,12 +34,16 @@ public:
 	ActorState GetState();
 	Scene& GetScene();
 	TransformComponent& GetTransformComponent();
+
+	// Get the rigidbody component if it exists
 	inline RigidbodyComponent* GetRigidBody() const { return mRigidbody; }
+
 	void SetRigidBody(RigidbodyComponent* pRigidbody);
 	void SetTag(std::string pTag);
 	inline std::string GetTag() const { return mTag; }
 	bool HasTag(std::string tag);
 
+	// Get the first component of a specific type
 	template<typename  C>
 	C* GetComponentOfType() const
 	{
@@ -45,8 +55,11 @@ public:
 		}
 		return nullptr;
 	}
+
+	// Update the transform of all components
 	void UpdateComponentsTransform();
 
+	// Get the level of detail value
 	inline float GetLod() const { return mLod; }
 
 protected:
@@ -60,4 +73,3 @@ protected:
 	std::string mTag;
 	float mLod;
 };
-

@@ -2,6 +2,10 @@
 #include "Component.h"
 #include "../Graphics/Texture.h"
 
+/**
+ * @brief Component that handles rendering a 2D sprite for an Actor.
+ * Manages the texture, draw order, flipping, culling, and size override for the sprite.
+ */
 class SpriteComponent : public Component
 {
 public:
@@ -11,7 +15,9 @@ public:
 	SpriteComponent(const SpriteComponent&) = delete;
 	SpriteComponent& operator= (const SpriteComponent&) = delete;
 
+	// Sets the texture used by the sprite
 	virtual void SetTexture(const Texture& pTexture);
+	// Sets the flip method for rendering the sprite
 	void SetFlipMethode(IRenderer::Flip pFlipMethode);
 	virtual void Draw(IRenderer& pRenderer);
 
@@ -19,7 +25,9 @@ public:
 	int GetTexWidth() const { return mTexWidth; }
 	int GetTexHeight() const { return mTexHeight; }
 
+	// Enables or disables culling for the sprite
 	void SetCullOff(bool cull);
+	// Returns the world transform matrix for the sprite
 	Matrix4DRow GetWorldTransform() override;
 
 	Texture& GetTexture();
@@ -34,4 +42,3 @@ protected:
 	bool mCullOff;
 	float aspectRatio, aspectRatioInv;
 };
-

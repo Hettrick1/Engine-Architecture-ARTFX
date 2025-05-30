@@ -3,6 +3,12 @@
 #include "Physics/AABB.h"
 #include "Quaternion.h"
 
+/**
+ * @brief Collider component representing an oriented box using the Separating Axis Theorem (SAT) for collision detection.
+ * Handles collision checks, bounding box calculation, and debug drawing for box colliders.
+ * 
+ * INFO : Still work in progress
+ */
 class BoxSATComponent : public ColliderComponent {
 public :
     BoxSATComponent() = delete;
@@ -15,7 +21,6 @@ public :
     void DebugDraw(IRenderer& renderer) override;
 
     std::vector<Vector3D> GetVertices();
-
 
 private : 
     bool CheckCollisionWithBoxSAT(BoxSATComponent* other, ContactManifold& infosOut);

@@ -2,6 +2,11 @@
 
 #include "SpriteComponent.h"
 
+/**
+ * @brief Component that handles animated flipbook sprites for an Actor.
+ * It manages a sequence of textures and plays them as an animation,
+ * supporting looping, play control, and frame rate adjustment.
+ */
 class FlipbookComponent : public SpriteComponent
 {
 public:
@@ -12,12 +17,17 @@ public:
 	FlipbookComponent& operator=(const FlipbookComponent&) = delete;
 public:
 	float GetAnimationFps() const { return mAnimationFps; }
+	// Sets the textures used for the animation
 	void SetAnimationTextures(const std::vector<Texture*>& pTextures);
+	// Sets the animation frame rate (frames per second)
 	void SetAnimationFps(float pFps);
+	// Starts playing the animation from the beginning
 	void PlayAnimation();
 	inline bool IsAnimationEnded() const { return mHasFinished; }
 
+	// Enables or disables animation playback
 	void SetCanPlay(bool canPlay);
+	// Sets whether the animation should loop
 	void SetIsLooping(bool looping);
 
 	void Update() override;
@@ -27,4 +37,3 @@ private:
 	float mAnimationFps;
 	bool mIsLooping, mPlayOnce, mHasFinished, mCanPlay, mCanPlayPending;
 };
-

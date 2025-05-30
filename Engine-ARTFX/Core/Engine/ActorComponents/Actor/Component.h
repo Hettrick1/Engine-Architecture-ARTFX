@@ -4,12 +4,18 @@
 
 class Actor;
 
+/**
+ * @brief Base class for all components that can be attached to an Actor.
+ * Provides transform management (position, size, rotation) relative to its owner.
+ * Components can override lifecycle methods (OnStart, Update, OnEnd).
+ */
 class Component
 {
 public:
 	Component() = delete;
 	Component(Actor* owner, int updateOder = 0);
 	virtual ~Component();
+
 	virtual void OnStart();
 	virtual void Update();
 	virtual void OnEnd();
@@ -21,9 +27,14 @@ public:
 	void RelativeRotateY(float pAngle);
 	void RelativeRotateZ(float pAngle);
 
+	// Returns the world transform matrix of the component
 	virtual Matrix4DRow GetWorldTransform();
+
+	// Computes the relative transform matrix based on position, size, and rotation
 	virtual void ComputeRelativeTransform();
+
 	Matrix4DRow GetRelativeTransform() const { return mRelativeTransform; }
+
 	Vector3D RelativeRight() const
 	{
 		return Vector3D(-mRelativeTransform.mat[0][0], -mRelativeTransform.mat[1][0], -mRelativeTransform.mat[2][0]);
@@ -48,6 +59,7 @@ public:
 		return mRelativeSize;
 	}
 
+	// Returns the world position of the component
 	Vector3D GetWorldPosition();
 
 	Actor* GetOwner();
@@ -61,4 +73,3 @@ protected:
 	Vector3D mRelativeSize;
 	Quaternion mRelativeRotation;
 };
-

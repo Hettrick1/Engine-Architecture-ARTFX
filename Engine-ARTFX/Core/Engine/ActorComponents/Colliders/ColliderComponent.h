@@ -16,6 +16,11 @@ enum class ColliderType {
 	BoxSAT
 };
 
+/**
+ * @brief Base class for all collider components.
+ * Handles collision detection, event notification to listeners, and debug drawing.
+ * Can be extended for specific collider shapes and algorithms.
+ */
 class ColliderComponent : public Component
 {
 public:
@@ -23,22 +28,32 @@ public:
 	ColliderComponent(Actor* owner, int updateOder);
 	~ColliderComponent();
 
+	// Returns whether this collider is a query collider (does not physically interact).
 	bool GetIsQuerry();
+	// Sets whether this collider is a query collider.
 	void SetIsQuerry(bool isQuerry);
 	virtual void Update();
+	// Checks collision with another collider and outputs contact information.
 	virtual bool CheckCollisionWith(ColliderComponent* other, ContactManifold& infosOut);
+	// Returns the collision position as a pair of points.
 	virtual std::pair < Vector3D, Vector3D> GetCollisionPosition() const;
 	virtual void DebugDraw(IRenderer& renderer);
+	// Returns the axis-aligned bounding box of the collider.
 	virtual AABB GetAABB() { return AABB(); }
 	virtual ColliderType GetColliderType() const = 0;
 
 public:
+	// Adds a collision event listener.
 	void AddListener(ICollisionListener* listener);
+	// Removes a collision event listener.
 	void RemoveListener(ICollisionListener* listener);
 
 public:
+	// Notifies listeners that a collision has started.
 	void NotifyListenersStarted(HitResult* infos);
+	// Notifies listeners that a collision is ongoing.
 	void NotifyListenersStay(HitResult* infos);
+	// Notifies listeners that a collision has ended.
 	void NotifyListenersEnded(HitResult* infos);
 
 	void SetName(std::string pName) { mName = pName; }
@@ -46,6 +61,7 @@ public:
 
 	Vector3D GetSize() const { return mSize; }
 
+	// Sets whether the collider is active.
 	void SetActive(bool pActive);
 	inline bool GetIsActive() const { return mIsActive; }
 
@@ -55,4 +71,3 @@ protected :
 	Vector3D mSize;
 	std::string mName;
 };
-

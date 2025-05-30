@@ -10,6 +10,7 @@
 
 class RigidbodyComponent;
 
+// Utility namespace for collision hashing and equality
 namespace CollisionUtils {
 	struct CollisionPairHash {
 		std::size_t operator()(const std::pair<ColliderComponent*, ColliderComponent*>& pair) const {
@@ -46,6 +47,10 @@ namespace CollisionUtils {
 	};
 }
 
+/**
+ * @brief Handles the resolution of physics and query collisions between actors and their components.
+ * Manages rigidbodies, applies reaction forces, and maintains collision information for the physics engine.
+ */
 class CollisionResolver
 {
 public:
@@ -54,18 +59,29 @@ public:
 	CollisionResolver(const CollisionResolver&) = delete;
 	CollisionResolver& operator=(const CollisionResolver&) = delete;
 
+	// Unloads all collision data and clears internal state
 	void Unload();
 
+	// Updates all registered rigidbodies (e.g., applies forces, updates positions)
 	void UpdateRigidbodies();
+
 	void ResolveCollisions();
 	void CalculateQuerryCollisions();
 	void CalculatePhysicCollisions();
 
+	// Resolves penetration between two actors by moving them apart along the collision normal
 	void ResolvePenetration(Actor* actorA, Actor* actorB, Vector3D normal, float depth);
+
+	// Applies the calculated reaction forces to the rigidbodies
 	void ApplyReactionForce();
 
+	// Registers a rigidbody with its owning actor
 	void RegisterRigidBody(Actor* pOwner, RigidbodyComponent* pRigidbody);
+
+	// Removes a rigidbody from the resolver
 	void RemoveRigidBody(Actor* pOwner, RigidbodyComponent* pRigidbody);
+
+	// Adds a collision information object to the processing queue
 	void AddCollisionToQueue(CollisionInfos* pCollisionInfo);
 
 	std::unordered_map<Actor*, RigidbodyComponent*> GetRigidbodies() const { return mRigidbodies; }

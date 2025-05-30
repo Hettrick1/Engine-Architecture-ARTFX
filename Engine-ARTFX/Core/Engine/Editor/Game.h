@@ -10,16 +10,26 @@
 #include <iostream>
 #include <vector>
 
+/**
+ * @brief Main class responsible for managing the game loop, window, rendering, input, and scene.
+ */
 class Game
 {
 public:
 	Game(std::string title, Scene* pStartupScene);
 	~Game();
+
+	// Initializes the game systems and window
 	void Initialize();
+
+	// Main game loop
 	void Loop();
+
 	void Update();
 	void Render();
 	void Input();
+
+	// Closes and cleans up the game
 	void Close();
 
 private:
@@ -33,4 +43,3 @@ private:
 	CameraManager& mCameraManager;
 	bool mIsRunning;
 };
-
