@@ -1,6 +1,6 @@
 #include "InputManager.h"
 #include "BooleanActions.h"
-#include "InputAxis2D.h"
+#include "Axis2DAction.h"
 #include "SceneManager.h"
 
 InputManager& InputManager::Instance()
@@ -53,12 +53,12 @@ void InputManager::CreateNewAxis2DBinding(IActionListener* listener, std::string
     bool hasKeyboardBinding = (positiveX != SDLK_UNKNOWN && negativeX != SDLK_UNKNOWN && positiveY != SDLK_UNKNOWN && negativeY != SDLK_UNKNOWN);
 
     if (hasKeyboardBinding) {
-        InputAxis2D* newAction = new InputAxis2D(positiveX, negativeX, positiveY, negativeY, name);
+        Axis2DAction* newAction = new Axis2DAction(positiveX, negativeX, positiveY, negativeY, name);
         newAction->AddListener(listener);
         BindActionToKeys(newAction, { positiveX, negativeX, positiveY, negativeY });
     }
     else {
-        InputAxis2D* newAction = new InputAxis2D(name);
+        Axis2DAction* newAction = new Axis2DAction(name);
         newAction->AddListener(listener);
         BindActionToMouse(newAction);
     }

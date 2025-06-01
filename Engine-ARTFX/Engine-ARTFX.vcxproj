@@ -196,7 +196,7 @@
     <ClCompile Include="Game\Pong\Ball.cpp" />
     <ClCompile Include="Core\Engine\Editor\Game.cpp" />
     <ClCompile Include="Core\Engine\DebugClasses\Log.cpp" />
-    <ClCompile Include="Core\Engine\Inputs\InputAxis2D.cpp" />
+    <ClCompile Include="Core\Engine\Inputs\Axis2DAction.cpp" />
     <ClCompile Include="Core\Engine\Inputs\InputManager.cpp" />
     <ClCompile Include="Game\SpaceInvader\GroundActor.cpp" />
     <ClCompile Include="Core\Scenes\Childs\BowlingOpenGl.cpp" />
@@ -313,7 +313,7 @@
     <ClInclude Include="Core\Engine\ActorComponents\GraphicComponent\SpriteComponent.h" />
     <ClInclude Include="Game\SpaceInvader\SpaceInvaderPlayer.h" />
     <ClInclude Include="Core\Engine\Inputs\InputActions.h" />
-    <ClInclude Include="Core\Engine\Inputs\InputAxis2D.h" />
+    <ClInclude Include="Core\Engine\Inputs\Axis2DAction.h" />
     <ClInclude Include="Core\Engine\Inputs\InputManager.h" />
     <ClInclude Include="Core\Engine\ActorComponents\PhysicComponent\RigidbodyComponent.h" />
     <ClInclude Include="Core\Engine\CoreComponents\PlayerController2D.h" />

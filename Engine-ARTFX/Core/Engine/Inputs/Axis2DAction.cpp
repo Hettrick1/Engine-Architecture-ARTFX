@@ -1,23 +1,23 @@
-#include "InputAxis2D.h"
+#include "Axis2DAction.h"
 
-InputAxis2D::InputAxis2D(SDL_Keycode positiveX, SDL_Keycode negativeX, SDL_Keycode positiveY, SDL_Keycode negativeY, std::string name)
+Axis2DAction::Axis2DAction(SDL_Keycode positiveX, SDL_Keycode negativeX, SDL_Keycode positiveY, SDL_Keycode negativeY, std::string name)
     : mPositiveX(positiveX), mNegativeX(negativeX), mPositiveY(positiveY), mNegativeY(negativeY),
       x(0), y(0), InputActions(name), mUseMouse(false)
 {
 }
 
-InputAxis2D::InputAxis2D(std::string name)
+Axis2DAction::Axis2DAction(std::string name)
     : mPositiveX(SDLK_UNKNOWN), mNegativeX(SDLK_UNKNOWN), mPositiveY(SDLK_UNKNOWN), mNegativeY(SDLK_UNKNOWN),
       x(0), y(0), mUseMouse(true), InputActions(name)
 {
 }
 
-ActionType InputAxis2D::GetType() const
+ActionType Axis2DAction::GetType() const
 {
     return ActionType::Axis2D;
 }
 
-void InputAxis2D::Update()
+void Axis2DAction::Update()
 {
     float newX = 0, newY = 0;
 
@@ -55,12 +55,12 @@ void InputAxis2D::Update()
     }
 }
 
-Vector2D InputAxis2D::GetAxis() const
+Vector2D Axis2DAction::GetAxis() const
 {
     return {x, y};
 }
 
-bool InputAxis2D::IsKeyPressed(SDL_Keycode key) const
+bool Axis2DAction::IsKeyPressed(SDL_Keycode key) const
 {
     const Uint8* keyState = SDL_GetKeyboardState(nullptr);
     return keyState[SDL_GetScancodeFromKey(key)] != 0;

@@ -1,6 +1,6 @@
 #include "DoomMenuPC.h"
 #include "BooleanActions.h"
-#include "InputAxis2D.h"
+#include "Axis2DAction.h"
 #include "InputManager.h"
 #include "SceneManager.h"
 #include "LVLDoom.h"

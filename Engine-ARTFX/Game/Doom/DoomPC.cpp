@@ -1,7 +1,7 @@
 #include "DoomPC.h"
 
 #include "BooleanActions.h"
-#include "InputAxis2D.h"
+#include "Axis2DAction.h"
 #include "InputManager.h"
 #include "Actor.h"
 #include "Log.h"
@@ -81,7 +81,7 @@ void DoomPC::OnActionTriggered(InputActions* action)
 {
 	if (action->GetType() == ActionType::Axis2D)
 	{
-		InputAxis2D* Triggeredaction = static_cast<InputAxis2D*>(action);
+		Axis2DAction* Triggeredaction = static_cast<Axis2DAction*>(action);
 		if (Triggeredaction && Triggeredaction->GetName() == "Mouse")
 		{
 			SDL_SetRelativeMouseMode(SDL_TRUE);

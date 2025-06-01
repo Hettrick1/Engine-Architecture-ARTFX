@@ -2,14 +2,14 @@
 #include "InputActions.h"
 
 // Represents a 2D input axis, typically used for handling input from keyboard or mouse for movement or direction.
-class InputAxis2D : public InputActions
+class Axis2DAction : public InputActions
 {
 public:
     // Constructor for axis with specific key bindings.
-    InputAxis2D(SDL_Keycode positiveX, SDL_Keycode negativeX, SDL_Keycode positiveY, SDL_Keycode negativeY, std::string name);
+    Axis2DAction(SDL_Keycode positiveX, SDL_Keycode negativeX, SDL_Keycode positiveY, SDL_Keycode negativeY, std::string name);
 
     // Constructor for axis with only a name.
-    InputAxis2D(std::string name);
+    Axis2DAction(std::string name);
 
     ActionType GetType() const override;
 

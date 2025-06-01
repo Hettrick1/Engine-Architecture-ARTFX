@@ -90,7 +90,7 @@
     <ClCompile Include="Core\Engine\Inputs\BooleanActions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Engine\Inputs\InputAxis2D.cpp">
+    <ClCompile Include="Core\Engine\Inputs\Axis2DAction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Core\Engine\Inputs\InputManager.cpp">
@@ -371,7 +371,7 @@
     <ClInclude Include="Core\Engine\Inputs\BooleanActions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Engine\Inputs\InputAxis2D.h">
+    <ClInclude Include="Core\Engine\Inputs\Axis2DAction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Core\Engine\Inputs\IActionListener.h">

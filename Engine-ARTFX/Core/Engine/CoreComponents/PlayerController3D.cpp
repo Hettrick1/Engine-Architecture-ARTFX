@@ -1,6 +1,6 @@
 #include "PlayerController3D.h"
 #include "BooleanActions.h"
-#include "InputAxis2D.h"
+#include "Axis2DAction.h"
 #include "InputManager.h"
 #include "Actor.h"
 #include "Log.h"
@@ -99,7 +99,7 @@ void PlayerController3D::OnActionTriggered(InputActions* action)
 	{
 		SDL_SetRelativeMouseMode(SDL_TRUE);
 		SDL_SetHintWithPriority(SDL_HINT_MOUSE_RELATIVE_MODE_WARP, "1", SDL_HINT_OVERRIDE); 
-		InputAxis2D* axisAction = static_cast<InputAxis2D*>(action);
+		Axis2DAction* axisAction = static_cast<Axis2DAction*>(action);
 		Vector2D axis = axisAction->GetAxis();
 
 		float sensitivity = 0.1f;
